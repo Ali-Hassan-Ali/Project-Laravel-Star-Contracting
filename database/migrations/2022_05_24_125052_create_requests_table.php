@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypesTable extends Migration
+class CreateRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
-            
-            $table->text('type');
+            $table->foreignIdFor(\App\Models\Eir::class)->onDelete('cascade');
+            $table->integer('quantity');
+
+            $table->text('requested_part');
+            $table->text('requested_part_no');
+            $table->text('unit');
 
             $table->timestamps();
         });
@@ -30,6 +33,6 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('requests');
     }
 }

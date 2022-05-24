@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypesTable extends Migration
+class CreateStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,18 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
-            
-            $table->text('type');
 
+            $table->integer('break_sown_duration');     
+            $table->integer('hours_worked');
+
+            $table->text('working_status');
+            $table->string('break_down_description');
+            
+            $table->dateTime('as_of');
+            $table->dateTime('break_down_date');
             $table->timestamps();
         });
     }
@@ -30,6 +36,6 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('statuses');
     }
 }
