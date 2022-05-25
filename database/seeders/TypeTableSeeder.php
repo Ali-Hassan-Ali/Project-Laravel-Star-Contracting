@@ -13,6 +13,17 @@ class TypeTableSeeder extends Seeder
      */
     public function run()
     {
-        //
-    }
-}
+        $types = ['truck','shipping','Transfer'];
+
+        foreach ($types as $type) {
+            
+            \App\Models\Type::create([
+                'name'       => $type,
+                'user_id'    => 1,
+            ]);
+
+        }//end of each
+
+    }//end of run
+    
+}//end of class

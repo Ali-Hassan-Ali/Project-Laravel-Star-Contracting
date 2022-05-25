@@ -20,6 +20,7 @@ return [
             'users'    => 'c,r,u,d',
             'countrys' => 'c,r,u,d',
             'citys'    => 'c,r,u,d',
+            'types'    => 'c,r,u,d',
             'settings' => 'c,r,u,d',
         ],
         'admin' => [],

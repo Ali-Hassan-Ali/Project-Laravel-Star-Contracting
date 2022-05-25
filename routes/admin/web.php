@@ -35,10 +35,15 @@ Route::middleware([
             Route::delete('/countrys/bulk_delete', 'CountryController@bulkDelete')->name('countrys.bulk_delete');
             Route::resource('countrys', 'CountryController');
 
-
+            //citys routes
             Route::get('/citys/data', 'CityController@data')->name('citys.data');
             Route::delete('/citys/bulk_delete', 'CityController@bulkDelete')->name('citys.bulk_delete');
             Route::resource('citys', 'CityController');
+
+            //types routes
+            Route::get('/types/data', 'TypeController@data')->name('types.data');
+            Route::delete('/types/bulk_delete', 'TypeController@bulkDelete')->name('types.bulk_delete');
+            Route::resource('types', 'TypeController');
 
           
 

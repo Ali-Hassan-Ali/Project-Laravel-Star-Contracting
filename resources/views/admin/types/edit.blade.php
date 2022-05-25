@@ -8,7 +8,7 @@
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.countrys.index') }}">@lang('country.country')</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.types.index') }}">@lang('country.country')</a></li>
         <li class="breadcrumb-item">@lang('site.edit')</li>
     </ul>
 
@@ -18,7 +18,7 @@
 
             <div class="tile shadow">
 
-                <form method="post" action="{{ route('admin.countrys.update', $country->id) }}">
+                <form method="post" action="{{ route('admin.types.update', $type->id) }}">
                     @csrf
                     @method('put')
 
@@ -27,7 +27,7 @@
                     {{--name--}}
                     <div class="form-group">
                         <label>@lang('country.name')<span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name', $country->name) }}" required autofocus>
+                        <input type="text" name="name" class="form-control" value="{{ old('name', $type->name) }}" required autofocus>
                     </div>
 
 

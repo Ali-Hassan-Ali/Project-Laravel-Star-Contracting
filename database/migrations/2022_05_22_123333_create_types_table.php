@@ -15,10 +15,8 @@ class CreateTypesTable extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
-            
-            $table->text('type');
-
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->string('name');
             $table->timestamps();
         });
     }

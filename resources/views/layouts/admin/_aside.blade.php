@@ -44,6 +44,11 @@
             <li><a class="app-menu__item {{ request()->is('*citys*') ? 'active' : '' }}" href="{{ route('admin.citys.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.citys')</span></a></li>
         @endif
 
+        {{--countrys--}}
+        @if (auth()->user()->hasPermission('read_types'))
+            <li><a class="app-menu__item {{ request()->is('*types*') ? 'active' : '' }}" href="{{ route('admin.types.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.types')</span></a></li>
+        @endif
+
       
 
         {{--settings--}}

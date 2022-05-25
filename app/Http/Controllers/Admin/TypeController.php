@@ -1,86 +1,112 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\TypeRequest;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class TypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function __construct()
+    {
+        $this->middleware('permission:read_types')->only(['index']);
+        $this->middleware('permission:create_types')->only(['create', 'store']);
+        $this->middleware('permission:update_types')->only(['edit', 'update']);
+        $this->middleware('permission:delete_types')->only(['delete', 'bulk_delete']);
+
+    }// end of __construct
+
+
     public function index()
     {
-        //
-    }
+        return view('admin.types.index');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    }//end of index
+
+    public function data()
+    {
+        $types = Type::latest()->get();
+
+        return DataTables::of($types)
+            ->addColumn('record_select', 'admin.types.data_table.record_select')
+            ->editColumn('created_at', function (Type $type) {
+                return $type->created_at->format('Y-m-d');
+            })
+            ->addColumn('admin', function (Type $type) {
+                return $type->admin->name;
+            })
+            ->addColumn('actions','admin.types.data_table.actions')
+            ->rawColumns(['record_select', 'actions','admin'])
+            ->toJson();
+
+    }// end of data
+
+
     public function create()
     {
-        //
-    }
+        return view('admin.types.create');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    }// end of create
+
+    public function store(TypeRequest $request)
     {
-        //
-    }
+        $requestData             = $request->validated();
+        $requestData['user_id']  = auth()->id();
+        Type::create($requestData);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Type  $type
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Type $type)
-    {
-        //
-    }
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('admin.types.index');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Type  $type
-     * @return \Illuminate\Http\Response
-     */
+    }// end of store
+
+    
     public function edit(Type $type)
     {
-        //
-    }
+        return view('admin.types.edit', compact('type'));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Type  $type
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Type $type)
+    }// end of edit
+
+    
+    public function update(TypeRequest $request, Type $type)
     {
-        //
-    }
+        $type->update($request->validated());
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Type  $type
-     * @return \Illuminate\Http\Response
-     */
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('admin.types.index');
+
+    }// end of update
+
+    
     public function destroy(Type $type)
     {
-        //
-    }
-}
+        $this->delete($type);
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
+
+    }// end of destroy
+
+    public function bulkDelete()
+    {
+        foreach (json_decode(request()->record_ids) as $recordId) {
+
+            $type = Type::FindOrFail($recordId);
+            $this->delete($type);
+
+        }//end of for each
+
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
+
+    }// end of bulkDelete
+
+    private function delete(Type $type)
+    {
+        $type->delete();
+
+    }// end of delete
+
+}//end of controller
