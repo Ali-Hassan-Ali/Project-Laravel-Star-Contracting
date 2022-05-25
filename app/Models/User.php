@@ -13,7 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Notifiable, LaratrustUserTrait;
 
-    public $guarded = [];
+    protected $guarded = [];
      
     protected $appends = ['image_path'];
 

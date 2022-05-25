@@ -58,7 +58,7 @@ class AdminController extends Controller
         $requestData = $request->validated();
         $requestData['password'] = bcrypt($request->password);
 
-        $admin = User::create($request->all());
+        $admin = User::create($request->except('password_confirmation','role_id'));
         $admin->attachRoles(['admin', $request->role_id]);
 
         session()->flash('success', __('site.added_successfully'));
