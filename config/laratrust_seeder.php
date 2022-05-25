@@ -12,24 +12,20 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
-
         'super_admin' => [
-            'dashboard'  => 'r',
-            'admins'     => 'c,r,u,d',
-            'users'      => 'c,r,u,d',
-            'citys'      => 'c,r,u,d',
-            'vehicles'   => 'c,r,u,d',
+            'roles' => 'c,r,u,d',
+            'admins' => 'c,r,u,d',
+            'users' => 'c,r,u,d',
+            'settings' => 'c,r,u,d',
         ],
-
-        'admin' => [
-            'dashboard'  => 'r',
-        ],
+        'admin' => [],
+        'user' => [],
     ],
 
     'permissions_map' => [
         'c' => 'create',
         'r' => 'read',
         'u' => 'update',
-        'd' => 'delete',
+        'd' => 'delete'
     ]
 ];

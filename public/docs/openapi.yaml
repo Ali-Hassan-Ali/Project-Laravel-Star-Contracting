@@ -1,0 +1,322 @@
+openapi: 3.0.3
+info:
+    title: Laravel
+    description: ''
+    version: 1.0.0
+servers:
+    -
+        url: 'http://mudunelmanar.theportal.agency'
+paths:
+    /api/login:
+        post:
+            summary: Login
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Authentication
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                email:
+                                    type: string
+                                    description: 'The email of the user.'
+                                    example: suscipit
+                                password:
+                                    type: string
+                                    description: 'The password of the user.'
+                                    example: voluptas
+                            required:
+                                - email
+                                - password
+            security: []
+    /api/driver/trips:
+        get:
+            summary: Trips
+            description: ''
+            parameters:
+                -
+                    in: query
+                    name: status
+                    description: 'the trip status e.g. completed for completed trips, on_going for on_going trips'
+                    example: corporis
+                    required: false
+                    schema:
+                        type: string
+                        description: 'the trip status e.g. completed for completed trips, on_going for on_going trips'
+                        example: corporis
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                401:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    message: Unauthenticated.
+                                properties:
+                                    message: { type: string, example: Unauthenticated. }
+            tags:
+                - Driver
+    '/api/driver/trips/{trip}/update_status':
+        put:
+            summary: 'Update trip Status'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Driver
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                status:
+                                    type: string
+                                    description: 'the new trip status e.g: ''assigned_driver_and_truck'', ''not_assigned_driver_and_truck'', ''arrived'', ''on_loading'', ''on_way'', ''on_half_way'', ''off_loading'', ''completed'']'
+                                    example: mollitia
+                            required:
+                                - status
+        parameters:
+            -
+                in: path
+                name: trip
+                description: ''
+                example: libero
+                required: true
+                schema:
+                    type: string
+    '/api/driver/trips/{trip}/upload_on_loading_image':
+        put:
+            summary: 'Upload on loading image'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: multipart/form-data
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Driver
+            requestBody:
+                required: true
+                content:
+                    multipart/form-data:
+                        schema:
+                            type: object
+                            properties:
+                                on_loading_image:
+                                    type: string
+                                    format: binary
+                                    description: 'on loading image'
+                            required:
+                                - on_loading_image
+        parameters:
+            -
+                in: path
+                name: trip
+                description: ''
+                example: ea
+                required: true
+                schema:
+                    type: string
+    '/api/driver/trips/{trip}/upload_completed_image':
+        put:
+            summary: 'Upload completed image'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: multipart/form-data
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Driver
+            requestBody:
+                required: true
+                content:
+                    multipart/form-data:
+                        schema:
+                            type: object
+                            properties:
+                                completed_image:
+                                    type: string
+                                    format: binary
+                                    description: 'completed image'
+                            required:
+                                - completed_image
+        parameters:
+            -
+                in: path
+                name: trip
+                description: ''
+                example: et
+                required: true
+                schema:
+                    type: string
+    '/api/driver/locations/{driver}':
+        post:
+            summary: 'Store location'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Driver
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                trip_id:
+                                    type: integer
+                                    description: 'The id of the trip.'
+                                    example: 16
+                                lat:
+                                    type: string
+                                    description: 'The current lat of the driver.'
+                                    example: velit
+                                lng:
+                                    type: string
+                                    description: 'The current lng of the driver.'
+                                    example: in
+                            required:
+                                - trip_id
+                                - lat
+                                - lng
+        parameters:
+            -
+                in: path
+                name: driver
+                description: ''
+                example: voluptatum
+                required: true
+                schema:
+                    type: string
+    /api/driver/profile:
+        post:
+            summary: 'Update profile data'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Driver
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                    description: 'the new driver name'
+                                    example: enim
+                                email:
+                                    type: string
+                                    description: 'the new driver email'
+                                    example: dolores
+                                fcm_token:
+                                    type: string
+                                    description: 'optional the driver fcm_token'
+                                    example: adipisci
+                            required:
+                                - name
+                                - email

@@ -2,51 +2,80 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Storage;
 use Laratrust\Traits\LaratrustUserTrait;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use LaratrustUserTrait;
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Notifiable, LaratrustUserTrait;
 
-    protected $guarded = [];
-    protected $appends = ['name','image_path'];
-    protected $hidden  = ['password'];
-    protected $casts   = ['Email_verified_at' => 'datetime'];
+    public $guarded = [];
+     
+    protected $appends = ['image_path'];
 
-    public function Rents()
+    protected $hidden = ['password', 'remember_token'];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    //atr
+    public function getNameAttribute($value)
     {
-        return $this->hasMany(Rent::class);
+        return ucfirst($value);
 
-    }//endo frents
-
-    public function getNameAttribute()
-    {
-        return $this->f_name . $this->l_name;
-
-    }//end of name
+    }// end of getNameAttribute
 
     public function getImagePathAttribute()
     {
-        return asset('storage/' . $this->image);
+        if ($this->image) {
+            return Storage::url('uploads/' . $this->image);
+        }
 
-    }//end of get image path
+        return asset('admin_assets/images/default.png');
 
-    public function scopeWhenSearch($query , $search) 
+    }// end of getImagePathAttribute
+
+    //scope
+    public function scopeWhenRoleId($query, $roleId)
     {
-        return $query->when($search, function ($q) use ($search) {
+        return $query->when($roleId, function ($q) use ($roleId) {
 
-            return $q->where('f_name' , 'like', "%$search%")
-            ->orWhere('l_name', 'like', "%$search%")
-            ->orWhere('phone', 'like', "%$search%")
-            ->orWhere('Email', 'like', "%$search%");
+            return $q->whereHas('roles', function ($qu) use ($roleId) {
+
+                return $qu->where('id', $roleId);
+
+            });
+
         });
-        
-    }//end ofscopeWhenSearch
+
+    }// end of scopeWhenRoleId
+
+    //rel
+    public function favoriteMovies()
+    {
+        return $this->belongsToMany(Movie::class, 'user_favorite_movie', 'user_id', 'movie_id');
+
+    }// end of favoriteMovies
+
+    //fun
+    public function hasImage()
+    {
+        return $this->image != null;
+
+    }// end of hasImage
+
+    protected static function booted()
+    {
+        // static::created(function ($user) {
+        //     $user->api_token = Str::random(60);
+        //     $user->save();
+        // });
+
+    }//end of booted
 
 }//end of model

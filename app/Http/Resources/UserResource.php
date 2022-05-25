@@ -9,20 +9,18 @@ class UserResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param \Illuminate\Http\Request $request
+     * @return array
      */
     public function toArray($request)
     {
         return [
             'id' => $this->id,
-            'name'=> $request->f_name, 
-            'name' => $request->f_name+$request->l_name,
+            'name' => $this->name,
             'email' => $this->email,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'image' => $this->image_path,
         ];
-        //parent::toArray($request);
-        // return new UserResource(User::findOrFail($id));
-    }
-}
+
+    }//end of to array
+
+}//end of resource

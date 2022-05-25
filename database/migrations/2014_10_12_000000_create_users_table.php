@@ -17,13 +17,14 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->char('f_name', 100);
             $table->char('l_name', 100);
+            $table->text('type');
             $table->string('phone')->unique();
             $table->string('Email')->unique();
             $table->timestamp('Phone_verified_at')->nullable();
             $table->timestamp('Email_verified_at')->nullable();
             $table->integer('OTP')->default(-1);
             $table->string('password');
-            $table->string('image')->default('sefhopwerwefoiweb');
+            $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
