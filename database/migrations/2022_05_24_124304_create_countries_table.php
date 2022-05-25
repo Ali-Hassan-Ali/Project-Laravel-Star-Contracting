@@ -15,10 +15,8 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
-            
-            $table->text('country');
-
+            $table->string('name');
+            $table->foreignIdFor(\App\Models\User::class);
             $table->timestamps();
         });
     }

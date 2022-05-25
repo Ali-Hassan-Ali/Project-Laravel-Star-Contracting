@@ -1,58 +1,71 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Admin;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\CityRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\City;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class CityController extends Controller
 {
 
     public function __construct()
     {
-        //create read update delete
-        $this->middleware(['permission:citys_read'])->only('index');
-        $this->middleware(['permission:citys_create'])->only('create','store');
-        $this->middleware(['permission:citys_update'])->only('edit','update');
-        $this->middleware(['permission:citys_delete'])->only('destroy');
+        $this->middleware('permission:read_citys')->only(['index']);
+        $this->middleware('permission:create_citys')->only(['create', 'store']);
+        $this->middleware('permission:update_citys')->only(['edit', 'update']);
+        $this->middleware('permission:delete_citys')->only(['delete', 'bulk_delete']);
 
-    } //end of constructor
+    }// end of __construct
 
     public function index()
     {
-        $citys = City::WhenSearch(request()->search)->latest()->paginate(10);
-
-        return view('dashboard_admin.citys.index', compact('citys'));
+        return view('admin.citys.index');
 
     }//end of index 
+
+    public function data()
+    {
+        $citys = City::latest()->get();
+
+        return DataTables::of($citys)
+            ->addColumn('record_select', 'admin.citys.data_table.record_select')
+            ->editColumn('created_at', function (City $city) {
+                return $city->created_at->format('Y-m-d');
+            })
+            ->addColumn('admin', function (City $city) {
+                return $city->admin->name;
+            })
+            ->addColumn('country', function (City $city) {
+                return $city->country->name;
+            })
+            ->addColumn('actions', 'admin.citys.data_table.actions')
+            ->rawColumns(['record_select', 'actions'])
+            ->toJson();
+
+    }// end of data
 
 
     public function create()
     {
-        return view('dashboard_admin.citys.create');
+        $countrys = Country::all();
+
+        return view('admin.citys.create', compact('countrys'));
 
     }//end of create
 
     
-    public function store(Request $request)
+    public function store(CityRequest $request)
     {
-        $request->validate([
-            'name' => ['required','max:255'],
-        ]);
+        $requestData             = $request->validated();
+        $requestData['user_id']  = auth()->id();
+        City::create($requestData);
 
-        try {
-            
-            City::create($request->all());
-
-            session()->flash('success', __('dashboard.added_successfully'));
-            return redirect()->route('dashboard.admin.citys.index');
-
-        } catch (\Exception $e) {
-
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-
-        }//end try
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('admin.citys.index');
 
     }//end of store
 
@@ -60,48 +73,49 @@ class CityController extends Controller
 
     public function edit(City $city)
     {
-        return view('dashboard_admin.citys.edit', compact('city'));
+        $countrys = Country::all();
+
+        return view('admin.citys.edit', compact('city','countrys'));
 
     }//end of edit
 
 
-    public function update(Request $request, City $city)
+    public function update(CityRequest $request, City $city)
     {
-        $request->validate([
-            'name' => ['required','max:255'],
-        ]);
+        $city->update($request->validated());
 
-        try {
-            
-            $city->update($request->all());
-
-            session()->flash('success', __('dashboard.updated_successfully'));
-            return redirect()->route('dashboard.admin.citys.index');
-
-        } catch (\Exception $e) {
-
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-
-        }//end try
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('admin.citys.index');
 
     }//end of store
 
    
     public function destroy(City $city)
     {
-        try {
+        $this->delete($city);
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
 
-            $city->delete();
+    }// end of destroy
 
-            session()->flash('success', __('dashboard.deleted_successfully'));
-            return redirect()->route('dashboard.admin.citys.index');
+    public function bulkDelete()
+    {
+        foreach (json_decode(request()->record_ids) as $recordId) {
 
-        } catch (\Exception $e) {
+            $city = City::FindOrFail($recordId);
+            $this->delete($city);
 
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }//end of for each
 
-        }//end try
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
 
-    }//end of destroy
+    }// end of bulkDelete
+
+    private function delete(City $city)
+    {
+        $city->delete();
+
+    }// end of delete
 
 }//end of controller

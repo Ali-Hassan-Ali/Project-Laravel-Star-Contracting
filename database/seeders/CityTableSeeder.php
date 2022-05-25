@@ -13,13 +13,14 @@ class CityTableSeeder extends Seeder
      */
     public function run()
     {
-        $citys = ['الخرطوم','امدرمان','بحري','ود مدني','كسلا','نيلا'];
+        $citys = ['Khartoum','omdurman','bahri'];
 
         foreach ($citys as $city) {
             
             \App\Models\City::create([
-                'name'     => $city,
-                'admin_id' => 1,
+                'name'       => $city,
+                'user_id'    => 1,
+                'country_id' => 1,
             ]);
 
         }//end of each

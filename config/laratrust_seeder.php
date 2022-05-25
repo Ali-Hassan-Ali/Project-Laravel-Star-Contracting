@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -12,10 +13,13 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
+
         'super_admin' => [
-            'roles' => 'c,r,u,d',
-            'admins' => 'c,r,u,d',
-            'users' => 'c,r,u,d',
+            'roles'    => 'c,r,u,d',
+            'admins'   => 'c,r,u,d',
+            'users'    => 'c,r,u,d',
+            'countrys' => 'c,r,u,d',
+            'citys'    => 'c,r,u,d',
             'settings' => 'c,r,u,d',
         ],
         'admin' => [],

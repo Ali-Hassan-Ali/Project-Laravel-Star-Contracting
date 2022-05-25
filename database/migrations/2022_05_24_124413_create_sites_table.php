@@ -17,9 +17,7 @@ class CreateSitesTable extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
             $table->foreignIdFor(\App\Models\Country::class)->onDelete('cascade');
-            
-            $table->text('site');
-
+            $table->text('name');
             $table->timestamps();
         });
     }

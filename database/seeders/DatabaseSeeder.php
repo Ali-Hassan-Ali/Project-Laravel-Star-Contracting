@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LaratrustSeeder::class,
             UsersTableSeeder::class,
+            CountryTableSeeder::class,
+            CityTableSeeder::class,
         ]);
     }
 }

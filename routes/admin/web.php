@@ -30,6 +30,16 @@ Route::middleware([
             Route::delete('/users/bulk_delete', 'UserController@bulkDelete')->name('users.bulk_delete');
             Route::resource('users', 'UserController');
 
+            //country routes
+            Route::get('/countrys/data', 'CountryController@data')->name('countrys.data');
+            Route::delete('/countrys/bulk_delete', 'CountryController@bulkDelete')->name('countrys.bulk_delete');
+            Route::resource('countrys', 'CountryController');
+
+
+            Route::get('/citys/data', 'CityController@data')->name('citys.data');
+            Route::delete('/citys/bulk_delete', 'CityController@bulkDelete')->name('citys.bulk_delete');
+            Route::resource('citys', 'CityController');
+
           
 
             //setting routes
