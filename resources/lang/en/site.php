@@ -1,23 +1,28 @@
 <?php
 
 return [
-    'home' => 'Home',
+    'home'   => 'Home',
     'logout' => 'Logout',
-    'login' => 'Login',
+    'login'  => 'Login',
     'serial' => 'Serial',
 
-    'add' => 'Add',
-    'edit' => 'Edit',
+    'add'    => 'Add',
+    'edit'   => 'Edit',
     'delete' => 'Delete',
     'action' => 'Action',
     'search' => 'Search',
-    'no_data_found' => 'Sorry no data found',
-    'added_successfully' => 'Record added successfully',
+    'no_data_found'        => 'Sorry no data found',
+    'added_successfully'   => 'Record added successfully',
     'updated_successfully' => 'Record updated successfully',
     'deleted_successfully' => 'Record deleted successfully',
-    'confirm_delete' => 'Confirm deletion',
-    'yes' => 'Yes',
+    'confirm_delete'       => 'Confirm deletion',
+
+    'yes'=> 'Yes',
     'no' => 'No',
+
+    '1' => 'Yes',
+    '0' => 'No',
+
     'choose' => 'Choose',
     'change' => 'Change',
     'create' => 'Create',

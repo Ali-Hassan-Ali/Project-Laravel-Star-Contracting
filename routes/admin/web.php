@@ -45,6 +45,11 @@ Route::middleware([
             Route::delete('/types/bulk_delete', 'TypeController@bulkDelete')->name('types.bulk_delete');
             Route::resource('types', 'TypeController');
 
+            //equipments routes
+            Route::get('/equipments/data', 'EquipmentController@data')->name('equipments.data');
+            Route::delete('/equipments/bulk_delete', 'EquipmentController@bulkDelete')->name('equipments.bulk_delete');
+            Route::resource('equipments', 'EquipmentController');
+
           
 
             //setting routes

@@ -13,34 +13,35 @@ class CreateEquipmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('equipment', function (Blueprint $table) {
+        Schema::create('equipments', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Country::class)->onDelete('cascade');
-            $table->foreignIdFor(\App\Models\Site::class)->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
             $table->foreignIdFor(\App\Models\Type::class)->onDelete('cascade');
-            $table->foreignIdFor(\App\Models\Spec::class)->onDelete('cascade');
+            // $table->foreignIdFor(\App\Models\Spec::class)->onDelete('cascade');
             
-            $table->integer('year_of_manufacture');
-            $table->integer('rental_cost_per_basis');
+            $table->dateTime('year_of_manufacture');
+            $table->dateTime('rental_cost_basis');
+
             $table->integer('driver_salary');
+            $table->integer('rental_basis');
 
             $table->text('make');
-            $table->text('equipment_name');
-            $table->text('plate_no');
-            $table->text('chasis_no');
-            $table->text('engine_no');
-            $table->text('serial_no');
+            $table->text('name');
+            $table->enum('plate_no', [true,false])->default(true);
+            $table->enum('chasis_no', [true,false])->default(true);
+            $table->enum('engine_no', [true,false])->default(true);
+            $table->enum('serial_no', [true,false])->default(true);
+
             $table->text('model');
             $table->text('owner_ship');
-            $table->text('rental_basis');
             $table->text('operator');
             $table->text('responsible_person');
-            $table->text('allocated_to');
             $table->text('project_allocated_to');
-            $table->text('rp_email');
+            $table->text('email');
 
             $table->dateTime('registration_expiry');
-            $table->dateTime('reg_expiry_reminder_sent');
+            $table->dateTime('expiry_reminder_sent');
             $table->timestamps();
         });
     }
