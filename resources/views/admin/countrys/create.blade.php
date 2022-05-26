@@ -3,12 +3,12 @@
 @section('content')
 
     <div>
-        <h2>@lang('users.countrys')</h2>
+        <h2>@lang('countrys.countrys')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.countrys.index') }}">@lang('users.countrys')</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.countrys.index') }}">@lang('countrys.countrys')</a></li>
         <li class="breadcrumb-item">@lang('site.create')</li>
     </ul>
 
@@ -26,7 +26,7 @@
 
                     {{--name--}}
                     <div class="form-group">
-                        <label>@lang('users.name')<span class="text-danger">*</span></label>
+                        <label>@lang('countrys.name')<span class="text-danger">*</span></label>
                         <input type="text" name="name" class="form-control" value="{{ old('name') }}" required autofocus>
                     </div>
 

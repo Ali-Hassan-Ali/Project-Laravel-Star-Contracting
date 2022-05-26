@@ -24,29 +24,19 @@
             <li><a class="app-menu__item {{ request()->is('*admins*') ? 'active' : '' }}" href="{{ route('admin.admins.index') }}"><i class="app-menu__icon fa fa-users"></i> <span class="app-menu__label">@lang('admins.admins')</span></a></li>
         @endif
 
-        {{--users--}}
-        @if (auth()->user()->hasPermission('read_users'))
-            <li><a class="app-menu__item {{ request()->is('*users*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.users')</span></a></li>
-        @endif
-
-        {{--users--}}
-        @if (auth()->user()->hasPermission('read_users'))
-            <li><a class="app-menu__item {{ request()->is('*users*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.users')</span></a></li>
-        @endif
-
         {{--countrys--}}
         @if (auth()->user()->hasPermission('read_countrys'))
-            <li><a class="app-menu__item {{ request()->is('*countrys*') ? 'active' : '' }}" href="{{ route('admin.countrys.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.countrys')</span></a></li>
+            <li><a class="app-menu__item {{ request()->is('*countrys*') ? 'active' : '' }}" href="{{ route('admin.countrys.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('countrys.countrys')</span></a></li>
         @endif
 
         {{--countrys--}}
         @if (auth()->user()->hasPermission('read_citys'))
-            <li><a class="app-menu__item {{ request()->is('*citys*') ? 'active' : '' }}" href="{{ route('admin.citys.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.citys')</span></a></li>
+            <li><a class="app-menu__item {{ request()->is('*citys*') ? 'active' : '' }}" href="{{ route('admin.citys.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('citys.citys')</span></a></li>
         @endif
 
         {{--countrys--}}
         @if (auth()->user()->hasPermission('read_types'))
-            <li><a class="app-menu__item {{ request()->is('*types*') ? 'active' : '' }}" href="{{ route('admin.types.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('users.types')</span></a></li>
+            <li><a class="app-menu__item {{ request()->is('*types*') ? 'active' : '' }}" href="{{ route('admin.types.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('types.types')</span></a></li>
         @endif
 
       

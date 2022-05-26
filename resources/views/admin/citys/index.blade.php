@@ -66,8 +66,8 @@
                                         </div>
                                     </th>
                                     <th>@lang('citys.name')</th>
-                                    <th>@lang('country.name')</th>
-                                    <th>@lang('admin.name')</th>
+                                    <th>@lang('countrys.name')</th>
+                                    <th>@lang('admins.name')</th>
                                     <th>@lang('site.created_at')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>

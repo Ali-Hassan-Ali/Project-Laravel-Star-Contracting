@@ -32,7 +32,7 @@
 
                     {{--email--}}
                     <div class="form-group">
-                        <label>@lang('roles.role') <span class="text-danger">*</span></label>
+                        <label>@lang('citys.citys') <span class="text-danger">*</span></label>
                         <select name="country_id" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('countrys.countrys')</option>
                             @foreach ($countrys as $country)
