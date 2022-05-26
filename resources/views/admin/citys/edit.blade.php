@@ -36,10 +36,9 @@
                         <select name="country_id" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('countrys.countrys')</option>
                             @foreach ($countrys as $country)
-                                <option value="{{ $country->id }}" 
-                                    {{ $country->id == old('country_id') ? 'selected' : '' }}
-                                    {{ $country->id == $city->country_id ? 'selected' : '' }}
-                                    >{{ $country->name }}</option>
+                                <option value="{{ $country->id }}" {{ $country->id == old('country_id', $city->country_id) ? 'selected' : '' }}>
+                                    {{ $country->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
