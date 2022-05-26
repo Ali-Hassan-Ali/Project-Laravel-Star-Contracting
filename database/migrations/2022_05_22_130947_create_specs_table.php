@@ -20,6 +20,7 @@ class CreateSpecsTable extends Migration
 
             $table->text('specification');
             
+            $table->softDeletes();
             $table->timestamps();
         });
     }

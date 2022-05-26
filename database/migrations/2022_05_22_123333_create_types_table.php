@@ -17,6 +17,8 @@ class CreateTypesTable extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\User::class);
             $table->string('name');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

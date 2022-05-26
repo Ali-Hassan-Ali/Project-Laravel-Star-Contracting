@@ -33,6 +33,8 @@ class CreateEirsTable extends Migration
             $table->dateTime('actual_payment_transfer_date');
             $table->dateTime('actual_shipment_pickup_date');
             $table->dateTime('actual_arrival_to_site_date');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

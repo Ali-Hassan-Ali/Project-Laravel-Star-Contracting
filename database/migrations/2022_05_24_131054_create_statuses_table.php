@@ -25,6 +25,8 @@ class CreateStatusesTable extends Migration
             
             $table->dateTime('as_of');
             $table->dateTime('break_down_date');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

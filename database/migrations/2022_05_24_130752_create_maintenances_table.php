@@ -27,6 +27,8 @@ class CreateMaintenancesTable extends Migration
             $table->dateTime('last_service_date');
             $table->dateTime('next_service_date');
             $table->dateTime('actual_service_date');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

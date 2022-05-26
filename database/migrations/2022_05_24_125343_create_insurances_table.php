@@ -30,6 +30,8 @@ class CreateInsurancesTable extends Migration
 
             $table->dateTime('claim_date');
             $table->dateTime('insurance_start_date');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

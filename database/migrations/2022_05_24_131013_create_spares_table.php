@@ -28,6 +28,8 @@ class CreateSparesTable extends Migration
             $table->string('attachments');
             
             $table->dateTime('usage_date');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

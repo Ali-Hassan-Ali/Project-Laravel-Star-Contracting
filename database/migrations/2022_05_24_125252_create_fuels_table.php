@@ -30,6 +30,8 @@ class CreateFuelsTable extends Migration
             
             $table->dateTime('last_fill_date');
             $table->dateTime('next_fill_date');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

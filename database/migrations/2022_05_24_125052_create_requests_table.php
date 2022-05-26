@@ -22,6 +22,7 @@ class CreateRequestsTable extends Migration
             $table->text('requested_part_no');
             $table->text('unit');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

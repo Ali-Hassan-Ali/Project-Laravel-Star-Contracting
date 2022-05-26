@@ -22,6 +22,8 @@ class CreateAdminsTable extends Migration
             $table->string('image')->default('admin_images/default.png');
             $table->string('password');
             $table->rememberToken();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

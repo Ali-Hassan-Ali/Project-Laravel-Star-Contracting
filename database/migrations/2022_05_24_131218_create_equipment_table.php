@@ -42,6 +42,8 @@ class CreateEquipmentTable extends Migration
 
             $table->dateTime('registration_expiry');
             $table->dateTime('expiry_reminder_sent');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

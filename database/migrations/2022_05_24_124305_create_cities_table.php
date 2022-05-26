@@ -15,9 +15,11 @@ class CreateCitiesTable extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->foreignIdFor(\App\Models\User::class);
             $table->foreignIdFor(\App\Models\Country::class);
+            
+            $table->softDeletes();
             $table->timestamps();
         });
     }

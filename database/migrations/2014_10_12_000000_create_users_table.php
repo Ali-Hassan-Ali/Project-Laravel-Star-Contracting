@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->enum('type', ['super_admin', 'admin', 'user']);
             $table->string('image')->nullable();
             $table->rememberToken();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

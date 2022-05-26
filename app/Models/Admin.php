@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Laratrust\Traits\LaratrustUserTrait;
 
 class Admin extends Authenticatable
 {
-    use LaratrustUserTrait;
-    use HasFactory;
+    use LaratrustUserTrait, HasFactory, Notifiable, SoftDeletes;
 
     protected $guard    = 'admin';
 
