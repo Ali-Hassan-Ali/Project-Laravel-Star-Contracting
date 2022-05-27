@@ -22,16 +22,15 @@
                     @csrf
                     @method('put')
 
-                    @include('admin.partials._errors')
-
                     {{--name--}}
                     <div class="form-group">
                         <label>@lang('citys.name')<span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" value="{{ $city->name }}" required autofocus>
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $city->name) }}" required autofocus>
+
                     </div>
 
-                    {{--email--}}
-                    <div class="form-group">
+                    {{--country_id--}}
+                    <div class="form-group @error('country_id') custom-select @enderror">
                         <label>@lang('citys.citys') <span class="text-danger">*</span></label>
                         <select name="country_id" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('countrys.countrys')</option>
@@ -41,6 +40,11 @@
                                 </option>
                             @endforeach
                         </select>
+                        @error('country_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">

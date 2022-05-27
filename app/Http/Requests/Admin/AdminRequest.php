@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AdminRequest extends FormRequest
 {
@@ -24,19 +25,17 @@ class AdminRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
-            'type' => 'required',
-            'role_id' => 'required',
+            'name'     => ['required','min:2','max:255'],
+            'password' => ['required','confirmed'],
+            'type'     => ['required'],
+            'role_id'  => ['required'],
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
             
             $admin = $this->route()->parameter('admin');
 
-            $rules['email'] = 'required|email|unique:users,id,' . $admin->id;
-            $rules['password'] = '';
+            $rules['email'] = ['required','email','min:2','max:255', Rule::unique('users')->ignore($admin->id)];
 
         }//end of if
 

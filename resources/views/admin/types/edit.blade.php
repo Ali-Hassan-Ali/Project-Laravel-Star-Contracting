@@ -22,12 +22,15 @@
                     @csrf
                     @method('put')
 
-                    @include('admin.partials._errors')
-
                     {{--name--}}
                     <div class="form-group">
                         <label>@lang('types.types')<span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name', $type->name) }}" required autofocus>
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $type->name) }}" required autofocus>
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
 

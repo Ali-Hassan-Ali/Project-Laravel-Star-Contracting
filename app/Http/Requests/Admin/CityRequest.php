@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CityRequest extends FormRequest
 {
@@ -24,9 +25,20 @@ class CityRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name'       => 'required',
-            'country_id' => 'required',
+            'country_id' => ['required','numeric'],
         ];
+
+        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+
+            $citys = $this->route()->parameter('city');
+
+            $rules['name'] = ['required','min:2','max:255', Rule::unique('cities')->ignore($citys->id)];
+
+        } else {
+
+            $rules['name'] = ['required','min:2','max:255','unique:cities'];
+
+        }//end of if
 
         return $rules;
 

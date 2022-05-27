@@ -26,7 +26,7 @@ class PasswordRequest extends FormRequest
     {
         $rules = [
             'old_password' => ['required', new CheckOldPassword],
-            'password' => 'required|confirmed'
+            'password'     => ['required','confirmed'],
         ];
 
         return $rules;

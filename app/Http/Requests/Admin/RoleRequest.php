@@ -24,15 +24,18 @@ class RoleRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|unique:roles',
-            'permissions' => 'required',
+            'permissions'  => ['required'],
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
             $role = $this->route()->parameter('role');
 
-            $rules['name'] = 'required|unique:roles,id,' . $role->id;
+            $rules['name'] = ['required','min:2','max:255', Rule::unique('roles')->ignore($role->id)];
+
+        } else {
+
+            $rules['name'] = ['required','min:2','max:255','unique:roles'];
 
         }//end of if
 

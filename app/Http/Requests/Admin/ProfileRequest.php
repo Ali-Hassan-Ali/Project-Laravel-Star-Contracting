@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProfileRequest extends FormRequest
 {
@@ -24,9 +25,9 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,id,' . auth()->user()->id,
-            'image' => 'sometimes|nullable|image',
+            'name'  => ['required','min:2','max:255'],
+            'email' => ['required','email','min:2','max:255', Rule::unique('users')->ignore(auth()->id())],
+            'image' => ['required','sometimes','nullable','image'],
         ];
 
         return $rules;

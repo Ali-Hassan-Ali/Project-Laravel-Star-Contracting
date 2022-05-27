@@ -67,6 +67,11 @@
     <link rel="stylesheet" href="{{ asset('admin_assets/css/custom.css')}}">
 
     <style>
+        
+        .has-error .select2-selection {
+            border-color: rgb(185, 74, 72) !important;
+        }
+
         .loader {
             -webkit-animation: spin 2s linear infinite; /* Safari */
             animation: spin 2s linear infinite;
