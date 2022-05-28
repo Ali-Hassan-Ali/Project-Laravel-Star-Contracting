@@ -65,6 +65,7 @@
                                             </label>
                                         </div>
                                     </th>
+                                    <th>@lang('equipments.equipments')</th>
                                     <th>@lang('status.working_status')</th>
                                     <th>@lang('status.break_down_duration')</th>
                                     <th>@lang('status.hours_worked')</th>
@@ -107,6 +108,7 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+                {data: 'equipment', name: 'equipment'},
                 {data: 'working_status', name: 'working_status'},
                 {data: 'break_down_duration', name: 'break_down_duration'},
                 {data: 'hours_worked', name: 'hours_worked'},

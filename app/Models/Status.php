@@ -18,6 +18,12 @@ class Status extends Model
         
     }//end of  belongsTo
 
+    public function equipment()
+    {
+        return $this->belongsTo(Equipment::class);
+        
+    }//end of  belongsTo
+
     public function getAsOfAttribute($value)
     {
         return date('Y-m-d\TH:i', strtotime($value));
