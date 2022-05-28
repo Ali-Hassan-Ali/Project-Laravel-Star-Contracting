@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CityTableSeeder::class,
             TypeTableSeeder::class,
             EquipmentTableSeeder::class,
+            StatusTableSeeder::class,
         ]);
     }
 }

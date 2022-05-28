@@ -21,6 +21,7 @@ return [
             'countrys'   => 'c,r,u,d',
             'citys'      => 'c,r,u,d',
             'types'      => 'c,r,u,d',
+            'status'     => 'c,r,u,d',
             'equipments' => 'c,r,u,d',
             'settings'   => 'c,r,u,d',
         ],

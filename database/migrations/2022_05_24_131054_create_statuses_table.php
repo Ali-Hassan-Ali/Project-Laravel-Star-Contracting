@@ -16,15 +16,16 @@ class CreateStatusesTable extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
 
-            $table->integer('break_sown_duration');     
+            $table->integer('break_down_duration');
             $table->integer('hours_worked');
 
-            $table->text('working_status');
-            $table->string('break_down_description');
+            $table->enum('working_status', [true,false])->default(true);
+            $table->text('break_down_description');
             
-            $table->dateTime('as_of');
-            $table->dateTime('break_down_date');
+            $table->timestamps('as_of');
+            $table->timestamps('break_down_date');
 
             $table->softDeletes();
             $table->timestamps();
