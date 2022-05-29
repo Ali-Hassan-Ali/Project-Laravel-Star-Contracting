@@ -24,8 +24,8 @@ class CreateStatusesTable extends Migration
             $table->enum('working_status', [true,false])->default(true);
             $table->text('break_down_description');
             
-            $table->timestamps('as_of');
-            $table->timestamps('break_down_date');
+            $table->dateTime('as_of');
+            $table->dateTime('break_down_date');
 
             $table->softDeletes();
             $table->timestamps();

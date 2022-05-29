@@ -16,9 +16,9 @@ class CreateSpecsTable extends Migration
         Schema::create('specs', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
-            $table->foreignIdFor(\App\Models\Type::class)->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\User::class);
 
-            $table->text('specification');
+            $table->longText('description');
             
             $table->softDeletes();
             $table->timestamps();

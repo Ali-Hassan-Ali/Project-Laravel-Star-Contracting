@@ -50,7 +50,11 @@ Route::middleware([
             Route::delete('/status/bulk_delete', 'StatusController@bulkDelete')->name('status.bulk_delete');
             Route::resource('status', 'StatusController');
 
-            
+            //specs routes
+            Route::get('/specs/data', 'SpecController@data')->name('specs.data');
+            Route::delete('/specs/bulk_delete', 'SpecController@bulkDelete')->name('specs.bulk_delete');
+            Route::resource('specs', 'SpecController');
+
             //equipments routes
             Route::get('/equipments/data', 'EquipmentController@data')->name('equipments.data');
             Route::delete('/equipments/bulk_delete', 'EquipmentController@bulkDelete')->name('equipments.bulk_delete');

@@ -39,10 +39,14 @@
             <li><a class="app-menu__item {{ request()->is('*types*') ? 'active' : '' }}" href="{{ route('admin.types.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('types.types')</span></a></li>
         @endif
 
-
         {{--statuses--}}
         @if (auth()->user()->hasPermission('read_status'))
             <li><a class="app-menu__item {{ request()->is('*status*') ? 'active' : '' }}" href="{{ route('admin.status.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('status.status')</span></a></li>
+        @endif
+
+        {{--specs--}}
+        @if (auth()->user()->hasPermission('read_specs'))
+            <li><a class="app-menu__item {{ request()->is('*specs*') ? 'active' : '' }}" href="{{ route('admin.specs.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('specs.specs')</span></a></li>
         @endif
 
         {{--equipments--}}

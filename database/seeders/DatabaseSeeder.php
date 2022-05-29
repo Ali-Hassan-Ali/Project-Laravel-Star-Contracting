@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             TypeTableSeeder::class,
             EquipmentTableSeeder::class,
             StatusTableSeeder::class,
+            SpecTableSeeder::class,
         ]);
     }
 }
