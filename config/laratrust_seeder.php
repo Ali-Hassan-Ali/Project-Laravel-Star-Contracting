@@ -24,6 +24,7 @@ return [
             'status'     => 'c,r,u,d',
             'specs'      => 'c,r,u,d',
             'equipments' => 'c,r,u,d',
+            'insurances' => 'c,r,u,d',
             'settings'   => 'c,r,u,d',
         ],
         'admin' => [],

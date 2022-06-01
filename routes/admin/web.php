@@ -55,6 +55,11 @@ Route::middleware([
             Route::delete('/specs/bulk_delete', 'SpecController@bulkDelete')->name('specs.bulk_delete');
             Route::resource('specs', 'SpecController');
 
+            //insurances routes
+            Route::get('/insurances/data', 'InsuranceController@data')->name('insurances.data');
+            Route::delete('/insurances/bulk_delete', 'InsuranceController@bulkDelete')->name('insurances.bulk_delete');
+            Route::resource('insurances', 'InsuranceController');
+
             //equipments routes
             Route::get('/equipments/data', 'EquipmentController@data')->name('equipments.data');
             Route::delete('/equipments/bulk_delete', 'EquipmentController@bulkDelete')->name('equipments.bulk_delete');

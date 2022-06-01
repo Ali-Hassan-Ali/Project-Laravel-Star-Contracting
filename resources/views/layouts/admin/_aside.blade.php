@@ -49,6 +49,11 @@
             <li><a class="app-menu__item {{ request()->is('*specs*') ? 'active' : '' }}" href="{{ route('admin.specs.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('specs.specs')</span></a></li>
         @endif
 
+        {{--insurances--}}
+        @if (auth()->user()->hasPermission('read_insurances'))
+            <li><a class="app-menu__item {{ request()->is('*insurances*') ? 'active' : '' }}" href="{{ route('admin.insurances.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('insurances.insurances')</span></a></li>
+        @endif
+
         {{--equipments--}}
         @if (auth()->user()->hasPermission('read_equipments'))
             <li><a class="app-menu__item {{ request()->is('*equipments*') ? 'active' : '' }}" href="{{ route('admin.equipments.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('equipments.equipments')</span></a></li>

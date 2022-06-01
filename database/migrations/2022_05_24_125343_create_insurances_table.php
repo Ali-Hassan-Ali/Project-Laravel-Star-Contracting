@@ -16,20 +16,22 @@ class CreateInsurancesTable extends Migration
         Schema::create('insurances', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
             
             $table->integer('premium');
             $table->integer('insurance_duration');
-            $table->integer('insurance_expiry');
-            $table->integer('claimed_amount');
+            $table->integer('claim_amount');
+            $table->integer('policy_number');
             
             $table->text('insurer');
+            $table->text('claim_description');
             $table->text('type_of_insurance');
-            $table->text('policy_number');
-            $table->enum('claims',['yes','no']);
-            $table->string('attachments');
+            $table->enum('claims',[true,false])->default(true);
+            $table->string('attachments')->default('insurances_attachments_image/default.png');
 
             $table->dateTime('claim_date');
             $table->dateTime('insurance_start_date');
+            $table->dateTime('insurance_expiry');
 
             $table->softDeletes();
             $table->timestamps();
