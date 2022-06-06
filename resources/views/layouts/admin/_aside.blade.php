@@ -64,6 +64,11 @@
             <li><a class="app-menu__item {{ request()->is('*spares*') ? 'active' : '' }}" href="{{ route('admin.spares.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('spares.spares')</span></a></li>
         @endif
 
+        {{--maintenances--}}
+        @if (auth()->user()->hasPermission('read_maintenances'))
+            <li><a class="app-menu__item {{ request()->is('*maintenances*') ? 'active' : '' }}" href="{{ route('admin.maintenances.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('maintenances.maintenances')</span></a></li>
+        @endif
+
 
         {{--settings--}}
         @if (auth()->user()->hasPermission('read_settings'))

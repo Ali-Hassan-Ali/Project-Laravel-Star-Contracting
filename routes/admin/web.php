@@ -70,6 +70,11 @@ Route::middleware([
             Route::delete('/spares/bulk_delete', 'SpareController@bulkDelete')->name('spares.bulk_delete');
             Route::resource('spares', 'SpareController');
 
+            //maintenances routes
+            Route::get('/maintenances/data', 'MaintenanceController@data')->name('maintenances.data');
+            Route::delete('/maintenances/bulk_delete', 'MaintenanceController@bulkDelete')->name('maintenances.bulk_delete');
+            Route::resource('maintenances', 'MaintenanceController');
+
           
 
             //setting routes

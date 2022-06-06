@@ -18,8 +18,6 @@
 
             <div class="tile shadow">
 
-                @include('admin.partials._errors')
-
                 <form method="post" action="{{ route('admin.spares.store') }}" enctype="multipart/form-data">
                     @csrf
                     @method('post')

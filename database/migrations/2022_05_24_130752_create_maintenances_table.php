@@ -16,13 +16,14 @@ class CreateMaintenancesTable extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
             
-            $table->integer('last_service_km/hmr');
-            $table->integer('next_service_dueon_km/hmr');
-            $table->integer('actual_service_reading_km/hmr');
+            $table->integer('last_service_km');
+            $table->integer('next_service_dueon_km');
+            $table->integer('actual_service_reading');
 
             $table->text('non_scheduled');
-            $table->enum('scheduled',['yes','no']);
+            $table->enum('scheduled',[true, false])->default(true);
 
             $table->dateTime('last_service_date');
             $table->dateTime('next_service_date');

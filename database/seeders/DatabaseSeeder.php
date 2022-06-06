@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             SpecTableSeeder::class,
             InsuranceTableSeeder::class,
             SpareTableSeeder::class,
+            MaintenanceTableSeeder::class,
         ]);
     }
 }
