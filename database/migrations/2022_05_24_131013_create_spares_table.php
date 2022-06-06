@@ -16,16 +16,17 @@ class CreateSparesTable extends Migration
         Schema::create('spares', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
 
-            $table->integer('freight_charges_till_site');
-            $table->integer('cost_of_spare');
-            $table->integer('location_of_spare');
+            $table->integer('freight_charges');
+            $table->integer('cost');
+            $table->integer('location');
 
-            $table->text('spare_name');
-            $table->text('spare_part_no');
-            $table->string('usage_description');
-            $table->enum('used',['yes','no']);
-            $table->string('attachments');
+            $table->string('name');
+            $table->boolean('part_no')->default(true);
+            $table->text('description');
+            $table->enum('used',[true, false])->default(true);
+            $table->string('attachments')->default('attachments_spares_file/default.png');
             
             $table->dateTime('usage_date');
 

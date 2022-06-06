@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             StatusTableSeeder::class,
             SpecTableSeeder::class,
             InsuranceTableSeeder::class,
+            SpareTableSeeder::class,
         ]);
     }
 }

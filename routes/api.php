@@ -17,8 +17,9 @@ use App\Http\Controllers\Api\ApartmentController;
 |
 */
 
-Route::get('ping', function() {
-    return response()->api('server up to work');
+Route::get('/test', function() {
+
+    return \App\Models\User::first();
 });
 
 Route::post('/search',[SearchController::class,'search']);

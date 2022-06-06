@@ -65,6 +65,11 @@ Route::middleware([
             Route::delete('/equipments/bulk_delete', 'EquipmentController@bulkDelete')->name('equipments.bulk_delete');
             Route::resource('equipments', 'EquipmentController');
 
+            //spares routes
+            Route::get('/spares/data', 'SpareController@data')->name('spares.data');
+            Route::delete('/spares/bulk_delete', 'SpareController@bulkDelete')->name('spares.bulk_delete');
+            Route::resource('spares', 'SpareController');
+
           
 
             //setting routes

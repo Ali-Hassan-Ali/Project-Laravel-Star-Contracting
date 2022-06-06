@@ -11,7 +11,7 @@ use App\Models\Admin;
 use App\Models\Apartment;
 use App\Models\Order;
 use App\Models\City;
-use App\Models\Vehicle;
+use App\Models\User;
 
 class WelcomController extends Controller
 {
@@ -25,9 +25,9 @@ class WelcomController extends Controller
     
     public function index()
     {
-        $admins_count     = Admin::whereRoleIs('admin')->count();
+        $admins_count     = User::whereRoleIs('admin')->count();
         $citys_count      = City::count();
-        $vehicle_count    = Vehicle::count();
+        $vehicle_count    = '3';
         // $apartments_count = Apartment::count();
         // $orders_count     = Order::count();
 

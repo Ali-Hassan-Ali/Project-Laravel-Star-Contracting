@@ -59,6 +59,11 @@
             <li><a class="app-menu__item {{ request()->is('*equipments*') ? 'active' : '' }}" href="{{ route('admin.equipments.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('equipments.equipments')</span></a></li>
         @endif
 
+        {{--spares--}}
+        @if (auth()->user()->hasPermission('read_spares'))
+            <li><a class="app-menu__item {{ request()->is('*spares*') ? 'active' : '' }}" href="{{ route('admin.spares.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('spares.spares')</span></a></li>
+        @endif
+
 
         {{--settings--}}
         @if (auth()->user()->hasPermission('read_settings'))
