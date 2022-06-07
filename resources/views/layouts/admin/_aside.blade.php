@@ -69,6 +69,12 @@
             <li><a class="app-menu__item {{ request()->is('*maintenances*') ? 'active' : '' }}" href="{{ route('admin.maintenances.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('maintenances.maintenances')</span></a></li>
         @endif
 
+        {{--fuels--}}
+        @if (auth()->user()->hasPermission('read_fuels'))
+            <li><a class="app-menu__item {{ request()->is('*fuels*') ? 'active' : '' }}" href="{{ route('admin.fuels.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('fuels.fuels')</span></a></li>
+        @endif
+
+        
 
         {{--settings--}}
         @if (auth()->user()->hasPermission('read_settings'))

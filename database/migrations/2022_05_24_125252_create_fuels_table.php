@@ -16,6 +16,7 @@ class CreateFuelsTable extends Migration
         Schema::create('fuels', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
 
             $table->text('unit');
             $table->text('fuel_type');
@@ -28,8 +29,8 @@ class CreateFuelsTable extends Migration
             $table->integer('hours_worked_weekly');
             $table->integer('total_cost_of_fuel');
             
-            $table->dateTime('last_fill_date');
-            $table->dateTime('next_fill_date');
+            $table->dateTime('last_date');
+            $table->dateTime('next_date');
 
             $table->softDeletes();
             $table->timestamps();

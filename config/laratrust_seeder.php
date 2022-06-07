@@ -23,6 +23,7 @@ return [
             'types'        => 'c,r,u,d',
             'status'       => 'c,r,u,d',
             'specs'        => 'c,r,u,d',
+            'fuels'        => 'c,r,u,d',
             'spares'       => 'c,r,u,d',
             'equipments'   => 'c,r,u,d',
             'maintenances' => 'c,r,u,d',

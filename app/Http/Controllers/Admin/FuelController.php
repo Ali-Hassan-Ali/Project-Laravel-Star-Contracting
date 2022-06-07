@@ -1,86 +1,120 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\FuelRequest;
+use App\Models\Equipment;
 use App\Models\Fuel;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class FuelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('permission:read_fuels')->only(['index']);
+        $this->middleware('permission:create_fuels')->only(['create', 'store']);
+        $this->middleware('permission:update_fuels')->only(['edit', 'update']);
+        $this->middleware('permission:delete_fuels')->only(['delete', 'bulk_delete']);
+
+    }// end of __construct
+
     public function index()
     {
-        //
-    }
+        return view('admin.fuels.index');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    }//end of index 
+
+    public function data()
+    {
+        $fuels = Fuel::latest()->get();
+
+        return DataTables::of($fuels)
+            ->addColumn('record_select', 'admin.fuels.data_table.record_select')
+            ->editColumn('created_at', function (Fuel $fuel) {
+                return $fuel->created_at->format('Y-m-d');
+            })
+            ->addColumn('admin', function (Fuel $fuel) {
+                return $fuel->admin->name;
+            })
+            ->addColumn('equipment', function (Fuel $fuel) {
+                return $fuel->equipment->name;
+            })
+            ->addColumn('actions', 'admin.fuels.data_table.actions')
+            ->rawColumns(['record_select', 'actions'])
+            ->toJson();
+
+    }// end of data
+
+
     public function create()
     {
-        //
-    }
+        $equipments = Equipment::all();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+        return view('admin.fuels.create', compact('equipments'));
+
+    }//end of create
+
+    
+    public function store(FuelRequest $request)
     {
-        //
-    }
+        $requestData             = $request->validated();
+        $requestData['user_id']  = auth()->id();
+        fuel::create($requestData);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Fuel  $fuel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Fuel $fuel)
-    {
-        //
-    }
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('admin.fuels.index');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Fuel  $fuel
-     * @return \Illuminate\Http\Response
-     */
+    }//end of store
+
+
+
     public function edit(Fuel $fuel)
     {
-        //
-    }
+        $equipments = Equipment::all();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Fuel  $fuel
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Fuel $fuel)
+        return view('admin.fuels.edit', compact('fuel','equipments'));
+
+    }//end of edit
+
+
+    public function update(FuelRequest $request, Fuel $fuel)
     {
-        //
-    }
+        $fuel->update($request->validated());
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Fuel  $fuel
-     * @return \Illuminate\Http\Response
-     */
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('admin.fuels.index');
+
+    }//end of store
+
+   
     public function destroy(Fuel $fuel)
     {
-        //
-    }
-}
+        $this->delete($fuel);
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
+
+    }// end of destroy
+
+    public function bulkDelete()
+    {
+        foreach (json_decode(request()->record_ids) as $recordId) {
+
+            $fuel = Fuel::FindOrFail($recordId);
+            $this->delete($fuel);
+
+        }//end of for each
+
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
+
+    }// end of bulkDelete
+
+    private function delete(Fuel $fuel)
+    {
+        $fuel->delete();
+
+    }// end of delete
+
+}//end of controller

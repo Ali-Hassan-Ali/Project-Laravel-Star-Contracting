@@ -75,6 +75,11 @@ Route::middleware([
             Route::delete('/maintenances/bulk_delete', 'MaintenanceController@bulkDelete')->name('maintenances.bulk_delete');
             Route::resource('maintenances', 'MaintenanceController');
 
+            //fuels routes
+            Route::get('/fuels/data', 'FuelController@data')->name('fuels.data');
+            Route::delete('/fuels/bulk_delete', 'FuelController@bulkDelete')->name('fuels.bulk_delete');
+            Route::resource('fuels', 'FuelController');
+
           
 
             //setting routes
