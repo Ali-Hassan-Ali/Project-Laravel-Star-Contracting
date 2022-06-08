@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             SpareTableSeeder::class,
             MaintenanceTableSeeder::class,
             FuelTableSeeder::class,
+            EirTableSeeder::class,
         ]);
     }
 }

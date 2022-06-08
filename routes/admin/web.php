@@ -80,6 +80,12 @@ Route::middleware([
             Route::delete('/fuels/bulk_delete', 'FuelController@bulkDelete')->name('fuels.bulk_delete');
             Route::resource('fuels', 'FuelController');
 
+
+            //eirs routes
+            Route::get('/eirs/data', 'EirController@data')->name('eirs.data');
+            Route::delete('/eirs/bulk_delete', 'EirController@bulkDelete')->name('eirs.bulk_delete');
+            Route::resource('eirs', 'EirController');
+
           
 
             //setting routes
