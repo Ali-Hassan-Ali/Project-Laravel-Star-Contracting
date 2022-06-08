@@ -33,7 +33,7 @@
                     <h5>@lang('roles.permissions') <span class="text-danger">*</span></h5>
 
                     @php
-                        $models = ['roles', 'admins','countrys','citys','types'];
+                        $models = ['roles', 'admins', 'countrys', 'citys', 'types', 'status', 'specs', 'eirs', 'fuels', 'spares', 'equipments', 'maintenances', 'request_parts', 'insurances', 'settings'];
                     @endphp
 
                     <table class="table">
