@@ -86,6 +86,12 @@ Route::middleware([
             Route::delete('/eirs/bulk_delete', 'EirController@bulkDelete')->name('eirs.bulk_delete');
             Route::resource('eirs', 'EirController');
 
+
+            //eirs routes
+            Route::get('/request_parts/data', 'RequestPartController@data')->name('request_parts.data');
+            Route::delete('/request_parts/bulk_delete', 'RequestPartController@bulkDelete')->name('request_parts.bulk_delete');
+            Route::resource('request_parts', 'RequestPartController');
+
           
 
             //setting routes

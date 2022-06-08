@@ -79,6 +79,11 @@
             <li><a class="app-menu__item {{ request()->is('*eirs*') ? 'active' : '' }}" href="{{ route('admin.eirs.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('eirs.eirs')</span></a></li>
         @endif
 
+        {{--request_parts--}}
+        @if (auth()->user()->hasPermission('read_request_parts'))
+            <li><a class="app-menu__item {{ request()->is('*request_parts*') ? 'active' : '' }}" href="{{ route('admin.request_parts.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('request_parts.request_parts')</span></a></li>
+        @endif
+
         
 
         {{--settings--}}

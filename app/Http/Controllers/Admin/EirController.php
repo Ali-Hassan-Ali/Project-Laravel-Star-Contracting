@@ -86,7 +86,7 @@ class EirController extends Controller
         $requestData                 = $request->validated();
         if ($request->attachments) {
 
-            Storage::disk('local')->delete('public/'. $spare->attachments);
+            Storage::disk('local')->delete('public/'. $eir->attachments);
 
             $requestData['attachments'] = $request->file('attachments')->store('attachments_eirs_file','public');
         }
@@ -123,7 +123,7 @@ class EirController extends Controller
 
     private function delete(Eir $eir)
     {
-        Storage::disk('local')->delete('public/'. $spare->attachments);
+        Storage::disk('local')->delete('public/'. $eir->attachments);
         $eir->delete();
 
     }// end of delete

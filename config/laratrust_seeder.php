@@ -28,6 +28,7 @@ return [
             'spares'       => 'c,r,u,d',
             'equipments'   => 'c,r,u,d',
             'maintenances' => 'c,r,u,d',
+            'request_parts'=> 'c,r,u,d',
             'insurances'   => 'c,r,u,d',
             'settings'     => 'c,r,u,d',
         ],

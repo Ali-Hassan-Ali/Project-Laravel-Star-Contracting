@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             MaintenanceTableSeeder::class,
             FuelTableSeeder::class,
             EirTableSeeder::class,
+            RequestPartTableSeeder::class,
         ]);
     }
 }
