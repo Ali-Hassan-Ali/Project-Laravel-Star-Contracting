@@ -13,6 +13,7 @@ Route::middleware([
 
             //home
            
+            Route::get('/top_statistics', 'HomeController@topStatistics')->name('home.top_statistics');
             Route::get('/home', 'HomeController@index')->name('home');
 
             //role routes
@@ -87,7 +88,7 @@ Route::middleware([
             Route::resource('eirs', 'EirController');
 
 
-            //eirs routes
+            //request_parts routes
             Route::get('/request_parts/data', 'RequestPartController@data')->name('request_parts.data');
             Route::delete('/request_parts/bulk_delete', 'RequestPartController@bulkDelete')->name('request_parts.bulk_delete');
             Route::resource('request_parts', 'RequestPartController');
