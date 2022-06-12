@@ -33,7 +33,7 @@
                     <h5>@lang('roles.permissions') <span class="text-danger">*</span></h5>
 
                     @php
-                        $models = ['roles', 'admins', 'countrys', 'citys', 'types', 'status', 'specs', 'eirs', 'fuels', 'spares', 'equipments', 'maintenances', 'request_parts', 'insurances', 'settings'];
+                        $models = ['statistics','roles', 'admins', 'countrys', 'citys', 'types', 'status', 'specs', 'eirs', 'fuels', 'spares', 'equipments', 'maintenances', 'request_parts', 'insurances', 'settings'];
                     @endphp
 
                     <table class="table">
@@ -58,8 +58,14 @@
 
                                     @php
                                         //create_roles, read_roles, update_roles, delete_roles
-                                            $permissionMaps = ['create', 'read', 'update', 'delete'];
+                                        $permissionMaps = ['create', 'read', 'update', 'delete'];
                                     @endphp
+
+                                    @if ($model == 'statistics')
+                                        @php
+                                            $permissionMaps = ['read'];
+                                        @endphp
+                                    @endif
 
                                     @foreach ($permissionMaps as $permissionMap)
                                         <div class="animated-checkbox mx-2" style="display:inline-block;">

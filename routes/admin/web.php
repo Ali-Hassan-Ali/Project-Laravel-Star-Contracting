@@ -16,6 +16,17 @@ Route::middleware([
             Route::get('/top_statistics', 'HomeController@topStatistics')->name('home.top_statistics');
             Route::get('/home', 'HomeController@index')->name('home');
 
+            Route::get('/equipment_chart', 'StatisticsController@equipmentChart')->name('equipment.chart');
+            Route::get('/specs_chart', 'StatisticsController@specsChart')->name('specs.chart');
+            Route::get('/spares_chart', 'StatisticsController@sparesChart')->name('spares.chart');
+            Route::get('/fuels_chart', 'StatisticsController@fuelsChart')->name('fuels.chart');
+            Route::get('/eirs_chart', 'StatisticsController@eirsChart')->name('eirs.chart');
+            Route::get('/insurances_chart', 'StatisticsController@insurancesChart')->name('insurances.chart');
+            Route::get('/maintenances_chart', 'StatisticsController@maintenancesChart')->name('maintenances.chart');
+
+            Route::get('/statistics_chart', 'StatisticsController@chart')->name('statistics.chart');
+            Route::get('/statistics_table', 'StatisticsController@table')->name('statistics.table');
+
             //role routes
             Route::get('/roles/data', 'RoleController@data')->name('roles.data');
             Route::delete('/roles/bulk_delete', 'RoleController@bulkDelete')->name('roles.bulk_delete');

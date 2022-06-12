@@ -300,86 +300,6 @@
 
             </div><!-- end of row -->
 
-            {{--movies chart--}}
-            <div class="row my-3">
-
-     {{--            <div class="col-md-12">
-
-                    <div class="card">
-
-                        <div class="card-body">
-
-                            <div class="d-flex justify-content-between">
-                                <h4>@lang('movies.movies_chart')</h4>
-
-                                <select id="movies-chart-year" style="width: 100px;">
-                                    @for ($i = 5; $i >=0 ; $i--)
-                                        <option value="{{ now()->subYears($i)->year }}"
-                                                {{ now()->subYears($i)->year == now()->year ? 'selected' : '' }}
-                                        >
-                                            {{ now()->subYears($i)->year }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-
-                            <div id="movies-chart-wrapper"></div>
-
-                        </div><!-- end of card body -->
-
-                    </div><!-- end of card -->
-
-                </div><!-- end of col --> --}}
-
-            </div><!-- end of row -->
-
-{{--             <div class="row">
-
-                <div class="col-md-12">
-
-                    <div class="card">
-
-                        <div class="card-body">
-
-
-                            <div class="d-flex my-2">
-                                <h4 class="mb-0">@lang('movies.top') @lang('movies.popular')</h4>
-                                {{-- <a href="{{ route('admin.movies.index') }}" class="mx-2 mt-1">@lang('site.show_all')</a> --}}
-                            </div>
-
-                            <table class="table">
-                                {{-- <tr>
-                                    <th>#</th>
-                                    <th style="width: 30%;">@lang('movies.title')</th>
-                                    <th>@lang('movies.vote')</th>
-                                    <th>@lang('movies.vote_count')</th>
-                                    <th>@lang('movies.release_date')</th>
-                                </tr> --}}
-
-                                {{-- @foreach ($popularMovies as $index => $movie)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td><a href="{{ route('admin.movies.show', $movie->id) }}">{{ $movie->title }}</a></td>
-                                        <td><i class="fa fa-star text-warning"></i> <span class="mx-2">{{ $movie->vote }}</span></td>
-                                        <td>{{ $movie->vote_count }}</td>
-                                        <td>{{ $movie->release_date }}</td>
-                                    </tr>
-                                @endforeach --}}
-                            </table>
-
-                            <div class="d-flex my-2">
-                                {{-- <h4 class="mb-0">@lang('movies.top') @lang('movies.now_playing')</h4> --}}
-                                {{-- <a href="{{ route('admin.movies.index', ['type' => 'now_playing']) }}" class="mx-2 mt-1">@lang('site.show_all')</a> --}}
-                            </div>
-
-                        </div><!-- end of card body -->
-
-                    </div><!-- end of card -->
-
-                </div><!-- end of col -->
-
-            </div><!-- end of row --> --}}
-
         </div><!-- end of col -->
 
     </div><!-- end of row -->
@@ -391,16 +311,6 @@
         $(function () {
 
             topStatistics();
-
-            moviesChart("{{ now()->year }}");
-
-            $('#movies-chart-year').on('change', function () {
-
-                let year = $(this).find(':selected').val();
-
-                moviesChart(year);
-
-            });//end of on change
 
         });//end of document ready
 
@@ -438,29 +348,5 @@
 
         }//end of fun
 
-        function moviesChart(year) {
-
-            let loader = `
-                    <div class="d-flex justify-content-center align-items-center">
-                        <div class="loader loader-md"></div>
-                    </div>
-                `;
-
-            $('#movies-chart-wrapper').empty().append(loader);
-
-            $.ajax({
-                data: {
-                    'year': year,
-                },
-                cache: false,
-                success: function (html) {
-
-                    $('#movies-chart-wrapper').empty().append(html);
-
-                },
-
-            });//end of ajax call
-
-        }
     </script>
 @endpush

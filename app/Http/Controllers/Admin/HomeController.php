@@ -21,6 +21,7 @@ use App\Models\RequestPart;
 
 class HomeController extends Controller
 {
+
     public function index()
     {
         return view('admin.home');
@@ -61,6 +62,6 @@ class HomeController extends Controller
             'request_parts_count' => $RequestPartsCount,
         ]);
 
-    }//emd of 
+    }//emd of
 
 }//end of controller

@@ -31,6 +31,7 @@ return [
             'request_parts'=> 'c,r,u,d',
             'insurances'   => 'c,r,u,d',
             'settings'     => 'c,r,u,d',
+            'statistics'   => 'c,r,u,d',
         ],
         'admin' => [],
         'user' => [],

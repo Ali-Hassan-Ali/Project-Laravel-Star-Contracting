@@ -36,5 +36,7 @@ return [
     'loading'     => 'Loading ...',
     'show'        => 'Show',
     'show_all'    => 'Show all ...',
+    'total'       => 'Total',
+    'top'         => 'Top',
 
 ];
