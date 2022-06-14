@@ -26,25 +26,25 @@
 
                             <div class="d-flex my-2">
                                 <h4 class="mb-0">@lang('site.top') @lang('equipments.equipments')</h4>
-                                {{-- <a href="{{ route('admin.movies.index') }}" class="mx-2 mt-1">@lang('site.show_all')</a> --}}
+                                <a href="{{ route('admin.equipments.index') }}" class="mx-2 mt-1">@lang('site.show_all')</a>
                             </div>
 
                             <table class="table">
                                 <tr>
                                     <th>#</th>
-                                    <th style="width: 30%;">@lang('equipments.name')</th>
+                                    <th>@lang('equipments.name')</th>
                                     <th>@lang('equipments.model')</th>
-                                    <th>@lang('movies.vote_count')</th>
-                                    <th>@lang('movies.release_date')</th>
+                                    <th>@lang('types.types')</th>
+                                    <th>@lang('equipments.operator')</th>
                                 </tr>
 
                                 @foreach ($equipments as $index => $equipment)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td><a href="{{ route('admin.equipments.show', $equipment->id) }}">{{ $equipment->name }}</a></td>
-                                        <td><span class="mx-2">{{ $equipment->model }}</span></td>
-                                        <td>{{ $equipment->vote_count }}</td>
-                                        <td>{{ $equipment->release_date }}</td>
+                                        <td>{{ $equipment->name }}</td>
+                                        <td>{{ $equipment->model }}</td>
+                                        <td>{{ $equipment->type->name }}</td>
+                                        <td>{{ $equipment->operator }}</td>
                                     </tr>
                                 @endforeach
                             </table>
