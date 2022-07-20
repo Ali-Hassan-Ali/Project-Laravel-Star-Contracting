@@ -38,6 +38,17 @@
                         @enderror
                     </div>
 
+                    {{--as_of--}}
+                    <div class="form-group">
+                        <label>@lang('status.as_of') <span class="text-danger">*</span></label>
+                        <input type="date" name="as_of" class="form-control @error('as_of') is-invalid @enderror" value="{{ old('as_of', date('Y-m-d', strtotime($status->as_of)) ) }}" max="{{ date('Y-m-d', strtotime(now())) }}" required autofocus>
+                        @error('as_of')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
                     @php
                         $statuses = ['breakdown', 'working'];
                     @endphp
@@ -51,17 +62,6 @@
                                 <option value="{{ $statu }}" {{ $statu == old('working_status', $status->working_status) ? 'selected' : '' }}>@lang('status.' . $statu)</option>
                             @endforeach
                         </select>
-                    </div>
-
-                    {{--as_of--}}
-                    <div class="form-group">
-                        <label>@lang('status.as_of') <span class="text-danger">*</span></label>
-                        <input type="date" name="as_of" class="form-control @error('as_of') is-invalid @enderror" value="{{ old('as_of', date('Y-m-d', strtotime($status->as_of)) ) }}" max="{{ date('Y-m-d', strtotime(now())) }}" required autofocus>
-                        @error('as_of')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
 
                     {{--break_down_date--}}
@@ -89,7 +89,7 @@
                     {{--hours_worked--}}
                     <div class="form-group">
                         <label>@lang('status.hours_worked') <span class="text-danger">*</span></label>
-                        <input type="text" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', $status->hours_worked) }}" required autofocus>
+                        <input type="text" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', $status->hours_worked) }}" autofocus>
                         @error('hours_worked')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

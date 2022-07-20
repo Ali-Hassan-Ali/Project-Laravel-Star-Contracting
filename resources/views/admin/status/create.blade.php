@@ -38,21 +38,6 @@
                         @enderror
                     </div>
 
-                    @php
-                        $status = ['breakdown', 'working'];
-                    @endphp
-
-                    {{--working_status--}}
-                    <div class="form-group">
-                        <label>@lang('status.working_status') <span class="text-danger">*</span></label>
-                        <select name="working_status" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('status.working_status')</option>
-                            @foreach ($status as $statu)
-                                <option value="{{ $statu }}" {{ $statu == old('working_status') ? 'selected' : '' }}>@lang('status.' . $statu)</option>
-                            @endforeach
-                        </select>
-                    </div>
-
                     {{--as_of--}}
                     <div class="form-group">
                         <label>@lang('status.as_of') <span class="text-danger">*</span></label>
@@ -62,6 +47,21 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
+
+                    @php
+                        $status = ['breakdown', 'working'];
+                    @endphp
+
+                    {{--working_status--}}
+                    <div class="form-group">
+                        <label>@lang('status.working_status') <span class="text-danger">*</span></label>
+                        <select name="working_status" id="working-status" class="form-control select2" required>
+                            <option value="">@lang('site.choose') @lang('status.working_status')</option>
+                            @foreach ($status as $statu)
+                                <option value="{{ $statu }}" {{ $statu == old('working_status') ? 'selected' : '' }}>@lang('status.' . $statu)</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     {{--break_down_date--}}
@@ -89,7 +89,7 @@
                     {{--hours_worked--}}
                     <div class="form-group">
                         <label>@lang('status.hours_worked') <span class="text-danger">*</span></label>
-                        <input type="text" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked') }}" required autofocus>
+                        <input type="text" id="hours-worked" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked') }}" autofocus>
                         @error('hours_worked')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -100,7 +100,7 @@
                     {{-- break_down_description --}}
                     <div class="form-group">
                         <label>@lang('status.descrption') <span class="text-danger">*</span></label>
-                        <textarea class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description') }}</textarea>
+                        <textarea id="break-down" class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description') }}</textarea>
                         @error('break_down_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -122,4 +122,28 @@
 
 @endsection
 
+@push('scripts')
 
+    <script>
+        
+        $('#working-status').on('change', function () {
+
+            var value = $(this).val();
+
+            if (value) {
+
+                $('#hours-worked').attr('disabled', true);
+                $('#break-down').attr('disabled', true);
+
+            } else {
+
+                $('#hours-worked').attr('disabled', false);
+                $('#break-down').attr('disabled', false);
+
+            }//end of if
+            
+        });//end of chage
+
+    </script>
+
+@endpush

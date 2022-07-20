@@ -19,10 +19,10 @@ class CreateStatusesTable extends Migration
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
 
             $table->integer('break_down_duration');
-            $table->string('hours_worked')->default('hours worked');
+            $table->string('hours_worked')->nullable();
 
             $table->enum('working_status', ['breakdown', 'working'])->default('breakdown');
-            $table->text('break_down_description');
+            $table->text('break_down_description')->nullable();
             
             $table->dateTime('as_of');
             $table->dateTime('break_down_date');
