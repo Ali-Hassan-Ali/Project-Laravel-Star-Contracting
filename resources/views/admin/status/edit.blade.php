@@ -39,7 +39,7 @@
                     </div>
 
                     @php
-                        $statuses = [1,0];
+                        $statuses = ['breakdown', 'working'];
                     @endphp
 
                     {{--working_status--}}
@@ -48,7 +48,7 @@
                         <select name="working_status" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('status.working_status')</option>
                             @foreach ($statuses as $statu)
-                                <option value="{{ $statu }}" {{ $statu == old('working_status', $status->working_status) ? 'selected' : '' }}>@lang('site.' . $statu)</option>
+                                <option value="{{ $statu }}" {{ $statu == old('working_status', $status->working_status) ? 'selected' : '' }}>@lang('status.' . $statu)</option>
                             @endforeach
                         </select>
                     </div>
@@ -56,7 +56,7 @@
                     {{--as_of--}}
                     <div class="form-group">
                         <label>@lang('status.as_of') <span class="text-danger">*</span></label>
-                        <input type="datetime-local" name="as_of" class="form-control @error('as_of') is-invalid @enderror" value="{{ old('as_of', $status->as_of) }}" required autofocus>
+                        <input type="date" name="as_of" class="form-control @error('as_of') is-invalid @enderror" value="{{ old('as_of', date('Y-m-d', strtotime($status->as_of)) ) }}" max="{{ date('Y-m-d', strtotime(now())) }}" required autofocus>
                         @error('as_of')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -67,7 +67,7 @@
                     {{--break_down_date--}}
                     <div class="form-group">
                         <label>@lang('status.break_down_date') <span class="text-danger">*</span></label>
-                        <input type="datetime-local" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date', $status->break_down_date) }}" required autofocus>
+                        <input type="date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date', date('Y-m-d', strtotime($status->break_down_date)) ) }}" required autofocus >
                         @error('break_down_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -89,7 +89,7 @@
                     {{--hours_worked--}}
                     <div class="form-group">
                         <label>@lang('status.hours_worked') <span class="text-danger">*</span></label>
-                        <input type="number" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', $status->hours_worked) }}" required autofocus>
+                        <input type="text" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', $status->hours_worked) }}" required autofocus>
                         @error('hours_worked')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

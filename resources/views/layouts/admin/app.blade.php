@@ -74,6 +74,10 @@
             border-color: rgb(185, 74, 72) !important;
         }
 
+        label {
+            text-transform: capitalize;
+        }
+
         .loader {
             -webkit-animation: spin 2s linear infinite; /* Safari */
             animation: spin 2s linear infinite;

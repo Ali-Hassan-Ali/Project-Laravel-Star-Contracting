@@ -28,7 +28,6 @@ class AdminRequest extends FormRequest
             'name'     => ['required','min:2','max:255'],
             'password' => ['required','confirmed'],
             'type'     => ['required'],
-            'role_id'  => ['required'],
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -37,7 +36,11 @@ class AdminRequest extends FormRequest
 
             $rules['email'] = ['required','email','min:2','max:255', Rule::unique('users')->ignore($admin->id)];
 
-        }//end of if
+        } else {
+
+            $rules['email'] = ['required','email','unique:users','min:2','max:255'];
+
+        } //end of if
 
         return $rules;
 

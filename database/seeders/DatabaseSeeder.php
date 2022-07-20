@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             FuelTableSeeder::class,
             EirTableSeeder::class,
             RequestPartTableSeeder::class,
+            ComboBoxTableSeeder::class,
         ]);
     }
 }

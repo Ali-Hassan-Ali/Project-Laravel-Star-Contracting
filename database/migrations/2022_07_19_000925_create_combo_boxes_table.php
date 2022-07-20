@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypesTable extends Migration
+class CreateComboBoxesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('combo_boxes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class);
-            $table->foreignIdFor(\App\Models\Country::class);
-            $table->foreignIdFor(\App\Models\City::class);
-
             $table->string('name');
+            $table->enum('type', ['make', 'model', 'owner_ship'])->nullable();
+
+            $table->foreignIdFor(\App\Models\User::class);
 
             $table->softDeletes();
             $table->timestamps();
@@ -33,6 +32,6 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('combo_boxes');
     }
 }

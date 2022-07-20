@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class TypeRequest extends FormRequest
+class ComboBoxRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,24 +25,13 @@ class TypeRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'country_id' => ['required','numeric'],
-            'city_id'    => ['required','numeric'],
+            'name'    => ['required','string'],
+            'type'    => ['required','in:make,model,owner_ship'],
         ];
-
-        if (in_array($this->method(), ['PUT', 'PATCH'])) {
-
-            $types = $this->route()->parameter('type');
-
-            $rules['name'] = ['required','min:2','max:255', Rule::unique('types')->ignore($types->id)];
-
-        } else {
-
-            $rules['name'] = ['required','min:2','max:255','unique:types'];
-
-        }//end of if
 
         return $rules;
 
     }//end of rules
 
 }//end of request
+

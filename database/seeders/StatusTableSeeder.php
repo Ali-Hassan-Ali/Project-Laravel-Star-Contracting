@@ -13,7 +13,7 @@ class StatusTableSeeder extends Seeder
      */
     public function run()
     {
-        $statuses = ['status one','status tow','status three','status fore'];
+        $statuses = ['Breakdown','Working'];
 
         foreach ($statuses as $status) {
             
@@ -23,7 +23,7 @@ class StatusTableSeeder extends Seeder
 
                 'break_down_duration' => 10,
                 'hours_worked'        => 20,
-                'working_status'      => true,
+                'working_status'      => 'Breakdown',
 
                 'break_down_description' => 'description',
                 

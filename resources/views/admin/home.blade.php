@@ -16,7 +16,8 @@
 
             {{--top statistics--}}
             <div class="row" id="top-statistics">
-
+                @if (auth()->user()->hasPermission('read_roles'))
+                {{-- roles --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -36,7 +37,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_admins'))
+                {{-- admins --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -56,7 +60,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_countrys'))
+                {{-- countrys --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -76,7 +83,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_countrys'))
+                {{-- citys --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -96,7 +106,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_types'))
+                {{-- types --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -116,7 +129,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_status'))
+                {{-- status --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -136,7 +152,10 @@
                     </div>
 
                 </div><!-- end of col -->
-
+                @endif
+                
+                @if (auth()->user()->hasPermission('read_specs'))
+                {{-- specs --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -156,7 +175,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_insurances'))
+                {{-- insurances --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -176,7 +198,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_insurances'))
+                {{-- insurances --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -196,8 +221,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
-
+                @if (auth()->user()->hasPermission('read_spares'))
+                {{-- spares --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -217,7 +244,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_maintenances'))
+                {{-- maintenances --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -237,7 +267,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_fuels'))
+                {{-- fuels --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -257,7 +290,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_eirs'))
+                {{-- eirs --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -277,7 +313,10 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
 
+                @if (auth()->user()->hasPermission('read_request_parts'))
+                {{-- request_parts --}}
                 <div class="col-md-4 mb-2">
 
                     <div class="card">
@@ -297,6 +336,8 @@
                     </div>
 
                 </div><!-- end of col -->
+                @endif
+
 
             </div><!-- end of row -->
 

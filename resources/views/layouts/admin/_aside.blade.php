@@ -22,6 +22,14 @@
             </ul>
         </li>
 
+        {{--statistics--}}
+        <li class="treeview {{ request()->is('*combo_boxs*') || request()->is('*combo_boxs*')  ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fas fa-chart-area"></i><span class="app-menu__label">@lang('combo_boxs.combo_boxs')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item {{ request()->is('*combo_boxs*') ? 'active' : '' }}" href="{{ route('admin.combo_boxs.index') }}"><i class="icon fas fa-chart-line"></i>@lang('combo_boxs.combo_boxs')</a></li>
+                {{-- <li><a class="treeview-item {{ request()->is('*combo_boxs*') ? 'active' : '' }}" href="{{ route('admin.statistics.table') }}"><i class="icon fa-solid fa-table"></i>@lang('statistics.table')</a></li> --}}
+            </ul>
+        </li>
+
         {{--roles--}}
         @if (auth()->user()->hasPermission('read_roles'))
             <li><a class="app-menu__item {{ request()->is('*roles*') ? 'active' : '' }}" href="{{ route('admin.roles.index') }}"><i class="app-menu__icon fa fa-lock"></i> <span class="app-menu__label">@lang('roles.roles')</span></a></li>

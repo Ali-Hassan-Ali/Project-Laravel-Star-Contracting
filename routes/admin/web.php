@@ -27,6 +27,11 @@ Route::middleware([
             Route::get('/statistics_chart', 'StatisticsController@chart')->name('statistics.chart');
             Route::get('/statistics_table', 'StatisticsController@table')->name('statistics.table');
 
+            //combo boxs routes
+            Route::get('/combo_boxs/data', 'ComboBoxController@data')->name('combo_boxs.data');
+            Route::delete('/combo_boxs/bulk_delete', 'ComboBoxController@bulkDelete')->name('combo_boxs.bulk_delete');
+            Route::resource('combo_boxs', 'ComboBoxController');
+
             //role routes
             Route::get('/roles/data', 'RoleController@data')->name('roles.data');
             Route::delete('/roles/bulk_delete', 'RoleController@bulkDelete')->name('roles.bulk_delete');
