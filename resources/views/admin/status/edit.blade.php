@@ -78,7 +78,7 @@
                     {{--break_down_duration--}}
                     <div class="form-group">
                         <label>@lang('status.break_down_duration') <span class="text-danger">*</span></label>
-                        <input type="number" name="break_down_duration" class="form-control @error('break_down_duration') is-invalid @enderror" value="{{ old('break_down_duration', $status->break_down_duration) }}" required autofocus>
+                        <input type="text" name="break_down_duration" class="form-control @error('break_down_duration') is-invalid @enderror" value="{{ old('break_down_duration', $status->break_down_duration) }}" required autofocus>
                         @error('break_down_duration')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
