@@ -16,29 +16,33 @@ class CreateEquipmentTable extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Country::class)->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\City::class)->onDelete('cascade');
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
-            $table->foreignIdFor(\App\Models\Type::class)->onDelete('cascade');
-            // $table->foreignIdFor(\App\Models\Spec::class)->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\Spec::class)->onDelete('cascade');
             
-            $table->dateTime('year_of_manufacture');
-            $table->dateTime('rental_cost_basis');
+            $table->string('year_of_manufacture')->nullable();
+            $table->string('rental_cost_basis')->default(0);
 
-            $table->integer('driver_salary');
-            $table->integer('rental_basis');
+            $table->integer('driver_salary')->default(0);
+            $table->string('rental_basis');
 
-            $table->text('make');
-            $table->text('name');
-            $table->enum('plate_no', [true,false])->default(true);
-            $table->enum('chasis_no', [true,false])->default(true);
-            $table->enum('engine_no', [true,false])->default(true);
-            $table->enum('serial_no', [true,false])->default(true);
+            $table->string('make');
+            $table->string('name');
+            $table->string('type');
+
+            $table->string('plate_no')->nullable();
+            $table->string('chasis_no')->nullable();
+            $table->string('engine_no')->nullable();
+            $table->string('serial_no')->nullable();
 
             $table->text('model');
             $table->text('owner_ship');
             $table->text('operator');
-            $table->text('responsible_person');
-            $table->text('project_allocated_to');
-            $table->text('email');
+
+            $table->text('responsible_person')->nullable();
+            $table->text('project_allocated_to')->nullable();
+            $table->text('allocated_to')->nullable();
+            $table->text('email')->nullable();
 
             $table->dateTime('registration_expiry');
             $table->dateTime('expiry_reminder_sent');

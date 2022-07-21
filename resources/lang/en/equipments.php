@@ -19,6 +19,7 @@ return [
     'operator'            => 'operator',
     'responsible_person'  => 'responsible person',
     'project_allocated_to'=> 'project allocated to',
+    'allocated_to'        => 'allocated to',
     'email'               => 'email',
     'registration_expiry' => 'registration expiry',
     'expiry_reminder_sent'=> 'expiry reminder sent',

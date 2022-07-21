@@ -13,18 +13,20 @@ class EquipmentTableSeeder extends Seeder
      */
     public function run()
     {
-        $citys = ['car 1','car 2','car 3'];
+        $equipmens = ['car 1','car 2','car 3'];
 
-        foreach ($citys as $city) {
+        foreach ($equipmens as $equipmen) {
             
             \App\Models\Equipment::create([
-                'name'       => $city,
+                'name'       => $equipmen,
                 'user_id'    => 1,
                 'country_id' => 1,
-                'type_id'    => 1,
+                'city_id'    => 1,
+                'spec_id'    => 1,
                 'year_of_manufacture'   => now(),
                 'rental_cost_basis' => now(),
                 'driver_salary'         => 200,
+                'type'                  => 'type',
                 'make'                  => 'make',
                 'plate_no'              => true,
                 'chasis_no'             => true,

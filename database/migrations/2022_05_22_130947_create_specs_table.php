@@ -18,6 +18,7 @@ class CreateSpecsTable extends Migration
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
             $table->foreignIdFor(\App\Models\User::class);
 
+            $table->string('name')->default('specs name');
             $table->longText('description');
             
             $table->softDeletes();

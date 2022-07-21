@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SpecRequest;
 use App\Models\Equipment;
 use App\Models\Spec;
+use App\Models\Country;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
@@ -56,8 +58,10 @@ class SpecController extends Controller
     public function create()
     {
         $equipments = Equipment::all();
+        $countrys   = Country::all();
+        $citys      = City::all();
 
-        return view('admin.specs.create', compact('equipments'));
+        return view('admin.specs.create', compact('equipments', 'countrys', 'citys'));
 
     }// end of create
 
@@ -76,8 +80,10 @@ class SpecController extends Controller
     public function edit(Spec $spec)
     {
         $equipments = Equipment::all();
+        $countrys   = Country::all();
+        $citys      = City::all();
 
-        return view('admin.specs.edit', compact('spec','equipments'));
+        return view('admin.specs.edit', compact('spec', 'equipments', 'countrys', 'citys'));
 
     }// end of edit
 

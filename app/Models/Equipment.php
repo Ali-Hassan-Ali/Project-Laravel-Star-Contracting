@@ -24,10 +24,9 @@ class Equipment extends Model
         
     }//end of  belongsTo
 
-
-    public function type()
+    public function city()
     {
-        return $this->belongsTo(Type::class, 'type_id');
+        return $this->belongsTo(City::class, 'city_id');
         
     }//end of  belongsTo
 
