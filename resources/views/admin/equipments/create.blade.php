@@ -136,7 +136,7 @@
                     <div class="form-group @error('model') custom-select @enderror">
                         <label>@lang('equipments.model') <span class="text-danger">*</span></label>
                         <select name="model" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('specs.name')</option>
+                            <option value="">@lang('site.choose') @lang('equipments.model')</option>
                             @foreach ($models as $model)
                                 <option value="{{ $model->name }}" {{ $model->name == old('model') ? 'selected' : '' }}>{{ $model->name }}</option>
                             @endforeach
@@ -186,7 +186,7 @@
                     <div class="form-group @error('owner_ship') custom-select @enderror">
                         <label>@lang('equipments.owner_ship') <span class="text-danger">*</span></label>
                         <select name="owner_ship" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('specs.name')</option>
+                            <option value="">@lang('site.choose') @lang('equipments.owner_ship')</option>
                             @foreach ($owner_ship as $owner)
                                 <option value="{{ $owner->name }}" {{ $owner->name == old('owner_ship') ? 'selected' : '' }}>{{ $owner->name }}</option>
                             @endforeach
@@ -202,7 +202,7 @@
                     <div class="form-group @error('rental_basis') custom-select @enderror">
                         <label>@lang('equipments.rental_basis') <span class="text-danger">*</span></label>
                         <select name="rental_basis" class="form-control select2">
-                            <option value="">@lang('site.choose') @lang('specs.name')</option>
+                            <option value="">@lang('site.choose') @lang('equipments.rental_basis')</option>
                             @foreach ($rental_basis as $rental)
                                 <option value="{{ $rental->name }}" {{ $rental->name == old('rental_basis') ? 'selected' : '' }}>{{ $rental->name }}</option>
                             @endforeach
