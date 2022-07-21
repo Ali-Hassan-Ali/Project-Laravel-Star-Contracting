@@ -148,6 +148,17 @@
                         @enderror
                     </div>
 
+                                        {{--rental_cost_basis--}}
+                    <div class="form-group">
+                        <label>@lang('equipments.rental_cost_basis')<span class="text-danger">*</span></label>
+                        <input type="number" name="rental_cost_basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
+                        @error('rental_cost_basis')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
                     {{--countrys--}}
                     <div class="form-group">
                         <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
@@ -208,17 +219,6 @@
                         <label>@lang('equipments.year_of_manufacture')<span class="text-danger">*</span></label>
                         <input type="test" name="year_of_manufacture" class="form-control @error('year_of_manufacture') custom-select @enderror" value="{{ old('year_of_manufacture') }}" autofocus>
                         @error('year_of_manufacture')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{--rental_cost_basis--}}
-                    <div class="form-group">
-                        <label>@lang('equipments.rental_cost_basis')<span class="text-danger">*</span></label>
-                        <input type="number" name="rental_cost_basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
-                        @error('rental_cost_basis')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
