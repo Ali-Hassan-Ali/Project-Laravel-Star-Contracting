@@ -252,11 +252,15 @@
                         @enderror
                     </div>
 
-
-                    {{--responsible_person--}}
-                    <div class="form-group">
-                        <label>@lang('equipments.responsible_person')<span class="text-danger">*</span></label>
-                        <input type="text" name="responsible_person" class="form-control @error('responsible_person') custom-select @enderror" value="{{ old('responsible_person') }}" required autofocus>
+                    {{--operator--}}
+                    <div class="form-group @error('responsible_person') custom-select @enderror">
+                        <label>@lang('equipments.responsible_person') <span class="text-danger">*</span></label>
+                        <select name="operator" class="form-control select2" required>
+                            <option value="">@lang('site.choose') @lang('equipments.responsible_person')</option>
+                            @foreach ($responsible_person as $responsible)
+                                <option value="{{ $responsible->name }}" {{ $responsible->name == old('responsible_person') ? 'selected' : '' }}>{{ $responsible->name }}</option>
+                            @endforeach
+                        </select>
                         @error('responsible_person')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
