@@ -40,7 +40,6 @@ class EquipmentTableSeeder extends Seeder
                 'project_allocated_to'  => 'ali',
                 'email'                 => 'ali#gmail.com',
                 'registration_expiry'   => now(),
-                'expiry_reminder_sent'  => now(),
             ]);
 
         }//end of each
