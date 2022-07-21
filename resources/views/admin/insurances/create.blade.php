@@ -123,7 +123,7 @@
 
                     {{--plate_no--}}
                     <div class="form-group">
-                        <label>@lang('equipments.claims') <span class="text-danger">*</span></label>
+                        <label>@lang('insurances.claims') <span class="text-danger">*</span></label>
                         <select name="claims" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('equipments.claim')</option>
                             @foreach ($claims as $claim)
