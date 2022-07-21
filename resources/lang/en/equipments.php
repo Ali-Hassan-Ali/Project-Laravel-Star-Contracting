@@ -2,12 +2,12 @@
 
 return [
     'equipments' => 'Equipments',
-    'name'       => 'Equipments',
+    'name'       => 'name',
     
-    'plate_no'   => 'plate',
-    'chasis_no'  => 'chasis',
-    'engine_no'  => 'engine',
-    'serial_no'  => 'no serial',
+    'plate_no'   => 'plate no',
+    'chasis_no'  => 'chasis no',
+    'engine_no'  => 'engine no',
+    'serial_no'  => 'serial no',
 
     'year_of_manufacture' => 'year of manufacture',
     'rental_cost_basis'   => 'rental cost basis',
