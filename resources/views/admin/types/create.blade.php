@@ -33,38 +33,6 @@
                         @enderror
                     </div>
 
-                    {{--country--}}
-                    <div class="form-group @error('country_id') custom-select @enderror">
-                        <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
-                        <select name="country_id" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('countrys.countrys')</option>
-                            @foreach ($countrys as $country)
-                                <option value="{{ $country->id }}" {{ $country->id == old('country_id') ? 'selected' : '' }}>{{ $country->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('country_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{--citys--}}
-                    <div class="form-group @error('city_id') custom-select @enderror">
-                        <label>@lang('citys.citys') <span class="text-danger">*</span></label>
-                        <select name="city_id" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('citys.citys')</option>
-                            @foreach ($citys as $city)
-                                <option value="{{ $city->id }}" {{ $city->id == old('city_id') ? 'selected' : '' }}>{{ $city->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('city_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
                     </div>

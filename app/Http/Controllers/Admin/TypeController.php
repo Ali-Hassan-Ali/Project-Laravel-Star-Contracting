@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TypeRequest;
-use App\Models\Country;
 use App\Models\Type;
-use App\Models\City;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -50,10 +48,7 @@ class TypeController extends Controller
 
     public function create()
     {
-        $countrys = Country::all();
-        $citys = City::all();
-
-        return view('admin.types.create', compact('countrys', 'citys'));
+        return view('admin.types.create'));
 
     }// end of create
 
@@ -71,10 +66,7 @@ class TypeController extends Controller
     
     public function edit(Type $type)
     {
-        $countrys = Country::all();
-        $citys = City::all();
-
-        return view('admin.types.edit', compact('type', 'countrys', 'citys'));
+        return view('admin.types.edit', compact('type'));
 
     }// end of edit
 
