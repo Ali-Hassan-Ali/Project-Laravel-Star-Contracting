@@ -50,31 +50,6 @@
                     </div>
 
                     @php
-                        $status = [1, 0];
-                        $enums = ['used', 'part_no'];
-                    @endphp
-
-                    @foreach ($enums as $enum)
-                        
-                        {{--$enum--}}
-                        <div class="form-group">
-                            <label>@lang('spares.' . $enum) <span class="text-danger">*</span></label>
-                            <select name="{{ $enum }}" class="form-control select2 @error($enum) custom-select @enderror" required>
-                                <option value="">@lang('site.choose') @lang('spares.' . $enum)</option>
-                                @foreach ($status as $statu)
-                                    <option value="{{ $statu }}" {{ $statu == old($enum) ? 'selected' : '' }}>@lang('site.' . $statu)</option>
-                                @endforeach
-                            </select>
-                            @error($enum)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                    @endforeach
-
-                    @php
                         $numbers = ['freight_charges','cost','location'];
                     @endphp
 
@@ -93,10 +68,35 @@
 
                     @endforeach
 
+                    @php
+                        $status = [1, 0];
+                        $enums = ['part_no', 'used'];
+                    @endphp
+
+                    @foreach ($enums as $enum)
+                        
+                        {{--$enum--}}
+                        <div class="form-group">
+                            <label>@lang('spares.' . $enum) <span class="text-danger">*</span></label>
+                            <select name="{{ $enum }}" id="{{ $enum }}" class="form-control select2 @error($enum) custom-select @enderror" required>
+                                <option value="" selected disabled>@lang('site.choose') @lang('spares.' . $enum)</option>
+                                @foreach ($status as $statu)
+                                    <option value="{{ $statu }}" {{ $statu == old($enum) ? '' : '' }}>@lang('site.' . $statu)</option>
+                                @endforeach
+                            </select>
+                            @error($enum)
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                    @endforeach
+
                     {{-- usage_date --}}
                     <div class="form-group">
-                        <label>@lang('insurances.usage_date') <span class="text-danger">*</span></label>
-                        <input type="date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date') }}" required>
+                        <label>@lang('spares.usage_date') <span class="text-danger">*</span></label>
+                        <input {{ old('used') == '1' ? 'disabled' : '' }} disabled type="date" name="usage_date" id="usage-date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date') }}" required>
                         @error('usage_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -107,7 +107,7 @@
                     {{-- description --}}
                     <div class="form-group">
                         <label>@lang('spares.description') <span class="text-danger">*</span></label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="6">{{ old('description') }}</textarea>
+                        <textarea {{ old('used') == '1' ? 'disabled' : '' }} disabled class="form-control @error('description') is-invalid @enderror" id="usage-description" name="description" rows="6">{{ old('description') }}</textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -141,4 +141,28 @@
 
 @endsection
 
+@push('scripts')
 
+    <script>
+        
+        $('#used').on('change', function () {
+
+            var value = $(this).val();
+
+            if (value == '0') {
+
+                $('#usage-date').attr('disabled', true);
+                $('#usage-description').attr('disabled', true);
+
+            } else {
+
+                $('#usage-date').attr('disabled', false);
+                $('#usage-description').attr('disabled', false);
+
+            }//end of if
+            
+        });//end of chage
+
+    </script>
+
+@endpush

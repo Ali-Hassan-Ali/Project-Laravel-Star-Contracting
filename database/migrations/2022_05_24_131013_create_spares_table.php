@@ -24,11 +24,11 @@ class CreateSparesTable extends Migration
 
             $table->string('name');
             $table->boolean('part_no')->default(true);
-            $table->text('description');
-            $table->enum('used',[true, false])->default(true);
+            $table->enum('used',[true, false])->nullable()->default(true);
             $table->string('attachments')->default('attachments_spares_file/default.png');
             
-            $table->dateTime('usage_date');
+            $table->dateTime('usage_date')->nullable();
+            $table->text('description')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
