@@ -244,7 +244,7 @@
                     {{--driver_salary--}}
                     <div class="form-group">
                         <label>@lang('equipments.driver_salary')<span class="text-danger">*</span></label>
-                        <input type="number" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', 0) }}" required autofocus>
+                        <input type="text" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', 0) }}" required autofocus>
                         @error('driver_salary')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
