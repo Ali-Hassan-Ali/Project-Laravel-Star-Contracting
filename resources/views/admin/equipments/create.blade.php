@@ -342,19 +342,6 @@
                     </div>
 
 
-                    {{--expiry_reminder_sent--}}
-                    <div class="form-group">
-                        <label>@lang('equipments.expiry_reminder_sent')<span class="text-danger">*</span></label>
-                        <input type="date" name="expiry_reminder_sent" class="form-control @error('expiry_reminder_sent') custom-select @enderror" value="{{ old('expiry_reminder_sent') }}" autofocus>
-                        @error('expiry_reminder_sent')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-
-
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
                     </div>

@@ -36,7 +36,6 @@ class EquipmentRequest extends FormRequest
             'email'                 => ['required','email'],
             'driver_salary'         => ['required','numeric'],
             'registration_expiry'   => ['required','string','min:2','max:255'],
-            'expiry_reminder_sent'  => ['required','string','min:2','max:255'],
             'year_of_manufacture'   => ['required','string','min:2','max:255'],
             'rental_basis'          => ['nullable','string','min:2','max:255'],
             'rental_cost_basis'     => ['nullable','numeric'],
