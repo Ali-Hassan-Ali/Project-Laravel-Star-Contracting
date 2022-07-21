@@ -151,7 +151,7 @@
                                         {{--rental_cost_basis--}}
                     <div class="form-group">
                         <label>@lang('equipments.rental_cost_basis')<span class="text-danger">*</span></label>
-                        <input type="number" name="rental_cost_basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
+                        <input type="test" name="rental_cost_basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
                         @error('rental_cost_basis')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
