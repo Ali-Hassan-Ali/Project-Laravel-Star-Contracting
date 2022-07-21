@@ -134,7 +134,7 @@
 
                     {{--model--}}
                     <div class="form-group @error('model') custom-select @enderror">
-                        <label>@lang('specs.model') <span class="text-danger">*</span></label>
+                        <label>@lang('equipments.model') <span class="text-danger">*</span></label>
                         <select name="model" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('specs.name')</option>
                             @foreach ($models as $model)
@@ -148,7 +148,7 @@
                         @enderror
                     </div>
 
-                                        {{--rental_cost_basis--}}
+                    {{--rental_cost_basis--}}
                     <div class="form-group">
                         <label>@lang('equipments.rental_cost_basis')<span class="text-danger">*</span></label>
                         <input type="test" name="rental_cost_basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>

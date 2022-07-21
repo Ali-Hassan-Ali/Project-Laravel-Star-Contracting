@@ -7,7 +7,7 @@ return [
     'plate_no'   => 'plate',
     'chasis_no'  => 'chasis',
     'engine_no'  => 'engine',
-    'serial_no'  => 'serial',
+    'serial_no'  => 'no serial',
 
     'year_of_manufacture' => 'year of manufacture',
     'rental_cost_basis'   => 'rental cost basis',
