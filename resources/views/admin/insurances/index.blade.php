@@ -72,7 +72,7 @@
                                     <th>@lang('insurances.insurance_expiry')</th>
                                     <th>@lang('insurances.insurance_duration')</th>
                                     <th>@lang('insurances.policy_number')</th>
-                                    <th>@lang('insurances.claims')</th>
+                                    <th>@lang('insurances.claim')</th>
                                     <th>@lang('insurances.claim_date')</th>
                                     <th>@lang('insurances.claim_amount')</th>
                                     <th>@lang('insurances.claim_description')</th>
@@ -120,7 +120,7 @@
                 {data: 'insurance_expiry', name: 'insurance_expiry'},
                 {data: 'insurance_duration', name: 'insurance_duration'},
                 {data: 'policy_number', name: 'policy_number'},
-                {data: 'claims', name: 'claims'},
+                {data: 'claim', name: 'claim'},
                 {data: 'claim_date', name: 'claim_date'},
                 {data: 'claim_amount', name: 'claim_amount'},
                 {data: 'claim_description', name: 'claim_description'},

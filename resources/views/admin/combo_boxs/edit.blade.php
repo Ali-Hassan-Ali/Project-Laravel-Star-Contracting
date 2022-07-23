@@ -29,7 +29,7 @@
                     </div>
 
                     @php
-                        $combo_boxs = ['make', 'model', 'owner_ship', 'equipment', 'equipment', 'rental_basis', 'operator', 'responsible_person', 'responsible_person_email', 'allocated_to', 'project_allocated_to'];
+                        $combo_boxs = ['make', 'model', 'owner_ship', 'equipment', 'equipment', 'rental_basis', 'operator', 'responsible_person', 'responsible_person_email', 'allocated_to', 'project_allocated_to', 'insurer'];
                     @endphp
 
                     {{--type--}}

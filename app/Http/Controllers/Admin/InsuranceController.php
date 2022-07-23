@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\InsuranceRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Insurance;
 use App\Models\Equipment;
+use App\Models\ComboBox;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -30,7 +31,7 @@ class InsuranceController extends Controller
 
     public function data()
     {
-        $insurances = Insurance::select();
+        $insurances = Insurance::latest()->get();
 
         return DataTables::of($insurances)
             ->addColumn('record_select', 'admin.insurances.data_table.record_select')
@@ -52,8 +53,9 @@ class InsuranceController extends Controller
     public function create()
     {
         $equipments = Equipment::all();
+        $insurers   = ComboBox::where('type', 'insurer')->get();
 
-        return view('admin.insurances.create', compact('equipments'));
+        return view('admin.insurances.create', compact('equipments', 'insurers'));
 
     }// end of create
 
@@ -74,8 +76,9 @@ class InsuranceController extends Controller
     public function edit(Insurance $insurance)
     {
         $equipments = Equipment::all();
+        $insurs     = ComboBox::where('type', 'insurer')->get();
 
-        return view('admin.insurances.edit', compact('insurance','equipments'));
+        return view('admin.insurances.edit', compact('insurance', 'equipments', 'insurs'));
 
     }// end of edit
 

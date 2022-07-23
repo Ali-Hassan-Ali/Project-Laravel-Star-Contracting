@@ -147,6 +147,18 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
+        $insurers = ['insurer one','insurer tow', 'insurer three'];
+
+        foreach ($insurers as $insurer) {
+            
+            \App\Models\ComboBox::create([
+                'name'    => $insurer,
+                'type'    => 'insurer',
+                'user_id' => 1,
+            ]);
+
+        }//end of each
+
     }//end of run
     
 }//end of class

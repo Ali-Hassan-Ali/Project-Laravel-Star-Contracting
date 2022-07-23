@@ -25,17 +25,17 @@ class InsuranceRequest extends FormRequest
     {
         $rules = [
             'equipment_id'        => ['required','numeric'],
-            'premium'             => ['required','numeric'],
-            'insurance_duration'  => ['required','numeric'],
-            'claim_amount'        => ['required','numeric'],
-            'policy_number'       => ['required','numeric'],
-            'insurer'             => ['required'],
-            'claim_description'   => ['required'],
-            'type_of_insurance'   => ['required'],
-            'claims'              => ['required'],
-            'claim_date'          => ['required'],
-            'insurance_start_date'=> ['required'],
-            'insurance_expiry'    => ['required'],
+            'claim_amount'        => ['nullable','numeric'],
+            'insurance_duration'  => ['required','min:2','max:255'],
+            'policy_number'       => ['required','min:2','max:255'],
+            'premium'             => ['required','min:2','max:255'],
+            'insurer'             => ['required','min:2','max:255'],
+            'claim_description'   => ['required_if:claim,==,1'],
+            'type_of_insurance'   => ['required','min:2','max:255'],
+            'claim'               => ['nullable','in:1,0'],
+            'claim_date'          => ['nullable','min:2','max:255'],
+            'insurance_start_date'=> ['required','min:2','max:255'],
+            'insurance_expiry'    => ['required','min:2','max:255'],
         ];
 
         if (in_array($this->method(), ['POST'])) {

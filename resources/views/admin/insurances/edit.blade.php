@@ -38,10 +38,15 @@
                         @enderror
                     </div>
 
-                    {{-- insurer --}}
-                    <div class="form-group">
+                    {{--insurer--}}
+                    <div class="form-group @error('insurer') custom-select @enderror">
                         <label>@lang('insurances.insurer') <span class="text-danger">*</span></label>
-                        <input type="text" name="insurer" autofocus class="form-control @error('insurer') is-invalid @enderror" value="{{ old('insurer', $insurance->insurer) }}" required>
+                        <select name="insurer" class="form-control select2" required>
+                            <option value="">@lang('site.choose') @lang('insurances.insurer')</option>
+                            @foreach ($insurs as $insur)
+                                <option value="{{ $insur->name }}" {{ $insur->name == old('insurer', $insurance->insurer) ? 'selected' : '' }}>{{ $insur->name }}</option>
+                            @endforeach
+                        </select>
                         @error('insurer')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -63,7 +68,7 @@
                     {{-- premium --}}
                     <div class="form-group">
                         <label>@lang('insurances.premium') <span class="text-danger">*</span></label>
-                        <input type="number" name="premium" autofocus class="form-control @error('premium') is-invalid @enderror" value="{{ old('premium', $insurance->premium) }}" required>
+                        <input type="text" name="premium" autofocus class="form-control @error('premium') is-invalid @enderror" value="{{ old('premium', $insurance->premium) }}" required>
                         @error('premium')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -74,7 +79,7 @@
                     {{-- policy_number --}}
                     <div class="form-group">
                         <label>@lang('insurances.policy_number') <span class="text-danger">*</span></label>
-                        <input type="number" name="policy_number" autofocus class="form-control @error('policy_number') is-invalid @enderror" value="{{ old('policy_number', $insurance->policy_number) }}" required>
+                        <input type="text" name="policy_number" autofocus class="form-control @error('policy_number') is-invalid @enderror" value="{{ old('policy_number', $insurance->policy_number) }}" required>
                         @error('policy_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -95,6 +100,16 @@
                         @enderror
                     </div>
 
+                    {{-- insurance_duration --}}
+                    <div class="form-group">
+                        <label>@lang('insurances.insurance_duration') <span class="text-danger">*</span></label>
+                        <input type="text" name="insurance_duration" autofocus class="form-control @error('insurance_duration') is-invalid @enderror" value="{{ old('insurance_duration', $insurance->insurance_duration) }}" required>
+                        @error('insurance_duration')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
                     {{-- insurance_expiry --}}
                     <div class="form-group">
@@ -107,28 +122,18 @@
                         @enderror
                     </div>
 
-                    {{-- insurance_duration --}}
-                    <div class="form-group">
-                        <label>@lang('insurances.insurance_duration') <span class="text-danger">*</span></label>
-                        <input type="number" name="insurance_duration" autofocus class="form-control @error('insurance_duration') is-invalid @enderror" value="{{ old('insurance_duration', $insurance->insurance_duration) }}" required>
-                        @error('insurance_duration')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
 
                     @php
-                        $claims = [1,0];
+                        $claims = ['1','0'];
                     @endphp
 
                     {{--plate_no--}}
                     <div class="form-group">
-                        <label>@lang('insurances.claims') <span class="text-danger">*</span></label>
-                        <select name="claims" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('equipments.claim')</option>
+                        <label>@lang('insurances.claim') <span class="text-danger">*</span></label>
+                        <select name="claim" id="claim" class="form-control select2">
+                            <option value="">@lang('site.choose') @lang('insurances.claim')</option>
                             @foreach ($claims as $claim)
-                                <option value="{{ $claim }}" {{ $claim == old('claims', $insurance->claims) ? 'selected' : '' }}>@lang('site.' . $claim)</option>
+                                <option value="{{ $claim }}" {{ $claim == old('claim', $insurance->claim) ? 'selected' : '' }}>@lang('site.' . $claim)</option>
                             @endforeach
                         </select>
                     </div>
@@ -137,7 +142,7 @@
                     {{-- claim_date --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_date') <span class="text-danger">*</span></label>
-                        <input type="date" name="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date', date('Y-m-d', strtotime($equipment->claim_date))) }}" required>
+                        <input type="date" name="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date', date('Y-m-d', strtotime($equipment->claim_date))) }}" required max="{{ date('Y-m-d', strtotime(now())) }}">
                         @error('claim_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -160,7 +165,7 @@
                     {{-- claim_description --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_description') <span class="text-danger">*</span></label>
-                        <textarea class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="20">{{ old('claim_description', $insurance->claim_description) }}</textarea>
+                        <textarea {{ old('claim', $insurance->claim) == '0' ? 'disabled' : '' }} id="claim-desc" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="20">{{ old('claim_description', $insurance->claim_description) }}</textarea>
                         @error('claim_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -193,3 +198,26 @@
 
 @endsection
 
+@push('scripts')
+
+    <script>
+        
+        $('#claim').on('change', function () {
+
+            var value = $(this).val();
+
+            if (value == '0') {
+
+                $('#claim-desc').attr('disabled', true);
+
+            } else {
+
+                $('#claim-desc').attr('disabled', false);
+
+            }//end of if
+            
+        });//end of chage
+
+    </script>
+
+@endpush

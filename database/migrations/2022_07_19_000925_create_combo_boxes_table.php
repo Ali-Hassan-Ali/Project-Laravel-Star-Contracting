@@ -19,7 +19,8 @@ class CreateComboBoxesTable extends Migration
             $table->enum('type', ['make', 'model', 'owner_ship', 
                                   'equipment', 'type', 'rental_basis', 
                                   'operator', 'responsible_person', 
-                                  'responsible_person_email', 'allocated_to', 'project_allocated_to'])->nullable();
+                                  'responsible_person_email', 'allocated_to', 'project_allocated_to',
+                                  'insurer'])->nullable();
 
             $table->foreignIdFor(\App\Models\User::class);
 

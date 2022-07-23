@@ -18,18 +18,19 @@ class CreateInsurancesTable extends Migration
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
             
-            $table->integer('premium');
-            $table->integer('insurance_duration');
-            $table->integer('claim_amount');
-            $table->integer('policy_number');
+            $table->integer('claim_amount')->nullable();
             
+            $table->string('insurance_duration');
+            $table->string('policy_number');
+            $table->string('premium');
+
             $table->text('insurer');
-            $table->text('claim_description');
+            $table->text('claim_description')->nullable();
             $table->text('type_of_insurance');
-            $table->enum('claims',[true,false])->default(true);
+            $table->enum('claim',['1','0'])->default('1')->nullable();
             $table->string('attachments')->default('insurances_attachments_image/default.png');
 
-            $table->dateTime('claim_date');
+            $table->dateTime('claim_date')->nullable();
             $table->dateTime('insurance_start_date');
             $table->dateTime('insurance_expiry');
 
