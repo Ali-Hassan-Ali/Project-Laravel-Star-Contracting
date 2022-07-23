@@ -111,9 +111,38 @@ class EquipmentController extends Controller
     public function edit(Equipment $equipment)
     {
         $countrys = Country::all();
-        $types    = Type::all();
+        $citys    = City::all();
+        $specs    = Spec::all();
+        $makes    = ComboBox::where('type', 'make')->get();
+        $models   = ComboBox::where('type', 'model')->get();
+        $types    = ComboBox::where('type', 'type')->get();
 
-        return view('admin.equipments.edit', compact('equipment','countrys','types'));
+        $equ        = ComboBox::where('type', 'equipment')->get();
+        $owner_ship = ComboBox::where('type', 'owner_ship')->get();
+        $rental_basis = ComboBox::where('type', 'rental_basis')->get();
+        $operators  = ComboBox::where('type', 'operator')->get();
+
+        $responsible_person       = ComboBox::where('type', 'responsible_person')->get();
+        $responsible_person_email = ComboBox::where('type', 'responsible_person_email')->get();
+        $allocated_to             = ComboBox::where('type', 'allocated_to')->get();
+        $project_allocated_to     = ComboBox::where('type', 'project_allocated_to')->get();
+
+        return view('admin.equipments.edit', compact('equipment',
+                                                        'countrys',
+                                                        'citys',
+                                                        'types',
+                                                        'makes', 
+                                                        'models', 
+                                                        'specs', 
+                                                        'types',
+                                                        'owner_ship',
+                                                        'rental_basis',
+                                                        'operators',
+                                                        'equ',
+                                                        'responsible_person',
+                                                        'responsible_person_email',
+                                                        'allocated_to',
+                                                        'project_allocated_to'));
 
     }// end of edit
 

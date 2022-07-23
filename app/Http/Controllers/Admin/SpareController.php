@@ -84,6 +84,7 @@ class SpareController extends Controller
     public function update(SpareRequest $request, Spare $spare)
     {
         $requestData                 = $request->validated();
+
         if ($request->attachments) {
 
             Storage::disk('local')->delete('public/'. $spare->attachments);

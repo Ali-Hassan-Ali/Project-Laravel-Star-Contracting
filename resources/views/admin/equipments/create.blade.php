@@ -78,7 +78,7 @@
                         <select name="spec_id" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('specs.specs')</option>
                             @foreach ($specs as $spec)
-                                <option value="{{ $spec->id }}" {{ $spec->name == old('spec_id') ? 'selected' : '' }}>{{ $spec->name }}</option>
+                                <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id') ? 'selected' : '' }}>{{ $spec->name }}</option>
                             @endforeach
                         </select>
                         @error('spec_id')
@@ -246,22 +246,6 @@
                         <label>@lang('equipments.driver_salary')<span class="text-danger">*</span></label>
                         <input type="text" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', 0) }}" required autofocus>
                         @error('driver_salary')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{--operator--}}
-                    <div class="form-group @error('responsible_person') custom-select @enderror">
-                        <label>@lang('equipments.responsible_person') <span class="text-danger">*</span></label>
-                        <select name="operator" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('equipments.responsible_person')</option>
-                            @foreach ($responsible_person as $responsible)
-                                <option value="{{ $responsible->name }}" {{ $responsible->name == old('responsible_person') ? 'selected' : '' }}>{{ $responsible->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('responsible_person')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

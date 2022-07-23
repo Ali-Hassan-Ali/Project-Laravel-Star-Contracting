@@ -18,7 +18,7 @@
 
             <div class="tile shadow">
 
-                <form method="post" action="{{ route('admin.spares.update', $spare->id) }}">
+                <form method="post" action="{{ route('admin.spares.update', $spare->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('put')
 
@@ -69,8 +69,8 @@
                     @endforeach
 
                     @php
-                        $status = [1, 0];
-                        $enums = ['used', 'part_no'];
+                        $status = ['1', '0'];
+                        $enums = ['part_no', 'used'];
                     @endphp
 
                     @foreach ($enums as $enum)
@@ -79,7 +79,7 @@
                         <div class="form-group">
                             <label>@lang('spares.' . $enum) <span class="text-danger">*</span></label>
                             <select name="{{ $enum }}" id="{{ $enum }}" class="form-control select2 @error($enum) custom-select @enderror" required>
-                                <option value="">@lang('site.choose') @lang('spares.' . $enum)</option>
+                                <option value="" disabled>@lang('site.choose') @lang('spares.' . $enum)</option>
                                 @foreach ($status as $statu)
                                     <option value="{{ $statu }}" {{ $statu == old($enum, $spare[$enum]) ? 'selected' : '' }}>@lang('site.' . $statu)</option>
                                 @endforeach
@@ -96,7 +96,7 @@
                     {{-- usage_date --}}
                     <div class="form-group">
                         <label>@lang('insurances.usage_date') <span class="text-danger">*</span></label>
-                        <input {{ $spare->used == '1' ? 'disabled' : '' }} type="date" id="usage-date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date', date('Y-m-d', strtotime($spare->usage_date)) ) }}" required>
+                        <input {{ $spare->used == '0' ? 'disabled' : '' }} type="date" id="usage-date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date', date('Y-m-d', strtotime($spare->usage_date)) ) }}" required>
                         @error('usage_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -107,7 +107,7 @@
                     {{-- description --}}
                     <div class="form-group">
                         <label>@lang('spares.description') <span class="text-danger">*</span></label>
-                        <textarea {{ $spare->used == '1' ? 'disabled' : '' }} id="usage-description" class="form-control @error('description') is-invalid @enderror" name="description" rows="6">{{ old('description', $spare->description) }}</textarea>
+                        <textarea {{ $spare->used == '0' ? 'disabled' : '' }} id="usage-description" class="form-control @error('description') is-invalid @enderror" name="description" rows="6">{{ old('description', $spare->description) }}</textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

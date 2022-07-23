@@ -24,7 +24,7 @@ class CreateSparesTable extends Migration
 
             $table->string('name');
             $table->boolean('part_no')->default(true);
-            $table->enum('used',[true, false])->nullable()->default(true);
+            $table->enum('used', ['1', '0'])->default('1');
             $table->string('attachments')->default('attachments_spares_file/default.png');
             
             $table->dateTime('usage_date')->nullable();

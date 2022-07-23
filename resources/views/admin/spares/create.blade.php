@@ -69,7 +69,7 @@
                     @endforeach
 
                     @php
-                        $status = [1, 0];
+                        $status = ['1', '0'];
                         $enums = ['part_no', 'used'];
                     @endphp
 
