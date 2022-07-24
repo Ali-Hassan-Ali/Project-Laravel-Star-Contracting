@@ -22,6 +22,8 @@
                     @csrf
                     @method('put')
 
+                    @include('admin.partials._errors')
+
                     {{--equipment_id--}}
                     <div class="form-group @error('equipment_id') custom-select @enderror">
                         <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
@@ -49,54 +51,64 @@
                         @enderror
                     </div>
 
-                    @php
-                        $numbers = ['freight_charges','cost','location'];
-                    @endphp
+                    {{--part_no--}}
+                    <div class="form-group">
+                        <label>@lang('spares.part_no')<span class="text-danger">*</span></label>
+                        <input type="text" name="part_no" class="form-control @error('part_no') is-invalid @enderror" value="{{ old('part_no', $spare->part_no) }}" required autofocus>
+                        @error('part_no')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
-                    @foreach ($numbers as $number)
-                        
-                        {{--$number--}}
-                        <div class="form-group">
-                            <label>@lang('spares.' . $number)<span class="text-danger">*</span></label>
-                            <input type="number" name="{{ $number }}" class="form-control @error($number) is-invalid @enderror" value="{{ old($number, $spare[$number]) }}" required autofocus>
-                            @error($number)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
 
-                    @endforeach
+                    {{--part_no--}}
+                    <div class="form-group">
+                        <label>@lang('spares.cost')<span class="text-danger">*</span></label>
+                        <input type="text" name="cost" class="form-control @error('cost') is-invalid @enderror" value="{{ old('cost', $spare->cost) }}" required autofocus>
+                        @error('cost')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--freight_charges--}}
+                    <div class="form-group">
+                        <label>@lang('spares.freight_charges')<span class="text-danger">*</span></label>
+                        <input type="text" name="freight_charges" class="form-control @error('freight_charges') is-invalid @enderror" value="{{ old('freight_charges', $spare->freight_charges) }}" required autofocus>
+                        @error('freight_charges')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
                     @php
                         $status = ['1', '0'];
-                        $enums = ['part_no', 'used'];
                     @endphp
 
-                    @foreach ($enums as $enum)
-                        
-                        {{--$enum--}}
-                        <div class="form-group">
-                            <label>@lang('spares.' . $enum) <span class="text-danger">*</span></label>
-                            <select name="{{ $enum }}" id="{{ $enum }}" class="form-control select2 @error($enum) custom-select @enderror" required>
-                                <option value="" disabled>@lang('site.choose') @lang('spares.' . $enum)</option>
-                                @foreach ($status as $statu)
-                                    <option value="{{ $statu }}" {{ $statu == old($enum, $spare[$enum]) ? 'selected' : '' }}>@lang('site.' . $statu)</option>
-                                @endforeach
-                            </select>
-                            @error($enum)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                    @endforeach
+                    {{--$used--}}
+                    <div class="form-group">
+                        <label>@lang('spares.used') <span class="text-danger">*</span></label>
+                        <select name="used" id="used" class="form-control select2 @error('used') custom-select @enderror" required>
+                            <option value="" selected disabled>@lang('site.choose') @lang('spares.used')</option>
+                            @foreach ($status as $statu)
+                                <option value="{{ $statu }}" {{ $statu == old('used', $spare->used) ? 'selected' : '' }}>@lang('site.' . $statu)</option>
+                            @endforeach
+                        </select>
+                        @error('used')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
                     {{-- usage_date --}}
                     <div class="form-group">
-                        <label>@lang('insurances.usage_date') <span class="text-danger">*</span></label>
-                        <input {{ $spare->used == '0' ? 'disabled' : '' }} type="date" id="usage-date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date', date('Y-m-d', strtotime($spare->usage_date)) ) }}" required>
+                        <label>@lang('spares.usage_date') <span class="text-danger">*</span></label>
+                        <input {{ old('used', $spare->used) == '0' ? 'disabled' : '' }} type="date" id="usage-date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date', date('Y-m-d', strtotime($spare->usage_date)) ) }}" required>
                         @error('usage_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -107,7 +119,7 @@
                     {{-- description --}}
                     <div class="form-group">
                         <label>@lang('spares.description') <span class="text-danger">*</span></label>
-                        <textarea {{ $spare->used == '0' ? 'disabled' : '' }} id="usage-description" class="form-control @error('description') is-invalid @enderror" name="description" rows="6">{{ old('description', $spare->description) }}</textarea>
+                        <textarea {{ old('used', $spare->used) == '0' ? 'disabled' : '' }} id="usage-description" class="form-control @error('description') is-invalid @enderror" name="description" rows="6">{{ old('description', $spare->description) }}</textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -115,9 +127,28 @@
                         @enderror
                     </div>
 
+
+                    {{-- location --}}
+                    <div class="form-group @error('location') custom-select @enderror">
+                        <label>@lang('spares.location') <span class="text-danger">*</span></label>
+                        <select name="location" class="form-control select2" required>
+                            <option value="" disabled>@lang('site.choose') @lang('spares.location')</option>
+                            @foreach ($locations as $location)
+                                <option value="{{ $location->name }}" {{ $location->name == old('location', $spare->location) ? 'selected' : '' }}>{{ $location->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('location')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    
+
+                    
                     {{-- attachments --}}
                     <div class="form-group">
-                        <label>@lang('insurances.attachments') <span class="text-danger">*</span></label>
+                        <label>@lang('spares.attachments') <span class="text-danger">*</span></label>
                         <input type="file" name="attachments" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
                         @error('attachments')
                             <span class="invalid-feedback" role="alert">

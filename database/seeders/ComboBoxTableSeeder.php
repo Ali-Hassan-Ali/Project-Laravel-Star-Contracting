@@ -159,6 +159,18 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
+        $locations = ['location one','location tow', 'location three'];
+
+        foreach ($locations as $location) {
+            
+            \App\Models\ComboBox::create([
+                'name'    => $location,
+                'type'    => 'location',
+                'user_id' => 1,
+            ]);
+
+        }//end of each
+
     }//end of run
     
 }//end of class

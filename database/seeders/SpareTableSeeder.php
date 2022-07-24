@@ -24,9 +24,9 @@ class SpareTableSeeder extends Seeder
                 'equipment_id'      => 1,
                 'user_id'           => 1,
                 'name'              => 'spare name',
-                'part_no'           => true,
+                'part_no'           => 'part no',
                 'description'       => "description $spare",
-                'used'              => true,
+                'used'              => '1',
                 'attachments'       => 'default.png',
                 'usage_date'        => now(),
             ]);

@@ -26,13 +26,13 @@ class SpareRequest extends FormRequest
         $rules = [
             'equipment_id'           => ['required','numeric'],
             'name'                   => ['required','min:2','max:255'],
-            'part_no'                => ['required'],
-            'used'                   => ['required', 'in:1,0'],
-            'freight_charges'        => ['required','numeric'],
-            'cost'                   => ['required','numeric'],
-            'location'               => ['required','numeric'],
-            'description'            => ['nullable','min:2','max:255'],
-            'usage_date'             => ['nullable','date'],
+            'part_no'                => ['required','min:2','max:255'],
+            'used'                   => ['nullable', 'in:1,0'],
+            'freight_charges'        => ['required','min:2','max:255'],
+            'cost'                   => ['required','min:2','max:255'],
+            'location'               => ['required','min:2','max:255'],
+            'description'            => ['required_if:used,==,1','min:2','max:255'],
+            'usage_date'             => ['required_if:used,==,1','date'],
         ];
 
         if (in_array($this->method(), ['POST'])) {
