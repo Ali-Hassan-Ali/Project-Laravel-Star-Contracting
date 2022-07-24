@@ -24,9 +24,9 @@
                     @csrf
                     @method('post')
 
-                                        {{--equipment_id--}}
+                    {{--equipment_id--}}
                     <div class="form-group @error('equipment_id') custom-select @enderror">
-                        <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
+                        <label>@lang('maintenances.equipments') <span class="text-danger">*</span></label>
                         <select name="equipment_id" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
                             @foreach ($equipments as $equipment)
@@ -40,70 +40,101 @@
                         @enderror
                     </div>
 
+                    {{--last_service_date--}}
+                    <div class="form-group">
+                        <label>@lang('maintenances.last_service_date')<span class="text-danger">*</span></label>
+                        <input type="date" name="last_service_date" class="form-control @error('last_service_date') is-invalid @enderror" value="{{ old('last_service_date') }}" required autofocus>
+                        @error('last_service_date')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--next_service_date--}}
+                    <div class="form-group">
+                        <label>@lang('maintenances.next_service_date')<span class="text-danger">*</span></label>
+                        <input type="date" name="next_service_date" class="form-control @error('next_service_date') is-invalid @enderror" value="{{ old('next_service_date') }}" required autofocus>
+                        @error('next_service_date')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--last_service_km--}}
+                    <div class="form-group">
+                        <label>@lang('maintenances.last_service_km')<span class="text-danger">*</span></label>
+                        <input type="number" name="last_service_km" class="form-control @error('last_service_km') is-invalid @enderror" value="{{ old('last_service_km') }}" required autofocus>
+                        @error('last_service_km')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--next_service_dueon_km--}}
+                    <div class="form-group">
+                        <label>@lang('maintenances.next_service_dueon_km')<span class="text-danger">*</span></label>
+                        <input type="number" name="next_service_dueon_km" class="form-control @error('next_service_dueon_km') is-invalid @enderror" value="{{ old('next_service_dueon_km') }}" required autofocus>
+                        @error('next_service_dueon_km')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--actual_service_date--}}
+                    <div class="form-group">
+                        <label>@lang('maintenances.actual_service_date')<span class="text-danger">*</span></label>
+                        <input type="date" name="actual_service_date" class="form-control @error('actual_service_date') is-invalid @enderror" value="{{ old('actual_service_date') }}" required autofocus>
+                        @error('actual_service_date')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--actual_service_reading--}}
+                    <div class="form-group">
+                        <label>@lang('maintenances.actual_service_reading')<span class="text-danger">*</span></label>
+                        <input type="number" name="actual_service_reading" class="form-control @error('actual_service_reading') is-invalid @enderror" value="{{ old('actual_service_reading') }}" required autofocus>
+                        @error('actual_service_reading')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
                     @php
-                        $numbers    = ['last_service_km','next_service_dueon_km','actual_service_reading'];
-                        $data_times = ['last_service_date','next_service_date','actual_service_date'];
-                        $status     = [1, 0];
-                        $enums      = ['scheduled'];
+                        $status = ['1', '0'];
                     @endphp
 
-                    @foreach ($numbers as $number)
-                        
-                        {{--$number--}}
-                        <div class="form-group">
-                            <label>@lang('maintenances.' . $number)<span class="text-danger">*</span></label>
-                            <input type="number" name="{{ $number }}" class="form-control @error($number) is-invalid @enderror" value="{{ old($number) }}" required autofocus>
-                            @error($number)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                    @endforeach
-
-                    @foreach ($data_times as $data_time)
-                        
-                        {{--$data_time--}}
-                        <div class="form-group">
-                            <label>@lang('maintenances.' . $data_time)<span class="text-danger">*</span></label>
-                            <input type="date" name="{{ $data_time }}" class="form-control @error($data_time) is-invalid @enderror" value="{{ old($data_time) }}" required autofocus>
-                            @error($data_time)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                    @endforeach
-
-
-                    @foreach ($enums as $enum)
-                        
-                        {{--$enum--}}
-                        <div class="form-group">
-                            <label>@lang('maintenances.' . $enum) <span class="text-danger">*</span></label>
-                            <select name="{{ $enum }}" class="form-control select2 @error($enum) custom-select @enderror" required>
-                                <option value="">@lang('site.choose') @lang('maintenances.' . $enum)</option>
-                                @foreach ($status as $statu)
-                                    <option value="{{ $statu }}" {{ $statu == old($enum) ? 'selected' : '' }}>@lang('site.' . $statu)</option>
-                                @endforeach
-                            </select>
-                            @error($enum)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                    @endforeach
-
-
-                    {{-- non_scheduled --}}
+                    {{--scheduled--}}
                     <div class="form-group">
+                        <label>@lang('maintenances.scheduled') <span class="text-danger">*</span></label>
+                        <select name="scheduled" id="scheduled" class="form-control select2 @error('scheduled') custom-select @enderror" required>
+                            <option value="">@lang('site.choose') @lang('maintenances.scheduled')</option>
+                            @foreach ($status as $statu)
+                                <option value="{{ $statu }}" {{ $statu == old('scheduled') ? 'selected' : '' }}>@lang('site.' . $statu)</option>
+                            @endforeach
+                        </select>
+                        @error('scheduled')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--equipments--}}
+                    <div class="form-group @error('non_scheduled') custom-select @enderror">
                         <label>@lang('maintenances.non_scheduled') <span class="text-danger">*</span></label>
-                        <textarea class="form-control @error('non_scheduled') is-invalid @enderror" name="non_scheduled" rows="6">{{ old('non_scheduled') }}</textarea>
+                        <select {{ old('scheduled') == '0' ? 'disabled' : '' }} disabled name="non_scheduled" id="non-scheduled" class="form-control select2" required>
+                            <option value="">@lang('site.choose') @lang('maintenances.non_scheduled')</option>
+                            @foreach ($non_scheduleds as $scheduled)
+                                <option value="{{ $scheduled->name }}" {{ $scheduled->name == old('non_scheduled') ? 'selected' : '' }}>{{ $scheduled->name }}</option>
+                            @endforeach
+                        </select>
                         @error('non_scheduled')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -125,5 +156,30 @@
     </div><!-- end of row -->
 
 @endsection
+
+
+@push('scripts')
+
+    <script>
+        
+        $('#scheduled').on('change', function () {
+
+            var value = $(this).val();
+
+            if (value == '0') {
+
+                $('#non-scheduled').attr('disabled', true);
+
+            } else {
+
+                $('#non-scheduled').attr('disabled', false);
+
+            }//end of if
+            
+        });//end of chage
+
+    </script>
+
+@endpush
 
 

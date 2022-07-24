@@ -2,6 +2,7 @@
 
 return [
     'maintenances'           => 'Maintenances',
+    'equipments'             => 'equipments only',
     'last_service_km'        => 'last service km',
     'next_service_dueon_km'  => 'next service dueon km',
     'actual_service_reading' => 'actual service reading',

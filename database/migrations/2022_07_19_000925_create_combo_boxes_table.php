@@ -20,7 +20,7 @@ class CreateComboBoxesTable extends Migration
                                   'equipment', 'type', 'rental_basis', 
                                   'operator', 'responsible_person', 
                                   'responsible_person_email', 'allocated_to', 'project_allocated_to',
-                                  'insurer', 'location'])->nullable();
+                                  'insurer', 'location', 'non_scheduled'])->nullable();
 
             $table->foreignIdFor(\App\Models\User::class);
 

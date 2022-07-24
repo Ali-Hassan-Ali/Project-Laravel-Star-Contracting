@@ -171,6 +171,18 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
+        $non_scheduleds = ['Preventive Maintenance','Breakdown'];
+
+        foreach ($non_scheduleds as $scheduled) {
+            
+            \App\Models\ComboBox::create([
+                'name'    => $scheduled,
+                'type'    => 'non_scheduled',
+                'user_id' => 1,
+            ]);
+
+        }//end of each
+
     }//end of run
     
 }//end of class

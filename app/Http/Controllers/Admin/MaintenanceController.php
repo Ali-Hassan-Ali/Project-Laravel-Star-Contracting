@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MaintenanceRequest;
 use App\Models\Maintenance;
 use App\Models\Equipment;
+use App\Models\ComboBox;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -50,9 +51,10 @@ class MaintenanceController extends Controller
 
     public function create()
     {
-        $equipments = Equipment::all();
+        $equipments     = Equipment::all();
+        $non_scheduleds = ComboBox::where('type', 'non_scheduled')->get();
 
-        return view('admin.maintenances.create', compact('equipments'));
+        return view('admin.maintenances.create', compact('equipments', 'non_scheduleds'));
 
     }//end of create
 
@@ -72,9 +74,10 @@ class MaintenanceController extends Controller
 
     public function edit(Maintenance $maintenance)
     {
-        $equipments = Equipment::all();
+        $equipments     = Equipment::all();
+        $non_scheduleds = ComboBox::where('type', 'non_scheduled')->get();
 
-        return view('admin.maintenances.edit', compact('maintenance','equipments'));
+        return view('admin.maintenances.edit', compact('maintenance','equipments', 'non_scheduleds'));
 
     }//end of edit
 

@@ -18,15 +18,15 @@ class CreateMaintenancesTable extends Migration
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
             
-            $table->integer('last_service_km');
-            $table->integer('next_service_dueon_km');
+            $table->integer('last_service_km')->nullable();
+            $table->integer('next_service_dueon_km')->nullable();
             $table->integer('actual_service_reading');
 
             $table->text('non_scheduled');
-            $table->enum('scheduled',[true, false])->default(true);
+            $table->enum('scheduled',['1', '0'])->default('1');
 
-            $table->dateTime('last_service_date');
-            $table->dateTime('next_service_date');
+            $table->dateTime('last_service_date')->nullable();
+            $table->dateTime('next_service_date')->nullable();
             $table->dateTime('actual_service_date');
 
             $table->softDeletes();
