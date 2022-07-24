@@ -22,16 +22,22 @@
                     @csrf
                     @method('post')
 
-                    {{--equipments--}}
-                    <div class="form-group @error('equipment_id') custom-select @enderror">
-                        <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
-                        <select name="equipment_id" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
-                            @foreach ($equipments as $equipment)
-                                <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}>{{ $equipment->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('equipment_id')
+                    {{--name--}}
+                    <div class="form-group">
+                        <label>@lang('specs.name')<span class="text-danger">*</span></label>
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required autofocus>
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--type_spec--}}
+                    <div class="form-group">
+                        <label>@lang('specs.type_spec')<span class="text-danger">*</span></label>
+                        <input type="text" name="type_spec" class="form-control @error('type_spec') is-invalid @enderror" value="{{ old('type_spec') }}" required autofocus>
+                        @error('type_spec')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -48,6 +54,22 @@
                             @endforeach
                         </select>
                         @error('country_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--citys--}}
+                    <div class="form-group @error('city_id') custom-select @enderror">
+                        <label>@lang('citys.citys') <span class="text-danger">*</span></label>
+                        <select name="city_id" class="form-control select2" required>
+                            <option value="">@lang('site.choose') @lang('citys.citys')</option>
+                            @foreach ($citys as $city)
+                                <option value="{{ $city->id }}" {{ $city->id == old('city_id') ? 'selected' : '' }}>{{ $city->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('city_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

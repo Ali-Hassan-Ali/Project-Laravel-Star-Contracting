@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SpecRequest;
-use App\Models\Equipment;
 use App\Models\Spec;
 use App\Models\Country;
 use App\Models\City;
@@ -39,8 +38,11 @@ class SpecController extends Controller
             ->editColumn('created_at', function (Spec $spec) {
                 return $spec->created_at->format('Y-m-d');
             })
-            ->editColumn('equipment', function (Spec $spec) {
-                return $spec->equipment->name;
+            ->editColumn('country', function (Spec $spec) {
+                return $spec->country->name;
+            })
+            ->editColumn('city', function (Spec $spec) {
+                return $spec->city->name;
             })
             ->addColumn('admin', function (Spec $spec) {
                 return $spec->admin->name;
@@ -57,11 +59,10 @@ class SpecController extends Controller
 
     public function create()
     {
-        $equipments = Equipment::all();
         $countrys   = Country::all();
         $citys      = City::all();
 
-        return view('admin.specs.create', compact('equipments', 'countrys', 'citys'));
+        return view('admin.specs.create', compact('countrys', 'citys'));
 
     }// end of create
 
@@ -79,11 +80,10 @@ class SpecController extends Controller
     
     public function edit(Spec $spec)
     {
-        $equipments = Equipment::all();
         $countrys   = Country::all();
         $citys      = City::all();
 
-        return view('admin.specs.edit', compact('spec', 'equipments', 'countrys', 'citys'));
+        return view('admin.specs.edit', compact('spec', 'countrys', 'citys'));
 
     }// end of edit
 

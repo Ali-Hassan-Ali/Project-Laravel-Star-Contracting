@@ -13,14 +13,17 @@ class SpecTableSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['description truck','description shipping','description Transfer','description','description'];
+        $specs = ['spec truck','spec shipping','spec Transfer','spec for'];
 
-        foreach ($types as $type) {
+        foreach ($specs as $spec) {
             
             \App\Models\Spec::create([
-                'equipment_id'  => 1,
+                'name'          => $spec,
+                'type_spec'     => 'type specification',
+                'country_id'    => 1,
+                'city_id'       => 1,
                 'user_id'       => 1,
-                'description'   => $type,
+                'description'   => 'description description description description',
             ]);
 
         }//end of each

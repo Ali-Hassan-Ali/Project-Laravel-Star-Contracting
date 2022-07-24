@@ -65,8 +65,10 @@
                                             </label>
                                         </div>
                                     </th>
-                                    <th>@lang('equipments.equipments')</th>
-                                    <th>@lang('specs.description')</th>
+                                    <th>@lang('specs.name')</th>
+                                    <th>@lang('specs.type_spec')</th>
+                                    <th>@lang('countrys.countrys')</th>
+                                    <th>@lang('citys.citys')</th>
                                     <th>@lang('admins.name')</th>
                                     <th>@lang('site.created_at')</th>
                                     <th>@lang('site.action')</th>
@@ -104,8 +106,10 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'equipment', name: 'equipment'},
-                {data: 'description', name: 'description'},
+                {data: 'name', name: 'name'},
+                {data: 'type_spec', name: 'type_spec'},
+                {data: 'country', name: 'country'},
+                {data: 'city', name: 'city'},
                 {data: 'admin', name: 'admin'},
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

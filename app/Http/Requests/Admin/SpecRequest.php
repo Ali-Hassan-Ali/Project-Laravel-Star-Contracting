@@ -25,7 +25,10 @@ class SpecRequest extends FormRequest
     {
         $rules = [
             'description'  => ['required','string'],
-            'equipment_id' => ['required','numeric'],
+            'type_spec'    => ['required','min:2','max:255'],
+            'name'         => ['required','min:2','max:255'],
+            'country_id'   => ['required','numeric'],
+            'city_id'      => ['required','numeric'],
         ];
 
         return $rules;

@@ -15,10 +15,13 @@ class CreateSpecsTable extends Migration
     {
         Schema::create('specs', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->string('name');
+            $table->string('type_spec');
 
-            $table->string('name')->default('specs name');
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\Country::class);
+            $table->foreignIdFor(\App\Models\City::class);
+
             $table->longText('description');
             
             $table->softDeletes();

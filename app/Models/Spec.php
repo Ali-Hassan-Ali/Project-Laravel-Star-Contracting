@@ -18,9 +18,15 @@ class Spec extends Model
         
     }//end of  belongsTo
 
-    public function equipment()
+    public function country()
     {
-        return $this->belongsTo(Equipment::class);
+        return $this->belongsTo(Country::class);
+        
+    }//end of  belongsTo
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
         
     }//end of  belongsTo
     
