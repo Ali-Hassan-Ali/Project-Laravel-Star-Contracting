@@ -23,6 +23,8 @@ class EquipmentRequest extends FormRequest
      */
     public function rules()
     {
+
+        // dd(\Request::all());
         $rules = [
             'name'                  => ['required','string','min:2','max:255'],
             'make'                  => ['required','string','min:2','max:255'],
@@ -31,14 +33,14 @@ class EquipmentRequest extends FormRequest
             'owner_ship'            => ['required','string','min:2','max:255'],
             'operator'              => ['required','string','min:2','max:255'],
             'responsible_person'    => ['required','string','min:2','max:255'],
-            'project_allocated_to'  => ['nullable','string','min:2','max:25'],
+            'project_allocated_to'  => ['required_if:allocated_to,==,Project','string','min:2','max:25'],
             'allocated_to'          => ['required','string','min:2','max:25'],
             'email'                 => ['required','email'],
-            'driver_salary'         => ['required','string','min:2','max:25'],
+            'driver_salary'         => ['required_if:operator,==,Driver','string','min:2','max:25'],
             'registration_expiry'   => ['required','string','min:2','max:255'],
             'year_of_manufacture'   => ['required','string','min:2','max:255'],
-            'rental_basis'          => ['nullable','string','min:2','max:255'],
-            'rental_cost_basis'     => ['nullable','numeric'],
+            'rental_basis'          => ['required_if:owner_ship,==,Rented','string','min:2','max:255'],
+            'rental_cost_basis'     => ['required_if:owner_ship,==,Rented','numeric'],
             'spec_id'               => ['required','numeric'],
             'country_id'            => ['required','numeric'],
             'city_id'               => ['required','numeric'],

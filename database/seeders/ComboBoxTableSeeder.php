@@ -85,7 +85,7 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
-        $operators = ['operator one','operator tow'];
+        $operators = ['driver','operator tow'];
 
         foreach ($operators as $operator) {
             
@@ -123,7 +123,7 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
-        $allocated_tos = ['allocated_to one','allocated_to tow'];
+        $allocated_tos = ['General','Project'];
 
         foreach ($allocated_tos as $allocated_to) {
             

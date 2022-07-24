@@ -23,8 +23,8 @@ class CreateEquipmentTable extends Migration
             $table->string('year_of_manufacture')->nullable();
             $table->string('rental_cost_basis')->default(0);
 
-            $table->string('driver_salary')->default(0);
-            $table->string('rental_basis');
+            $table->string('driver_salary')->nullable();
+            $table->string('rental_basis')->nullable();
 
             $table->string('make');
             $table->string('name');

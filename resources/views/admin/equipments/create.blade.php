@@ -46,7 +46,7 @@
                         <select name="name" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('equipments.name')</option>
                             @foreach ($equipments as $equipment)
-                                <option value="{{ $equipment->name }}" {{ $equipment->name == old('equipment') ? 'selected' : '' }}>{{ $equipment->name }}</option>
+                                <option value="{{ $equipment->name }}" {{ $equipment->name == old('name') ? 'selected' : '' }}>{{ $equipment->name }}</option>
                             @endforeach
                         </select>
                         @error('equipment')
@@ -151,7 +151,7 @@
                     {{--rental_cost_basis--}}
                     <div class="form-group">
                         <label>@lang('equipments.rental_cost_basis')<span class="text-danger">*</span></label>
-                        <input type="test" name="rental_cost_basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
+                        <input type="test" name="rental_cost_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} disabled id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
                         @error('rental_cost_basis')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -185,7 +185,7 @@
                     {{--owner_ship--}}
                     <div class="form-group @error('owner_ship') custom-select @enderror">
                         <label>@lang('equipments.owner_ship') <span class="text-danger">*</span></label>
-                        <select name="owner_ship" class="form-control select2" required>
+                        <select name="owner_ship" id="owner-ship" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('equipments.owner_ship')</option>
                             @foreach ($owner_ship as $owner)
                                 <option value="{{ $owner->name }}" {{ $owner->name == old('owner_ship') ? 'selected' : '' }}>{{ $owner->name }}</option>
@@ -201,7 +201,7 @@
                     {{--rental_basis--}}
                     <div class="form-group @error('rental_basis') custom-select @enderror">
                         <label>@lang('equipments.rental_basis') <span class="text-danger">*</span></label>
-                        <select name="rental_basis" class="form-control select2">
+                        <select name="rental_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} disabled id="rental-basis" class="form-control select2">
                             <option value="">@lang('site.choose') @lang('equipments.rental_basis')</option>
                             @foreach ($rental_basis as $rental)
                                 <option value="{{ $rental->name }}" {{ $rental->name == old('rental_basis') ? 'selected' : '' }}>{{ $rental->name }}</option>
@@ -228,10 +228,10 @@
                     {{--operator--}}
                     <div class="form-group @error('operator') custom-select @enderror">
                         <label>@lang('equipments.operator') <span class="text-danger">*</span></label>
-                        <select name="operator" class="form-control select2" required>
+                        <select name="operator" id="operator" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('equipments.operator')</option>
                             @foreach ($operators as $operator)
-                                <option value="{{ $operator->name }}" {{ $operator->name == old('operator') ? 'selected' : '' }}>{{ $rental->name }}</option>
+                                <option value="{{ $operator->name }}" {{ $operator->name == old('operator') ? 'selected' : '' }}>{{ $operator->name }}</option>
                             @endforeach
                         </select>
                         @error('operator')
@@ -244,7 +244,7 @@
                     {{--driver_salary--}}
                     <div class="form-group">
                         <label>@lang('equipments.driver_salary')<span class="text-danger">*</span></label>
-                        <input type="text" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', 0) }}" required autofocus>
+                        <input type="text" {{ old('operator') == 'driver' ? '' : 'disabled' }} disabled id="driver-salary" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', 0) }}" required autofocus>
                         @error('driver_salary')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -289,7 +289,7 @@
                     {{--allocated_to--}}
                     <div class="form-group @error('allocated_to') custom-select @enderror">
                         <label>@lang('equipments.allocated_to') <span class="text-danger">*</span></label>
-                        <select name="allocated_to" class="form-control select2" required>
+                        <select name="allocated_to" id="allocated-to" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('equipments.allocated_to')</option>
                             @foreach ($allocated_to as $allocated)
                                 <option value="{{ $allocated->name }}" {{ $allocated->name == old('allocated_to') ? 'selected' : '' }}>{{ $allocated->name }}</option>
@@ -305,7 +305,7 @@
                     {{--project_allocated_to--}}
                     <div class="form-group @error('project_allocated_to') custom-select @enderror">
                         <label>@lang('equipments.project_allocated_to') <span class="text-danger">*</span></label>
-                        <select name="project_allocated_to" multiple class="form-control select2">
+                        <select name="project_allocated_to" {{ old('allocated_to') == 'project' ? '' : 'disabled' }} disabled multiple id="project-allocated-to" class="form-control select2">
                             <option value="">@lang('site.choose') @lang('equipments.project_allocated_to')</option>
                             @foreach ($project_allocated_to as $project)
                                 <option value="{{ $project->name }}" {{ $project->name == old('project_allocated_to') ? 'selected' : '' }}>{{ $project->name }}</option>
@@ -345,3 +345,62 @@
 @endsection
 
 
+@push('scripts')
+
+    <script>
+        
+        $('#operator').on('change', function () {
+
+            var value = $(this).val();
+
+            if (value == 'driver' || value == 'Driver') {
+
+                $('#driver-salary').attr('disabled', false);
+
+            } else {
+
+                $('#driver-salary').attr('disabled', true);
+
+            }//end of if
+            
+        });//end of chage
+
+        
+        $('#allocated-to').on('change', function () {
+            
+            var value = $(this).val();
+
+            if (value == 'project' || value == 'Project') {
+
+                $('#project-allocated-to').attr('disabled', false);
+
+            } else {
+
+                $('#project-allocated-to').attr('disabled', true);
+
+            }//end of if
+            
+        });//end of chage
+
+        $('#owner-ship').on('change', function () {
+            
+            var value = $(this).val();
+
+            if (value == 'rented' || value == 'Rented') {
+
+                $('#rental-cost-basis').attr('disabled', false);
+                $('#rental-basis').attr('disabled', false);
+
+            } else {
+
+                $('#rental-cost-basis').attr('disabled', true);
+                $('#rental-basis').attr('disabled', true);
+
+            }//end of if
+            
+        });//end of chage
+
+
+    </script>
+
+@endpush
