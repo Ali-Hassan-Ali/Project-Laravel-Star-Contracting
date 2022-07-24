@@ -20,10 +20,7 @@ class SpecTableSeeder extends Seeder
             \App\Models\Spec::create([
                 'name'          => $spec,
                 'type_spec'     => 'type specification',
-                'country_id'    => 1,
-                'city_id'       => 1,
                 'user_id'       => 1,
-                'description'   => 'description description description description',
             ]);
 
         }//end of each

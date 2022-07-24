@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SpecRequest;
 use App\Models\Spec;
-use App\Models\Country;
-use App\Models\City;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
@@ -38,18 +36,12 @@ class SpecController extends Controller
             ->editColumn('created_at', function (Spec $spec) {
                 return $spec->created_at->format('Y-m-d');
             })
-            ->editColumn('country', function (Spec $spec) {
-                return $spec->country->name;
-            })
-            ->editColumn('city', function (Spec $spec) {
-                return $spec->city->name;
-            })
             ->addColumn('admin', function (Spec $spec) {
                 return $spec->admin->name;
             })
-            ->addColumn('description', function (Spec $spec) {
-                return Str::of($spec->description)->limit(70);
-            })
+            // ->addColumn('description', function (Spec $spec) {
+            //     return Str::of($spec->description)->limit(70);
+            // })
             ->addColumn('actions','admin.specs.data_table.actions')
             ->rawColumns(['record_select', 'actions','admin','equipment'])
             ->toJson();
@@ -59,10 +51,7 @@ class SpecController extends Controller
 
     public function create()
     {
-        $countrys   = Country::all();
-        $citys      = City::all();
-
-        return view('admin.specs.create', compact('countrys', 'citys'));
+        return view('admin.specs.create');
 
     }// end of create
 
@@ -80,10 +69,7 @@ class SpecController extends Controller
     
     public function edit(Spec $spec)
     {
-        $countrys   = Country::all();
-        $citys      = City::all();
-
-        return view('admin.specs.edit', compact('spec', 'countrys', 'citys'));
+        return view('admin.specs.edit', compact('spec'));
 
     }// end of edit
 

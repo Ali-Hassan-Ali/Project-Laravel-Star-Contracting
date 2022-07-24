@@ -15,14 +15,10 @@ class CreateSpecsTable extends Migration
     {
         Schema::create('specs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('type_spec');
 
             $table->foreignIdFor(\App\Models\User::class);
-            $table->foreignIdFor(\App\Models\Country::class);
-            $table->foreignIdFor(\App\Models\City::class);
-
-            $table->longText('description');
             
             $table->softDeletes();
             $table->timestamps();
