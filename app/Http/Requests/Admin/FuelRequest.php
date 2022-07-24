@@ -25,17 +25,17 @@ class FuelRequest extends FormRequest
     {
         $rules = [
             'equipment_id'             => ['required','numeric'],
-            'unit'                     => ['required','string'],
+            'unit'                     => ['required','string','min:2','max:255'],
             'fuel_type'                => ['required','string'],
-            'no_of_units_filled'       => ['required','string'],
-            'last_mileage_reading'     => ['required','string'],
-            'current_mileage_reading'  => ['required','string'],
-            'average_mileage_reading'  => ['required','string'],
+            'no_of_units_filled'       => ['required','numeric'],
+            'last_mileage_reading'     => ['required','numeric'],
+            'current_mileage_reading'  => ['required','numeric'],
+            'average_mileage_reading'  => ['required','numeric'],
             'fuel_rate_per_litre'      => ['required','string'],
             'hours_worked_weekly'      => ['required','string'],
             'total_cost_of_fuel'       => ['required','string'],
-            'last_date'                => ['required'],
-            'next_date'                => ['required'],
+            'last_date'                => ['required','date'],
+            'next_date'                => ['required','date'],
         ];
 
         return $rules;

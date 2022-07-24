@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FuelRequest;
 use App\Models\Equipment;
+use App\Models\ComboBox;
 use App\Models\Fuel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -51,8 +52,10 @@ class FuelController extends Controller
     public function create()
     {
         $equipments = Equipment::all();
+        $units      = ComboBox::where('type', 'unit')->get();
+        $fuel_types = ComboBox::where('type', 'fuel_type')->get();
 
-        return view('admin.fuels.create', compact('equipments'));
+        return view('admin.fuels.create', compact('equipments', 'units', 'fuel_types'));
 
     }//end of create
 
@@ -73,8 +76,10 @@ class FuelController extends Controller
     public function edit(Fuel $fuel)
     {
         $equipments = Equipment::all();
+        $units      = ComboBox::where('type', 'unit')->get();
+        $fuel_types = ComboBox::where('type', 'fuel_type')->get();
 
-        return view('admin.fuels.edit', compact('fuel','equipments'));
+        return view('admin.fuels.edit', compact('fuel','equipments', 'units', 'fuel_types'));
 
     }//end of edit
 

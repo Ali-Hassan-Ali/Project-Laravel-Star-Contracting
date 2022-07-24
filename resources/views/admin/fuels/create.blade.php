@@ -23,7 +23,7 @@
                 <form method="post" action="{{ route('admin.fuels.store') }}">
                     @csrf
                     @method('post')
-
+ 
                     {{--equipment_id--}}
                     <div class="form-group @error('equipment_id') custom-select @enderror">
                         <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
@@ -42,25 +42,8 @@
 
 
                     @php
-                        $numbers    = ['no_of_units_filled','last_mileage_reading','current_mileage_reading','average_mileage_reading','fuel_rate_per_litre','hours_worked_weekly','total_cost_of_fuel'];
                         $data_times = ['last_date','next_date'];
-                        $textareas  = ['unit','fuel_type'];
                     @endphp
-
-                    @foreach ($numbers as $number)
-                        
-                        {{--$number--}}
-                        <div class="form-group">
-                            <label>@lang('fuels.' . $number)<span class="text-danger">*</span></label>
-                            <input type="number" name="{{ $number }}" class="form-control @error($number) is-invalid @enderror" value="{{ old($number) }}" required autofocus>
-                            @error($number)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                    @endforeach
 
                     @foreach ($data_times as $data_time)
                         
@@ -77,20 +60,71 @@
 
                     @endforeach
 
-                    @foreach ($textareas as $textarea)
+                    {{--unit--}}
+                    <div class="form-group @error('unit') custom-select @enderror">
+                        <label>@lang('fuels.unit') <span class="text-danger">*</span></label>
+                        <select name="unit" class="form-control select2" required>
+                            <option value="">@lang('site.choose') @lang('fuels.unit')</option>
+                            @foreach ($units as $unit)
+                                <option value="{{ $unit->name }}" {{ $unit->name == old('unit') ? 'selected' : '' }}>{{ $unit->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('unit')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--$data_time--}}
+                    <div class="form-group">
+                        <label>@lang('fuels.no_of_units_filled')<span class="text-danger">*</span></label>
+                        <input type="number" id="no-of-unit-filled" name="no_of_units_filled" class="form-control @error('no_of_units_filled') is-invalid @enderror" value="{{ old('no_of_units_filled', 0) }}" required autofocus>
+                        @error('no_of_units_filled')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{--fuel_types--}}
+                    <div class="form-group @error('fuel_type') custom-select @enderror">
+                        <label>@lang('fuels.fuel_type') <span class="text-danger">*</span></label>
+                        <select name="fuel_type" class="form-control select2" required>
+                            <option value="">@lang('site.choose') @lang('fuels.fuel_type')</option>
+                            @foreach ($fuel_types as $fuel_type)
+                                <option value="{{ $fuel_type->name }}" {{ $fuel_type->name == old('fuel_type') ? 'selected' : '' }}>{{ $fuel_type->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('fuel_type')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    @php
+                        $numbers = ['last_mileage_reading','current_mileage_reading','average_mileage_reading',
+                                    'fuel_rate_per_litre','hours_worked_weekly','total_cost_of_fuel'];
+                    @endphp
+
+                    @foreach ($numbers as $number)
                         
-                        {{-- $textarea --}}
+                        {{--$number--}}
                         <div class="form-group">
-                            <label>@lang('fuels.'.$textarea) <span class="text-danger">*</span></label>
-                            <textarea class="form-control @error($textarea) is-invalid @enderror" name="{{ $textarea }}" rows="6">{{ old($textarea) }}</textarea>
-                            @error($textarea)
+                            <label>@lang('fuels.' . $number)<span class="text-danger">*</span></label>
+                            <input type="number" {{ $number == 'average_mileage_reading' ? 'disabled' : '' || $number == 'total_cost_of_fuel' ? 'disabled' : '' }} id="{{ $number }}" name="{{ $number }}" class="form-control @error($number) is-invalid @enderror" value="{{ old($number, 0) }}" required autofocus>
+                            @error($number)
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        
+
                     @endforeach
+
+                    <input type="number" name="average_mileage_reading" id="average_mileage_reading-hidding" hidden>
+                    <input type="number" name="total_cost_of_fuel" id="total_cost_of_fuel-hidding" hidden>
 
                 
                     <div class="form-group">
@@ -107,4 +141,35 @@
 
 @endsection
 
+@push('scripts')
 
+    <script>
+        
+        $(document).on('change', '#current_mileage_reading, #no-of-unit-filled, #last_mileage_reading',function () {
+
+            var current     = $('#current_mileage_reading').val();
+            var lastCurrent = $('#last_mileage_reading').val();
+            var unit        = $('#no-of-unit-filled').val();
+
+            var total = current - lastCurrent / unit;
+
+            $('#average_mileage_reading').val(total);
+            $('#average_mileage_reading-hidding').val(total);
+            
+        });//end of chage
+
+        $(document).on('change', '#no-of-unit-filled, #fuel_rate_per_litre',function () {
+
+            var fuelRate    = $('#fuel_rate_per_litre').val();
+            var unit        = $('#no-of-unit-filled').val();
+
+            var total = fuelRate * unit;
+
+            $('#total_cost_of_fuel').val(total);
+            $('#total_cost_of_fuel-hidding').val(total);
+            
+        });//end of chage
+
+    </script>
+
+@endpush

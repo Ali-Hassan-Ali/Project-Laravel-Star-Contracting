@@ -183,6 +183,30 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
+        $units = ['unit one','unit tow'];
+
+        foreach ($units as $unit) {
+            
+            \App\Models\ComboBox::create([
+                'name'    => $unit,
+                'type'    => 'unit',
+                'user_id' => 1,
+            ]);
+
+        }//end of each
+
+        $fuel_types = ['fuel_type one','fuel_type tow'];
+
+        foreach ($fuel_types as $fuel_type) {
+            
+            \App\Models\ComboBox::create([
+                'name'    => $fuel_type,
+                'type'    => 'fuel_type',
+                'user_id' => 1,
+            ]);
+
+        }//end of each
+
     }//end of run
     
 }//end of class

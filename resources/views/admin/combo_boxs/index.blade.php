@@ -47,7 +47,7 @@
                     </div>
 
                     @php
-                        $combo_boxs = ['make', 'model', 'owner_ship', 'equipment', 'equipment', 'rental_basis', 'operator', 'responsible_person', 'responsible_person_email', 'allocated_to', 'project_allocated_to', 'insurer', 'location', 'non_scheduled'];
+                        $combo_boxs = ['make', 'model', 'owner_ship', 'equipment', 'equipment', 'rental_basis', 'operator', 'responsible_person', 'responsible_person_email', 'allocated_to', 'project_allocated_to', 'insurer', 'location', 'non_scheduled', 'unit'];
                     @endphp
                     <div class="col-md-6">
                         <div class="form-group">
