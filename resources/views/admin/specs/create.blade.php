@@ -34,10 +34,15 @@
                     </div>
 
                     {{--type_spec--}}
-                    <div class="form-group">
-                        <label>@lang('specs.type_spec')<span class="text-danger">*</span></label>
-                        <input type="text" name="type_spec" class="form-control @error('type_spec') is-invalid @enderror" value="{{ old('type_spec') }}" required autofocus>
-                        @error('type_spec')
+                    <div class="form-group @error('type') custom-select @enderror">
+                        <label>@lang('equipments.type') <span class="text-danger">*</span></label>
+                        <select name="type" class="form-control select2" required>
+                            <option value="">@lang('site.choose') @lang('specs.type')</option>
+                            @foreach ($spec_types as $type)
+                                <option value="{{ $type->name }}" {{ $type->name == old('type') ? 'selected' : '' }}>{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('type')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

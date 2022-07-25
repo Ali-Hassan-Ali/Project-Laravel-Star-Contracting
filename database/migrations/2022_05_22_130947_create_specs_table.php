@@ -16,7 +16,7 @@ class CreateSpecsTable extends Migration
         Schema::create('specs', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('type_spec');
+            $table->string('type');
 
             $table->foreignIdFor(\App\Models\User::class);
             

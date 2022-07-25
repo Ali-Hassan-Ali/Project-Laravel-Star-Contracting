@@ -207,6 +207,18 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
+        $spec_types = ['spec_type one','spec_type tow'];
+
+        foreach ($spec_types as $spec_type) {
+            
+            \App\Models\ComboBox::create([
+                'name'    => $spec_type,
+                'type'    => 'spec_type',
+                'user_id' => 1,
+            ]);
+
+        }//end of each
+
     }//end of run
     
 }//end of class

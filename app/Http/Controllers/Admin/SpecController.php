@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SpecRequest;
+use App\Models\ComboBox;
 use App\Models\Spec;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -51,7 +52,9 @@ class SpecController extends Controller
 
     public function create()
     {
-        return view('admin.specs.create');
+        $spec_types = ComboBox::where('type', 'spec_type')->get();
+
+        return view('admin.specs.create', compact('spec_types'));
 
     }// end of create
 
@@ -69,7 +72,9 @@ class SpecController extends Controller
     
     public function edit(Spec $spec)
     {
-        return view('admin.specs.edit', compact('spec'));
+        $spec_types = ComboBox::where('type', 'spec_type')->get();
+
+        return view('admin.specs.edit', compact('spec', 'spec_types'));
 
     }// end of edit
 

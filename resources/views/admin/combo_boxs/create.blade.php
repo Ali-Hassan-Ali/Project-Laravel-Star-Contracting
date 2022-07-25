@@ -34,16 +34,16 @@
                     </div>
 
                     @php
-                        $combo_boxs = ['make', 'model', 'owner_ship', 'equipment', 'equipment', 'rental_basis', 'operator', 'responsible_person', 'responsible_person_email', 'allocated_to', 'project_allocated_to', 'insurer', 'location', 'non_scheduled', 'unit', 'fuel_type'];
+                        $combo_boxs = ['make', 'model', 'owner_ship', 'equipment', 'type', 'rental_basis', 'operator', 'responsible_person', 'responsible_person_email', 'allocated_to', 'project_allocated_to', 'insurer', 'location', 'non_scheduled', 'unit', 'fuel_type', 'spec_type'];
                     @endphp
 
                     {{--type--}}
                     <div class="form-group @error('type') custom-select @enderror">
                         <label>@lang('combo_boxs.type') <span class="text-danger">*</span></label>
-                        <select name="type" class="form-control select2" required>
+                        <select name="type" class="form-control select2" {{ request()->combo_boxs ? 'disabled' : '' }} required>
                             <option value="">@lang('site.choose') @lang('combo_boxs.type')</option>
                             @foreach ($combo_boxs as $box)
-                                <option value="{{ $box }}" {{ $box == old('type') ? 'selected' : '' }}>{{ $box }}</option>
+                                <option value="{{ $box }}" {{ $box == old('type') ? 'selected' : '' }} {{ $box == request()->combo_boxs ? 'selected disabled' : '' }}>{{ $box }}</option>
                             @endforeach
                         </select>
                         @error('type')

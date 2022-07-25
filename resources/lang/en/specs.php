@@ -3,6 +3,6 @@
 return [
     'specs'         => 'Specifications',
     'name'          => 'Specificatio name',
-    'type_spec'     => 'Specifications type',
+    'type'          => 'Specifications type',
     'description'   => 'description',
 ];

@@ -25,8 +25,21 @@
         {{--statistics--}}
         <li class="treeview {{ request()->is('*combo_boxs*') || request()->is('*combo_boxs*')  ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fas fa-chart-area"></i><span class="app-menu__label">@lang('combo_boxs.combo_boxs')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
+
                 <li><a class="treeview-item {{ request()->is('*combo_boxs*') ? 'active' : '' }}" href="{{ route('admin.combo_boxs.index') }}"><i class="icon fas fa-chart-line"></i>@lang('combo_boxs.combo_boxs')</a></li>
-                {{-- <li><a class="treeview-item {{ request()->is('*combo_boxs*') ? 'active' : '' }}" href="{{ route('admin.statistics.table') }}"><i class="icon fa-solid fa-table"></i>@lang('statistics.table')</a></li> --}}
+
+                @php
+                    $combo_boxs = ['make', 'model', 'owner_ship', 'equipment', 'type', 'rental_basis', 'operator', 'responsible_person', 'responsible_person_email', 'allocated_to', 'project_allocated_to', 'insurer', 'location', 'non_scheduled', 'unit', 'fuel_type', 'spec_type'];
+                @endphp
+
+                @foreach ($combo_boxs as $combo)
+
+                    <li><a class="treeview-item {{ request()->is('*combo_boxs*') ? 'active' : '' }}" href="{{ route('admin.combo_boxs.index', ['combo_boxs' => $combo]) }}">
+                        <i class="icon fa-solid fa-table"></i>@lang('combo_boxs.' . $combo)</a>
+                    </li>
+                    
+                @endforeach
+
             </ul>
         </li>
 

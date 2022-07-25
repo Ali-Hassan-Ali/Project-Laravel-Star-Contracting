@@ -18,9 +18,9 @@ class SpecTableSeeder extends Seeder
         foreach ($specs as $spec) {
             
             \App\Models\Spec::create([
-                'name'          => $spec,
-                'type_spec'     => 'type specification',
-                'user_id'       => 1,
+                'name'    => $spec,
+                'type'    => 'specification type',
+                'user_id' => 1,
             ]);
 
         }//end of each

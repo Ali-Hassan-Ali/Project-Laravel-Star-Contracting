@@ -24,11 +24,8 @@ class SpecRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'description'  => ['nullable','string'],
-            'type_spec'    => ['required','min:2','max:255'],
-            'name'         => ['nullable','min:2','max:255'],
-            'country_id'   => ['nullable','numeric'],
-            'city_id'      => ['nullable','numeric'],
+            'type' => ['required','min:2','max:255'],
+            'name' => ['nullable','min:2','max:255'],
         ];
 
         return $rules;

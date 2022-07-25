@@ -22,7 +22,7 @@
                     <div class="col-md-12">
 
                         @if (auth()->user()->hasPermission('read_combo_boxs'))
-                            <a href="{{ route('admin.combo_boxs.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
+                            <a href="{{ route('admin.combo_boxs.create', ['combo_boxs' => request()->combo_boxs ]) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
                         @endif
 
                         @if (auth()->user()->hasPermission('delete_combo_boxs'))
@@ -47,7 +47,7 @@
                     </div>
 
                     @php
-                        $combo_boxs = ['make', 'model', 'owner_ship', 'equipment', 'equipment', 'rental_basis', 'operator', 'responsible_person', 'responsible_person_email', 'allocated_to', 'project_allocated_to', 'insurer', 'location', 'non_scheduled', 'unit', 'fuel_type'];
+                        $combo_boxs = ['make', 'model', 'owner_ship', 'equipment', 'type', 'rental_basis', 'operator', 'responsible_person', 'responsible_person_email', 'allocated_to', 'project_allocated_to', 'insurer', 'location', 'non_scheduled', 'unit', 'fuel_type', 'spec_type'];
                     @endphp
                     <div class="col-md-6">
                         <div class="form-group">
@@ -55,7 +55,7 @@
                                 <select id="combo-boxs" class="form-control select2">
                                     <option value="">@lang('site.all') @lang('combo_boxs.type')</option>
                                     @foreach ($combo_boxs as $boxs)
-                                        <option value="{{ $boxs }}">{{ $boxs }}</option>
+                                        <option value="{{ $boxs }}" {{ $boxs == request()->combo_boxs ? 'selected' : '' }}>{{ $boxs }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -119,7 +119,7 @@
             ajax: {
                 url: '{{ route('admin.combo_boxs.data') }}',
                 data: function (d) {
-                    d.type = type;
+                    d.type = type ?? "{{ request()->combo_boxs }}";
                 }
             },
             columns: [
