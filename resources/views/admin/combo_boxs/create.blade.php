@@ -43,7 +43,7 @@
                         <select name="type" class="form-control select2" {{ request()->combo_boxs ? 'disabled' : '' }} required>
                             <option value="">@lang('site.choose') @lang('combo_boxs.type')</option>
                             @foreach ($combo_boxs as $box)
-                                <option value="{{ $box }}" {{ $box == old('type') ? 'selected' : '' }} {{ $box == request()->combo_boxs ? 'selected disabled' : '' }}>{{ $box }}</option>
+                                <option value="{{ $box }}" {{ $box == old('type') ? 'selected' : '' }} {{ $box == request()->combo_boxs ? 'selected' : '' }}>{{ $box }}</option>
                             @endforeach
                         </select>
                         @error('type')
