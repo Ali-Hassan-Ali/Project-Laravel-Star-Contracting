@@ -40,7 +40,7 @@
                     {{--type--}}
                     <div class="form-group @error('type') custom-select @enderror">
                         <label>@lang('combo_boxs.type') <span class="text-danger">*</span></label>
-                        <select name="type" class="form-control select2" {{ request()->combo_boxs ? 'disabled' : '' }} required>
+                        <select name="type" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('combo_boxs.type')</option>
                             @foreach ($combo_boxs as $box)
                                 <option value="{{ $box }}" {{ $box == old('type') ? 'selected' : '' }} {{ $box == request()->combo_boxs ? 'selected' : '' }}>{{ $box }}</option>
