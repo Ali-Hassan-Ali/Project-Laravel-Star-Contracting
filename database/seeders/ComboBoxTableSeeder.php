@@ -207,7 +207,7 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
-        $spec_types = ['spec_type one','spec_type tow'];
+        $spec_types = ['truck','shipping','Transfer'];
 
         foreach ($spec_types as $spec_type) {
             
