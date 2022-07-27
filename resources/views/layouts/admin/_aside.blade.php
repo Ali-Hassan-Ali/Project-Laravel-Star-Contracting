@@ -64,9 +64,9 @@
         @endif
 
         {{--countrys--}}
-        @if (auth()->user()->hasPermission('read_types'))
+        {{-- @if (auth()->user()->hasPermission('read_types'))
             <li><a class="app-menu__item {{ request()->is('*types*') ? 'active' : '' }}" href="{{ route('admin.types.index') }}"><i class="app-menu__icon fa-solid fa-hurricane"></i> <span class="app-menu__label">@lang('types.types')</span></a></li>
-        @endif
+        @endif --}}
 
         {{--statuses--}}
         @if (auth()->user()->hasPermission('read_status'))
