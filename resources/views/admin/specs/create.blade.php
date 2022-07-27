@@ -35,7 +35,7 @@
 
                     {{--type_spec--}}
                     <div class="form-group @error('type') custom-select @enderror">
-                        <label>@lang('equipments.type') <span class="text-danger">*</span></label>
+                        <label>@lang('specs.type') <span class="text-danger">*</span></label>
                         <select name="type" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('specs.type')</option>
                             @foreach ($spec_types as $type)

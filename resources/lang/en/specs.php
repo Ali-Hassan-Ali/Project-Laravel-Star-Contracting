@@ -2,7 +2,7 @@
 
 return [
     'specs'         => 'Specifications',
-    'name'          => 'Specificatio name',
-    'type'          => 'Specifications type',
+    'name'          => 'name',
+    'type'          => 'type',
     'description'   => 'description',
 ];
