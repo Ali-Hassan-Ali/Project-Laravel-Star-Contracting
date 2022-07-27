@@ -26,7 +26,7 @@ class ComboBoxRequest extends FormRequest
     {
         $rules = [
             'name'    => ['required','string'],
-            'type'    => ['required','in:make,model,owner_ship'],
+            'type'    => ['required'],
         ];
 
         return $rules;
