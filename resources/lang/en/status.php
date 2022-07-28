@@ -5,7 +5,7 @@ return [
     'as_of'    => 'As of',
 
     'breakdown'  => 'Breakdown',
-    'working'    => 'working',
+    'working'    => 'Working',
 
     'working_status'      => 'working status',
     'hours_worked'        => 'hours worked',
