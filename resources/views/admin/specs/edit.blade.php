@@ -24,7 +24,7 @@
 
                     {{--name--}}
                     <div class="form-group">
-                        <label>@lang('specs.name')<span class="text-danger">*</span></label>
+                        <label>@lang('specs.specs')<span class="text-danger">*</span></label>
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $spec->name) }}" autofocus>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
