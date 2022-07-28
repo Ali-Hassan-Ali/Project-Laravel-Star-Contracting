@@ -26,7 +26,7 @@
                     <div class="form-group @error('equipment_id') custom-select @enderror">
                         <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
                         <select name="equipment_id" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
+                            <option value="" selected disabled>@lang('site.choose') @lang('equipments.equipments')</option>
                             @foreach ($equipments as $equipment)
                                 <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $fuel->equipment_id) ? 'selected' : '' }}>{{ $equipment->name }}</option>
                             @endforeach
@@ -62,7 +62,7 @@
                     <div class="form-group @error('unit') custom-select @enderror">
                         <label>@lang('fuels.unit') <span class="text-danger">*</span></label>
                         <select name="unit" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('fuels.unit')</option>
+                            <option value="" selected disabled>@lang('site.choose') @lang('fuels.unit')</option>
                             @foreach ($units as $unit)
                                 <option value="{{ $unit->name }}" {{ $unit->name == old('unit', $fuel->unit) ? 'selected' : '' }}>{{ $unit->name }}</option>
                             @endforeach
@@ -89,7 +89,7 @@
                     <div class="form-group @error('fuel_type') custom-select @enderror">
                         <label>@lang('fuels.fuel_type') <span class="text-danger">*</span></label>
                         <select name="fuel_type" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('fuels.fuel_type')</option>
+                            <option value="" selected disabled>@lang('site.choose') @lang('fuels.fuel_type')</option>
                             @foreach ($fuel_types as $fuel_type)
                                 <option value="{{ $fuel_type->name }}" {{ $fuel_type->name == old('fuel_type', $fuel->fuel_type) ? 'selected' : '' }}>{{ $fuel_type->name }}</option>
                             @endforeach

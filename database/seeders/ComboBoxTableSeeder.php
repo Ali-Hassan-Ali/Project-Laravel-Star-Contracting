@@ -195,7 +195,7 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
-        $fuel_types = ['fuel_type one','fuel_type tow'];
+        $fuel_types = ['Petrol','Diesel'];
 
         foreach ($fuel_types as $fuel_type) {
             
