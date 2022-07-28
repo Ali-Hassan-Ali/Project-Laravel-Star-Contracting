@@ -183,7 +183,7 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
-        $units = ['unit one','unit tow'];
+        $units = ['Gallons', 'Litres'];
 
         foreach ($units as $unit) {
             
