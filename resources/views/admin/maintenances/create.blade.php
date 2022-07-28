@@ -54,7 +54,7 @@
                     {{--next_service_date--}}
                     <div class="form-group">
                         <label>@lang('maintenances.next_service_date')<span class="text-danger">*</span></label>
-                        <input type="date" name="next_service_date" class="form-control @error('next_service_date') is-invalid @enderror" value="{{ old('next_service_date') }}" required autofocus>
+                        <input type="date" disabled name="next_service_date" class="form-control @error('next_service_date') is-invalid @enderror" value="{{ old('next_service_date') }}" required autofocus>
                         @error('next_service_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -168,11 +168,12 @@
 
             if (value == '0') {
 
-                $('#non-scheduled').attr('disabled', true);
+                $('#non-scheduled').attr('disabled', false);
 
             } else {
+                
+                $('#non-scheduled').attr('disabled', true);
 
-                $('#non-scheduled').attr('disabled', false);
 
             }//end of if
             

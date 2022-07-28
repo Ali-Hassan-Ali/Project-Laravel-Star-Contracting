@@ -19,7 +19,6 @@ class CreateSparesTable extends Migration
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
 
             $table->string('cost');
-            $table->string('location');
             $table->string('freight_charges');
             $table->string('name');
             $table->string('part_no');
@@ -29,6 +28,9 @@ class CreateSparesTable extends Migration
             
             $table->dateTime('usage_date')->nullable();
             $table->text('description')->nullable();
+
+            $table->foreignIdFor(\App\Models\Country::class)->onDelete('cascade')->nullable();
+            $table->foreignIdFor(\App\Models\City::class)->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();

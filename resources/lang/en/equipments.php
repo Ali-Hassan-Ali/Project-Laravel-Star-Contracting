@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'equipments' => 'Equipments',
-    'name'       => 'name',
+    'equipments' => 'Equipment',
+    'name'       => 'Equipment name',
     
     'plate_no'   => 'plate no',
     'chasis_no'  => 'chasis no',
@@ -15,7 +15,7 @@ return [
     'rental_basis'        => 'rental basis',
     'make'                => 'make',
     'model'               => 'model',
-    'owner_ship'          => 'owner ship',
+    'owner_ship'          => 'ownership',
     'operator'            => 'operator',
     'responsible_person'  => 'responsible person',
     'project_allocated_to'=> 'project allocated to',

@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'countrys' => 'Countrys',
-    'name'     => 'Countrys',
+    'countrys' => 'Country',
+    'name'     => 'Country',
 ];

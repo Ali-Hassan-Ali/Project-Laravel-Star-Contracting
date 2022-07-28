@@ -2,9 +2,9 @@
 
 return [
     'maintenances'           => 'Maintenances',
-    'equipments'             => 'equipments only',
-    'last_service_km'        => 'last service km',
-    'next_service_dueon_km'  => 'next service dueon km',
+    'equipments'             => 'equipment',
+    'last_service_km'        => 'last service KM/HMR',
+    'next_service_dueon_km'  => 'next service due on KM/HMR',
     'actual_service_reading' => 'actual service reading',
     'non_scheduled'          => 'non scheduled',
     'scheduled'              => 'scheduled',

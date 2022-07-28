@@ -55,9 +55,14 @@
                     </div>
 
                     {{-- type_of_insurance --}}
-                    <div class="form-group">
+                    <div class="form-group @error('type_of_insurance') custom-select @enderror">
                         <label>@lang('insurances.type_of_insurance') <span class="text-danger">*</span></label>
-                        <input type="text" name="type_of_insurance" autofocus class="form-control @error('type_of_insurance') is-invalid @enderror" value="{{ old('type_of_insurance') }}" required>
+                        <select name="type_of_insurance" class="form-control select2" required>
+                            <option value="">@lang('site.choose') @lang('insurances.type_of_insurance')</option>
+                            @foreach ($type_insurances as $type_insur)
+                                <option value="{{ $type_insur->name }}" {{ $type_insur->name == old('type_of_insurance') ? 'selected' : '' }}>{{ $type_insur->name }}</option>
+                            @endforeach
+                        </select>
                         @error('type_of_insurance')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -102,7 +107,7 @@
                     {{-- insurance_duration --}}
                     <div class="form-group">
                         <label>@lang('insurances.insurance_duration') <span class="text-danger">*</span></label>
-                        <input type="text" name="insurance_duration" autofocus class="form-control @error('insurance_duration') is-invalid @enderror" value="{{ old('insurance_duration') }}" required>
+                        <input type="number" name="insurance_duration" autofocus class="form-control @error('insurance_duration') is-invalid @enderror" value="{{ old('insurance_duration') }}" required>
                         @error('insurance_duration')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -113,7 +118,7 @@
                     {{-- insurance_expiry --}}
                     <div class="form-group">
                         <label>@lang('insurances.insurance_expiry') <span class="text-danger">*</span></label>
-                        <input type="date" name="insurance_expiry" autofocus class="form-control @error('insurance_expiry') is-invalid @enderror" value="{{ old('insurance_expiry') }}" required>
+                        <input type="date" name="insurance_expiry" disabled autofocus class="form-control @error('insurance_expiry') is-invalid @enderror" value="{{ old('insurance_expiry') }}" required>
                         @error('insurance_expiry')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -128,11 +133,11 @@
 
                     {{--plate_no--}}
                     <div class="form-group">
-                        <label>@lang('insurances.claim') <span class="text-danger">*</span></label>
+                        <label>@lang('insurances.claim')</label>
                         <select name="claim" id="claim" class="form-control select2">
-                            <option value="" selected>@lang('site.choose') @lang('insurances.claim')</option>
+                            <option value="" selected disabled>@lang('site.choose') @lang('insurances.claim')</option>
                             @foreach ($claims as $claim)
-                                <option value="{{ $claim }}" {{ $claim == old('claim') ? 'selected' : '' }}>@lang('site.' . $claim)</option>
+                                <option value="{{ $claim }}" {{ $claim == old('claim', '0') ? 'selected' : '' }}>@lang('site.' . $claim)</option>
                             @endforeach
                         </select>
                     </div>
@@ -141,7 +146,7 @@
                     {{-- claim_date --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_date') <span class="text-danger">*</span></label>
-                        <input type="date" name="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date') }}" max="{{ date('Y-m-d', strtotime(now())) }}">
+                        <input type="date" name="claim_date" disabled id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date') }}" max="{{ date('Y-m-d', strtotime(now())) }}">
                         @error('claim_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -152,7 +157,7 @@
                     {{-- claim_amount --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_amount') <span class="text-danger">*</span></label>
-                        <input type="number" name="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount') }}">
+                        <input type="number" name="claim_amount" disabled id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount') }}">
                         @error('claim_amount')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -164,7 +169,7 @@
                     {{-- claim_description --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_description') <span class="text-danger">*</span></label>
-                        <textarea {{ old('claims') == '0' ? 'disabled' : '' }} disabled id="claim-desc" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="20">{{ old('claim_description') }}</textarea>
+                        <textarea {{ old('claims') == '0' ? 'disabled' : '' }} disabled id="claim_description" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="5">{{ old('claim_description') }}</textarea>
                         @error('claim_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -208,11 +213,15 @@
 
             if (value == '0') {
 
-                $('#claim-desc').attr('disabled', true);
+                $('#claim_description').attr('disabled', true);
+                $('#claim_amount').attr('disabled', true);
+                $('#claim_date').attr('disabled', true);
 
             } else {
 
-                $('#claim-desc').attr('disabled', false);
+                $('#claim_description').attr('disabled', false);
+                $('#claim_amount').attr('disabled', false);
+                $('#claim_date').attr('disabled', false);
 
             }//end of if
             

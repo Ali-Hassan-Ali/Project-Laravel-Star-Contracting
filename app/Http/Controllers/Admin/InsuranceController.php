@@ -54,8 +54,9 @@ class InsuranceController extends Controller
     {
         $equipments = Equipment::all();
         $insurers   = ComboBox::where('type', 'insurer')->get();
+        $type_insurances  = ComboBox::where('type', 'type_of_insurance')->get();
 
-        return view('admin.insurances.create', compact('equipments', 'insurers'));
+        return view('admin.insurances.create', compact('equipments', 'insurers', 'type_insurances'));
 
     }// end of create
 
@@ -77,8 +78,9 @@ class InsuranceController extends Controller
     {
         $equipments = Equipment::all();
         $insurs     = ComboBox::where('type', 'insurer')->get();
+        $type_insurances  = ComboBox::where('type', 'type_of_insurance')->get();
 
-        return view('admin.insurances.edit', compact('insurance', 'equipments', 'insurs'));
+        return view('admin.insurances.edit', compact('insurance', 'equipments', 'insurs', 'type_insurances'));
 
     }// end of edit
 

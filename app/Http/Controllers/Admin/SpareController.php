@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Equipment;
 use App\Models\Spare;
-use App\Models\ComboBox;
+use App\Models\Country;
+use App\Models\City;
 use App\Http\Requests\Admin\SpareRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -53,9 +54,9 @@ class SpareController extends Controller
     public function create()
     {
         $equipments = Equipment::all();
-        $locations  = ComboBox::where('type', 'location')->get();
+        $citys      = City::all();
 
-        return view('admin.spares.create', compact('equipments', 'locations'));
+        return view('admin.spares.create', compact('equipments', 'citys'));
 
     }//end of create
 
@@ -77,9 +78,9 @@ class SpareController extends Controller
     public function edit(Spare $spare)
     {
         $equipments = Equipment::all();
-        $locations  = ComboBox::where('type', 'location')->get();
+        $citys      = City::all();
 
-        return view('admin.spares.edit', compact('spare', 'equipments', 'locations'));
+        return view('admin.spares.edit', compact('spare', 'equipments', 'citys'));
 
     }//end of edit
 

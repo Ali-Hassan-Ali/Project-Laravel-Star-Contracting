@@ -55,9 +55,14 @@
                     </div>
 
                     {{-- type_of_insurance --}}
-                    <div class="form-group">
+                    <div class="form-group @error('type_of_insurance') custom-select @enderror">
                         <label>@lang('insurances.type_of_insurance') <span class="text-danger">*</span></label>
-                        <input type="text" name="type_of_insurance" autofocus class="form-control @error('type_of_insurance') is-invalid @enderror" value="{{ old('type_of_insurance', $insurance->type_of_insurance) }}" required>
+                        <select name="type_of_insurance" class="form-control select2" required>
+                            <option value="">@lang('site.choose') @lang('insurances.type_of_insurance')</option>
+                            @foreach ($type_insurances as $type_insur)
+                                <option value="{{ $type_insur->name }}" {{ $type_insur->name == old('type_of_insurance', $insurance->type_of_insurance) ? 'selected' : '' }}>{{ $type_insur->name }}</option>
+                            @endforeach
+                        </select>
                         @error('type_of_insurance')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -103,7 +108,7 @@
                     {{-- insurance_duration --}}
                     <div class="form-group">
                         <label>@lang('insurances.insurance_duration') <span class="text-danger">*</span></label>
-                        <input type="text" name="insurance_duration" autofocus class="form-control @error('insurance_duration') is-invalid @enderror" value="{{ old('insurance_duration', $insurance->insurance_duration) }}" required>
+                        <input type="number" name="insurance_duration" autofocus class="form-control @error('insurance_duration') is-invalid @enderror" value="{{ old('insurance_duration', $insurance->insurance_duration) }}" required>
                         @error('insurance_duration')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -114,7 +119,7 @@
                     {{-- insurance_expiry --}}
                     <div class="form-group">
                         <label>@lang('insurances.insurance_expiry') <span class="text-danger">*</span></label>
-                        <input type="date" name="insurance_expiry" autofocus class="form-control @error('insurance_expiry') is-invalid @enderror" value="{{ old('insurance_expiry', date('Y-m-d', strtotime($equipment->insurance_expiry))) }}" required>
+                        <input type="date" name="insurance_expiry" disabled autofocus class="form-control @error('insurance_expiry') is-invalid @enderror" value="{{ old('insurance_expiry', date('Y-m-d', strtotime($equipment->insurance_expiry))) }}" required>
                         @error('insurance_expiry')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -142,7 +147,7 @@
                     {{-- claim_date --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_date') <span class="text-danger">*</span></label>
-                        <input type="date" name="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date', date('Y-m-d', strtotime($equipment->claim_date))) }}" required max="{{ date('Y-m-d', strtotime(now())) }}">
+                        <input type="date" name="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date', date('Y-m-d', strtotime($equipment->claim_date))) }}" required max="{{ date('Y-m-d', strtotime(now())) }}" >
                         @error('claim_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

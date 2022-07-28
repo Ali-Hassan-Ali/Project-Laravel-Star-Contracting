@@ -66,7 +66,7 @@
                     {{--part_no--}}
                     <div class="form-group">
                         <label>@lang('spares.cost')<span class="text-danger">*</span></label>
-                        <input type="text" name="cost" class="form-control @error('cost') is-invalid @enderror" value="{{ old('cost', $spare->cost) }}" required autofocus>
+                        <input type="number" name="cost" class="form-control @error('cost') is-invalid @enderror" value="{{ old('cost', $spare->cost) }}" required autofocus>
                         @error('cost')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -128,20 +128,15 @@
                     </div>
 
 
-                    {{-- location --}}
-                    <div class="form-group @error('location') custom-select @enderror">
+                    {{--citys--}}
+                    <div class="form-group">
                         <label>@lang('spares.location') <span class="text-danger">*</span></label>
-                        <select name="location" class="form-control select2" required>
-                            <option value="" disabled>@lang('site.choose') @lang('spares.location')</option>
-                            @foreach ($locations as $location)
-                                <option value="{{ $location->name }}" {{ $location->name == old('location', $spare->location) ? 'selected' : '' }}>{{ $location->name }}</option>
+                        <select name="city_id" class="form-control select2" required>
+                            <option value="" selected disabled>@lang('site.choose') @lang('spares.location')</option>
+                            @foreach ($citys as $city)
+                                <option value="{{ $city->id }}" {{ $city->id == old('city_id', $spare->city_id) ? 'selected' : '' }}>{{ $city->name }}</option>
                             @endforeach
                         </select>
-                        @error('location')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     
 

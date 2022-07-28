@@ -20,7 +20,8 @@ class SpareTableSeeder extends Seeder
             \App\Models\Spare::create([
                 'freight_charges'   => 1,
                 'cost'              => 1,
-                'location'          => 1,
+                'country_id'        => 1,
+                'city_id'           => 1,
                 'equipment_id'      => 1,
                 'user_id'           => 1,
                 'name'              => 'spare name',

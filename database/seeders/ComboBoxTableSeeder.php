@@ -219,6 +219,19 @@ class ComboBoxTableSeeder extends Seeder
 
         }//end of each
 
+
+        $type_insurances = ['Third Party', 'Comprehensive', 'Motor Private Comprehensive'];
+
+        foreach ($type_insurances as $type_insura) {
+            
+            \App\Models\ComboBox::create([
+                'name'    => $type_insura,
+                'type'    => 'type_of_insurance',
+                'user_id' => 1,
+            ]);
+
+        }//end of each
+
     }//end of run
     
 }//end of class

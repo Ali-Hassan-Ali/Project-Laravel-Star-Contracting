@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'citys' => 'Citys',
-    'name'  => 'Citys',
+    'citys' => 'Site',
+    'name'  => 'Site',
 ];

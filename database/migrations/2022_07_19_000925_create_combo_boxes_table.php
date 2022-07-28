@@ -21,7 +21,7 @@ class CreateComboBoxesTable extends Migration
                                   'operator', 'responsible_person', 
                                   'responsible_person_email', 'allocated_to', 'project_allocated_to',
                                   'insurer', 'location', 'non_scheduled', 
-                                  'unit', 'fuel_type', 'spec_type'])->nullable();
+                                  'unit', 'fuel_type', 'spec_type', 'type_of_insurance'])->nullable();
 
             $table->foreignIdFor(\App\Models\User::class);
 

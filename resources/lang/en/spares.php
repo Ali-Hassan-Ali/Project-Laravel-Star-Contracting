@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'spares'          => 'Spares name',
-    'name'            => 'Name spares',
-    'description'     => 'description',
-    'part_no'         => 'part no',
+    'spares'          => 'Spare name',
+    'name'            => 'Spare name',
+    'description'     => 'usage description',
+    'part_no'         => 'Spare part no',
     'freight_charges' => 'freight charges',
     'cost'            => 'cost',
     'used'            => 'used',
