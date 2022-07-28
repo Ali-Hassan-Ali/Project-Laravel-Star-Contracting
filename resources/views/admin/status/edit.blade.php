@@ -50,7 +50,7 @@
                     </div>
 
                     @php
-                        $statuses = ['breakdown', 'working'];
+                        $statuses = ['Breakdown', 'Working'];
                     @endphp
 
                     {{--working_status--}}
