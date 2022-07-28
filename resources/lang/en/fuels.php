@@ -11,6 +11,6 @@ return [
     'fuel_rate_per_litre'     => 'fuel rate per litre',
     'hours_worked_weekly'     => 'hours worked weekly',
     'total_cost_of_fuel'      => 'total cost of fuel',
-    'last_date'               => 'last date',
-    'next_date'               => 'next date',
+    'last_date'               => 'last filled date',
+    'next_date'               => 'next fill date',
 ];
