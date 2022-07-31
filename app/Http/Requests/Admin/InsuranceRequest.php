@@ -32,7 +32,7 @@ class InsuranceRequest extends FormRequest
             'insurer'             => ['required','min:2','max:255'],
             'claim_description'   => ['required_if:claim,==,1'],
             'type_of_insurance'   => ['required','min:2','max:255'],
-            'claim'               => ['nullable','in:1,0'],
+            'claim'               => ['nullable','in:1,0','numeric'],
             'claim_date'          => ['nullable','min:2','max:255'],
             'insurance_start_date'=> ['required','min:2','max:255'],
             'insurance_expiry'    => ['required','min:2','max:255'],

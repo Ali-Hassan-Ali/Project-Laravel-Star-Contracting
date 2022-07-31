@@ -34,7 +34,13 @@ class StatusController extends Controller
         return DataTables::of($statuss)
             ->addColumn('record_select', 'admin.status.data_table.record_select')
             ->editColumn('created_at', function (Status $status) {
-                return $status->created_at->format('Y-m-d');
+                return $status->created_at->format('d-m-Y');
+            })
+            ->editColumn('as_of', function (Status $status) {
+                return date('d-m-Y', strtotime($status->as_of));
+            })
+            ->editColumn('break_down_date', function (Status $status) {
+                return date('d-m-Y', strtotime($status->break_down_date));
             })
             ->addColumn('admin', function (Status $status) {
                 return $status->admin->name;

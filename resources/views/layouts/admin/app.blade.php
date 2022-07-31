@@ -15,6 +15,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Main CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/main-teal.css') }}" media="all">
 
     <!-- Font-icon css-->
@@ -246,6 +247,7 @@
     //select 2
     $('.select2').select2({
         'width': '100%',
+        'tags': true,
     });
 
 </script>

@@ -25,14 +25,12 @@ class StatusRequest extends FormRequest
     {
         $rules = [
             'equipment_id'           => ['required','numeric'],
-            'break_down_duration'    => ['nullable'],
-            // 'hours_worked'           => ['required_if:working_status,Breakdown,Working'],
-            'hours_worked'           => ['nullable'],
+            'break_down_duration'    => ['required_if:working_status,Breakdown','numeric'],
+            'hours_worked'           => ['nullable','numeric'],
             'working_status'         => ['required','in:breakdown,working'],
-            // 'break_down_description' => ['required_if:working_status,Breakdown,Working'],
-            'break_down_description' => ['nullable'],
-            'as_of'                  => ['required'],
-            'break_down_date'        => ['nullable'],
+            'as_of'                  => ['required','date'],
+            'break_down_description' => ['required_if:working_status,Breakdown'],
+            'break_down_date'        => ['required_if:working_status,Breakdown', 'date'],
         ];
 
         return $rules;

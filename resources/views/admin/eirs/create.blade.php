@@ -44,9 +44,10 @@
                     @php
                         $numbers    = ['eir_no'];
                         $textareas  = ['description'];
-                        $data_times = ['date','expected_process_date','expected_po_released_date','expected_payment_transfer_date',
-                                       'expected_shipment_pickup_date','expected_arrival_to_site_date',
-                                       'actual_process_date','actual_po_released_date',
+                        $data_times_expected = ['expected_process_date','expected_po_released_date','expected_payment_transfer_date',
+                                       'expected_shipment_pickup_date','expected_arrival_to_site_date'];
+
+                       $data_times = ['actual_process_date','actual_po_released_date',
                                        'actual_payment_transfer_date','actual_shipment_pickup_date',
                                        'actual_arrival_to_site_date'];
                     @endphp
@@ -66,6 +67,33 @@
 
                     @endforeach
 
+                    {{--$expected--}}
+                    <div class="form-group">
+                        <label>@lang('eirs.date')<span class="text-danger">*</span></label>
+                        <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}" required autofocus>
+                        @error('date')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    @foreach ($data_times_expected as $expected)
+                        
+                        {{--$expected--}}
+                        <div class="form-group">
+                            <label>@lang('eirs.' . $expected)<span class="text-danger">*</span></label>
+                            <input type="date" disabled name="{{ $expected }}" class="form-control @error($expected) is-invalid @enderror" value="{{ old($expected) }}" required autofocus>
+                            @error($expected)
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                    @endforeach
+
+
                     @foreach ($data_times as $data_time)
                         
                         {{--$data_time--}}
@@ -80,7 +108,6 @@
                         </div>
 
                     @endforeach
-
                     @foreach ($textareas as $textarea)
                         
                         {{-- $textarea --}}

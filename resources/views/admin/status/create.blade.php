@@ -25,8 +25,8 @@
                     {{--equipment_id--}}
                     <div class="form-group @error('equipment_id') custom-select @enderror">
                         <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
-                        <select name="equipment_id" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
+                        <select name="equipment_id" class="form-control select2" required pa>
+                            <option value="" selected disabled>@lang('site.choose') @lang('equipments.equipments')</option>
                             @foreach ($equipments as $equipment)
                                 <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}>{{ $equipment->name }}</option>
                             @endforeach
@@ -41,13 +41,15 @@
                     {{--as_of--}}
                     <div class="form-group">
                         <label>@lang('status.as_of') <span class="text-danger">*</span></label>
-                        <input type="date" name="as_of" disabled class="form-control @error('as_of') is-invalid @enderror" value="{{ old('as_of', date('Y-m-d', strtotime( now() ))) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                        <input type="date" disabled class="form-control @error('as_of') is-invalid @enderror" value="{{ old('as_of', date('Y-m-d', strtotime( now() ))) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                         @error('as_of')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
+
+                    <input type="date" hidden id="as_of" name="as_of" class="form-control" value="{{ old('as_of', date('Y-m-d', strtotime( now() ))) }}" max="{{ date('Y-m-d', strtotime( now() )) }}">
 
                     @php
                         $status = ['breakdown', 'working'];
@@ -89,13 +91,15 @@
                     {{--break_down_duration--}}
                     <div class="form-group">
                         <label>@lang('status.break_down_duration') <span class="text-danger">*</span></label>
-                        <input type="text" disabled id="break_down_duration" name="break_down_duration" class="form-control @error('break_down_duration') is-invalid @enderror" value="{{ old('break_down_duration') }}" autofocus>
+                        <input type="number" disabled id="break_down_duration" class="form-control @error('break_down_duration') is-invalid @enderror" value="{{ old('break_down_duration') }}" autofocus>
                         @error('break_down_duration')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
+
+                    <input type="number" hidden id="break_down_duration_hidden" name="break_down_duration" class="form-control" value="{{ old('break_down_duration') }}">
 
                     {{-- break_down_description --}}
                     <div class="form-group">
@@ -125,30 +129,47 @@
 @push('scripts')
 
     <script>
+
+        $(document).ready(function() {
+
+            $(document).on('change', '#break_down_date',function () {
+
+                var oneD      = 1000 * 60 * 60 * 24;
+                var startDate = new Date($('#break_down_date').val());
+                var endDate   = new Date($('#as_of').val());
+
+                var countDay = Math.round((endDate.getTime() - startDate.getTime()) / oneD);
+                $('#break_down_duration').val(countDay);
+                $('#break_down_duration_hidden').val(countDay);
+                
+            });
+
+            $('#working-status').on('change', function () {
+
+                var value = $(this).val();
+
+                if (value == 'breakdown') {
+
+                    $('#break_down_description').attr('disabled', false);
+                    $('#break_down_date').attr('disabled', false);
+
+                    $('#break_down_duration').attr('disabled', true);
+
+                }//end of if
+
+                if (value == 'working') {
+
+                    $('#break_down_description').attr('disabled', true);
+                    $('#break_down_date').attr('disabled', true);
+
+                    $('#hours_worked').attr('disabled', false);
+
+                }//end of if
+                
+            });//end of chage
+
+        });//end of document ready
         
-        $('#working-status').on('change', function () {
-
-            var value = $(this).val();
-
-            if (value == 'breakdown') {
-
-                $('#break_down_description').attr('disabled', false);
-                $('#break_down_date').attr('disabled', false);
-
-                $('#break_down_duration').attr('disabled', true);
-
-            }
-
-            if (value == 'working') {
-
-                $('#break_down_description').attr('disabled', true);
-                $('#break_down_date').attr('disabled', true);
-
-                $('#hours_worked').attr('disabled', false);
-
-            }
-            
-        });//end of chage
 
     </script>
 

@@ -26,7 +26,7 @@
                     <div class="form-group @error('equipment_id') custom-select @enderror">
                         <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
                         <select name="equipment_id" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
+                            <option value="" selected disabled>@lang('site.choose') @lang('equipments.equipments')</option>
                             @foreach ($equipments as $equipment)
                                 <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $status->equipment_id) ? 'selected' : '' }}>{{ $equipment->name }}</option>
                             @endforeach
@@ -41,7 +41,7 @@
                     {{--as_of--}}
                     <div class="form-group">
                         <label>@lang('status.as_of') <span class="text-danger">*</span></label>
-                        <input type="date" name="as_of" class="form-control @error('as_of') is-invalid @enderror" value="{{ old('as_of', date('Y-m-d', strtotime($status->as_of)) ) }}" max="{{ date('Y-m-d', strtotime(now())) }}" required autofocus>
+                        <input type="date" disabled class="form-control @error('as_of') is-invalid @enderror" value="{{ old('as_of', date('Y-m-d', strtotime($status->as_of)) ) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                         @error('as_of')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -49,16 +49,18 @@
                         @enderror
                     </div>
 
+                    <input type="date" hidden id="as_of" name="as_of" class="form-control" value="{{ old('as_of', date('Y-m-d', strtotime( $status->as_of ))) }}" max="{{ date('Y-m-d', strtotime( now() )) }}">
+
                     @php
-                        $statuses = ['breakdown', 'working'];
+                        $statusing = ['breakdown', 'working'];
                     @endphp
 
                     {{--working_status--}}
                     <div class="form-group">
                         <label>@lang('status.working_status') <span class="text-danger">*</span></label>
-                        <select name="working_status" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('status.working_status')</option>
-                            @foreach ($statuses as $statu)
+                        <select name="working_status" id="working-status" class="form-control select2" required>
+                            <option value="" selected disabled>@lang('site.choose') @lang('status.working_status')</option>
+                            @foreach ($statusing as $statu)
                                 <option value="{{ $statu }}" {{ $statu == old('working_status', $status->working_status) ? 'selected' : '' }}>@lang('status.' . $statu)</option>
                             @endforeach
                         </select>
@@ -67,7 +69,7 @@
                     {{--hours_worked--}}
                     <div class="form-group">
                         <label>@lang('status.hours_worked') <span class="text-danger">*</span></label>
-                        <input type="text" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', $status->hours_worked) }}" autofocus>
+                        <input type="number" id="hours_worked" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', $status->hours_worked) }}" autofocus>
                         @error('hours_worked')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -78,7 +80,7 @@
                     {{--break_down_date--}}
                     <div class="form-group">
                         <label>@lang('status.break_down_date') <span class="text-danger">*</span></label>
-                        <input type="date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date', date('Y-m-d', strtotime($status->break_down_date)) ) }}" max="{{ date('Y-m-d', strtotime( now() )) }}" autofocus >
+                        <input type="date" {{ old('working_status', $status->working_status) == 'breakdown' ? '' : 'disabled' }} id="break_down_date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date', date('Y-m-d', strtotime( $status->hours_worked ))) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                         @error('break_down_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -89,7 +91,7 @@
                     {{--break_down_duration--}}
                     <div class="form-group">
                         <label>@lang('status.break_down_duration') <span class="text-danger">*</span></label>
-                        <input type="text" name="break_down_duration" class="form-control @error('break_down_duration') is-invalid @enderror" value="{{ old('break_down_duration', $status->break_down_duration) }}" autofocus>
+                        <input type="number" disabled id="break_down_duration" class="form-control @error('break_down_duration') is-invalid @enderror" value="{{ old('break_down_duration', $status->break_down_duration) }}" autofocus>
                         @error('break_down_duration')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -97,10 +99,12 @@
                         @enderror
                     </div>
 
+                    <input type="number" hidden id="break_down_duration_hidden" name="break_down_duration" class="form-control" value="{{ old('break_down_duration', $status->break_down_duration) }}">
+
                     {{-- break_down_description --}}
                     <div class="form-group">
                         <label>@lang('status.descrption') <span class="text-danger">*</span></label>
-                        <textarea class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ $status->break_down_description }}</textarea>
+                        <textarea {{ old('working_status', $status->working_status) == 'breakdown' ? '' : 'disabled' }} id="break_down_description" class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description', $status->break_down_description) }}</textarea>
                         @error('break_down_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -123,3 +127,49 @@
 
 @endsection
 
+@push('scripts')
+
+    <script>
+
+        $(document).ready(function() {
+
+            $(document).on('change', '#break_down_date',function () {
+
+                var oneD      = 1000 * 60 * 60 * 24;
+                var startDate = new Date($('#break_down_date').val());
+                var endDate   = new Date($('#as_of').val());
+
+                var countDay = Math.round((endDate.getTime() - startDate.getTime()) / oneD);
+                $('#break_down_duration').val(countDay);
+                $('#break_down_duration_hidden').val(countDay);
+                
+            });
+
+            $('#working-status').on('change', function () {
+
+                var value = $(this).val();
+
+                if (value == 'breakdown') {
+
+                    $('#break_down_description').attr('disabled', false);
+                    $('#break_down_date').attr('disabled', false);
+
+                }//end of if
+
+                if (value == 'working') {
+
+                    $('#break_down_description').attr('disabled', true);
+                    $('#break_down_date').attr('disabled', true);
+
+                    $('#hours_worked').attr('disabled', false);
+
+                }//end of if
+                
+            });//end of chage
+            
+        });//end of document ready
+        
+
+    </script>
+
+@endpush
