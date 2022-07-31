@@ -24,8 +24,6 @@
 
                     @include('admin.partials._errors')
 
-                    @include('admin.partials._errors')
-
                     {{--name--}}
                     <div class="form-group">
                         <label>@lang('users.f_name')<span class="text-danger">*</span></label>

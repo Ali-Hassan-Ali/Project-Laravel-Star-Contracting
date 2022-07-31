@@ -62,7 +62,25 @@ class InsuranceController extends Controller
 
     public function store(InsuranceRequest $request)
     {
-        $requestData                 = $request->except('claim_attachments');
+        $requestData = $request->except('claim_attachments','insurer','type_of_insurance');
+
+        $requestData['insurer']           = ComboBox::where('name', $request->insurer)->first();
+        $requestData['type_of_insurance'] = ComboBox::where('name', $request->type_of_insurance)->first();
+        
+        if (!$requestData['insurer']) {
+            $insurer = ComboBox::create(['name' => $request->insurer, 'type' => 'insurer','user_id' => auth()->id()]);
+            $requestData['insurer'] = $insurer['name'];
+        } else {
+            $requestData['insurer'] = $request->insurer;
+        } 
+
+        if (!$requestData['type_of_insurance']) {
+            $type_of_insurance = ComboBox::create(['name' => $request->type_of_insurance, 'type' => 'type_of_insurance','user_id' => auth()->id()]);
+            $requestData['type_of_insurance'] = $type_of_insurance['name'];
+        } else {
+            $requestData['type_of_insurance'] = $request->type_of_insurance;
+        } 
+
         $requestData['user_id']      = auth()->id();
         $requestData['attachments']  = $request->file('claim_attachments')->store('claim_attachments_image','public');
 
@@ -76,18 +94,36 @@ class InsuranceController extends Controller
     
     public function edit(Insurance $insurance)
     {
-        $equipments = Equipment::all();
-        $insurs     = ComboBox::where('type', 'insurer')->get();
+        $equipments       = Equipment::all();
+        $insurers         = ComboBox::where('type', 'insurer')->get();
         $type_insurances  = ComboBox::where('type', 'type_of_insurance')->get();
 
-        return view('admin.insurances.edit', compact('insurance', 'equipments', 'insurs', 'type_insurances'));
+        return view('admin.insurances.edit', compact('insurance', 'equipments', 'insurers', 'type_insurances'));
 
     }// end of edit
 
     
     public function update(InsuranceRequest $request, Insurance $insurance)
     {
-        $requestData                 = $request->except('claim_attachments');
+        $requestData = $request->except('claim_attachments','insurer','type_of_insurance');
+
+        $requestData['insurer']           = ComboBox::where('name', $request->insurer)->first();
+        $requestData['type_of_insurance'] = ComboBox::where('name', $request->type_of_insurance)->first();
+        
+        if (!$requestData['insurer']) {
+            $insurer = ComboBox::create(['name' => $request->insurer, 'type' => 'insurer','user_id' => auth()->id()]);
+            $requestData['insurer'] = $insurer['name'];
+        } else {
+            $requestData['insurer'] = $request->insurer;
+        } 
+
+        if (!$requestData['type_of_insurance']) {
+            $type_of_insurance = ComboBox::create(['name' => $request->type_of_insurance, 'type' => 'type_of_insurance','user_id' => auth()->id()]);
+            $requestData['type_of_insurance'] = $type_of_insurance['name'];
+        } else {
+            $requestData['type_of_insurance'] = $request->type_of_insurance;
+        } 
+
         $requestData['user_id']      = auth()->id();
 
         if ($request->attachments) {

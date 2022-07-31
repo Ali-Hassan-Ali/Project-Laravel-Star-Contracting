@@ -69,8 +69,6 @@
                                     <th>@lang('fuels.fuel_type')</th>
                                     <th>@lang('fuels.last_date')</th>
                                     <th>@lang('fuels.next_date')</th>
-                                    <th>@lang('admins.name')</th>
-                                    <th>@lang('site.created_at')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>

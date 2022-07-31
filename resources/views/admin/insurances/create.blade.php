@@ -22,6 +22,8 @@
                     @csrf
                     @method('post')
 
+                    @include('admin.partials._errors')
+
                     {{--equipments--}}
                     <div class="form-group @error('equipment_id') custom-select @enderror">
                         <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
@@ -129,11 +131,13 @@
                         @enderror
                     </div>
 
+                    <input type="date" name="insurance_expiry" id="insurance_expiry_hidden" value="{{ old('insurance_expiry') }}" hidden>
+
 
                    {{--claim--}}
                     <div class="form-group ml-3">
                         <div class="form-check form-switch">
-                          <input class="form-check-input" id="claim" type="checkbox" name="darkmode" value="1">
+                          <input class="form-check-input" id="claim" type="checkbox" name="claim" value="{{ old('claim', '1') }}">
                           <label class="form-check-label">@lang('insurances.claim')</label>
                         </div>
                     </div>
@@ -142,7 +146,7 @@
                     {{-- claim_date --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_date') <span class="text-danger">*</span></label>
-                        <input type="date" name="claim_date" disabled id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date') }}" max="{{ date('Y-m-d', strtotime(now())) }}">
+                        <input type="date" name="claim_date" {{ old('claim') == '0' ? 'disabled' : '' }} disabled id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date') }}" max="{{ date('Y-m-d', strtotime(now())) }}">
                         @error('claim_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -153,7 +157,7 @@
                     {{-- claim_amount --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_amount') <span class="text-danger">*</span></label>
-                        <input type="number" name="claim_amount" disabled id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount') }}">
+                        <input type="number" {{ old('claim') == '0' ? 'disabled' : '' }} disabled name="claim_amount" id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount') }}">
                         @error('claim_amount')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -165,7 +169,7 @@
                     {{-- claim_description --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_description') <span class="text-danger">*</span></label>
-                        <textarea {{ old('claims') == '0' ? 'disabled' : '' }} disabled id="claim_description" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="5">{{ old('claim_description') }}</textarea>
+                        <textarea {{ old('claim') == '0' ? 'disabled' : '' }} disabled id="claim_description" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="5">{{ old('claim_description') }}</textarea>
                         @error('claim_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -205,7 +209,7 @@
 
         $(document).ready(function() {
 
-            $('#insurance_duration').on('change', function () {
+            $('#insurance_duration').on('change keyup', function () {
 
                 var startDate = new Date($("#insurance_start_date").val()),
                     days      = parseInt($(this).val());
@@ -213,6 +217,7 @@
                 var newDate = startDate.setDate(startDate.getDate() + days);
 
                 $("#insurance_expiry").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
+                $("#insurance_expiry_hidden").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
 
 
             });//end of chage

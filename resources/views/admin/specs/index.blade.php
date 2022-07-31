@@ -65,7 +65,7 @@
                                             </label>
                                         </div>
                                     </th>
-                                    <th>@lang('specs.name')</th>
+                                    <th>@lang('specs.specs')</th>
                                     <th>@lang('specs.type')</th>
                                     <th>@lang('admins.name')</th>
                                     <th>@lang('site.created_at')</th>
