@@ -71,8 +71,6 @@
                                     <th>@lang('status.hours_worked')</th>
                                     <th>@lang('status.as_of')</th>
                                     <th>@lang('status.break_down_date')</th>
-                                    <th>@lang('admins.admins')</th>
-                                    <th>@lang('site.created_at')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -114,8 +112,6 @@
                 {data: 'hours_worked', name: 'hours_worked'},
                 {data: 'as_of', name: 'as_of'},
                 {data: 'break_down_date', name: 'break_down_date'},
-                {data: 'admin', name: 'admin'},
-                {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[2, 'desc']],
