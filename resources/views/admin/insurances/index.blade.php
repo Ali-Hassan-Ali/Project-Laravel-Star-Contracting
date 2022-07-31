@@ -66,17 +66,17 @@
                                         </div>
                                     </th>
                                     <th>@lang('equipments.equipments')</th>
-                                    <th>@lang('insurances.premium')</th>
                                     <th>@lang('insurances.insurer')</th>
                                     <th>@lang('insurances.type_of_insurance')</th>
-                                    <th>@lang('insurances.insurance_expiry')</th>
-                                    <th>@lang('insurances.insurance_duration')</th>
+                                    <th>@lang('insurances.premium')</th>
                                     <th>@lang('insurances.policy_number')</th>
+                                    <th>@lang('insurances.insurance_start_date')</th>
+                                    <th>@lang('insurances.insurance_duration')</th>
+                                    <th>@lang('insurances.insurance_expiry')</th>
                                     <th>@lang('insurances.claim')</th>
                                     <th>@lang('insurances.claim_date')</th>
                                     <th>@lang('insurances.claim_amount')</th>
                                     <th>@lang('insurances.claim_description')</th>
-                                    <th>@lang('insurances.insurance_start_date')</th>
                                     <th>@lang('insurances.claim_attachments')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
@@ -114,17 +114,17 @@
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'equipment', name: 'equipment'},
-                {data: 'premium', name: 'premium'},
                 {data: 'insurer', name: 'insurer'},
                 {data: 'type_of_insurance', name: 'type_of_insurance'},
-                {data: 'insurance_expiry', name: 'insurance_expiry'},
-                {data: 'insurance_duration', name: 'insurance_duration'},
+                {data: 'premium', name: 'premium'},
                 {data: 'policy_number', name: 'policy_number'},
+                {data: 'insurance_start_date', name: 'insurance_start_date'},
+                {data: 'insurance_duration', name: 'insurance_duration'},
+                {data: 'insurance_expiry', name: 'insurance_expiry'},
                 {data: 'claim', name: 'claim'},
                 {data: 'claim_date', name: 'claim_date'},
                 {data: 'claim_amount', name: 'claim_amount'},
                 {data: 'claim_description', name: 'claim_description'},
-                {data: 'insurance_start_date', name: 'insurance_start_date'},
                 {data: 'attachments', name: 'attachments'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
