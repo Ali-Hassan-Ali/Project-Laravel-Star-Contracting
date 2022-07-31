@@ -139,7 +139,50 @@
 
         $('#data-table-search').keyup(function () {
             insurancesTable.search(this.value).draw();
-        })
+        });
+
+        $(document).ready(function() {
+
+            $(document).on('change', '#claim',function () {
+
+
+                var claim  = $(this).is(':checked') ? '1' : '0';
+                var id     = $(this).data('id');
+                var url    = "{{ route('admin.insurances.claim') }}";
+                var method = 'post';
+
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data: {
+                        claim : claim,
+                        id : id,
+                    },
+                    success: function (data) {
+                        insurancesTable.draw();
+                    }
+                });
+
+
+                if ($(this).is(':checked')) {
+
+                    $('#claim_description').attr('disabled', false);
+                    $('#claim_amount').attr('disabled', false);
+                    $('#claim_date').attr('disabled', false);
+                    
+                } else {
+
+                    $('#claim_description').attr('disabled', true);
+                    $('#claim_amount').attr('disabled', true);
+                    $('#claim_date').attr('disabled', true);
+
+                }//end of if
+                
+            });//end of chage
+            
+        });//end of reday fun
+
+
     </script>
 
 @endpush

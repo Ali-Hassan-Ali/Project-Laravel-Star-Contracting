@@ -38,13 +38,16 @@ class InsuranceController extends Controller
             ->editColumn('created_at', function (insurance $insurance) {
                 return $insurance->created_at->format('Y-m-d');
             })
+            ->editColumn('claim', function (insurance $insurance) {
+                return view('admin.insurances.data_table._claim', compact('insurance'));
+            })
             ->addColumn('equipment', function (Insurance $insurance) {
                 return $insurance->equipment->name;
             })
             ->addColumn('admin', function (Insurance $insurance) {
                 return $insurance->admin->name;
             })
-            ->addColumn('actions','admin.insurances.data_table.actions')
+            ->addColumn('actions','admin.insurances.data_table.actions','claim')
             ->rawColumns(['record_select', 'actions','admin','equipment'])
             ->toJson();
 
@@ -62,7 +65,7 @@ class InsuranceController extends Controller
 
     public function store(InsuranceRequest $request)
     {
-        $requestData = $request->except('claim_attachments','insurer','type_of_insurance');
+        $requestData = $request->except('claim_attachments','insurer','type_of_insurance','claim');
 
         $requestData['insurer']           = ComboBox::where('name', $request->insurer)->first();
         $requestData['type_of_insurance'] = ComboBox::where('name', $request->type_of_insurance)->first();
@@ -82,6 +85,7 @@ class InsuranceController extends Controller
         } 
 
         $requestData['user_id']      = auth()->id();
+        $requestData['claim']        = request()->has('claim') ? '1' : '0';
         $requestData['attachments']  = $request->file('claim_attachments')->store('claim_attachments_image','public');
 
         Insurance::create($requestData);
@@ -105,7 +109,8 @@ class InsuranceController extends Controller
     
     public function update(InsuranceRequest $request, Insurance $insurance)
     {
-        $requestData = $request->except('claim_attachments','insurer','type_of_insurance');
+
+        $requestData = $request->except('claim_attachments','insurer','type_of_insurance','claim');
 
         $requestData['insurer']           = ComboBox::where('name', $request->insurer)->first();
         $requestData['type_of_insurance'] = ComboBox::where('name', $request->type_of_insurance)->first();
@@ -124,7 +129,8 @@ class InsuranceController extends Controller
             $requestData['type_of_insurance'] = $request->type_of_insurance;
         } 
 
-        $requestData['user_id']      = auth()->id();
+        $requestData['user_id']    = auth()->id();
+        $requestData['claim']      = request()->has('claim') ? '1' : '0';
 
         if ($request->attachments) {
 
@@ -132,6 +138,8 @@ class InsuranceController extends Controller
 
             $requestData['attachments'] = $request->file('claim_attachments')->store('claim_attachments_image','public');
         }
+
+        $insurance->update($requestData);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.insurances.index');
@@ -166,6 +174,17 @@ class InsuranceController extends Controller
         Storage::disk('local')->delete('public/'. $insurance->attachments);
         
         $insurance->delete();
+
+    }// end of delete
+
+    public function claim(Request $request)
+    {
+        $insurance = insurance::FindOrFail($request->id);
+        $insurance->update(['claim' => $request->claim]);
+
+        session()->flash('success', __('site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
+        
 
     }// end of delete
 
