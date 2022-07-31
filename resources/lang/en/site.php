@@ -5,6 +5,7 @@ return [
     'logout' => 'Logout',
     'login'  => 'Login',
     'serial' => 'Serial',
+    'download' => 'download',
 
     'add'    => 'Add',
     'edit'   => 'Edit',

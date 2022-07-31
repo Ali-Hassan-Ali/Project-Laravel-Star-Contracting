@@ -6,13 +6,11 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
     
     Auth::routes();
 
-    // Route::get('/', function () {
+    Route::get('/test', function () {
 
-    //     return $dd = now()->addDays(1);
-
-    //     dd($dd);
+        dd(date('d-m-Y', strtotime(now()) ) );
         
-    // });
+    });
 
 
     Route::get('/', 'WelcomeController@index')->name('welcome');

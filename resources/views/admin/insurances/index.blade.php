@@ -77,7 +77,7 @@
                                     <th>@lang('insurances.claim_amount')</th>
                                     <th>@lang('insurances.claim_description')</th>
                                     <th>@lang('insurances.insurance_start_date')</th>
-                                    <th>@lang('site.created_at')</th>
+                                    <th>@lang('insurances.claim_attachments')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -125,7 +125,7 @@
                 {data: 'claim_amount', name: 'claim_amount'},
                 {data: 'claim_description', name: 'claim_description'},
                 {data: 'insurance_start_date', name: 'insurance_start_date'},
-                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'attachments', name: 'attachments'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             // order: [[5, 'desc']],
@@ -159,9 +159,20 @@
                         id : id,
                     },
                     success: function (data) {
-                        insurancesTable.draw();
-                    }
-                });
+
+                        $('.datatable').DataTable().ajax.reload();
+
+                        new Noty({
+                            layout: 'topRight',
+                            type: 'alert',
+                            text: data,
+                            killer: true,
+                            timeout: 2000,
+                        }).show();
+
+                    }//end of success
+                    
+                });//end of ajax
 
 
                 if ($(this).is(':checked')) {

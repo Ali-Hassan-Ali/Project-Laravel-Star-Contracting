@@ -36,10 +36,22 @@ class InsuranceController extends Controller
         return DataTables::of($insurances)
             ->addColumn('record_select', 'admin.insurances.data_table.record_select')
             ->editColumn('created_at', function (insurance $insurance) {
-                return $insurance->created_at->format('Y-m-d');
+                return $insurance->created_at->format('d-m-Y');
             })
+            ->editColumn('insurance_expiry', function (insurance $insurance) {
+                return date('d-m-Y', strtotime($insurance->insurance_expiry));
+            })
+            ->editColumn('claim_date', function (insurance $insurance) {
+                return date('d-m-Y', strtotime($insurance->claim_date));
+            })
+            ->editColumn('insurance_start_date', function (insurance $insurance) {
+                return date('d-m-Y', strtotime($insurance->insurance_start_date));
+            })            
             ->editColumn('claim', function (insurance $insurance) {
                 return view('admin.insurances.data_table._claim', compact('insurance'));
+            })
+            ->editColumn('attachments', function (insurance $insurance) {
+                return view('admin.insurances.data_table._attachments', compact('insurance'));
             })
             ->addColumn('equipment', function (Insurance $insurance) {
                 return $insurance->equipment->name;
@@ -47,7 +59,7 @@ class InsuranceController extends Controller
             ->addColumn('admin', function (Insurance $insurance) {
                 return $insurance->admin->name;
             })
-            ->addColumn('actions','admin.insurances.data_table.actions','claim')
+            ->addColumn('actions','admin.insurances.data_table.actions','claim','attachments')
             ->rawColumns(['record_select', 'actions','admin','equipment'])
             ->toJson();
 
@@ -182,8 +194,8 @@ class InsuranceController extends Controller
         $insurance = insurance::FindOrFail($request->id);
         $insurance->update(['claim' => $request->claim]);
 
-        session()->flash('success', __('site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        session()->flash('success', __('site.updated_successfully'));
+        return response(__('site.updated_successfully'));
         
 
     }// end of delete

@@ -19,20 +19,20 @@ class CreateInsurancesTable extends Migration
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
             
             $table->integer('claim_amount')->nullable();
+            $table->integer('insurance_duration');
+            $table->integer('premium');
             
-            $table->string('insurance_duration');
             $table->string('policy_number');
-            $table->string('premium');
-
-            $table->text('insurer');
-            $table->text('claim_description')->nullable();
-            $table->text('type_of_insurance');
-            $table->enum('claim', ['1','0'])->default('0');
+            $table->string('insurer');
+            $table->string('type_of_insurance');
             $table->string('attachments')->default('insurances_attachments_image/default.png');
 
-            $table->dateTime('claim_date')->nullable();
-            $table->dateTime('insurance_start_date');
-            $table->dateTime('insurance_expiry');
+            $table->text('claim_description')->nullable();
+            $table->enum('claim', ['1','0'])->default('0');
+
+            $table->date('claim_date')->nullable();
+            $table->date('insurance_start_date')->nullable();
+            $table->date('insurance_expiry')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
