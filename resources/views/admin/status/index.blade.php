@@ -66,11 +66,11 @@
                                         </div>
                                     </th>
                                     <th>@lang('equipments.equipments')</th>
-                                    <th>@lang('status.working_status')</th>
-                                    <th>@lang('status.break_down_duration')</th>
-                                    <th>@lang('status.hours_worked')</th>
                                     <th>@lang('status.as_of')</th>
+                                    <th>@lang('status.working_status')</th>
+                                    <th>@lang('status.hours_worked')</th>
                                     <th>@lang('status.break_down_date')</th>
+                                    <th>@lang('status.break_down_duration')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -107,11 +107,11 @@
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'equipment', name: 'equipment'},
-                {data: 'working_status', name: 'working_status'},
-                {data: 'break_down_duration', name: 'break_down_duration'},
-                {data: 'hours_worked', name: 'hours_worked'},
                 {data: 'as_of', name: 'as_of'},
+                {data: 'working_status', name: 'working_status'},
+                {data: 'hours_worked', name: 'hours_worked'},
                 {data: 'break_down_date', name: 'break_down_date'},
+                {data: 'break_down_duration', name: 'break_down_duration'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[2, 'desc']],
