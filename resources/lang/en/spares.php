@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'spares'          => 'Spare name',
+    'spares'          => 'Spare',
     'name'            => 'Spare name',
     'description'     => 'usage description',
     'part_no'         => 'Spare part no',

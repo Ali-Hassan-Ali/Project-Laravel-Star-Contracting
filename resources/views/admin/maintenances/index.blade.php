@@ -65,10 +65,15 @@
                                             </label>
                                         </div>
                                     </th>
-                                    <th>@lang('maintenances.maintenances')</th>
+                                    <th>@lang('equipments.equipments')</th>
+                                    <th>@lang('maintenances.last_service_date')</th>
+                                    <th>@lang('maintenances.next_service_date')</th>
                                     <th>@lang('maintenances.last_service_km')</th>
-                                    <th>@lang('admins.name')</th>
-                                    <th>@lang('site.created_at')</th>
+                                    <th>@lang('maintenances.next_service_dueon_km')</th>
+                                    <th>@lang('maintenances.actual_service_date')</th>
+                                    <th>@lang('maintenances.actual_service_reading')</th>
+                                    <th>@lang('maintenances.scheduled')</th>
+                                    <th>@lang('maintenances.non_scheduled')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -104,10 +109,15 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'last_service_km', name: 'last_service_km'},
                 {data: 'equipment', name: 'equipment'},
-                {data: 'admin', name: 'admin'},
-                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'last_service_date', name: 'last_service_date'},
+                {data: 'next_service_date', name: 'next_service_date'},
+                {data: 'last_service_km', name: 'last_service_km'},
+                {data: 'next_service_dueon_km', name: 'next_service_dueon_km'},
+                {data: 'actual_service_date', name: 'actual_service_date'},
+                {data: 'actual_service_reading', name: 'actual_service_reading'},
+                {data: 'scheduled', name: 'scheduled'},
+                {data: 'non_scheduled', name: 'non_scheduled'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[2, 'desc']],

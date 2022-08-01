@@ -40,7 +40,7 @@ class InsuranceRequest extends FormRequest
 
         if (in_array($this->method(), ['POST'])) {
 
-            $rules['claim_attachments'] = ['required', 'file'];
+            $rules['attachments'] = ['required', 'array'];
         }
 
         return $rules;

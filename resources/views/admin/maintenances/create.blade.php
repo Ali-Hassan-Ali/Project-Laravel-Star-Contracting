@@ -43,7 +43,7 @@
                     {{--last_service_date--}}
                     <div class="form-group">
                         <label>@lang('maintenances.last_service_date')<span class="text-danger">*</span></label>
-                        <input type="date" name="last_service_date" class="form-control @error('last_service_date') is-invalid @enderror" value="{{ old('last_service_date') }}" required autofocus>
+                        <input type="date" name="last_service_date" id="last_service_date" class="form-control @error('last_service_date') is-invalid @enderror" value="{{ old('last_service_date') }}" required autofocus>
                         @error('last_service_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -51,10 +51,11 @@
                         @enderror
                     </div>
 
+
                     {{--next_service_date--}}
                     <div class="form-group">
                         <label>@lang('maintenances.next_service_date')<span class="text-danger">*</span></label>
-                        <input type="date" disabled name="next_service_date" class="form-control @error('next_service_date') is-invalid @enderror" value="{{ old('next_service_date') }}" required autofocus>
+                        <input type="date" disabled name="next_service_date" id="next_service_date" class="form-control @error('next_service_date') is-invalid @enderror" value="{{ old('next_service_date') }}" required autofocus>
                         @error('next_service_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -62,10 +63,12 @@
                         @enderror
                     </div>
 
+                    <input type="date" name="next_service_date" id="next_service_date_hidden" hidden value="{{ old('next_service_date') }}" hidden>
+
                     {{--last_service_km--}}
                     <div class="form-group">
                         <label>@lang('maintenances.last_service_km')<span class="text-danger">*</span></label>
-                        <input type="number" name="last_service_km" class="form-control @error('last_service_km') is-invalid @enderror" value="{{ old('last_service_km') }}" required autofocus>
+                        <input type="number" name="last_service_km" id="last_service_km" class="form-control @error('last_service_km') is-invalid @enderror" value="{{ old('last_service_km') }}" required autofocus>
                         @error('last_service_km')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -76,13 +79,15 @@
                     {{--next_service_dueon_km--}}
                     <div class="form-group">
                         <label>@lang('maintenances.next_service_dueon_km')<span class="text-danger">*</span></label>
-                        <input type="number" name="next_service_dueon_km" class="form-control @error('next_service_dueon_km') is-invalid @enderror" value="{{ old('next_service_dueon_km') }}" required autofocus>
+                        <input type="number" name="next_service_dueon_km" disabled id="next_service_dueon_km" class="form-control @error('next_service_dueon_km') is-invalid @enderror" value="{{ old('next_service_dueon_km') }}" required autofocus>
                         @error('next_service_dueon_km')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
+
+                    <input type="number" name="next_service_dueon_km" id="next_service_dueon_km_hidden" hidden value="{{ old('next_service_dueon_km') }}" hidden>
 
                     {{--actual_service_date--}}
                     <div class="form-group">
@@ -106,31 +111,19 @@
                         @enderror
                     </div>
 
-                    @php
-                        $status = ['1', '0'];
-                    @endphp
-
                     {{--scheduled--}}
-                    <div class="form-group">
-                        <label>@lang('maintenances.scheduled') <span class="text-danger">*</span></label>
-                        <select name="scheduled" id="scheduled" class="form-control select2 @error('scheduled') custom-select @enderror" required>
-                            <option value="">@lang('site.choose') @lang('maintenances.scheduled')</option>
-                            @foreach ($status as $statu)
-                                <option value="{{ $statu }}" {{ $statu == old('scheduled') ? 'selected' : '' }}>@lang('site.' . $statu)</option>
-                            @endforeach
-                        </select>
-                        @error('scheduled')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    <div class="form-group ml-3">
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" id="scheduled" type="checkbox" name="scheduled" value="{{ old('scheduled', '1') }}" {{ old('scheduled', '0') == '0' ? '' : 'checked' }}>
+                          <label class="form-check-label">@lang('maintenances.scheduled')</label>
+                        </div>
                     </div>
 
                     {{--equipments--}}
                     <div class="form-group @error('non_scheduled') custom-select @enderror">
                         <label>@lang('maintenances.non_scheduled') <span class="text-danger">*</span></label>
-                        <select {{ old('scheduled') == '0' ? 'disabled' : '' }} disabled name="non_scheduled" id="non-scheduled" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('maintenances.non_scheduled')</option>
+                        <select {{ old('scheduled', '0') == '0' ? 'disabled' : '' }} name="non_scheduled" id="non-scheduled" class="form-control select2" required>
+                            <option value="" selected disabled>@lang('site.choose') @lang('maintenances.non_scheduled')</option>
                             @foreach ($non_scheduleds as $scheduled)
                                 <option value="{{ $scheduled->name }}" {{ $scheduled->name == old('non_scheduled') ? 'selected' : '' }}>{{ $scheduled->name }}</option>
                             @endforeach
@@ -157,30 +150,70 @@
 
 @endsection
 
-
 @push('scripts')
 
     <script>
-        
-        $('#scheduled').on('change', function () {
 
-            var value = $(this).val();
+        $(document).ready(function() {
 
-            if (value == '0') {
+            $('#last_service_date').on('change', function () {
 
-                $('#non-scheduled').attr('disabled', false);
+                var startDate = new Date($(this).val()),
+                    days      = parseInt(90);
 
-            } else {
+                var newDate = startDate.setDate(startDate.getDate() + days);
+
+                $("#next_service_date").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
+                $("#next_service_date_hidden").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
                 
-                $('#non-scheduled').attr('disabled', true);
+            });//end of chage last service date
+
+            // $('#last_service_km').on('change', function () {
+
+            //     var startDate = new Date($(this).val()),
+            //         days      = parseInt(4000);
+
+            //     var newDate = startDate.setDate(startDate.getDate() + days);
+
+            //     $("#next_service_dueon_km").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
+            //     $("#next_service_dueon_km_hidden").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
+                
+            // });//end of chage last service date
 
 
-            }//end of if
-            
-        });//end of chage
+            $('#last_service_km').on('change keyup', function () {
+
+                var start  = parseInt($(this).val()),
+                    count  = parseInt(4000);
+
+                var total = start + count;
+
+                $("#next_service_dueon_km").val(total);//YYYY-MM-dd
+                $("#next_service_dueon_km_hidden").val(total);//YYYY-MM-dd
+                
+            });//end of chage last service date
+
+            $('#scheduled').on('change', function () {
+
+                var value = $(this).is(':checked') ? '1' : '0';
+
+                if (value == '0') {
+
+                    $('#non-scheduled').attr('disabled', true);
+
+                } else {
+
+                    $('#non-scheduled').attr('disabled', false);
+                    
+
+
+                }//end of if
+                
+            });//end of chage scheduled
+
+        });//end of document ready 
+        
 
     </script>
 
 @endpush
-
-

@@ -18,15 +18,15 @@ class CreateSparesTable extends Migration
             $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
 
-            $table->string('cost');
+            $table->integer('cost');
+            
             $table->string('freight_charges');
             $table->string('name');
             $table->string('part_no');
-            $table->string('attachments')->default('attachments_spares_file/default.png');
 
-            $table->enum('used', ['1', '0'])->default('1')->nullable();
+            $table->enum('used', ['1', '0'])->default('0');
             
-            $table->dateTime('usage_date')->nullable();
+            $table->date('usage_date')->nullable();
             $table->text('description')->nullable();
 
             $table->foreignIdFor(\App\Models\Country::class)->onDelete('cascade')->nullable();

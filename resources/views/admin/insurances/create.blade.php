@@ -137,7 +137,7 @@
                    {{--claim--}}
                     <div class="form-group ml-3">
                         <div class="form-check form-switch">
-                          <input class="form-check-input" id="claim" type="checkbox" name="claim" value="{{ old('claim', '1') }}">
+                          <input class="form-check-input" id="claim" type="checkbox" name="claim" value="{{ old('claim', '1') }}" {{ old('claim') == '1' ? 'checked' : '' }}>
                           <label class="form-check-label">@lang('insurances.claim')</label>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                     {{-- claim_date --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_date') <span class="text-danger">*</span></label>
-                        <input type="date" name="claim_date" {{ old('claim') == '0' ? 'disabled' : '' }} disabled id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date') }}" max="{{ date('Y-m-d', strtotime(now())) }}">
+                        <input type="date" name="claim_date" {{ old('claim','1') == '1' ? '' : 'disabled' }} id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date') }}" max="{{ date('Y-m-d', strtotime(now())) }}">
                         @error('claim_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -157,7 +157,7 @@
                     {{-- claim_amount --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_amount') <span class="text-danger">*</span></label>
-                        <input type="number" {{ old('claim') == '0' ? 'disabled' : '' }} disabled name="claim_amount" id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount') }}">
+                        <input type="number" {{ old('claim','1') == '1' ? '' : 'disabled' }} name="claim_amount" id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount') }}">
                         @error('claim_amount')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -169,7 +169,7 @@
                     {{-- claim_description --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_description') <span class="text-danger">*</span></label>
-                        <textarea {{ old('claim') == '0' ? 'disabled' : '' }} disabled id="claim_description" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="5">{{ old('claim_description') }}</textarea>
+                        <textarea {{ old('claim','1') == '1' ? '' : 'disabled' }} id="claim_description" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="5">{{ old('claim_description') }}</textarea>
                         @error('claim_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -180,8 +180,8 @@
                     {{-- claim_attachments --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_attachments') <span class="text-danger">*</span></label>
-                        <input type="file" name="claim_attachments" autofocus class="form-control @error('claim_attachments') is-invalid @enderror" value="{{ old('claim_attachments') }}" required>
-                        @error('claim_attachments')
+                        <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
+                        @error('attachments')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

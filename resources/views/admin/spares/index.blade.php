@@ -67,8 +67,13 @@
                                     </th>
                                     <th>@lang('spares.name')</th>
                                     <th>@lang('equipments.equipments')</th>
-                                    <th>@lang('admins.name')</th>
-                                    <th>@lang('site.created_at')</th>
+                                    <th>@lang('spares.part_no')</th>
+                                    <th>@lang('spares.cost')</th>
+                                    <th>@lang('spares.freight_charges')</th>
+                                    <th>@lang('spares.used')</th>
+                                    <th>@lang('spares.usage_date')</th>
+                                    <th>@lang('spares.location')</th>
+                                    <th>@lang('spares.attachments')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -106,8 +111,13 @@
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'name', name: 'name'},
                 {data: 'equipment', name: 'equipment'},
-                {data: 'admin', name: 'admin'},
-                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'part_no', name: 'part_no'},
+                {data: 'cost', name: 'cost'},
+                {data: 'freight_charges', name: 'freight_charges'},
+                {data: 'used', name: 'used'},
+                {data: 'usage_date', name: 'usage_date'},
+                {data: 'location', name: 'location'},
+                {data: 'attachments', name: 'attachments'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[2, 'desc']],

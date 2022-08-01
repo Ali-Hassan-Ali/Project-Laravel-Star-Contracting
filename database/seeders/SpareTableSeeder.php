@@ -18,18 +18,17 @@ class SpareTableSeeder extends Seeder
         foreach ($spares as $spare) {
             
             \App\Models\Spare::create([
-                'freight_charges'   => 1,
-                'cost'              => 1,
-                'country_id'        => 1,
-                'city_id'           => 1,
                 'equipment_id'      => 1,
                 'user_id'           => 1,
+                'cost'              => 1,
+                'freight_charges'   => 'freight_charges',
+                'country_id'        => 1,
+                'city_id'           => 1,
                 'name'              => 'spare name',
                 'part_no'           => 'part no',
-                'description'       => "description $spare",
                 'used'              => '1',
-                'attachments'       => 'default.png',
                 'usage_date'        => now(),
+                'description'       => "description $spare",
             ]);
 
         }//end of each

@@ -22,12 +22,12 @@ class CreateMaintenancesTable extends Migration
             $table->integer('next_service_dueon_km')->nullable();
             $table->integer('actual_service_reading');
 
-            $table->text('non_scheduled');
-            $table->enum('scheduled',['1', '0'])->default('1');
+            $table->string('non_scheduled')->nullable();
+            $table->enum('scheduled',['1', '0'])->default('0');
 
-            $table->dateTime('last_service_date')->nullable();
-            $table->dateTime('next_service_date')->nullable();
-            $table->dateTime('actual_service_date');
+            $table->date('last_service_date')->nullable();
+            $table->date('next_service_date')->nullable();
+            $table->date('actual_service_date');
 
             $table->softDeletes();
             $table->timestamps();

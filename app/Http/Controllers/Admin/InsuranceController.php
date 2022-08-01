@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Insurance;
 use App\Models\Equipment;
 use App\Models\ComboBox;
+use App\Models\Attachment;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -77,30 +78,24 @@ class InsuranceController extends Controller
 
     public function store(InsuranceRequest $request)
     {
-        $requestData = $request->except('claim_attachments','insurer','type_of_insurance','claim');
-
-        $requestData['insurer']           = ComboBox::where('name', $request->insurer)->first();
-        $requestData['type_of_insurance'] = ComboBox::where('name', $request->type_of_insurance)->first();
+        $validated = $request->validated();
+        $validated = $request->safe()->except(['attachments','insurer','type_of_insurance','claim']);
         
-        if (!$requestData['insurer']) {
-            $insurer = ComboBox::create(['name' => $request->insurer, 'type' => 'insurer','user_id' => auth()->id()]);
-            $requestData['insurer'] = $insurer['name'];
-        } else {
-            $requestData['insurer'] = $request->insurer;
-        } 
+        $validated['insurer']           = $this->tagInsurer($request);
+        $validated['type_of_insurance'] = $this->tagInsurerType($request);
+        $validated['user_id']           = auth()->id();
+        $validated['claim']             = request()->has('claim') ? '1' : '0';
 
-        if (!$requestData['type_of_insurance']) {
-            $type_of_insurance = ComboBox::create(['name' => $request->type_of_insurance, 'type' => 'type_of_insurance','user_id' => auth()->id()]);
-            $requestData['type_of_insurance'] = $type_of_insurance['name'];
-        } else {
-            $requestData['type_of_insurance'] = $request->type_of_insurance;
-        } 
+        $insurance = Insurance::create($validated);
 
-        $requestData['user_id']      = auth()->id();
-        $requestData['claim']        = request()->has('claim') ? '1' : '0';
-        $requestData['attachments']  = $request->file('claim_attachments')->store('claim_attachments_image','public');
+        foreach ($request->file('attachments') as $file) {
+            
+            Attachment::create([
+                'path'         => $file->store('insurances_attachments_file'),
+                'insurance_id' => $insurance->id,
+            ]);
 
-        Insurance::create($requestData);
+        }//end of rach
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.insurances.index');
@@ -122,36 +117,15 @@ class InsuranceController extends Controller
     public function update(InsuranceRequest $request, Insurance $insurance)
     {
 
-        $requestData = $request->except('claim_attachments','insurer','type_of_insurance','claim');
+        $validated = $request->validated();
+        $validated = $request->safe()->except(['claim_attachments','insurer','type_of_insurance','claim']);
 
-        $requestData['insurer']           = ComboBox::where('name', $request->insurer)->first();
-        $requestData['type_of_insurance'] = ComboBox::where('name', $request->type_of_insurance)->first();
-        
-        if (!$requestData['insurer']) {
-            $insurer = ComboBox::create(['name' => $request->insurer, 'type' => 'insurer','user_id' => auth()->id()]);
-            $requestData['insurer'] = $insurer['name'];
-        } else {
-            $requestData['insurer'] = $request->insurer;
-        } 
+        $validated['insurer']           = $this->tagInsurer($request);
+        $validated['type_of_insurance'] = $this->tagInsurerType($request);
+        $validated['user_id']           = auth()->id();
+        $validated['claim']             = request()->has('claim') ? '1' : '0';
 
-        if (!$requestData['type_of_insurance']) {
-            $type_of_insurance = ComboBox::create(['name' => $request->type_of_insurance, 'type' => 'type_of_insurance','user_id' => auth()->id()]);
-            $requestData['type_of_insurance'] = $type_of_insurance['name'];
-        } else {
-            $requestData['type_of_insurance'] = $request->type_of_insurance;
-        } 
-
-        $requestData['user_id']    = auth()->id();
-        $requestData['claim']      = request()->has('claim') ? '1' : '0';
-
-        if ($request->attachments) {
-
-            Storage::disk('local')->delete('public/'. $insurance->attachments);
-
-            $requestData['attachments'] = $request->file('claim_attachments')->store('claim_attachments_image','public');
-        }
-
-        $insurance->update($requestData);
+        $insurance->update($validated);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.insurances.index');
@@ -188,6 +162,33 @@ class InsuranceController extends Controller
         $insurance->delete();
 
     }// end of delete
+
+    private function tagInsurer(InsuranceRequest $request)
+    {
+
+        $requestData['insurer'] = ComboBox::where('name', $request->insurer)->first();
+        
+        if (!$requestData['insurer']) {
+            $insurer = ComboBox::create(['name' => $request->insurer, 'type' => 'insurer','user_id' => auth()->id()]);
+            return $requestData['insurer'] = $insurer['name'];
+        } else {
+            return $requestData['insurer'] = $request->insurer;
+        } 
+
+    }// end of fun
+
+    private function tagInsurerType(InsuranceRequest $request)
+    {
+        $requestData['type_of_insurance'] = ComboBox::where('name', $request->type_of_insurance)->first();
+
+        if (!$requestData['type_of_insurance']) {
+            $type_of_insurance = ComboBox::create(['name' => $request->type_of_insurance, 'type' => 'type_of_insurance','user_id' => auth()->id()]);
+            return $requestData['type_of_insurance'] = $type_of_insurance['name'];
+        } else {
+            return $requestData['type_of_insurance'] = $request->type_of_insurance;
+        } 
+
+    }// end of fun
 
     public function claim(Request $request)
     {

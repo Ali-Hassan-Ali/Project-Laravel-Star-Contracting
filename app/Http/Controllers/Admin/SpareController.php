@@ -7,6 +7,7 @@ use App\Models\Equipment;
 use App\Models\Spare;
 use App\Models\Country;
 use App\Models\City;
+use App\Models\Attachment;
 use App\Http\Requests\Admin\SpareRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -38,8 +39,20 @@ class SpareController extends Controller
             ->editColumn('created_at', function (Spare $spare) {
                 return $spare->created_at->format('Y-m-d');
             })
+            ->editColumn('used', function (Spare $spare) {
+                return view('admin.spares.data_table._used', compact('spare'));
+            })       
+            ->editColumn('usage_date', function (Spare $spare) {
+                return date('d-m-Y', strtotime($spare->usage_date));
+            })            
             ->addColumn('admin', function (Spare $spare) {
                 return $spare->admin->name;
+            })
+            ->addColumn('location', function (Spare $spare) {
+                return $spare->city->name;
+            })
+            ->editColumn('attachments', function (Spare $spare) {
+                return view('admin.spares.data_table._attachments', compact('spare'));
             })
             ->addColumn('equipment', function (Spare $spare) {
                 return $spare->equipment->name;
@@ -63,10 +76,22 @@ class SpareController extends Controller
     
     public function store(SpareRequest $request)
     {
-        $requestData                 = $request->validated();
-        $requestData['user_id']      = auth()->id();
-        $requestData['attachments']  = $request->file('attachments')->store('attachments_spares_file', 'public');
-        Spare::create($requestData);
+        $validated = $request->validated();
+        $validated = $request->safe()->except(['attachments','used']);
+
+        $validated['used']    = request()->has('used') ? '1' : '0';
+        $validated['user_id'] = auth()->id();
+
+        $spare = Spare::create($validated);
+
+        foreach ($request->file('attachments') as $file) {
+            
+            Attachment::create([
+                'path'     => $file->store('attachments_attachments_file'),
+                'spare_id' => $spare->id,
+            ]);
+
+        }//end of rach
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.spares.index');
@@ -87,16 +112,13 @@ class SpareController extends Controller
 
     public function update(SpareRequest $request, Spare $spare)
     {
-        $requestData                 = $request->validated();
+        $validated = $request->validated();
+        $validated = $request->safe()->except(['attachments','used']);
 
-        if ($request->attachments) {
+        $validated['used']    = request()->has('used') ? '1' : '0';
+        $validated['user_id'] = auth()->id();
 
-            Storage::disk('local')->delete('public/'. $spare->attachments);
-
-            $requestData['attachments'] = $request->file('claim_attachments')->store('attachments_spares_file','public');
-        }
-        
-        $spare->update($requestData);
+        $spare->update($validated);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.spares.index');

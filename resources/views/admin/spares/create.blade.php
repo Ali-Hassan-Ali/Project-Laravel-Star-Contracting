@@ -63,16 +63,20 @@
                     </div>
 
 
-                    {{--part_no--}}
-                    <div class="form-group">
-                        <label>@lang('spares.cost')<span class="text-danger">*</span></label>
-                        <input type="number" name="cost" class="form-control @error('cost') is-invalid @enderror" value="{{ old('cost') }}" required autofocus>
+                    {{--cost--}}
+                    <label>@lang('spares.cost') <span class="text-danger">*</span></label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" name="cost" class="form-control @error('cost') is-invalid @enderror" value="{{ old('cost') }}" required>
                         @error('cost')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
+                    
 
                     {{--freight_charges--}}
                     <div class="form-group">
@@ -85,30 +89,19 @@
                         @enderror
                     </div>
 
-                    @php
-                        $status = ['1', '0'];
-                    @endphp
 
                     {{--$used--}}
-                    <div class="form-group">
-                        <label>@lang('spares.used') <span class="text-danger">*</span></label>
-                        <select name="used" id="used" class="form-control select2 @error('used') custom-select @enderror" required>
-                            <option value="" selected disabled>@lang('site.choose') @lang('spares.used')</option>
-                            @foreach ($status as $statu)
-                                <option value="{{ $statu }}" {{ $statu == old('used') ? 'selected' : '' }}>@lang('site.' . $statu)</option>
-                            @endforeach
-                        </select>
-                        @error('used')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    <div class="form-group ml-3">
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" id="used" type="checkbox" name="used" value="{{ old('claim', '1') }}" {{ old('used', '0') == '0' ? '' : 'checked' }}>
+                          <label class="form-check-label">@lang('spares.used')</label>
+                        </div>
                     </div>
 
                     {{-- usage_date --}}
                     <div class="form-group">
                         <label>@lang('spares.usage_date') <span class="text-danger">*</span></label>
-                        <input {{ old('spare ') == '0' ? 'disabled' : '' }} disabled id="usage-date" type="date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date') }}" required>
+                        <input {{ old('used') == '1' ? '' : 'disabled' }} id="usage-date" type="date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date') }}" required>
                         @error('usage_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -119,7 +112,7 @@
                     {{-- description --}}
                     <div class="form-group">
                         <label>@lang('spares.description') <span class="text-danger">*</span></label>
-                        <textarea {{ old('spare ') == '0' ? 'disabled' : '' }} disabled id="usage-description" class="form-control @error('description') is-invalid @enderror" name="description" rows="6">{{ old('description') }}</textarea>
+                        <textarea {{ old('used') == '1' ? '' : 'disabled' }} id="usage-description" class="form-control @error('description') is-invalid @enderror" name="description" rows="6">{{ old('description') }}</textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -142,7 +135,7 @@
                     {{-- attachments --}}
                     <div class="form-group">
                         <label>@lang('spares.attachments') <span class="text-danger">*</span></label>
-                        <input type="file" name="attachments" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
+                        <input type="file" name="attachments[]" multiple autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
                         @error('attachments')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -171,7 +164,7 @@
         
         $('#used').on('change', function () {
 
-            var value = $(this).val();
+            var value = $(this).is(':checked') ? '1' : '0';
 
             if (value == '0') {
 

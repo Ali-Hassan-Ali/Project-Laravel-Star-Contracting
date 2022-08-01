@@ -27,17 +27,17 @@ class SpareRequest extends FormRequest
             'equipment_id'           => ['required','numeric'],
             'name'                   => ['required','min:2','max:255'],
             'part_no'                => ['required','min:2','max:255'],
-            'used'                   => ['nullable', 'in:1,0'],
+            'used'                   => ['nullable','in:1,0'],
             'freight_charges'        => ['required','min:2','max:255'],
-            'cost'                   => ['required','min:2','max:255'],
+            'cost'                   => ['required','numeric'],
             'city_id'                => ['required','numeric'],
-            'description'            => ['required_if:used,==,1','min:2','max:255'],
+            'description'            => ['required_if:used,==,1'],
             'usage_date'             => ['required_if:used,==,1','date'],
         ];
 
         if (in_array($this->method(), ['POST'])) {
 
-            $rules['attachments'] = ['required'];
+            $rules['attachments'] = ['required','array'];
 
         }
 

@@ -36,6 +36,18 @@ class MaintenanceController extends Controller
             ->editColumn('created_at', function (Maintenance $maintenance) {
                 return $maintenance->created_at->format('Y-m-d');
             })
+            ->editColumn('scheduled', function (Maintenance $maintenance) {
+                return view('admin.maintenances.data_table._scheduled', compact('maintenance'));
+            })
+            ->editColumn('last_service_date', function (Maintenance $maintenance) {
+                return date('d-m-Y', strtotime($maintenance->last_service_date));
+            })
+            ->editColumn('next_service_date', function (Maintenance $maintenance) {
+                return date('d-m-Y', strtotime($maintenance->next_service_date));
+            })
+            ->editColumn('actual_service_date', function (Maintenance $maintenance) {
+                return date('d-m-Y', strtotime($maintenance->actual_service_date));
+            })
             ->addColumn('admin', function (Maintenance $maintenance) {
                 return $maintenance->admin->name;
             })
@@ -61,9 +73,13 @@ class MaintenanceController extends Controller
     
     public function store(MaintenanceRequest $request)
     {
-        $requestData             = $request->validated();
-        $requestData['user_id']  = auth()->id();
-        Maintenance::create($requestData);
+        $validated = $request->validated();
+        $validated = $request->safe()->except(['scheduled']);
+
+        $validated['scheduled']    = request()->has('scheduled') ? '1' : '0';
+        $validated['user_id']      = auth()->id();
+
+        Maintenance::create($validated);
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.maintenances.index');
@@ -82,9 +98,15 @@ class MaintenanceController extends Controller
     }//end of edit
 
 
-    public function update(maintenanceRequest $request, Maintenance $maintenance)
+    public function update(MaintenanceRequest $request, Maintenance $maintenance)
     {
-        $maintenance->update($request->validated());
+        $validated = $request->validated();
+        $validated = $request->safe()->except(['scheduled']);
+
+        $validated['scheduled']    = request()->has('scheduled') ? '1' : '0';
+        $validated['user_id']      = auth()->id();
+
+        $maintenance->update($validated);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.maintenances.index');

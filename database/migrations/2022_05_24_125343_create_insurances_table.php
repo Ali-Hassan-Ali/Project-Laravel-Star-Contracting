@@ -25,7 +25,6 @@ class CreateInsurancesTable extends Migration
             $table->string('policy_number');
             $table->string('insurer');
             $table->string('type_of_insurance');
-            $table->string('attachments')->default('insurances_attachments_image/default.png');
 
             $table->text('claim_description')->nullable();
             $table->enum('claim', ['1','0'])->default('0');

@@ -1,0 +1,1 @@
+<a download="{{ $spare->attachments }}" href="{{ $spare->attachments }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> @lang('site.download')</a>
