@@ -47,8 +47,17 @@ class EquipmentController extends Controller
             ->addColumn('country', function (Equipment $equipment) {
                 return $equipment->country->name;
             })
-            ->addColumn('type', function (Equipment $equipment) {
-                return $equipment->type;
+            ->addColumn('city', function (Equipment $equipment) {
+                return $equipment->city->name;
+            })
+            ->addColumn('specs', function (Equipment $equipment) {
+                return $equipment->spec->name;
+            })
+            ->editColumn('year_of_manufacture', function (Equipment $equipment) {
+                return date('d-m-Y', strtotime($equipment->year_of_manufacture));
+            })
+            ->editColumn('registration_expiry', function (Equipment $equipment) {
+                return date('d-m-Y', strtotime($equipment->registration_expiry));
             })
             ->addColumn('actions','admin.equipments.data_table.actions')
             ->rawColumns(['record_select', 'actions'])
@@ -97,10 +106,17 @@ class EquipmentController extends Controller
     
     public function store(EquipmentRequest $request)
     {
-        $requestData             = $request->validated();
-        $requestData['user_id']  = auth()->id();
+        $validated = $request->validated();
+        $validated = $request->safe()->except(['make','model','type','name','operator']);
 
-        Equipment::create($requestData);
+        $validated['make']     = $this->tagMake($request);
+        $validated['model']    = $this->tagModel($request);
+        $validated['type']     = $this->tagType($request);
+        $validated['name']     = $this->tagEquipment($request);
+        $validated['operator'] = $this->tagOperator($request);
+        $validated['user_id']  = auth()->id();
+
+        Equipment::create($validated);
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.equipments.index');
@@ -117,6 +133,7 @@ class EquipmentController extends Controller
         $models   = ComboBox::where('type', 'model')->get();
         $types    = ComboBox::where('type', 'type')->get();
 
+        $equis      = ComboBox::where('type', 'equipment')->get();
         $equ        = ComboBox::where('type', 'equipment')->get();
         $owner_ship = ComboBox::where('type', 'owner_ship')->get();
         $rental_basis = ComboBox::where('type', 'rental_basis')->get();
@@ -138,7 +155,7 @@ class EquipmentController extends Controller
                                                         'owner_ship',
                                                         'rental_basis',
                                                         'operators',
-                                                        'equ',
+                                                        'equ','equis',
                                                         'responsible_person',
                                                         'responsible_person_email',
                                                         'allocated_to',
@@ -149,7 +166,17 @@ class EquipmentController extends Controller
     
     public function update(EquipmentRequest $request, Equipment $equipment)
     {
-        $equipment->update($request->validated());
+        $validated = $request->validated();
+        $validated = $request->safe()->except(['make','model','type','name','operator']);
+
+        $validated['make']     = $this->tagMake($request);
+        $validated['model']    = $this->tagModel($request);
+        $validated['type']     = $this->tagType($request);
+        $validated['name']     = $this->tagEquipment($request);
+        $validated['operator'] = $this->tagOperator($request);
+        $validated['user_id']  = auth()->id();
+
+        $equipment->update($validated);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.equipments.index');
@@ -184,5 +211,71 @@ class EquipmentController extends Controller
         $equipment->delete();
 
     }// end of delete
+
+    private function tagMake(EquipmentRequest $request)
+    {
+        $requestData['make'] = ComboBox::where('name', $request->make)->first();
+
+        if (!$requestData['make']) {
+            $type = ComboBox::create(['name' => $request->make, 'type' => 'make','user_id' => auth()->id()]);
+            return $requestData['make'] = $type['name'];
+        } else {
+            return $requestData['make'] = $request->make;
+        } 
+
+    }// end of fun
+
+
+    private function tagModel(EquipmentRequest $request)
+    {
+        $requestData['model'] = ComboBox::where('name', $request->model)->first();
+
+        if (!$requestData['model']) {
+            $type = ComboBox::create(['name' => $request->model, 'type' => 'model','user_id' => auth()->id()]);
+            return $requestData['model'] = $type['name'];
+        } else {
+            return $requestData['modelmodel'] = $request->make;
+        } 
+
+    }// end of fun
+
+    private function tagType(EquipmentRequest $request)
+    {
+        $requestData['type'] = ComboBox::where('name', $request->type)->first();
+
+        if (!$requestData['type']) {
+            $type = ComboBox::create(['name' => $request->type, 'type' => 'type','user_id' => auth()->id()]);
+            return $requestData['type'] = $type['name'];
+        } else {
+            return $requestData['type'] = $request->type;
+        } 
+
+    }// end of fun
+
+    private function tagEquipment(EquipmentRequest $request)
+    {
+        $requestData['name'] = ComboBox::where('name', $request->name)->first();
+
+        if (!$requestData['name']) {
+            $type = ComboBox::create(['name' => $request->name, 'type' => 'equipment','user_id' => auth()->id()]);
+            return $requestData['name'] = $type['name'];
+        } else {
+            return $requestData['name'] = $request->name;
+        } 
+
+    }// end of fun
+
+    private function tagOperator(EquipmentRequest $request)
+    {
+        $requestData['operator'] = ComboBox::where('name', $request->operator)->first();
+
+        if (!$requestData['operator']) {
+            $type = ComboBox::create(['name' => $request->operator, 'type' => 'operator','user_id' => auth()->id()]);
+            return $requestData['operator'] = $type['operator'];
+        } else {
+            return $requestData['operator'] = $request->operator;
+        } 
+
+    }// end of fun
 
 }//end of controller

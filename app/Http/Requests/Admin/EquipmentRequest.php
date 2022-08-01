@@ -35,7 +35,7 @@ class EquipmentRequest extends FormRequest
             'responsible_person'    => ['required','string','min:2','max:255'],
             'project_allocated_to'  => ['required_if:allocated_to,==,Project','string','min:2','max:25'],
             'allocated_to'          => ['required','string','min:2','max:25'],
-            'email'                 => ['required','email'],
+            'email'                 => ['required','email','min:2','max:25'],
             'driver_salary'         => ['required_if:operator,==,Driver','string','min:2','max:25'],
             'registration_expiry'   => ['required','string','min:2','max:255'],
             'year_of_manufacture'   => ['required','string','min:2','max:255'],
@@ -48,7 +48,6 @@ class EquipmentRequest extends FormRequest
             'chasis_no'             => ['required','string'],
             'engine_no'             => ['required','string'],
             'serial_no'             => ['required','string'],
-            'country_id'            => ['required','numeric'],
         ];
 
         return $rules;

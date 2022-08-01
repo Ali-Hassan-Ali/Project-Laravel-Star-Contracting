@@ -30,4 +30,10 @@ class Equipment extends Model
         
     }//end of  belongsTo
 
+    public function spec()
+    {
+        return $this->belongsTo(Spec::class);
+        
+    }//end of  belongsTo
+
 }//end of model

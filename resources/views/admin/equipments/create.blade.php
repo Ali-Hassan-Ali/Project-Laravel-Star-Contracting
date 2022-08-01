@@ -213,7 +213,7 @@
                     {{--rental_basis--}}
                     <div class="form-group @error('rental_basis') custom-select @enderror">
                         <label>@lang('equipments.rental_basis') <span class="text-danger">*</span></label>
-                        <select name="rental_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} disabled id="rental-basis" class="form-control select2">
+                        <select name="rental_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} id="rental-basis" class="form-control select2">
                             <option value="" selected disabled>@lang('site.choose') @lang('equipments.rental_basis')</option>
                             @foreach ($rental_basis as $rental)
                                 <option value="{{ $rental->name }}" {{ $rental->name == old('rental_basis') ? 'selected' : '' }}>{{ $rental->name }}</option>
@@ -229,7 +229,7 @@
                     {{--rental_cost_basis--}}
                     <div class="form-group">
                         <label>@lang('equipments.rental_cost_basis')<span class="text-danger">*</span></label>
-                        <input type="test" name="rental_cost_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} disabled id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
+                        <input type="test" name="rental_cost_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
                         @error('rental_cost_basis')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -259,7 +259,7 @@
                     {{--driver_salary--}}
                     <div class="form-group">
                         <label>@lang('equipments.driver_salary')<span class="text-danger">*</span></label>
-                        <input type="text" {{ old('operator') == 'driver' ? '' : 'disabled' }} disabled id="driver-salary" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', 0) }}" required autofocus>
+                        <input type="text" {{ old('operator') == 'driver' ? '' : 'disabled' }} id="driver-salary" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', 0) }}" required autofocus>
                         @error('driver_salary')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -320,8 +320,8 @@
                     {{--project_allocated_to--}}
                     <div class="form-group @error('project_allocated_to') custom-select @enderror">
                         <label>@lang('equipments.project_allocated_to') <span class="text-danger">*</span></label>
-                        <select name="project_allocated_to" {{ old('allocated_to') == 'project' ? '' : 'disabled' }} disabled multiple id="project-allocated-to" class="form-control select2">
-                            <option value="" selected disabled>@lang('site.choose') @lang('equipments.project_allocated_to')</option>
+                        <select name="project_allocated_to" {{ old('allocated_to') == 'project' ? '' : 'disabled' }} multiple id="project-allocated-to" class="form-control select2">
+                            <option value="" disabled>@lang('site.choose') @lang('equipments.project_allocated_to')</option>
                             @foreach ($project_allocated_to as $project)
                                 <option value="{{ $project->name }}" {{ $project->name == old('project_allocated_to') ? 'selected' : '' }}>{{ $project->name }}</option>
                             @endforeach
