@@ -107,13 +107,14 @@ class EquipmentController extends Controller
     public function store(EquipmentRequest $request)
     {
         $validated = $request->validated();
-        $validated = $request->safe()->except(['make','model','type','name','operator']);
+        $validated = $request->safe()->except(['make','model','type','name','operator','email']);
 
         $validated['make']     = $this->tagMake($request);
         $validated['model']    = $this->tagModel($request);
         $validated['type']     = $this->tagType($request);
         $validated['name']     = $this->tagEquipment($request);
         $validated['operator'] = $this->tagOperator($request);
+        $validated['email']    = $this->tagEmail($request);
         $validated['user_id']  = auth()->id();
 
         Equipment::create($validated);
@@ -167,15 +168,16 @@ class EquipmentController extends Controller
     public function update(EquipmentRequest $request, Equipment $equipment)
     {
         $validated = $request->validated();
-        $validated = $request->safe()->except(['make','model','type','name','operator']);
+        $validated = $request->safe()->except(['make','model','type','name','operator','email']);
 
         $validated['make']     = $this->tagMake($request);
         $validated['model']    = $this->tagModel($request);
         $validated['type']     = $this->tagType($request);
         $validated['name']     = $this->tagEquipment($request);
         $validated['operator'] = $this->tagOperator($request);
+        $validated['email']    = $this->tagEmail($request);
         $validated['user_id']  = auth()->id();
-
+        
         $equipment->update($validated);
 
         session()->flash('success', __('site.updated_successfully'));
@@ -271,9 +273,25 @@ class EquipmentController extends Controller
 
         if (!$requestData['operator']) {
             $type = ComboBox::create(['name' => $request->operator, 'type' => 'operator','user_id' => auth()->id()]);
-            return $requestData['operator'] = $type['operator'];
+            return $requestData['operator'] = $type['name'];
         } else {
             return $requestData['operator'] = $request->operator;
+        } 
+
+    }// end of fun
+
+    private function tagEmail(EquipmentRequest $request)
+    {
+        $requestData['email'] = ComboBox::where('name', $request->email)->first();
+        if (!$requestData['email']) {
+            $type = ComboBox::create([
+                'name' => $request->email, 
+                'type' => 'responsible_person_email',
+                'user_id' => auth()->id()]);
+
+            return $requestData['email'] = $type['name'];
+        } else {
+            return $requestData['email'] = $request->operator;
         } 
 
     }// end of fun
