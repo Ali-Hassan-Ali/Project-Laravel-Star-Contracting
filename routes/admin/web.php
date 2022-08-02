@@ -79,6 +79,7 @@ Route::middleware([
             Route::resource('insurances', 'InsuranceController');
 
             //equipments routes
+            Route::post('/equipments/data', 'EquipmentController@type')->name('equipments.type');
             Route::get('/equipments/data', 'EquipmentController@data')->name('equipments.data');
             Route::delete('/equipments/bulk_delete', 'EquipmentController@bulkDelete')->name('equipments.bulk_delete');
             Route::resource('equipments', 'EquipmentController');

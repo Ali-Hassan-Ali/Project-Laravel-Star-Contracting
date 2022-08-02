@@ -57,35 +57,25 @@
                     </div>
 
                     {{--types--}}
-                    <div class="form-group @error('types') custom-select @enderror">
+                    <div class="form-group">
                         <label>@lang('types.types') <span class="text-danger">*</span></label>
-                        <select name="type" class="form-control select2" required>
+                        <select name="type" id="types-equipment" class="form-control select2" required>
                             <option value="" selected disabled>@lang('site.choose') @lang('types.types')</option>
                             @foreach ($types as $type)
                                 <option value="{{ $type->name }}" {{ $type->name == old('type') ? 'selected' : '' }}>{{ $type->name }}</option>
                             @endforeach
                         </select>
-                        @error('equipment')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
 
                     {{--specs--}}
-                    <div class="form-group @error('spec_id') custom-select @enderror">
+                    <div class="form-group">
                         <label>@lang('specs.specs') <span class="text-danger">*</span></label>
-                        <select name="spec_id" class="form-control select2" required>
+                        <select name="spec_id" id="spec-id" class="form-control select2" required>
                             <option value="" selected disabled>@lang('site.choose') @lang('specs.specs')</option>
                             @foreach ($specs as $spec)
                                 <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id') ? 'selected' : '' }}>{{ $spec->name }}</option>
                             @endforeach
                         </select>
-                        @error('spec_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
 
                     {{--plate_no--}}
@@ -353,6 +343,35 @@
 
     <script>
         
+        $('#types-equipment').on('change', function () {
+
+            var value  = $(this).val();
+            var method = 'post';
+            var url    = "{{ route('admin.equipments.type') }}";
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: {
+                    type : value
+                },
+                success: function (data) {
+                    
+                    $('#spec-id').empty('');
+
+                    $.each(data, function(index,item) {
+
+                        var html = `<option value="${item.id}">${item.name}</option>`;
+
+                        $('#spec-id').append(html);
+
+                    });//end of each
+
+                }//end of each
+            });
+            
+        });//end of chage
+
         $('#operator').on('change', function () {
 
             var value = $(this).val();
