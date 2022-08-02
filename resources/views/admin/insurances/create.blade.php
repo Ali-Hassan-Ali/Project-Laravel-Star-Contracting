@@ -146,7 +146,7 @@
                     {{-- claim_date --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_date') <span class="text-danger">*</span></label>
-                        <input type="date" name="claim_date" {{ old('claim','1') == '1' ? '' : 'disabled' }} id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date') }}" max="{{ date('Y-m-d', strtotime(now())) }}">
+                        <input type="date" name="claim_date" {{ old('claim','0') == '1' ? '' : 'disabled' }} id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date') }}" max="{{ date('Y-m-d', strtotime(now())) }}">
                         @error('claim_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -157,7 +157,7 @@
                     {{-- claim_amount --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_amount') <span class="text-danger">*</span></label>
-                        <input type="number" {{ old('claim','1') == '1' ? '' : 'disabled' }} name="claim_amount" id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount') }}">
+                        <input type="number" {{ old('claim','0') == '1' ? '' : 'disabled' }} name="claim_amount" id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount') }}">
                         @error('claim_amount')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -169,7 +169,7 @@
                     {{-- claim_description --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_description') <span class="text-danger">*</span></label>
-                        <textarea {{ old('claim','1') == '1' ? '' : 'disabled' }} id="claim_description" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="5">{{ old('claim_description') }}</textarea>
+                        <textarea {{ old('claim','0') == '1' ? '' : 'disabled' }} id="claim_description" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="5">{{ old('claim_description') }}</textarea>
                         @error('claim_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
