@@ -111,7 +111,7 @@ class ComboBoxTableSeeder extends Seeder
         }//end of each
 
 
-        $responsible_person_emails = ['test@gmail.com','owner@gmail.com'];
+        $responsible_person_emails = ['gopakumar@star-contracting.com','new@star-contracting.com'];
 
         foreach ($responsible_person_emails as $email) {
             
