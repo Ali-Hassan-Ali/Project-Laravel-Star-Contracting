@@ -70,7 +70,7 @@ class EquipmentController extends Controller
     {
         $countrys = Country::all();
         $citys    = City::all();
-        $specs    = Spec::all();
+        $specs    = Spec::where('type', 'Equipment')->get();
         $makes    = ComboBox::where('type', 'make')->get();
         $models   = ComboBox::where('type', 'model')->get();
         $types    = ComboBox::where('type', 'spec_type')->get();
@@ -129,7 +129,7 @@ class EquipmentController extends Controller
     {
         $countrys = Country::all();
         $citys    = City::all();
-        $specs    = Spec::all();
+        $specs    = Spec::where('type', 'Equipment')->get();
         $makes    = ComboBox::where('type', 'make')->get();
         $models   = ComboBox::where('type', 'model')->get();
         $types    = ComboBox::where('type', 'spec_type')->get();
@@ -177,7 +177,7 @@ class EquipmentController extends Controller
         $validated['operator'] = $this->tagOperator($request);
         $validated['email']    = $this->tagEmail($request);
         $validated['user_id']  = auth()->id();
-        
+
         $equipment->update($validated);
 
         session()->flash('success', __('site.updated_successfully'));
