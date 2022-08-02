@@ -67,7 +67,7 @@
                                     </th>
                                     <th>@lang('equipments.make')</th>
                                     <th>@lang('equipments.name')</th>
-                                    <th>@lang('equipments.types')</th>
+                                    <th>@lang('types.types')</th>
                                     <th>@lang('specs.specs')</th>
                                     <th>@lang('equipments.plate_no')</th>
                                     <th>@lang('equipments.chasis_no')</th>
