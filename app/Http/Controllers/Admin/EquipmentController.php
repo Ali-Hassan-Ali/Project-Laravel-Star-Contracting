@@ -244,7 +244,7 @@ class EquipmentController extends Controller
         $requestData['type'] = ComboBox::where('name', $request->type)->first();
 
         if (!$requestData['type']) {
-            $type = ComboBox::create(['name' => $request->type, 'type' => 'type','user_id' => auth()->id()]);
+            $type = ComboBox::create(['name' => $request->type, 'type' => 'spec_type','user_id' => auth()->id()]);
             return $requestData['type'] = $type['name'];
         } else {
             return $requestData['type'] = $request->type;
