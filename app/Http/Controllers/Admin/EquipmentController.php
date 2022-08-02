@@ -106,7 +106,6 @@ class EquipmentController extends Controller
     
     public function store(EquipmentRequest $request)
     {
-        dd($request->validated());
         $validated = $request->validated();
         $validated = $request->safe()->except(['make','model','type','name','operator','email']);
 
