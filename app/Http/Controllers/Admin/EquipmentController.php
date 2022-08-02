@@ -73,7 +73,7 @@ class EquipmentController extends Controller
         $specs    = Spec::all();
         $makes    = ComboBox::where('type', 'make')->get();
         $models   = ComboBox::where('type', 'model')->get();
-        $types    = ComboBox::where('type', 'type')->get();
+        $types    = ComboBox::where('type', 'spec_type')->get();
 
         $equipments = ComboBox::where('type', 'equipment')->get();
         $owner_ship = ComboBox::where('type', 'owner_ship')->get();
@@ -131,7 +131,7 @@ class EquipmentController extends Controller
         $specs    = Spec::all();
         $makes    = ComboBox::where('type', 'make')->get();
         $models   = ComboBox::where('type', 'model')->get();
-        $types    = ComboBox::where('type', 'type')->get();
+        $types    = ComboBox::where('type', 'spec_type')->get();
 
         $equis      = ComboBox::where('type', 'equipment')->get();
         $equ        = ComboBox::where('type', 'equipment')->get();
