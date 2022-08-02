@@ -164,7 +164,7 @@
                     {{--countrys--}}
                     <div class="form-group">
                         <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
-                        <select name="country_id" class="form-control select2" required>
+                        <select name="country_id" id="country" class="form-control select2" required>
                             <option value="" selected disabled>@lang('site.choose') @lang('countrys.countrys')</option>
                             @foreach ($countrys as $country)
                                 <option value="{{ $country->id }}" {{ $country->id == old('country_id', $equipment->country_id) ? 'selected' : '' }}>{{ $country->name }}</option>
@@ -175,7 +175,7 @@
                     {{--citys--}}
                     <div class="form-group">
                         <label>@lang('citys.citys') <span class="text-danger">*</span></label>
-                        <select name="city_id" class="form-control select2" required>
+                        <select name="city_id" id="city" class="form-control select2" required>
                             <option value="" selected disabled>@lang('site.choose') @lang('citys.citys')</option>
                             @foreach ($citys as $city)
                                 <option value="{{ $city->id }}" {{ $city->id == old('city_id', $equipment->city_id) ? 'selected' : '' }}>{{ $city->name }}</option>
@@ -341,6 +341,35 @@
 @push('scripts')
 
     <script>
+
+        $('#country').on('change', function () {
+
+            var value  = $(this).val();
+            var method = 'post';
+            var url    = "{{ route('admin.equipments.country') }}";
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: {
+                    country_id : value
+                },
+                success: function (data) {
+                    
+                    $('#city').empty('');
+
+                    $.each(data, function(index,item) {
+
+                        var html = `<option value="${item.id}">${item.name}</option>`;
+
+                        $('#city').append(html);
+
+                    });//end of each
+
+                }//end of each
+            });
+            
+        });//end of chage
 
         $('#types-equipment').on('change', function () {
 

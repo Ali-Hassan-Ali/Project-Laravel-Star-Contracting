@@ -13,7 +13,7 @@ class CountryTableSeeder extends Seeder
      */
     public function run()
     {
-        $countrys = ['sudan','ather'];
+        $countrys = ['sudan','south sudan'];
 
         foreach ($countrys as $country) {
             

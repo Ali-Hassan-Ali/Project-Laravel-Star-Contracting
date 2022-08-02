@@ -305,4 +305,12 @@ class EquipmentController extends Controller
 
     }//end of typw
 
+    public function country(Request $request)
+    {
+        $citys = City::where('country_id', $request->country_id)->get();
+
+        return response()->json($citys);
+
+    }//end of countrys
+
 }//end of controller
