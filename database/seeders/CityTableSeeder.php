@@ -18,7 +18,7 @@ class CityTableSeeder extends Seeder
         foreach ($citys as $city) {
             
             \App\Models\City::create([
-                'name'       => $scity,
+                'name'       => $city,
                 'user_id'    => 1,
                 'country_id' => 1,
             ]);
