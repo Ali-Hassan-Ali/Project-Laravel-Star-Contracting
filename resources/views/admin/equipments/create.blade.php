@@ -82,11 +82,7 @@
                     <div class="form-group">
                         <label>@lang('equipments.plate_no')<span class="text-danger">*</span></label>
                         <input type="text" name="plate_no" class="form-control @error('plate_no') custom-select @enderror" value="{{ old('plate_no') }}" required autofocus>
-                        @error('plate_no')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+
                     </div>
 
                     {{--chasis_no--}}
