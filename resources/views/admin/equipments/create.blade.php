@@ -346,7 +346,6 @@
         $('#country').on('change', function () {
 
             var value  = $(this).val();
-            alert(value);
             var method = 'post';
             var url    = "{{ route('admin.equipments.country') }}";
 
