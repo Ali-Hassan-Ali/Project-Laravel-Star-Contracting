@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 Route::prefix(LaravelLocalization::setLocale())->group(function () {
     
@@ -8,7 +9,7 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
 
     Route::get('/test', function () {
 
-        return 'test';
+        return ucwords('foo bar');
         
     });
 

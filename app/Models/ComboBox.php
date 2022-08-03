@@ -20,7 +20,7 @@ class ComboBox extends Model
 
     public function getNameAttribute($value)
     {
-        return ucfirst($value);
+        return ucwords($value);
 
     }//end of get last name
     
