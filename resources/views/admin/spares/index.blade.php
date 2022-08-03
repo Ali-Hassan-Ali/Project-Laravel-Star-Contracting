@@ -72,6 +72,7 @@
                                     <th>@lang('spares.freight_charges')</th>
                                     <th>@lang('spares.used')</th>
                                     <th>@lang('spares.usage_date')</th>
+                                    <th>@lang('spares.description')</th>
                                     <th>@lang('spares.location')</th>
                                     <th>@lang('spares.attachments')</th>
                                     <th>@lang('site.action')</th>
@@ -116,6 +117,7 @@
                 {data: 'freight_charges', name: 'freight_charges'},
                 {data: 'used', name: 'used'},
                 {data: 'usage_date', name: 'usage_date'},
+                {data: 'description', name: 'description'},
                 {data: 'location', name: 'location'},
                 {data: 'attachments', name: 'attachments'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

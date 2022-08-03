@@ -19,8 +19,8 @@ class CreateSparesTable extends Migration
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
 
             $table->integer('cost');
+            $table->integer('freight_charges');
             
-            $table->string('freight_charges');
             $table->string('name');
             $table->string('part_no');
 
