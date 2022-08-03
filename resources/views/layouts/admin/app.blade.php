@@ -75,7 +75,7 @@
             border-color: rgb(185, 74, 72) !important;
         }
 
-        label, th {
+        label, th, li {
             text-transform: capitalize;
         }
 
