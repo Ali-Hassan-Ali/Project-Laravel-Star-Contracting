@@ -153,6 +153,11 @@
 
         $(document).ready(function() {
 
+            $('.select2').select2({
+                'width': '100%',
+                'tags': false,
+            });
+
             $('#last_service_date').on('change', function () {
 
                 var startDate = new Date($(this).val()),
