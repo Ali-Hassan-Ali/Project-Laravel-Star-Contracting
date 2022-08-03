@@ -79,9 +79,12 @@
                     
 
                     {{--freight_charges--}}
-                    <div class="form-group">
-                        <label>@lang('spares.freight_charges')<span class="text-danger">*</span></label>
-                        <input type="text" name="freight_charges" class="form-control @error('freight_charges') is-invalid @enderror" value="{{ old('freight_charges', $spare->freight_charges) }}" required autofocus>
+                    <label>@lang('spares.freight_charges') <span class="text-danger">*</span></label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" name="freight_charges" class="form-control @error('freight_charges') is-invalid @enderror" value="{{ old('freight_charges', $spare->freight_charges) }}" required>
                         @error('freight_charges')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
