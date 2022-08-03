@@ -40,13 +40,13 @@ class InsuranceController extends Controller
                 return $insurance->created_at->format('d-m-Y');
             })
             ->editColumn('insurance_expiry', function (insurance $insurance) {
-                return date('d-m-Y', strtotime($insurance->insurance_expiry));
+                return $insurance->insurance_expiry ? date('d-m-Y', strtotime($insurance->insurance_expiry)) : '';
             })
             ->editColumn('claim_date', function (insurance $insurance) {
-                return date('d-m-Y', strtotime($insurance->claim_date));
+                return $insurance->claim_date ? date('d-m-Y', strtotime($insurance->claim_date)) : '';
             })
             ->editColumn('insurance_start_date', function (insurance $insurance) {
-                return date('d-m-Y', strtotime($insurance->insurance_start_date));
+                return $insurance->insurance_start_date ? date('d-m-Y', strtotime($insurance->insurance_start_date)) : '';
             })            
             ->editColumn('claim', function (insurance $insurance) {
                 return view('admin.insurances.data_table._claim', compact('insurance'));

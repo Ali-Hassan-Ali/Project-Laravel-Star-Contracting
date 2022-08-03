@@ -28,7 +28,7 @@ class SpareRequest extends FormRequest
             'name'                   => ['required','min:2','max:255'],
             'part_no'                => ['required','min:2','max:255'],
             'used'                   => ['nullable','in:1,0'],
-            'freight_charges'        => ['required','min:2','max:255'],
+            'freight_charges'        => ['required','numeric'],
             'cost'                   => ['required','numeric'],
             'city_id'                => ['required','numeric'],
             'description'            => ['required_if:used,==,1'],

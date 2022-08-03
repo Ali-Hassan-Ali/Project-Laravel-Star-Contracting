@@ -54,13 +54,13 @@ class EquipmentController extends Controller
                 return ucfirst($equipment->spec->name);
             })
             ->editColumn('year_of_manufacture', function (Equipment $equipment) {
-                return date('d-m-Y', strtotime($equipment->year_of_manufacture));
+                return $equipment->year_of_manufacture ? date('d-m-Y', strtotime($equipment->year_of_manufacture)) : '';
             })
             ->editColumn('project_allocated_to', function (Equipment $equipment) {
                 return view('admin.equipments.data_table._project_allocated_to', compact('equipment'));
             })
             ->editColumn('registration_expiry', function (Equipment $equipment) {
-                return date('d-m-Y', strtotime($equipment->registration_expiry));
+                return $equipment->registration_expiry ? date('d-m-Y', strtotime($equipment->registration_expiry)) : '';
             })
             ->addColumn('actions','admin.equipments.data_table.actions')
             ->rawColumns(['record_select', 'actions'])

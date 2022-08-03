@@ -99,7 +99,7 @@
                     {{-- insurance_start_date --}}
                     <div class="form-group">
                         <label>@lang('insurances.insurance_start_date') <span class="text-danger">*</span></label>
-                            <input type="date" name="insurance_start_date" id="insurance_start_date"  autofocus class="form-control @error('insurance_start_date') is-invalid @enderror" value="{{ old('insurance_start_date', date('Y-m-d', strtotime($insurance->insurance_start_date))) }}" required>
+                            <input type="date" name="insurance_start_date" id="insurance_start_date"  autofocus class="form-control @error('insurance_start_date') is-invalid @enderror" value="{{ old('insurance_start_date', $insurance->insurance_start_date ? date('Y-m-d', strtotime($insurance->insurance_start_date)) : '') }}" required>
                         @error('insurance_start_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -121,7 +121,7 @@
                     {{-- insurance_expiry --}}
                     <div class="form-group">
                         <label>@lang('insurances.insurance_expiry') <span class="text-danger">*</span></label>
-                        <input type="date" name="insurance_expiry" id="insurance_expiry" disabled autofocus class="form-control @error('insurance_expiry') is-invalid @enderror" value="{{ old('insurance_expiry', date('Y-m-d', strtotime($insurance->insurance_expiry)) ) }}" required>
+                        <input type="date" name="insurance_expiry" id="insurance_expiry" disabled autofocus class="form-control @error('insurance_expiry') is-invalid @enderror" value="{{ old('insurance_expiry', $insurance->insurance_expiry ? date('Y-m-d', strtotime($insurance->insurance_expiry)) : '' ) }}" required>
                         @error('insurance_expiry')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -144,7 +144,7 @@
                     {{-- claim_date --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_date') <span class="text-danger">*</span></label>
-                        <input type="date" {{ old('claim', $insurance->claim) == '0' ? 'disabled' : '' }} name="claim_date" id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date', date('Y-m-d', strtotime($insurance->claim_date)) ) }}" max="{{ date('Y-m-d', strtotime(now())) }}">
+                        <input type="date" {{ old('claim', $insurance->claim) == '0' ? 'disabled' : '' }} name="claim_date" id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date', $insurance->claim_date ? date('Y-m-d', strtotime($insurance->claim_date)) : '' ) }}" max="{{ date('Y-m-d', strtotime(now())) }}">
                         @error('claim_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -43,7 +43,7 @@ class SpareController extends Controller
                 return view('admin.spares.data_table._used', compact('spare'));
             })       
             ->editColumn('usage_date', function (Spare $spare) {
-                return date('d-m-Y', strtotime($spare->usage_date));
+                return $spare->usage_date ? date('d-m-Y', strtotime($spare->usage_date)) : '';
             })            
             ->addColumn('admin', function (Spare $spare) {
                 return $spare->admin->name;
@@ -77,10 +77,11 @@ class SpareController extends Controller
     public function store(SpareRequest $request)
     {
         $validated = $request->validated();
-        $validated = $request->safe()->except(['attachments','used']);
+        $validated = $request->safe()->except(['attachments','used','usage_date']);
 
-        $validated['used']    = request()->has('used') ? '1' : '0';
-        $validated['user_id'] = auth()->id();
+        $validated['used']       = request()->has('used') ? '1' : '0';
+        $validated['user_id']    = auth()->id();
+        // $validated['usage_date'] = $request->has('usage_date') ?? null;
 
         $spare = Spare::create($validated);
 
