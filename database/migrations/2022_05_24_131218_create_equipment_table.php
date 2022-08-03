@@ -40,7 +40,7 @@ class CreateEquipmentTable extends Migration
             $table->text('operator');
 
             $table->text('responsible_person')->nullable();
-            $table->text('project_allocated_to')->nullable();
+            $table->json('project_allocated_to')->nullable();
             $table->text('allocated_to')->nullable();
             $table->text('email')->nullable();
 

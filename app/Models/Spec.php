@@ -29,5 +29,12 @@ class Spec extends Model
         return $this->belongsTo(City::class);
         
     }//end of  belongsTo
+
+    // Attribute-------------------
+    public function getTypeAttribute($value)
+    {
+        return ucfirst($value);
+
+    }//end of get last name
     
 }//end of model

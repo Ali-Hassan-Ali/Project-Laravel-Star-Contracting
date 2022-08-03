@@ -17,5 +17,11 @@ class ComboBox extends Model
         return $this->belongsTo(User::class, 'user_id');
         
     }//end of  belongsTo
+
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+
+    }//end of get last name
     
 }//end of modle

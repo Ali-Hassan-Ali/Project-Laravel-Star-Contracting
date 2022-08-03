@@ -72,9 +72,9 @@
                         <label>@lang('specs.specs') <span class="text-danger">*</span></label>
                         <select name="spec_id" id="spec-id" class="form-control select2" required>
                             <option value="" selected disabled>@lang('site.choose') @lang('specs.specs')</option>
-                            {{-- @foreach ($specs as $spec)
+                            @foreach ($specs as $spec)
                                 <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id', $equipment->spec_id) ? 'selected' : '' }}>{{ $spec->name }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                     </div>
 
@@ -177,9 +177,9 @@
                         <label>@lang('citys.citys') <span class="text-danger">*</span></label>
                         <select name="city_id" id="city" class="form-control select2" required>
                             <option value="" selected disabled>@lang('site.choose') @lang('citys.citys')</option>
-                            {{-- @foreach ($citys as $city)
+                            @foreach ($citys as $city)
                                 <option value="{{ $city->id }}" {{ $city->id == old('city_id', $equipment->city_id) ? 'selected' : '' }}>{{ $city->name }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                     </div>
 
@@ -310,10 +310,10 @@
                     {{--project_allocated_to--}}
                     <div class="form-group @error('project_allocated_to') custom-select @enderror">
                         <label>@lang('equipments.project_allocated_to') <span class="text-danger">*</span></label>
-                        <select name="project_allocated_to" {{ old('allocated_to', $equipment->allocated_to) == 'project' ? '' : 'disabled' }} multiple id="project-allocated-to" class="form-control select2">
+                        <select name="project_allocated_to[]" {{ old('allocated_to', $equipment->allocated_to) == 'project' ? '' : 'disabled' }} multiple id="project-allocated-to" class="form-control select2">
                             <option value="" disabled>@lang('site.choose') @lang('equipments.project_allocated_to')</option>
                             @foreach ($project_allocated_to as $project)
-                                <option value="{{ $project->name }}" {{ $project->name == old('project_allocated_to', $equipment->project_allocated_to) ? 'selected' : '' }}>{{ $project->name }}</option>
+                                <option value="{{ $project->name }}" {{ in_array($project->name, old('project_allocated_to', json_decode($equipment->project_allocated_to))) ? 'selected' : '' }}>{{ $project->name }}</option>
                             @endforeach
                         </select>
                         @error('project_allocated_to')

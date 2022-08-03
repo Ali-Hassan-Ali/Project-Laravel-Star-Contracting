@@ -45,16 +45,19 @@ class EquipmentController extends Controller
                 return $equipment->admin->name;
             })
             ->addColumn('country', function (Equipment $equipment) {
-                return $equipment->country->name;
+                return ucfirst($equipment->country->name);
             })
             ->addColumn('city', function (Equipment $equipment) {
-                return $equipment->city->name;
+                return ucfirst($equipment->city->name);
             })
             ->addColumn('specs', function (Equipment $equipment) {
-                return $equipment->spec->name;
+                return ucfirst($equipment->spec->name);
             })
             ->editColumn('year_of_manufacture', function (Equipment $equipment) {
                 return date('d-m-Y', strtotime($equipment->year_of_manufacture));
+            })
+            ->editColumn('project_allocated_to', function (Equipment $equipment) {
+                return json_decode($equipment->project_allocated_to);
             })
             ->editColumn('registration_expiry', function (Equipment $equipment) {
                 return date('d-m-Y', strtotime($equipment->registration_expiry));
@@ -107,13 +110,14 @@ class EquipmentController extends Controller
     public function store(EquipmentRequest $request)
     {
         $validated = $request->validated();
-        $validated = $request->safe()->except(['make','model','type','name','operator','email']);
+        $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person']);
 
         $validated['make']     = $this->tagMake($request);
         $validated['model']    = $this->tagModel($request);
         $validated['type']     = $this->tagType($request);
         $validated['name']     = $this->tagEquipment($request);
         $validated['operator'] = $this->tagOperator($request);
+        $validated['responsible_person'] = $this->tagResponsiblePerson($request);
         $validated['email']    = $this->tagEmail($request);
         $validated['user_id']  = auth()->id();
 
@@ -168,7 +172,7 @@ class EquipmentController extends Controller
     public function update(EquipmentRequest $request, Equipment $equipment)
     {
         $validated = $request->validated();
-        $validated = $request->safe()->except(['make','model','type','name','operator','email']);
+        $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to']);
 
         $validated['make']     = $this->tagMake($request);
         $validated['model']    = $this->tagModel($request);
@@ -176,6 +180,8 @@ class EquipmentController extends Controller
         $validated['name']     = $this->tagEquipment($request);
         $validated['operator'] = $this->tagOperator($request);
         $validated['email']    = $this->tagEmail($request);
+        $validated['responsible_person']   = $this->tagResponsiblePerson($request);
+        $validated['project_allocated_to'] = json_encode($request->project_allocated_to);
         $validated['user_id']  = auth()->id();
 
         $equipment->update($validated);
@@ -292,6 +298,22 @@ class EquipmentController extends Controller
             return $requestData['email'] = $type['name'];
         } else {
             return $requestData['email'] = $request->operator;
+        } 
+
+    }// end of fun
+
+    private function tagResponsiblePerson(EquipmentRequest $request)
+    {
+        $requestData['responsible_person'] = ComboBox::where('name', $request->responsible_person)->first();
+        if (!$requestData['responsible_person']) {
+            $type = ComboBox::create([
+                'name' => $request->responsible_person, 
+                'type' => 'responsible_person',
+                'user_id' => auth()->id()]);
+
+            return $requestData['responsible_person'] = $type['name'];
+        } else {
+            return $requestData['responsible_person'] = $request->responsible_person;
         } 
 
     }// end of fun

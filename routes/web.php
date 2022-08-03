@@ -8,7 +8,7 @@ Route::prefix(LaravelLocalization::setLocale())->group(function () {
 
     Route::get('/test', function () {
 
-        dd(date('d-m-Y', strtotime(now()) ) );
+        return 'test';
         
     });
 

@@ -33,12 +33,12 @@ class EquipmentTableSeeder extends Seeder
                 'engine_no'             => true,
                 'serial_no'             => true,
                 'model'                 => 'Lexus',
-                'owner_ship'            => 'name owner ship',
+                'owner_ship'            => 'SC',
                 'rental_basis'          => 200,
-                'operator'              => 'name operator',
+                'operator'              => 'Driver',
                 'responsible_person'    => 'name responsible person',
-                'project_allocated_to'  => 'ali',
-                'email'                 => 'ali#gmail.com',
+                'project_allocated_to'  => json_encode(["Project_allocated_to one","Project_allocated_to tow"]),
+                'email'                 => 'new@star-contracting.com',
                 'registration_expiry'   => now(),
             ]);
 
