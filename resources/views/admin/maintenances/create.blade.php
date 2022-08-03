@@ -122,7 +122,7 @@
                     {{--equipments--}}
                     <div class="form-group @error('non_scheduled') custom-select @enderror">
                         <label>@lang('maintenances.non_scheduled') <span class="text-danger">*</span></label>
-                        <select {{ old('scheduled', '0') == '0' ? 'disabled' : '' }} name="non_scheduled" id="non-scheduled" class="form-control select2" required>
+                        <select {{ old('scheduled', '1') == '0' ? 'disabled' : '' }} name="non_scheduled" id="non-scheduled" class="form-control select2" required>
                             <option value="" selected disabled>@lang('site.choose') @lang('maintenances.non_scheduled')</option>
                             @foreach ($non_scheduleds as $scheduled)
                                 <option value="{{ $scheduled->name }}" {{ $scheduled->name == old('non_scheduled') ? 'selected' : '' }}>{{ $scheduled->name }}</option>
@@ -199,13 +199,11 @@
 
                 if (value == '0') {
 
-                    $('#non-scheduled').attr('disabled', true);
+                    $('#non-scheduled').attr('disabled', false);
 
                 } else {
 
-                    $('#non-scheduled').attr('disabled', false);
-                    
-
+                    $('#non-scheduled').attr('disabled', true);
 
                 }//end of if
                 
