@@ -57,7 +57,7 @@ class EquipmentController extends Controller
                 return date('d-m-Y', strtotime($equipment->year_of_manufacture));
             })
             ->editColumn('project_allocated_to', function (Equipment $equipment) {
-                return json_decode($equipment->project_allocated_to);
+                return view('admin.equipments.data_table._project_allocated_to', compact('equipment'));
             })
             ->editColumn('registration_expiry', function (Equipment $equipment) {
                 return date('d-m-Y', strtotime($equipment->registration_expiry));
@@ -334,7 +334,6 @@ class EquipmentController extends Controller
             ComboBox::updateOrCreate([
                'name' => ucwords("$data"), 
             ],[
-                'name' => ucwords("$data"),
                 'type' => 'project_allocated_to',
                 'user_id' => auth()->id()
             ]);
