@@ -332,8 +332,9 @@ class EquipmentController extends Controller
         foreach ($requestDataPr as $key => $data) {
             
             ComboBox::updateOrCreate([
-               'name' => $data, 
+               'name' => ucwords("$data"), 
             ],[
+                'name' => ucwords("$data"),
                 'type' => 'project_allocated_to',
                 'user_id' => auth()->id()
             ]);
