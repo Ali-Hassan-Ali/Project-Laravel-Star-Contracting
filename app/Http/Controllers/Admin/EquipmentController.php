@@ -303,7 +303,7 @@ class EquipmentController extends Controller
 
             return $requestData['email'] = $type['name'];
         } else {
-            return $requestData['email'] = $request->operator;
+            return $requestData['email'] = $request->email;
         } 
 
     }// end of fun
