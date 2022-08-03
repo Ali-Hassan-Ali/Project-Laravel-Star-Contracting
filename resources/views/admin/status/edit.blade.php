@@ -52,7 +52,7 @@
                     <input type="date" hidden id="as_of" name="as_of" class="form-control" value="{{ old('as_of', date('Y-m-d', strtotime( $status->as_of ))) }}" max="{{ date('Y-m-d', strtotime( now() )) }}">
 
                     @php
-                        $statusing = ['breakdown', 'working'];
+                        $statusing = ['Breakdown', 'Working'];
                     @endphp
 
                     {{--working_status--}}
@@ -80,7 +80,7 @@
                     {{--break_down_date--}}
                     <div class="form-group">
                         <label>@lang('status.break_down_date') <span class="text-danger">*</span></label>
-                        <input type="date" {{ old('working_status', $status->working_status) == 'breakdown' ? '' : 'disabled' }} id="break_down_date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date', date('Y-m-d', strtotime( $status->hours_worked ))) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                        <input type="date" {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} id="break_down_date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date', date('Y-m-d', strtotime( $status->hours_worked ))) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                         @error('break_down_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -104,7 +104,7 @@
                     {{-- break_down_description --}}
                     <div class="form-group">
                         <label>@lang('status.descrption') <span class="text-danger">*</span></label>
-                        <textarea {{ old('working_status', $status->working_status) == 'breakdown' ? '' : 'disabled' }} id="break_down_description" class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description', $status->break_down_description) }}</textarea>
+                        <textarea {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} id="break_down_description" class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description', $status->break_down_description) }}</textarea>
                         @error('break_down_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -149,14 +149,14 @@
 
                 var value = $(this).val();
 
-                if (value == 'breakdown') {
+                if (value == 'Breakdown') {
 
                     $('#break_down_description').attr('disabled', false);
                     $('#break_down_date').attr('disabled', false);
 
                 }//end of if
 
-                if (value == 'working') {
+                if (value == 'Working') {
 
                     $('#break_down_description').attr('disabled', true);
                     $('#break_down_date').attr('disabled', true);

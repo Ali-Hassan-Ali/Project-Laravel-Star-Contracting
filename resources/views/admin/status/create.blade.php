@@ -52,7 +52,7 @@
                     <input type="date" hidden id="as_of" name="as_of" class="form-control" value="{{ old('as_of', date('Y-m-d', strtotime( now() ))) }}" max="{{ date('Y-m-d', strtotime( now() )) }}">
 
                     @php
-                        $status = ['breakdown', 'working'];
+                        $status = ['Breakdown', 'Working'];
                     @endphp
 
                     {{--working_status--}}
@@ -148,7 +148,7 @@
 
                 var value = $(this).val();
 
-                if (value == 'breakdown') {
+                if (value == 'Breakdown') {
 
                     $('#break_down_description').attr('disabled', false);
                     $('#break_down_date').attr('disabled', false);
@@ -157,7 +157,7 @@
 
                 }//end of if
 
-                if (value == 'working') {
+                if (value == 'Working') {
 
                     $('#break_down_description').attr('disabled', true);
                     $('#break_down_date').attr('disabled', true);

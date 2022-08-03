@@ -35,5 +35,11 @@ class Status extends Model
         return date('Y-m-d\TH:i', strtotime($value));
         
     }//end of fun
+
+    public function getWorkingStatusAttribute($value)
+    {
+        return ucwords($value);
+
+    }//end of get last name
     
 }//end of model

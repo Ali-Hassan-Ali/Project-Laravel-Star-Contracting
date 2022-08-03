@@ -4,8 +4,8 @@ return [
     'status'   => 'Status',
     'as_of'    => 'As of',
 
-    'breakdown'  => 'Breakdown',
-    'working'    => 'Working',
+    'Breakdown'  => 'Breakdown',
+    'Working'    => 'Working',
 
     'working_status'      => 'working status',
     'hours_worked'        => 'hours worked',
