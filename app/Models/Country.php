@@ -17,5 +17,11 @@ class Country extends Model
         return $this->belongsTo(User::class, 'user_id');
         
     }//end of  belongsTo
+
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+
+    }//end of get last name
     
 }//end of model

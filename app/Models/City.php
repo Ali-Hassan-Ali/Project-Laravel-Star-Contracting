@@ -34,4 +34,10 @@ class City extends Model
         
     }//end of  belongsTo
 
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+
+    }//end of get last name
+
 }//end of model
