@@ -313,7 +313,7 @@
                         <select name="project_allocated_to[]" {{ old('allocated_to', $equipment->allocated_to) == 'project' ? '' : 'disabled' }} multiple id="project-allocated-to" class="form-control select2">
                             <option value="" disabled>@lang('site.choose') @lang('equipments.project_allocated_to')</option>
                             @foreach ($project_allocated_to as $project)
-                                <option value="{{ $project->name }}" {{ in_array($project->name, old('project_allocated_to', json_decode($equipment->project_allocated_to))) ? 'selected' : '' }}>{{ $project->name }}</option>
+                                <option value="{{ $project->name }}" {{ in_array($project->name, old('project_allocated_to', json_decode($equipment->project_allocated_to) ?? [])) ? 'selected' : '' }}>{{ $project->name }}</option>
                             @endforeach
                         </select>
                         @error('project_allocated_to')

@@ -110,7 +110,7 @@ class EquipmentController extends Controller
     public function store(EquipmentRequest $request)
     {
         $validated = $request->validated();
-        $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person']);
+        $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to']);
 
         $validated['make']     = $this->tagMake($request);
         $validated['model']    = $this->tagModel($request);
@@ -119,7 +119,11 @@ class EquipmentController extends Controller
         $validated['operator'] = $this->tagOperator($request);
         $validated['responsible_person'] = $this->tagResponsiblePerson($request);
         $validated['email']    = $this->tagEmail($request);
+        if ($request->allocated_to == 'Project') {
+            $validated['project_allocated_to'] = json_encode($request->project_allocated_to);
+        }
         $validated['user_id']  = auth()->id();
+
 
         Equipment::create($validated);
 
@@ -181,7 +185,9 @@ class EquipmentController extends Controller
         $validated['operator'] = $this->tagOperator($request);
         $validated['email']    = $this->tagEmail($request);
         $validated['responsible_person']   = $this->tagResponsiblePerson($request);
-        $validated['project_allocated_to'] = json_encode($request->project_allocated_to);
+        if ($request->allocated_to == 'Project') {
+            $validated['project_allocated_to'] = json_encode($request->project_allocated_to);
+        }
         $validated['user_id']  = auth()->id();
 
         $equipment->update($validated);
