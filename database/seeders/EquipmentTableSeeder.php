@@ -37,6 +37,7 @@ class EquipmentTableSeeder extends Seeder
                 'rental_basis'          => 200,
                 'operator'              => 'Driver',
                 'responsible_person'    => 'name responsible person',
+                'allocated_to'          => 'Project',
                 'project_allocated_to'  => json_encode(["Project_allocated_to one","Project_allocated_to tow"]),
                 'email'                 => 'new@star-contracting.com',
                 'registration_expiry'   => now(),

@@ -36,4 +36,10 @@ class Equipment extends Model
         
     }//end of  belongsTo
 
+    public function getProjectAllocatedToAttribute($value)
+    {
+        return ucwords($value);
+
+    }//end of get last name
+
 }//end of model

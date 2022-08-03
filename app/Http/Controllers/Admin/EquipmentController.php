@@ -120,7 +120,7 @@ class EquipmentController extends Controller
         $validated['responsible_person'] = $this->tagResponsiblePerson($request);
         $validated['email']    = $this->tagEmail($request);
         if ($request->allocated_to == 'Project') {
-            $validated['project_allocated_to'] = json_encode($request->project_allocated_to);
+            $validated['project_allocated_to']    = json_encode($this->tagProjectAllocatedTo($request));
         }
         $validated['user_id']  = auth()->id();
 
@@ -186,7 +186,7 @@ class EquipmentController extends Controller
         $validated['email']    = $this->tagEmail($request);
         $validated['responsible_person']   = $this->tagResponsiblePerson($request);
         if ($request->allocated_to == 'Project') {
-            $validated['project_allocated_to'] = json_encode($request->project_allocated_to);
+            $validated['project_allocated_to']    = json_encode($this->tagProjectAllocatedTo($request));
         }
         $validated['user_id']  = auth()->id();
 
@@ -321,6 +321,26 @@ class EquipmentController extends Controller
         } else {
             return $requestData['responsible_person'] = $request->responsible_person;
         } 
+
+    }// end of fun
+
+    private function tagProjectAllocatedTo(EquipmentRequest $request)
+    {
+
+        $requestDataPr = $request->project_allocated_to;
+
+        foreach ($requestDataPr as $key => $data) {
+            
+            ComboBox::updateOrCreate([
+               'name' => $data, 
+            ],[
+                'type' => 'project_allocated_to',
+                'user_id' => auth()->id()
+            ]);
+
+        }//end of earch
+
+        return $requestData['project_allocated_to'] = $request->project_allocated_to;
 
     }// end of fun
 

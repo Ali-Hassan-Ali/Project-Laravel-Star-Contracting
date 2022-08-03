@@ -36,7 +36,7 @@ class EquipmentRequest extends FormRequest
             'project_allocated_to'  => ['required_if:allocated_to,==,Project','array'],
             'allocated_to'          => ['required','string','min:2','max:255'],
             'email'                 => ['required','email','min:2','max:255'],
-            'driver_salary'         => ['required_if:operator,==,Driver','string','min:2','max:255'],
+            // 'driver_salary'         => ['required_if:operator,==,Driver','string','min:2','max:255'],
             'registration_expiry'   => ['required','string','min:2','max:255'],
             'year_of_manufacture'   => ['required','string','min:2','max:255'],
             'rental_basis'          => ['required_if:owner_ship,==,Rented','string','min:2','max:255'],
