@@ -12,6 +12,7 @@ $(document).ready(function() {
 			success: function (data) {
 				
 				$('#equipment-city').empty('');
+				$('#equipment-city').append(`<option selected disabled>Choose Site</option>`);
 
 				$.each(data, function(index,item) {
 
@@ -37,10 +38,9 @@ $(document).ready(function() {
 			url: url,
 			method: method,
 			success: function (data) {
-
-				console.log(data);
 				
 				$('#equipment-man').empty('');
+				$('#equipment-man').append(`<option selected disabled>Choose Equipment</option>`);
 
 				$.each(data, function(index,item) {
 
