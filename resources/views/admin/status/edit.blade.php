@@ -28,7 +28,7 @@
                         <select name="equipment_id" class="form-control select2" required>
                             <option value="" selected disabled>@lang('site.choose') @lang('equipments.equipments')</option>
                             @foreach ($equipments as $equipment)
-                                <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $status->equipment_id) ? 'selected' : '' }}>{{ $equipment->name }}</option>
+                                <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $status->equipment_id) ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
                             @endforeach
                         </select>
                         @error('equipment_id')

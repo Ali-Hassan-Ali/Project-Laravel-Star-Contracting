@@ -28,7 +28,7 @@
                         <select name="equipment_id" class="form-control select2" required>
                             <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
                             @foreach ($equipments as $equipment)
-                                <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $maintenance->equipment_id) ? 'selected' : '' }}>{{ $equipment->name }}</option>
+                                <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $maintenance->equipment_id) ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
                             @endforeach
                         </select>
                         @error('equipment_id')
@@ -41,7 +41,7 @@
                     {{--last_service_date--}}
                     <div class="form-group">
                         <label>@lang('maintenances.last_service_date')<span class="text-danger">*</span></label>
-                        <input type="date" name="last_service_date" id="last_service_date" class="form-control @error('last_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', date('Y-m-d', strtotime($maintenance->last_service_date))) }}" required autofocus>
+                        <input type="date" name="last_service_date" id="last_service_date" class="form-control @error('last_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->last_service_date ? date('Y-m-d', strtotime($maintenance->last_service_date)) : '') }}" required autofocus>
                         @error('last_service_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -53,7 +53,7 @@
                     {{--next_service_date--}}
                     <div class="form-group">
                         <label>@lang('maintenances.next_service_date')<span class="text-danger">*</span></label>
-                        <input type="date" disabled name="next_service_date" id="next_service_date" class="form-control @error('next_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', date('Y-m-d', strtotime($maintenance->next_service_date))) }}" required autofocus>
+                        <input type="date" disabled name="next_service_date" id="next_service_date" class="form-control @error('next_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->next_service_date ? date('Y-m-d', strtotime($maintenance->next_service_date)) : '') }}" required autofocus>
                         @error('next_service_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -61,7 +61,7 @@
                         @enderror
                     </div>
                     
-                    <input type="date" name="next_service_date" id="next_service_date_hidden" hidden value="{{ old('next_service_date', date('Y-m-d', strtotime($maintenance->next_service_date))) }}" hidden>
+                    <input type="date" name="next_service_date" id="next_service_date_hidden" hidden value="{{ old('next_service_date', $maintenance->next_service_date ? date('Y-m-d', strtotime($maintenance->next_service_date)) : '') }}" hidden>
 
                     {{--last_service_km--}}
                     <div class="form-group">
@@ -90,7 +90,7 @@
                     {{--actual_service_date--}}
                     <div class="form-group">
                         <label>@lang('maintenances.actual_service_date')<span class="text-danger">*</span></label>
-                        <input type="date" name="actual_service_date" class="form-control @error('actual_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', date('Y-m-d', strtotime($maintenance->actual_service_date))) }}" required autofocus>
+                        <input type="date" name="actual_service_date" class="form-control @error('actual_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->actual_service_date ? date('Y-m-d', strtotime($maintenance->actual_service_date)) : '') }}" required autofocus>
                         @error('actual_service_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
