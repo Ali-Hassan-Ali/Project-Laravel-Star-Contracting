@@ -8,6 +8,8 @@ return [
     'chasis_no'  => 'chasis no',
     'engine_no'  => 'engine no',
     'serial_no'  => 'serial no',
+    'attachments'=> 'attachments',
+    'attachments_name'=> 'attachments name',
 
     'year_of_manufacture' => 'year of manufacture',
     'rental_cost_basis'   => 'rental cost basis',

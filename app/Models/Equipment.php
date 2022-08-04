@@ -36,6 +36,12 @@ class Equipment extends Model
         
     }//end of  belongsTo
 
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class);
+        
+    }//end of  belongsTo
+
     public function getProjectAllocatedToAttribute($value)
     {
         return ucwords($value);

@@ -8,6 +8,7 @@ use App\Models\Equipment;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\ComboBox;
+use App\Models\Attachment;
 use App\Models\Type;
 use App\Models\Spec;
 use Illuminate\Http\Request;
@@ -46,6 +47,9 @@ class EquipmentController extends Controller
             })
             ->addColumn('country', function (Equipment $equipment) {
                 return ucfirst($equipment->country->name);
+            })
+            ->editColumn('attachments', function (Equipment $equipment) {
+                return view('admin.equipments.data_table._attachments', compact('equipment'));
             })
             ->addColumn('city', function (Equipment $equipment) {
                 return ucfirst($equipment->city->name);
@@ -110,7 +114,7 @@ class EquipmentController extends Controller
     public function store(EquipmentRequest $request)
     {
         $validated = $request->validated();
-        $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to']);
+        $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to','attachments']);
 
         $validated['make']     = $this->tagMake($request);
         $validated['model']    = $this->tagModel($request);
@@ -124,8 +128,22 @@ class EquipmentController extends Controller
         }
         $validated['user_id']  = auth()->id();
 
+        $equipment = Equipment::create($validated);
 
-        Equipment::create($validated);
+        if ($request->attachments) {
+            
+            foreach ($request->file('attachments') as $file) {
+
+                Attachment::create([
+                    'path'         => $file->store('equipment_attachments_file'),
+                    'name'         => $file->getClientOriginalName(),
+                    'equipment_id' => $equipment->id,
+                ]);
+
+            }//end of rach
+
+        }//end of check file attachments
+
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.equipments.index');
@@ -176,7 +194,7 @@ class EquipmentController extends Controller
     public function update(EquipmentRequest $request, Equipment $equipment)
     {
         $validated = $request->validated();
-        $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to']);
+        $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to','attachments']);
 
         $validated['make']     = $this->tagMake($request);
         $validated['model']    = $this->tagModel($request);
@@ -191,6 +209,22 @@ class EquipmentController extends Controller
         $validated['user_id']  = auth()->id();
 
         $equipment->update($validated);
+
+        if ($request->attachments) {
+
+            $equipment->attachments()->delete();
+            
+            foreach ($request->file('attachments') as $file) {
+
+                Attachment::create([
+                    'path'         => $file->store('equipment_attachments_file'),
+                    'name'         => $file->getClientOriginalName(),
+                    'equipment_id' => $equipment->id,
+                ]);
+
+            }//end of rach
+
+        }//end of check file attachments
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.equipments.index');
@@ -359,5 +393,20 @@ class EquipmentController extends Controller
         return response()->json($citys);
 
     }//end of countrys
+
+    public function attachments(Equipment $equipment)
+    {
+        
+        return view('admin.equipments.attachments', compact('equipment'));
+
+    }//end of fun
+
+    public function attachmentsDestroy($id)
+    {
+        dd($id);
+        $equipment->delete();
+
+        return redirect()->back();   
+    }
 
 }//end of controller

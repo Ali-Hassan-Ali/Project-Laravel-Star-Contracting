@@ -92,6 +92,7 @@ class InsuranceController extends Controller
             
             Attachment::create([
                 'path'         => $file->store('insurances_attachments_file'),
+                'name'         => $file->getClientOriginalName(),
                 'insurance_id' => $insurance->id,
             ]);
 

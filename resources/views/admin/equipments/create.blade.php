@@ -18,7 +18,7 @@
 
             <div class="tile shadow">
 
-                <form method="post" action="{{ route('admin.equipments.store') }}">
+                <form method="post" action="{{ route('admin.equipments.store') }}" enctype="multipart/form-data">
                     @csrf
                     @method('post')
 
@@ -312,6 +312,17 @@
                             @endforeach
                         </select>
                         @error('project_allocated_to')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{-- attachments --}}
+                    <div class="form-group">
+                        <label>@lang('insurances.claim_attachments') <span class="text-danger">*</span></label>
+                        <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
+                        @error('attachments')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

@@ -48,6 +48,7 @@ class EquipmentRequest extends FormRequest
             'chasis_no'             => ['required','string'],
             'engine_no'             => ['required','string'],
             'serial_no'             => ['required','string'],
+            'attachments'           => ['nullable','array'],
         ];
 
         return $rules;

@@ -20,6 +20,7 @@ class CreateAttachmentsTable extends Migration
             
             $table->foreignIdFor(\App\Models\Insurance::class)->nullable();
             $table->foreignIdFor(\App\Models\Spare::class)->nullable();
+            $table->foreignIdFor(\App\Models\Equipment::class)->nullable();
 
             $table->softDeletes();
             $table->timestamps();

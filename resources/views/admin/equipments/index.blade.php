@@ -87,6 +87,7 @@
                                     <th>@lang('equipments.email')</th>
                                     <th>@lang('equipments.allocated_to')</th>
                                     <th>@lang('equipments.project_allocated_to')</th>
+                                    <th>@lang('equipments.attachments')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -144,6 +145,7 @@
                 {data: 'email', name: 'email'},
                 {data: 'allocated_to', name: 'allocated_to'},
                 {data: 'project_allocated_to', name: 'project_allocated_to'},
+                {data: 'attachments', name: 'attachments'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[2, 'desc']],

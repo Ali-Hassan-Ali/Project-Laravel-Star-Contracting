@@ -6,6 +6,7 @@ return [
     'login'  => 'Login',
     'serial' => 'Serial',
     'download' => 'download',
+    'all_attachments' => 'all attachments',
 
     'add'    => 'Add',
     'edit'   => 'Edit',

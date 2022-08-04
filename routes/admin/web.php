@@ -79,6 +79,10 @@ Route::middleware([
             Route::resource('insurances', 'InsuranceController');
 
             //equipments routes
+            Route::get('/equipments/attachments/{equipment}', 'EquipmentController@attachments')->name('equipments.attachments');
+
+            Route::delete('/equipments/attachments/{equipment}/destroy', 'EquipmentController@attachmentsDestroy')->name('equipments.attachments.destroy');
+
             Route::post('/equipments/country', 'EquipmentController@country')->name('equipments.country');
             Route::post('/equipments/data', 'EquipmentController@type')->name('equipments.type');
             Route::get('/equipments/data', 'EquipmentController@data')->name('equipments.data');
