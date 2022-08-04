@@ -123,6 +123,10 @@ Route::middleware([
             // Route::get('/settings/mobile_links', 'SettingController@mobileLinks')->name('settings.mobile_links');
             Route::resource('settings', 'SettingController')->only(['store']);
 
+
+            Route::post('/ajax/country/{country}', 'AjaxController@ajaxCountry')->name('ajax.country');
+            Route::post('/ajax/city/{city}', 'AjaxController@ajaxCity')->name('ajax.city');
+
             //profile routes
             Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
             Route::put('/profile/update', 'ProfileController@update')->name('profile.update');

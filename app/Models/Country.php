@@ -18,6 +18,12 @@ class Country extends Model
         
     }//end of  belongsTo
 
+    public function city()
+    {
+        return $this->hasMany(City::class);
+        
+    }//end of  belongsTo
+
     public function getNameAttribute($value)
     {
         return ucwords($value);

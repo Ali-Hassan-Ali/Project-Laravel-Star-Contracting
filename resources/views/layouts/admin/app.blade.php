@@ -176,6 +176,7 @@
 {{--custom--}}
 <script src="{{ asset('admin_assets/js/custom/index.js') }}"></script>
 <script src="{{ asset('admin_assets/js/custom/roles.js') }}"></script>
+<script src="{{ asset('admin_assets/js/custom/ajax.js') }}"></script>
 
 <script>
     $(document).ready(function () {

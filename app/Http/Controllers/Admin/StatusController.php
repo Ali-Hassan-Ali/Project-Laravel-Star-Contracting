@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StatusRequest;
 use App\Models\Equipment;
 use App\Models\Status;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -58,8 +59,9 @@ class StatusController extends Controller
     public function create()
     {
         $equipments = Equipment::all();
+        $countrys   = Country::all();
 
-        return view('admin.status.create', compact('equipments'));
+        return view('admin.status.create', compact('equipments', 'countrys'));
 
     }// end of create
 

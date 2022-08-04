@@ -34,6 +34,12 @@ class City extends Model
         
     }//end of  belongsTo
 
+    public function equipment()
+    {
+        return $this->hasMany(Equipment::class);
+        
+    }//end of  belongsTo
+
     public function getNameAttribute($value)
     {
         return ucwords($value);
