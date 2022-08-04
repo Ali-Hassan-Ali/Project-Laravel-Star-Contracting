@@ -22,25 +22,31 @@
                     @csrf
                     @method('post')
 
-                    {{--equipment_id--}}
-                    <div class="form-group">
-                        <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
-                        <select class="form-control select2" id="equipment-countrey" required>
-                            <option value="" selected disabled>@lang('site.choose') @lang('countrys.countrys')</option>
-                            @foreach ($countrys as $country)
-                                <option value="{{ $country->id }}" 
-                                    data-url="{{ route('admin.ajax.country', $country->id) }}">{{ $country->name }}</option>
-                            @endforeach
-                        </select>
+                    <div class="row mb-1">
+                        
+                        {{--equipment_id--}}
+                        <div class="col-6">
+                            <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
+                            <select class="form-control col-6 select2" id="equipment-countrey" required>
+                                <option value="" selected disabled>@lang('site.choose') @lang('countrys.countrys')</option>
+                                @foreach ($countrys as $country)
+                                    <option value="{{ $country->id }}" 
+                                        data-url="{{ route('admin.ajax.country', $country->id) }}">{{ $country->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{--equipment_id--}}
+                        <div class="col-6">
+                            <label>@lang('citys.citys') <span class="text-danger">*</span></label>
+                            <select class="form-control select2" required id="equipment-city">
+                                
+                            </select>
+                        </div>
+
                     </div>
 
-                    {{--equipment_id--}}
-                    <div class="form-group">
-                        <label>@lang('citys.citys') <span class="text-danger">*</span></label>
-                        <select class="form-control select2" required id="equipment-city">
-                            
-                        </select>
-                    </div>
+
 
                     {{--equipment_id--}}
                     <div class="form-group @error('equipment_id') custom-select @enderror">

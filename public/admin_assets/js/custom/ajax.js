@@ -44,7 +44,7 @@ $(document).ready(function() {
 
 				$.each(data, function(index,item) {
 
-                    var html = `<option value="${item.id}">${item.name}</option>`;
+                    var html = `<option value="${item.id}">${item.name} ${item.make} ${item.plate_no}</option>`;
 
                     $('#equipment-man').append(html);
 
