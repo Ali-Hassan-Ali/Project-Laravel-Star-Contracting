@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
 	$(document).on('change', '#equipment-countrey', function(e) {
 		e.preventDefault();
 		
@@ -26,6 +27,7 @@ $(document).ready(function() {
 		});
 
 	});//end of countrey
+
 
 	$(document).on('change', '#equipment-city', function(e) {
 		e.preventDefault();
