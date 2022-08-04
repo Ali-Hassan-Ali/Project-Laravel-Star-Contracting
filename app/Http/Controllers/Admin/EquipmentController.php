@@ -212,8 +212,6 @@ class EquipmentController extends Controller
 
         if ($request->attachments) {
 
-            $equipment->attachments()->delete();
-            
             foreach ($request->file('attachments') as $file) {
 
                 Attachment::create([
@@ -396,17 +394,8 @@ class EquipmentController extends Controller
 
     public function attachments(Equipment $equipment)
     {
-        
         return view('admin.equipments.attachments', compact('equipment'));
 
     }//end of fun
-
-    public function attachmentsDestroy($id)
-    {
-        dd($id);
-        $equipment->delete();
-
-        return redirect()->back();   
-    }
 
 }//end of controller
