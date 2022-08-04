@@ -46,16 +46,16 @@ class SpareController extends Controller
                 return $spare->usage_date ? date('d-m-Y', strtotime($spare->usage_date)) : '';
             })            
             ->addColumn('admin', function (Spare $spare) {
-                return $spare->admin->name;
+                return $spare->admin->name ?? '';
             })
             ->addColumn('location', function (Spare $spare) {
-                return $spare->city->name;
+                return $spare->city->name ?? '';
             })
             ->editColumn('attachments', function (Spare $spare) {
                 return view('admin.spares.data_table._attachments', compact('spare'));
             })
             ->addColumn('equipment', function (Spare $spare) {
-                return $spare->equipment->name;
+                return $spare->equipment->name ?? '';
             })
             ->addColumn('actions', 'admin.spares.data_table.actions')
             ->rawColumns(['record_select', 'actions','equipment'])

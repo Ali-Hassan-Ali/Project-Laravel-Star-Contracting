@@ -40,9 +40,6 @@ class SpecController extends Controller
             ->addColumn('admin', function (Spec $spec) {
                 return $spec->admin->name;
             })
-            // ->addColumn('description', function (Spec $spec) {
-            //     return Str::of($spec->description)->limit(70);
-            // })
             ->addColumn('actions','admin.specs.data_table.actions')
             ->rawColumns(['record_select', 'actions','admin','equipment'])
             ->toJson();

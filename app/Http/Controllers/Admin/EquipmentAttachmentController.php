@@ -53,7 +53,7 @@ class EquipmentAttachmentController extends Controller
      * @param  \App\Models\Attachment  $attachment
      * @return \Illuminate\Http\Response
      */
-    public function show(Attachment $attachment)
+    public function show(Equipment $equipment, Attachment $attachment)
     {
 
         return view('admin.equipment.attachments.create');
@@ -65,7 +65,7 @@ class EquipmentAttachmentController extends Controller
      * @param  \App\Models\Attachment  $attachment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Attachment $attachment)
+    public function edit(Equipment $equipment, Attachment $attachment)
     {
         //
     }
@@ -77,7 +77,7 @@ class EquipmentAttachmentController extends Controller
      * @param  \App\Models\Attachment  $attachment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attachment $attachment)
+    public function update(Request $request, Equipment $equipment, Attachment $attachment)
     {
         //
     }

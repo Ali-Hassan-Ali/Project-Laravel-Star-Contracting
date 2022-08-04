@@ -55,10 +55,10 @@ class InsuranceController extends Controller
                 return view('admin.insurances.data_table._attachments', compact('insurance'));
             })
             ->addColumn('equipment', function (Insurance $insurance) {
-                return $insurance->equipment->name;
+                return $insurance->equipment->name ?? '';
             })
             ->addColumn('admin', function (Insurance $insurance) {
-                return $insurance->admin->name;
+                return $insurance->admin->name ?? '';
             })
             ->addColumn('actions','admin.insurances.data_table.actions','claim','attachments')
             ->rawColumns(['record_select', 'actions','admin','equipment'])

@@ -37,16 +37,16 @@ class StatusController extends Controller
                 return $status->created_at->format('d-m-Y');
             })
             ->editColumn('as_of', function (Status $status) {
-                return date('d-m-Y', strtotime($status->as_of));
+                return $status->as_of ? date('d-m-Y', strtotime($status->as_of)) : '';
             })
             ->editColumn('break_down_date', function (Status $status) {
                 return date('d-m-Y', strtotime($status->break_down_date));
             })
             ->addColumn('admin', function (Status $status) {
-                return $status->admin->name;
+                return $status->admin->name ?? '';
             })
             ->addColumn('equipment', function (Status $status) {
-                return $status->equipment->name;
+                return $status->equipment->name  ?? '';
             })
             ->addColumn('actions','admin.status.data_table.actions')
             ->rawColumns(['record_select', 'actions', 'admin', 'equipment'])

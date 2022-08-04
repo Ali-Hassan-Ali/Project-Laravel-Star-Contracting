@@ -71,6 +71,7 @@
                                     <th>@lang('status.hours_worked')</th>
                                     <th>@lang('status.break_down_date')</th>
                                     <th>@lang('status.break_down_duration')</th>
+                                    <th>@lang('status.descrption')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -112,6 +113,7 @@
                 {data: 'hours_worked', name: 'hours_worked'},
                 {data: 'break_down_date', name: 'break_down_date'},
                 {data: 'break_down_duration', name: 'break_down_duration'},
+                {data: 'break_down_description', name: 'break_down_description'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[2, 'desc']],

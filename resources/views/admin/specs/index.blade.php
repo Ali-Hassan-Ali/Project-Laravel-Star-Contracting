@@ -67,8 +67,6 @@
                                     </th>
                                     <th>@lang('specs.specs')</th>
                                     <th>@lang('specs.type')</th>
-                                    <th>@lang('admins.name')</th>
-                                    <th>@lang('site.created_at')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -106,11 +104,9 @@
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'name', name: 'name'},
                 {data: 'type', name: 'type'},
-                {data: 'admin', name: 'admin'},
-                {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
-            order: [[5, 'desc']],
+            order: [[2, 'desc']],
             drawCallback: function (settings) {
                 $('.record__select').prop('checked', false);
                 $('#record__select-all').prop('checked', false);

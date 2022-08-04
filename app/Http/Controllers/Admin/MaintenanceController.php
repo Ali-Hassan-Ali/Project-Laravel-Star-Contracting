@@ -40,19 +40,19 @@ class MaintenanceController extends Controller
                 return view('admin.maintenances.data_table._scheduled', compact('maintenance'));
             })
             ->editColumn('last_service_date', function (Maintenance $maintenance) {
-                return date('d-m-Y', strtotime($maintenance->last_service_date));
+                return $maintenance->last_service_date ? date('d-m-Y', strtotime($maintenance->last_service_date)) : '';
             })
             ->editColumn('next_service_date', function (Maintenance $maintenance) {
-                return date('d-m-Y', strtotime($maintenance->next_service_date));
+                return $maintenance->next_service_date ? date('d-m-Y', strtotime($maintenance->next_service_date)) : '';
             })
             ->editColumn('actual_service_date', function (Maintenance $maintenance) {
-                return date('d-m-Y', strtotime($maintenance->actual_service_date));
+                return $maintenance->actual_service_date ? date('d-m-Y', strtotime($maintenance->actual_service_date)) : '';
             })
             ->addColumn('admin', function (Maintenance $maintenance) {
-                return $maintenance->admin->name;
+                return $maintenance->admin->name ?? '';
             })
             ->addColumn('equipment', function (Maintenance $maintenance) {
-                return $maintenance->equipment->name;
+                return $maintenance->equipment->name ?? '';
             })
             ->addColumn('actions', 'admin.maintenances.data_table.actions')
             ->rawColumns(['record_select', 'actions'])
