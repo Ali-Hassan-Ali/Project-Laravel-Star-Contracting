@@ -148,7 +148,7 @@
                         </div>
 
                         {{--registration_expiry--}}
-                        <div class="form-group col-6">
+                        <div class="form-group col-12">
                             <label>@lang('equipments.registration_expiry')</label>
                             <input {{ old('type') == 'Vehicle' ? '' : 'disabled' }} type="date" name="registration_expiry" id="registration-expiry" class="form-control @error('registration_expiry') custom-select @enderror" value="{{ old('registration_expiry') }}" autofocus>
                             @error('registration_expiry')
@@ -320,18 +320,19 @@
                             @enderror
                         </div>
 
+                        <div class="form-group col-6">
+                            <label>@lang('insurances.claim_attachments') <span class="text-danger">*</span></label>
+                            <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
+                            @error('attachments')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                     </div>{{-- row --}}
 
                     {{-- attachments --}}
-                    <div class="form-group">
-                        <label>@lang('insurances.claim_attachments') <span class="text-danger">*</span></label>
-                        <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
-                        @error('attachments')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
 
 
 
