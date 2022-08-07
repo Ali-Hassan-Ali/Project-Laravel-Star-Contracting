@@ -1,4 +1,9 @@
-$(document).ready(function() {
+$(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
 
 	$(document).on('change', '#equipment-countrey', function(e) {
@@ -46,15 +51,15 @@ $(document).ready(function() {
 
 				$.each(data, function(index,item) {
 
-                    // var html = `<option value="${item.id}">${item.make} ${item.name} ${item.plate_no}</option>`;
+                    var html = `<option value="${item.id}">${item.make} ${item.name} ${item.plate_no}</option>`;
 
-                    $('#equipment-man').append('aaaaaaaaa');
+                    $('#equipment-man').append(html);
 
                 });//end of each
 
 			}//end of success
-		});
+		})
 
 	});//end of countrey
-	
-});//end of redy function
+
+});//end of ready
