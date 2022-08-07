@@ -15,7 +15,7 @@ return [
     'rental_cost_basis'   => 'rental cost basis',
     'driver_salary'       => 'driver salary',
     'rental_basis'        => 'rental basis',
-    'make'                => 'make',
+    'make'                => 'Make',
     'model'               => 'model',
     'owner_ship'          => 'ownership',
     'operator'            => 'operator',

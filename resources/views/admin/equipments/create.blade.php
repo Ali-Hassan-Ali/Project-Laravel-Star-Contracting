@@ -123,7 +123,7 @@
                         <div class="form-group col-6 @error('model') custom-select @enderror">
                             <label>@lang('equipments.model')</label>
                             <select name="model" class="form-control select2">
-                                <option value="" selected>@lang('site.null') @lang('equipments.model')</option>
+                                <option value="" selected>#</option>
                                 @foreach ($models as $model)
                                     <option value="{{ $model->name }}" {{ $model->name == old('model') ? 'selected' : '' }}>{{ $model->name }}</option>
                                 @endforeach
