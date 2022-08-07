@@ -367,6 +367,7 @@
                 success: function (data) {
                     
                     $('#city').empty('');
+                    $('#city').append(`<option selected disabled>Choose city</option>`);
 
                     $.each(data, function(index,item) {
 
@@ -396,6 +397,7 @@
                 success: function (data) {
                     
                     $('#spec-id').empty('');
+                    $('#spec-id').append(`<option selected disabled>Choose</option>`);
 
                     $.each(data, function(index,item) {
 
