@@ -152,7 +152,7 @@
 
                     {{--registration_expiry--}}
                     <div class="form-group">
-                        <label>@lang('equipments.registration_expiry')<span class="text-danger">*</span></label>
+                        <label>@lang('equipments.registration_expiry')</label>
                         <input {{ $equipment->type == 'Vehicle' ? '' : 'disabled' }} id="registration-expiry" type="date" name="registration_expiry" class="form-control @error('registration_expiry') custom-select @enderror" value="{{  old('registration_expiry', $equipment->registration_expiry ? date('Y-m-d', strtotime($equipment->registration_expiry)) : '') }}" autofocus>
                         @error('registration_expiry')
                             <span class="invalid-feedback" role="alert">
