@@ -77,7 +77,6 @@ class SpareController extends Controller
     
     public function store(SpareRequest $request)
     {
-        dd(json_decode($request->equipments));
 
         $validated = $request->validated();
         $validated = $request->safe()->except(['attachments','used','usage_date', 'equipments']);
