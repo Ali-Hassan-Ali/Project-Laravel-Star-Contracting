@@ -113,8 +113,8 @@
                         {{--$number--}}
                         <div class="form-group">
                             <label>@lang('fuels.' . $number)<span class="text-danger">*</span></label>
-                            {{-- <input type="number" {{ $number == 'average_mileage_reading' ? 'disabled' : '' || $number == 'total_cost_of_fuel' ? 'disabled' : '' }} id="{{ $number }}" name="{{ $number }}" class="form-control @error($number) is-invalid @enderror" value="{{ old($number, 0) }}" required autofocus> --}}
-                            <input type="number" {{ $number == 'average_mileage_reading' ? 'disabled' : '' }} id="{{ $number }}" name="{{ $number }}" class="form-control @error($number) is-invalid @enderror" value="{{ old($number, 0) }}" required autofocus>
+                            <input type="number" {{ $number == 'average_mileage_reading' ? 'disabled' : '' || $number == 'total_cost_of_fuel' ? 'disabled' : '' }} id="{{ $number }}" name="{{ $number }}" class="form-control @error($number) is-invalid @enderror" value="{{ old($number, 0) }}" required autofocus>
+                            {{-- <input type="number" {{ $number == 'average_mileage_reading' ? 'disabled' : '' }} id="{{ $number }}" name="{{ $number }}" class="form-control @error($number) is-invalid @enderror" value="{{ old($number, 0) }}" required autofocus> --}}
                             @error($number)
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
