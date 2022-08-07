@@ -6,8 +6,8 @@ return [
     
     'plate_no'   => 'Plate No',
     'chasis_no'  => 'Chasis No',
-    'engine_no'  => 'Engine Mo',
-    'serial_no'  => 'Serial Mo',
+    'engine_no'  => 'Engine No',
+    'serial_no'  => 'Serial No',
     'attachments'=> 'Attachments',
     'attachments_name'=> 'Attachments Name',
 
