@@ -44,86 +44,87 @@
                             </select>
                         </div>
 
-                    </div>
+                        {{--equipment_id--}}
+                        <div class="form-group col-6 @error('equipment_id') custom-select @enderror">
+                            <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
+                            <select name="equipment_id" id="equipment-man" class="form-control select2" required>
+                                <option value="" selected disabled>@lang('site.choose') @lang('equipments.equipments')</option>
+                                @foreach ($equipments as $equipment)
+                                    <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $status->equipment_id) ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
+                                @endforeach
+                            </select>
+                            @error('equipment_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-                    {{--equipment_id--}}
-                    <div class="form-group @error('equipment_id') custom-select @enderror">
-                        <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
-                        <select name="equipment_id" id="equipment-man" class="form-control select2" required>
-                            <option value="" selected disabled>@lang('site.choose') @lang('equipments.equipments')</option>
-                            @foreach ($equipments as $equipment)
-                                <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $status->equipment_id) ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
-                            @endforeach
-                        </select>
-                        @error('equipment_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                        {{--as_of--}}
+                        <div class="form-group col-6">
+                            <label>@lang('status.as_of') <span class="text-danger">*</span></label>
+                            <input type="date" disabled class="form-control @error('as_of') is-invalid @enderror" value="{{ old('as_of', date('Y-m-d', strtotime($status->as_of)) ) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                            @error('as_of')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-                    {{--as_of--}}
-                    <div class="form-group">
-                        <label>@lang('status.as_of') <span class="text-danger">*</span></label>
-                        <input type="date" disabled class="form-control @error('as_of') is-invalid @enderror" value="{{ old('as_of', date('Y-m-d', strtotime($status->as_of)) ) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
-                        @error('as_of')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                        <input type="date" hidden id="as_of" name="as_of" class="form-control" value="{{ old('as_of', date('Y-m-d', strtotime( $status->as_of ))) }}" max="{{ date('Y-m-d', strtotime( now() )) }}">
 
-                    <input type="date" hidden id="as_of" name="as_of" class="form-control" value="{{ old('as_of', date('Y-m-d', strtotime( $status->as_of ))) }}" max="{{ date('Y-m-d', strtotime( now() )) }}">
+                        @php
+                            $statusing = ['Breakdown', 'Working'];
+                        @endphp
 
-                    @php
-                        $statusing = ['Breakdown', 'Working'];
-                    @endphp
+                        {{--working_status--}}
+                        <div class="form-group col-6">
+                            <label>@lang('status.working_status') <span class="text-danger">*</span></label>
+                            <select name="working_status" id="working-status" class="form-control select2" required>
+                                <option value="" selected disabled>@lang('site.choose') @lang('status.working_status')</option>
+                                @foreach ($statusing as $statu)
+                                    <option value="{{ $statu }}" {{ $statu == old('working_status', $status->working_status) ? 'selected' : '' }}>@lang('status.' . $statu)</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                    {{--working_status--}}
-                    <div class="form-group">
-                        <label>@lang('status.working_status') <span class="text-danger">*</span></label>
-                        <select name="working_status" id="working-status" class="form-control select2" required>
-                            <option value="" selected disabled>@lang('site.choose') @lang('status.working_status')</option>
-                            @foreach ($statusing as $statu)
-                                <option value="{{ $statu }}" {{ $statu == old('working_status', $status->working_status) ? 'selected' : '' }}>@lang('status.' . $statu)</option>
-                            @endforeach
-                        </select>
-                    </div>
+                        {{--hours_worked--}}
+                        <div class="form-group col-6">
+                            <label>@lang('status.hours_worked') <span class="text-danger">*</span></label>
+                            <input type="number" id="hours_worked" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', $status->hours_worked) }}" autofocus>
+                            @error('hours_worked')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-                    {{--hours_worked--}}
-                    <div class="form-group">
-                        <label>@lang('status.hours_worked') <span class="text-danger">*</span></label>
-                        <input type="number" id="hours_worked" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', $status->hours_worked) }}" autofocus>
-                        @error('hours_worked')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                        {{--break_down_date--}}
+                        <div class="form-group col-6">
+                            <label>@lang('status.break_down_date') <span class="text-danger">*</span></label>
+                            <input type="date" {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} id="break_down_date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date', date('Y-m-d', strtotime( $status->hours_worked ))) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                            @error('break_down_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-                    {{--break_down_date--}}
-                    <div class="form-group">
-                        <label>@lang('status.break_down_date') <span class="text-danger">*</span></label>
-                        <input type="date" {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} id="break_down_date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date', date('Y-m-d', strtotime( $status->hours_worked ))) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
-                        @error('break_down_date')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                        {{--break_down_duration--}}
+                        <div class="form-group col-6">
+                            <label>@lang('status.break_down_duration') <span class="text-danger">*</span></label>
+                            <input type="number" disabled id="break_down_duration" class="form-control @error('break_down_duration') is-invalid @enderror" value="{{ old('break_down_duration', $status->break_down_duration) }}" autofocus>
+                            @error('break_down_duration')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-                    {{--break_down_duration--}}
-                    <div class="form-group">
-                        <label>@lang('status.break_down_duration') <span class="text-danger">*</span></label>
-                        <input type="number" disabled id="break_down_duration" class="form-control @error('break_down_duration') is-invalid @enderror" value="{{ old('break_down_duration', $status->break_down_duration) }}" autofocus>
-                        @error('break_down_duration')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                        <input type="number" hidden id="break_down_duration_hidden" name="break_down_duration" class="form-control" value="{{ old('break_down_duration', $status->break_down_duration) }}">
 
-                    <input type="number" hidden id="break_down_duration_hidden" name="break_down_duration" class="form-control" value="{{ old('break_down_duration', $status->break_down_duration) }}">
+                    </div>{{-- row --}}
+
 
                     {{-- break_down_description --}}
                     <div class="form-group">
