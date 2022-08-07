@@ -119,6 +119,8 @@ class EquipmentController extends Controller
         $validated['make']     = $this->tagMake($request);
         if ($request->model) {
             $validated['model']    = $this->tagModel($request);
+        } else {
+            $validated['model']    = null;
         }
         $validated['type']     = $this->tagType($request);
         $validated['name']     = $this->tagEquipment($request);
@@ -201,6 +203,8 @@ class EquipmentController extends Controller
         $validated['make']     = $this->tagMake($request);
         if ($request->model) {
             $validated['model']    = $this->tagModel($request);
+        } else {
+            $validated['model']    = null;
         }
         $validated['type']     = $this->tagType($request);
         $validated['name']     = $this->tagEquipment($request);
