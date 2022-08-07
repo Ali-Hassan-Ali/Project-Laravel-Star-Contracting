@@ -24,7 +24,7 @@ class SpareRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'equipment_id'           => ['required','numeric'],
+            'equipments'             => ['required','array'],
             'name'                   => ['required','min:2','max:255'],
             'part_no'                => ['required','min:2','max:255'],
             'used'                   => ['nullable','in:1,0'],

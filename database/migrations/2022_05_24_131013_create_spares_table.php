@@ -15,7 +15,7 @@ class CreateSparesTable extends Migration
     {
         Schema::create('spares', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Equipment::class)->onDelete('cascade');
+            $table->json('equipments');
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
 
             $table->integer('cost');

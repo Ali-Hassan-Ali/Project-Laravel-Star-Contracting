@@ -49,7 +49,7 @@
                         {{-- equipment --}}
                         <div class="form-group @error('equipment_id') custom-select @enderror">
                             <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
-                            <select name="equipment_id" id="equipment-man" class="form-control select2" required>
+                            <select name="equipments[]" multiple id="equipment-man" class="form-control select2" required>
                                 <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
                                 @foreach ($equipments as $equipment)
                                     <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $spare->equipment_id) ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>

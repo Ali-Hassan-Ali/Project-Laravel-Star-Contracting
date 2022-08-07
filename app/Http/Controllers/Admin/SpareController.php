@@ -55,7 +55,7 @@ class SpareController extends Controller
                 return view('admin.spares.data_table._attachments', compact('spare'));
             })
             ->addColumn('equipment', function (Spare $spare) {
-                return $spare->equipment->name ?? '';
+                return view('admin.spares.data_table._equipment', compact('spare'));
             })
             ->addColumn('actions', 'admin.spares.data_table.actions')
             ->rawColumns(['record_select', 'actions','equipment'])
@@ -77,12 +77,14 @@ class SpareController extends Controller
     
     public function store(SpareRequest $request)
     {
+        dd(json_decode($request->equipments));
+
         $validated = $request->validated();
-        $validated = $request->safe()->except(['attachments','used','usage_date']);
+        $validated = $request->safe()->except(['attachments','used','usage_date', 'equipments']);
 
         $validated['used']       = request()->has('used') ? '1' : '0';
         $validated['user_id']    = auth()->id();
-        // $validated['usage_date'] = $request->has('usage_date') ?? null;
+        $validated['equipments'] = json_encode($request->equipments);
 
         $spare = Spare::create($validated);
 
@@ -116,10 +118,11 @@ class SpareController extends Controller
     public function update(SpareRequest $request, Spare $spare)
     {
         $validated = $request->validated();
-        $validated = $request->safe()->except(['attachments','used']);
+        $validated = $request->safe()->except(['attachments','used', 'equipments']);
 
-        $validated['used']    = request()->has('used') ? '1' : '0';
-        $validated['user_id'] = auth()->id();
+        $validated['used']       = request()->has('used') ? '1' : '0';
+        $validated['user_id']    = auth()->id();
+        $validated['equipments'] = json_encode($request->equipments);
 
         $spare->update($validated);
 
