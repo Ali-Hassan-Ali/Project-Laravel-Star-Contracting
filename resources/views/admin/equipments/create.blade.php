@@ -181,7 +181,7 @@
                         </div>
 
                         {{--owner_ship--}}
-                        <div class="form-group col-6 @error('owner_ship') custom-select @enderror">
+                        <div class="form-group col-12 @error('owner_ship') custom-select @enderror">
                             <label>@lang('equipments.owner_ship') <span class="text-danger">*</span></label>
                             <select name="owner_ship" id="owner-ship" class="form-control select2" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.owner_ship')</option>
@@ -320,19 +320,19 @@
                             @enderror
                         </div>
 
-                        <div class="form-group col-6">
-                            <label>@lang('insurances.claim_attachments') <span class="text-danger">*</span></label>
-                            <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
-                            @error('attachments')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
 
                     </div>{{-- row --}}
 
                     {{-- attachments --}}
+                    <div class="form-group">
+                        <label>@lang('insurances.claim_attachments') <span class="text-danger">*</span></label>
+                        <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
+                        @error('attachments')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
 
 
