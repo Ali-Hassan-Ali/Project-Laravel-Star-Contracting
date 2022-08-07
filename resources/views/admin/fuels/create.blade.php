@@ -109,10 +109,21 @@
                         </div>
 
                         {{--$data_time--}}
-                        <div class="form-group col-12">
+                        <div class="form-group col-6">
                             <label>@lang('fuels.no_of_units_filled')<span class="text-danger">*</span></label>
                             <input type="number" id="no-of-unit-filled" name="no_of_units_filled" class="form-control @error('no_of_units_filled') is-invalid @enderror" value="{{ old('no_of_units_filled', 0) }}" required autofocus>
                             @error('no_of_units_filled')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{--fuel_rate_per_litre--}}
+                        <div class="form-group col-6">
+                            <label>@lang('fuels.fuel_rate_per_litre')<span class="text-danger">*</span></label>
+                            <input type="number" id="fuel_rate_per_litre" name="fuel_rate_per_litre" class="form-control @error('average_mileage_reading') is-invalid @enderror" value="{{ old('fuel_rate_per_litre', 0) }}" required autofocus>
+                            @error('fuel_rate_per_litre')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -130,16 +141,6 @@
                             @enderror
                         </div>
 
-                        {{--fuel_rate_per_litre--}}
-                        <div class="form-group col-6">
-                            <label>@lang('fuels.fuel_rate_per_litre')<span class="text-danger">*</span></label>
-                            <input type="number" id="fuel_rate_per_litre" name="fuel_rate_per_litre" class="form-control @error('average_mileage_reading') is-invalid @enderror" value="{{ old('fuel_rate_per_litre', 0) }}" required autofocus>
-                            @error('fuel_rate_per_litre')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
 
                         {{--last_mileage_reading--}}
                         <div class="form-group col-6">
