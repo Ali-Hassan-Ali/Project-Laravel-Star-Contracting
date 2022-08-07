@@ -44,7 +44,7 @@ class CreateEquipmentTable extends Migration
             $table->text('allocated_to')->nullable();
             $table->text('email')->nullable();
 
-            $table->dateTime('registration_expiry');
+            $table->dateTime('registration_expiry')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

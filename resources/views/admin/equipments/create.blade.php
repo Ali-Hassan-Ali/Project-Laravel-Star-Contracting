@@ -80,13 +80,13 @@
 
                     {{--plate_no--}}
                     <div class="form-group">
-                        <label>@lang('equipments.plate_no')<span class="text-danger">*</span></label>
+                        <label>@lang('equipments.plate_no')</label>
                         <input type="text" name="plate_no" class="form-control @error('plate_no') custom-select @enderror" value="{{ old('plate_no') }}" autofocus>
                     </div>
 
                     {{--chasis_no--}}
                     <div class="form-group">
-                        <label>@lang('equipments.chasis_no')<span class="text-danger">*</span></label>
+                        <label>@lang('equipments.chasis_no')</label>
                         <input type="text" name="chasis_no" class="form-control @error('engine_no') custom-select @enderror" value="{{ old('chasis_no') }}" autofocus>
                         @error('engine_no')
                             <span class="invalid-feedback" role="alert">
@@ -97,7 +97,7 @@
 
                     {{--engine_no--}}
                     <div class="form-group">
-                        <label>@lang('equipments.engine_no')<span class="text-danger">*</span></label>
+                        <label>@lang('equipments.engine_no')</label>
                         <input type="text" name="engine_no" class="form-control @error('engine_no') custom-select @enderror" value="{{ old('engine_no') }}" autofocus>
                         @error('engine_no')
                             <span class="invalid-feedback" role="alert">
@@ -108,7 +108,7 @@
 
                     {{--serial_no--}}
                     <div class="form-group">
-                        <label>@lang('equipments.serial_no')<span class="text-danger">*</span></label>
+                        <label>@lang('equipments.serial_no')</label>
                         <input type="text" name="serial_no" class="form-control @error('serial_no') custom-select @enderror" value="{{ old('serial_no') }}" autofocus>
                         @error('serial_no')
                             <span class="invalid-feedback" role="alert">
@@ -119,7 +119,7 @@
 
                     {{--model--}}
                     <div class="form-group @error('model') custom-select @enderror">
-                        <label>@lang('equipments.model') <span class="text-danger">*</span></label>
+                        <label>@lang('equipments.model')</label>
                         <select name="model" class="form-control select2">
                             <option value="" selected>@lang('site.null') @lang('equipments.model')</option>
                             @foreach ($models as $model)
@@ -136,7 +136,7 @@
 
                     {{--year_of_manufacture--}}
                     <div class="form-group">
-                        <label>@lang('equipments.year_of_manufacture')<span class="text-danger">*</span></label>
+                        <label>@lang('equipments.year_of_manufacture')</label>
                         <input type="test" name="year_of_manufacture" class="form-control @error('year_of_manufacture') custom-select @enderror" value="{{ old('year_of_manufacture') }}" autofocus>
                         @error('year_of_manufacture')
                             <span class="invalid-feedback" role="alert">
