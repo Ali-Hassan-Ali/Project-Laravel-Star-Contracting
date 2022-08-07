@@ -29,9 +29,6 @@ class CreateSparesTable extends Migration
             $table->date('usage_date')->nullable();
             $table->text('description')->nullable();
 
-            $table->foreignIdFor(\App\Models\Country::class)->onDelete('cascade')->nullable();
-            $table->foreignIdFor(\App\Models\City::class)->onDelete('cascade');
-
             $table->softDeletes();
             $table->timestamps();
         });

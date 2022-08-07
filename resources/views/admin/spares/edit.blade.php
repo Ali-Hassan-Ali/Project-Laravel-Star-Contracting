@@ -150,17 +150,6 @@
                         @enderror
                     </div>
 
-                    {{--citys--}}
-                    <div class="form-group">
-                        <label>@lang('spares.location') <span class="text-danger">*</span></label>
-                        <select name="city_id" class="form-control select2" required>
-                            <option value="" selected disabled>@lang('site.choose') @lang('spares.location')</option>
-                            @foreach ($citys as $city)
-                                <option value="{{ $city->id }}" {{ $city->id == old('city_id', $spare->city_id) ? 'selected' : '' }}>{{ $city->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
                     
                     {{-- attachments --}}
                     <div class="form-group">

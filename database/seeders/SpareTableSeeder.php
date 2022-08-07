@@ -22,8 +22,6 @@ class SpareTableSeeder extends Seeder
                 'user_id'           => 1,
                 'cost'              => 1,
                 'freight_charges'   => 20,
-                'country_id'        => 1,
-                'city_id'           => 1,
                 'name'              => 'spare name',
                 'part_no'           => 'part no',
                 'used'              => '1',

@@ -30,7 +30,6 @@ class SpareRequest extends FormRequest
             'used'                   => ['nullable','in:1,0'],
             'freight_charges'        => ['required','numeric'],
             'cost'                   => ['required','numeric'],
-            'city_id'                => ['required','numeric'],
             'description'            => ['required_if:used,==,1'],
             'usage_date'             => ['required_if:used,==,1','date'],
         ];
