@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InsuranceRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Insurance;
+use App\Models\Country;
 use App\Models\Equipment;
 use App\Models\ComboBox;
 use App\Models\Attachment;
@@ -70,9 +71,10 @@ class InsuranceController extends Controller
     {
         $equipments = Equipment::all();
         $insurers   = ComboBox::where('type', 'insurer')->get();
+        $countrys   = Country::all();
         $type_insurances  = ComboBox::where('type', 'type_of_insurance')->get();
 
-        return view('admin.insurances.create', compact('equipments', 'insurers', 'type_insurances'));
+        return view('admin.insurances.create', compact('equipments', 'insurers', 'type_insurances', 'countrys'));
 
     }// end of create
 
@@ -109,8 +111,9 @@ class InsuranceController extends Controller
         $equipments       = Equipment::all();
         $insurers         = ComboBox::where('type', 'insurer')->get();
         $type_insurances  = ComboBox::where('type', 'type_of_insurance')->get();
+        $countrys         = Country::all();
 
-        return view('admin.insurances.edit', compact('insurance', 'equipments', 'insurers', 'type_insurances'));
+        return view('admin.insurances.edit', compact('insurance', 'equipments', 'insurers', 'type_insurances', 'countrys'));
 
     }// end of edit
 

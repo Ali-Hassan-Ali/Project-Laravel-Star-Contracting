@@ -68,8 +68,9 @@ class SpareController extends Controller
     {
         $equipments = Equipment::all();
         $citys      = City::all();
+        $countrys   = Country::all();
 
-        return view('admin.spares.create', compact('equipments', 'citys'));
+        return view('admin.spares.create', compact('equipments', 'citys', 'countrys'));
 
     }//end of create
 
@@ -105,8 +106,9 @@ class SpareController extends Controller
     {
         $equipments = Equipment::all();
         $citys      = City::all();
+        $countrys   = Country::all();
 
-        return view('admin.spares.edit', compact('spare', 'equipments', 'citys'));
+        return view('admin.spares.edit', compact('spare', 'equipments', 'citys', 'countrys'));
 
     }//end of edit
 

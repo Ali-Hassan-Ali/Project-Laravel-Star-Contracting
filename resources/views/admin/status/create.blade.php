@@ -27,7 +27,7 @@
                         {{--equipment_id--}}
                         <div class="col-6">
                             <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
-                            <select class="form-control col-6 select2" id="equipment-countrey" required>
+                            <select class="form-control col-6 select2" id="equipment-countrey">
                                 <option value="" selected disabled>@lang('site.choose') @lang('countrys.countrys')</option>
                                 @foreach ($countrys as $country)
                                     <option value="{{ $country->id }}" 
@@ -39,12 +39,12 @@
                         {{--equipment_id--}}
                         <div class="col-6">
                             <label>@lang('citys.citys') <span class="text-danger">*</span></label>
-                            <select class="form-control select2" required id="equipment-city">
+                            <select class="form-control select2" id="equipment-city">
                                 
                             </select>
                         </div>
 
-                    </div>
+                    </div>{{-- row --}}
 
 
 

@@ -81,8 +81,9 @@ class StatusController extends Controller
     public function edit(Status $status)
     {
         $equipments = Equipment::all();
+        $countrys   = Country::all();
 
-        return view('admin.status.edit', compact('status','equipments'));
+        return view('admin.status.edit', compact('status', 'equipments', 'countrys'));
 
     }// end of edit
 
