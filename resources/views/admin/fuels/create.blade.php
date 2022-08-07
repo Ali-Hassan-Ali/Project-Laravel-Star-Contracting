@@ -82,7 +82,7 @@
                         @endforeach
 
                         {{--fuel_types--}}
-                        <div class="form-group @error('fuel_type') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('fuels.fuel_type') <span class="text-danger">*</span></label>
                             <select name="fuel_type" class="form-control select2" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('fuels.fuel_type')</option>
@@ -109,7 +109,7 @@
                         </div>
 
                         {{--$data_time--}}
-                        <div class="form-group col-6">
+                        <div class="form-group col-12">
                             <label>@lang('fuels.no_of_units_filled')<span class="text-danger">*</span></label>
                             <input type="number" id="no-of-unit-filled" name="no_of_units_filled" class="form-control @error('no_of_units_filled') is-invalid @enderror" value="{{ old('no_of_units_filled', 0) }}" required autofocus>
                             @error('no_of_units_filled')
