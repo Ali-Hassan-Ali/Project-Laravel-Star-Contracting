@@ -23,42 +23,65 @@
                 <form method="post" action="{{ route('admin.fuels.store') }}">
                     @csrf
                     @method('post')
- 
-                    {{--equipment_id--}}
-                    <div class="form-group @error('equipment_id') custom-select @enderror">
-                        <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
-                        <select name="equipment_id" class="form-control select2" required>
-                            <option value="" selected disabled>@lang('site.choose') @lang('equipments.equipments')</option>
-                            @foreach ($equipments as $equipment)
-                                <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
-                            @endforeach
-                        </select>
-                        @error('equipment_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
 
-
-                    @php
-                        $data_times = ['last_date','next_date'];
-                    @endphp
-
-                    @foreach ($data_times as $data_time)
+                    <div class="row">
                         
-                        {{--$data_time--}}
-                        <div class="form-group">
-                            <label>@lang('fuels.' . $data_time)<span class="text-danger">*</span></label>
-                            <input type="date" name="{{ $data_time }}" class="form-control @error($data_time) is-invalid @enderror" value="{{ old($data_time) }}" required autofocus>
-                            @error($data_time)
+                        {{--equipment_id--}}
+                        <div class="form-group col-6">
+                            <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
+                            <select class="form-control col-6 select2" id="equipment-countrey">
+                                <option value="" selected disabled>@lang('site.choose') @lang('countrys.countrys')</option>
+                                @foreach ($countrys as $country)
+                                    <option value="{{ $country->id }}" 
+                                        data-url="{{ route('admin.ajax.country', $country->id) }}">{{ $country->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{--equipment_id--}}
+                        <div class="form-group col-6">
+                            <label>@lang('citys.citys') <span class="text-danger">*</span></label>
+                            <select class="form-control select2" id="equipment-city">
+                                
+                            </select>
+                        </div>
+
+                        {{--equipment_id--}}
+                        <div class="form-group @error('equipment_id') custom-select @enderror">
+                            <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
+                            <select name="equipment_id" id="equipment-man" class="form-control select2" required>
+                                <option value="" selected disabled>@lang('site.choose') @lang('equipments.equipments')</option>
+                                @foreach ($equipments as $equipment)
+                                    <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
+                                @endforeach
+                            </select>
+                            @error('equipment_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
 
-                    @endforeach
+                        @php
+                            $data_times = ['last_date','next_date'];
+                        @endphp
+
+                        @foreach ($data_times as $data_time)
+                            
+                            {{--$data_time--}}
+                            <div class="form-group col-6">
+                                <label>@lang('fuels.' . $data_time)<span class="text-danger">*</span></label>
+                                <input type="date" name="{{ $data_time }}" class="form-control @error($data_time) is-invalid @enderror" value="{{ old($data_time) }}" required autofocus>
+                                @error($data_time)
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                        @endforeach
+
+                    </div>{{-- row --}}
 
                     {{--unit--}}
                     <div class="form-group @error('unit') custom-select @enderror">
