@@ -52,7 +52,8 @@
                             <select name="equipments[]" multiple id="equipment-man" class="form-control select2" required>
                                 <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
                                 @foreach ($equipments as $equipment)
-                                    <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $spare->equipment_id) ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
+                                    <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $spare->equipment_id) ? 'selected' : '' }}
+                                        {{ in_array($equipment->id, json_encode($spare->equipments)) ? 'selected' :  ''}}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
                                 @endforeach
                             </select>
                             @error('equipment_id')
