@@ -21,6 +21,7 @@ return [
 
     'yes'=> 'Yes',
     'no' => 'No',
+    'null' => 'Null',
 
     '1' => 'Yes',
     '0' => 'No',

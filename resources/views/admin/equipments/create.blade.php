@@ -98,7 +98,7 @@
                     {{--engine_no--}}
                     <div class="form-group">
                         <label>@lang('equipments.engine_no')<span class="text-danger">*</span></label>
-                        <input type="text" name="engine_no" class="form-control @error('engine_no') custom-select @enderror" value="{{ old('engine_no') }}" required autofocus>
+                        <input type="text" name="engine_no" class="form-control @error('engine_no') custom-select @enderror" value="{{ old('engine_no') }}" autofocus>
                         @error('engine_no')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -121,7 +121,7 @@
                     <div class="form-group @error('model') custom-select @enderror">
                         <label>@lang('equipments.model') <span class="text-danger">*</span></label>
                         <select name="model" class="form-control select2">
-                            <option value="" selected disabled>@lang('site.choose') @lang('equipments.model')</option>
+                            <option value="" selected>@lang('site.null') @lang('equipments.model')</option>
                             @foreach ($models as $model)
                                 <option value="{{ $model->name }}" {{ $model->name == old('model') ? 'selected' : '' }}>{{ $model->name }}</option>
                             @endforeach
