@@ -117,7 +117,9 @@ class EquipmentController extends Controller
         $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to','attachments']);
 
         $validated['make']     = $this->tagMake($request);
-        $validated['model']    = $this->tagModel($request);
+        if ($request->model) {
+            $validated['model']    = $this->tagModel($request);
+        }
         $validated['type']     = $this->tagType($request);
         $validated['name']     = $this->tagEquipment($request);
         $validated['operator'] = $this->tagOperator($request);
@@ -197,7 +199,9 @@ class EquipmentController extends Controller
         $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to','attachments']);
 
         $validated['make']     = $this->tagMake($request);
-        $validated['model']    = $this->tagModel($request);
+        if ($request->model) {
+            $validated['model']    = $this->tagModel($request);
+        }
         $validated['type']     = $this->tagType($request);
         $validated['name']     = $this->tagEquipment($request);
         $validated['operator'] = $this->tagOperator($request);
