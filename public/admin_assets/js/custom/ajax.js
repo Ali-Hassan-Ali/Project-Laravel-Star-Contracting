@@ -46,9 +46,9 @@ $(document).ready(function() {
 
 				$.each(data, function(index,item) {
 
-                    var html = `<option value="${item.id}">${item.make} ${item.name} ${item.plate_no}</option>`;
+                    // var html = `<option value="${item.id}">${item.make} ${item.name} ${item.plate_no}</option>`;
 
-                    $('#equipment-man').append(html);
+                    $('#equipment-man').append('aaaaaaaaa');
 
                 });//end of each
 
