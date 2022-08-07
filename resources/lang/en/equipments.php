@@ -2,7 +2,7 @@
 
 return [
     'equipments' => 'Equipment',
-    'name'       => 'Equipment name',
+    'name'       => 'Equipment Name',
     
     'plate_no'   => 'plate no',
     'chasis_no'  => 'chasis no',

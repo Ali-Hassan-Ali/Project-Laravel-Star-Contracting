@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'specs'         => 'Specifications',
+    'specs'         => 'Specification',
     'name'          => 'name',
     'type'          => 'type',
     'description'   => 'description',
