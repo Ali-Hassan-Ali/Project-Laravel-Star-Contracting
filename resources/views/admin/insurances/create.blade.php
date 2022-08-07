@@ -24,10 +24,10 @@
 
                     @include('admin.partials._errors')
 
-                    <div class="row mb-1">
+                    <div class="row">
                         
                         {{--equipment_id--}}
-                        <div class="col-6">
+                        <div class="form-group col-6">
                             <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
                             <select class="form-control col-6 select2" id="equipment-countrey" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('countrys.countrys')</option>
@@ -39,110 +39,114 @@
                         </div>
 
                         {{--equipment_id--}}
-                        <div class="col-6">
+                        <div class="form-group col-6">
                             <label>@lang('citys.citys') <span class="text-danger">*</span></label>
                             <select class="form-control select2" required id="equipment-city">
                                 
                             </select>
                         </div>
-
-                    </div>
-
-                    {{--equipments--}}
-                    <div class="form-group @error('equipment_id') custom-select @enderror">
-                        <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
-                        <select name="equipment_id" id="equipment-man" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
-                            {{-- @foreach ($equipments as $equipment)
-                                <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
-                            @endforeach --}}
-                        </select>
-                        @error('equipment_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{--insurer--}}
-                    <div class="form-group @error('insurer') custom-select @enderror">
-                        <label>@lang('insurances.insurer') <span class="text-danger">*</span></label>
-                        <select name="insurer" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('insurances.insurer')</option>
-                            @foreach ($insurers as $insurer)
-                                <option value="{{ $insurer->name }}" {{ $insurer->name == old('insurer') ? 'selected' : '' }}>{{ $insurer->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('insurer')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{-- type_of_insurance --}}
-                    <div class="form-group @error('type_of_insurance') custom-select @enderror">
-                        <label>@lang('insurances.type_of_insurance') <span class="text-danger">*</span></label>
-                        <select name="type_of_insurance" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('insurances.type_of_insurance')</option>
-                            @foreach ($type_insurances as $type_insur)
-                                <option value="{{ $type_insur->name }}" {{ $type_insur->name == old('type_of_insurance') ? 'selected' : '' }}>{{ $type_insur->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('type_of_insurance')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{-- premium --}}
-                    <label>@lang('insurances.premium') <span class="text-danger">*</span></label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
+                        {{--equipments--}}
+                        <div class="form-group @error('equipment_id') custom-select @enderror">
+                            <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
+                            <select name="equipment_id" id="equipment-man" class="form-control select2" required>
+                                <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
+                                {{-- @foreach ($equipments as $equipment)
+                                    <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
+                                @endforeach --}}
+                            </select>
+                            @error('equipment_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                        <input type="number" name="premium" class="form-control @error('premium') is-invalid @enderror" value="{{ old('premium') }}" required>
-                        @error('premium')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
 
-                    {{-- policy_number --}}
-                    <div class="form-group">
-                        <label>@lang('insurances.policy_number') <span class="text-danger">*</span></label>
-                        <input type="text" name="policy_number" autofocus class="form-control @error('policy_number') is-invalid @enderror" value="{{ old('policy_number') }}" required>
-                        @error('policy_number')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                        {{--insurer--}}
+                        <div class="form-group col-6 @error('insurer') custom-select @enderror">
+                            <label>@lang('insurances.insurer') <span class="text-danger">*</span></label>
+                            <select name="insurer" class="form-control select2" required>
+                                <option value="">@lang('site.choose') @lang('insurances.insurer')</option>
+                                @foreach ($insurers as $insurer)
+                                    <option value="{{ $insurer->name }}" {{ $insurer->name == old('insurer') ? 'selected' : '' }}>{{ $insurer->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('insurer')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- type_of_insurance --}}
+                        <div class="form-group col-6 @error('type_of_insurance') custom-select @enderror">
+                            <label>@lang('insurances.type_of_insurance') <span class="text-danger">*</span></label>
+                            <select name="type_of_insurance" class="form-control select2" required>
+                                <option value="">@lang('site.choose') @lang('insurances.type_of_insurance')</option>
+                                @foreach ($type_insurances as $type_insur)
+                                    <option value="{{ $type_insur->name }}" {{ $type_insur->name == old('type_of_insurance') ? 'selected' : '' }}>{{ $type_insur->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('type_of_insurance')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- premium --}}
+                        <div class="form-group col-6">
+                            <label>@lang('insurances.premium') <span class="text-danger">*</span></label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" name="premium" class="form-control @error('premium') is-invalid @enderror" value="{{ old('premium') }}" required>
+                                @error('premium')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- policy_number --}}
+                        <div class="form-group col-6">
+                            <label>@lang('insurances.policy_number') <span class="text-danger">*</span></label>
+                            <input type="text" name="policy_number" autofocus class="form-control @error('policy_number') is-invalid @enderror" value="{{ old('policy_number') }}" required>
+                            @error('policy_number')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- insurance_start_date --}}
+                        <div class="form-group col-6">
+                            <label>@lang('insurances.insurance_start_date') <span class="text-danger">*</span></label>
+                                <input type="date" name="insurance_start_date" id="insurance_start_date"  autofocus class="form-control @error('insurance_start_date') is-invalid @enderror" value="{{ old('insurance_start_date') }}" required>
+                            @error('insurance_start_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- insurance_duration --}}
+                        <div class="form-group col-6">
+                            <label>@lang('insurances.insurance_duration') <span class="text-danger">*</span></label>
+                            <input type="number" name="insurance_duration" id="insurance_duration" autofocus class="form-control @error('insurance_duration') is-invalid @enderror" value="{{ old('insurance_duration') }}" required>
+                            @error('insurance_duration')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
+                    </div>{{-- row --}}
 
 
-                    {{-- insurance_start_date --}}
-                    <div class="form-group">
-                        <label>@lang('insurances.insurance_start_date') <span class="text-danger">*</span></label>
-                            <input type="date" name="insurance_start_date" id="insurance_start_date"  autofocus class="form-control @error('insurance_start_date') is-invalid @enderror" value="{{ old('insurance_start_date') }}" required>
-                        @error('insurance_start_date')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
 
-                    {{-- insurance_duration --}}
-                    <div class="form-group">
-                        <label>@lang('insurances.insurance_duration') <span class="text-danger">*</span></label>
-                        <input type="number" name="insurance_duration" id="insurance_duration" autofocus class="form-control @error('insurance_duration') is-invalid @enderror" value="{{ old('insurance_duration') }}" required>
-                        @error('insurance_duration')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+
 
                     {{-- insurance_expiry --}}
                     <div class="form-group">

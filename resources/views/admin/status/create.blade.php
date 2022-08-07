@@ -22,10 +22,10 @@
                     @csrf
                     @method('post')
 
-                    <div class="row mb-1">
+                    <div class="row">
                         
                         {{--equipment_id--}}
-                        <div class="col-6">
+                        <div class="form-group col-6">
                             <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
                             <select class="form-control col-6 select2" id="equipment-countrey">
                                 <option value="" selected disabled>@lang('site.choose') @lang('countrys.countrys')</option>
@@ -37,7 +37,7 @@
                         </div>
 
                         {{--equipment_id--}}
-                        <div class="col-6">
+                        <div class="form-group col-6">
                             <label>@lang('citys.citys') <span class="text-danger">*</span></label>
                             <select class="form-control select2" id="equipment-city">
                                 

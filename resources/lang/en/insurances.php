@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'insurances'        => 'Insurances',
+    'insurances'        => 'Insurance',
     'premium'           => 'Premium',
     'insurer'           => 'insurer',
     'type_of_insurance' => 'Type Of Insurance',
