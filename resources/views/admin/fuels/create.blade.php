@@ -131,7 +131,7 @@
                         </div>
 
                         {{--total_cost_of_fuel--}}
-                        <div class="form-group col-6">
+                        <div class="form-group col-12">
                             <label>@lang('fuels.total_cost_of_fuel')<span class="text-danger">*</span></label>
                             <input type="number" id="total_cost_of_fuel" name="total_cost_of_fuel" class="form-control @error('average_mileage_reading') is-invalid @enderror" value="{{ old('total_cost_of_fuel', 0) }}" required autofocus>
                             @error('total_cost_of_fuel')
