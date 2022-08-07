@@ -34,8 +34,8 @@ class CreateEquipmentTable extends Migration
             $table->string('chasis_no')->nullable();
             $table->string('engine_no')->nullable();
             $table->string('serial_no')->nullable();
-
-            $table->text('model');
+            $table->string('model')->nullable();
+            
             $table->text('owner_ship');
             $table->text('operator');
 

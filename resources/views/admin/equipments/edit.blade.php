@@ -81,7 +81,7 @@
                     {{--plate_no--}}
                     <div class="form-group">
                         <label>@lang('equipments.plate_no')<span class="text-danger">*</span></label>
-                        <input type="text" name="plate_no" class="form-control @error('plate_no') custom-select @enderror" value="{{ old('plate_no', $equipment->plate_no) }}" required autofocus>
+                        <input type="text" name="plate_no" class="form-control @error('plate_no') custom-select @enderror" value="{{ old('plate_no', $equipment->plate_no) }}" autofocus>
                         @error('plate_no')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -92,7 +92,7 @@
                     {{--chasis_no--}}
                     <div class="form-group">
                         <label>@lang('equipments.chasis_no')<span class="text-danger">*</span></label>
-                        <input type="text" name="chasis_no" class="form-control @error('engine_no') custom-select @enderror" value="{{ old('chasis_no', $equipment->chasis_no) }}" required autofocus>
+                        <input type="text" name="chasis_no" class="form-control @error('engine_no') custom-select @enderror" value="{{ old('chasis_no', $equipment->chasis_no) }}" autofocus>
                         @error('engine_no')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -114,7 +114,7 @@
                     {{--serial_no--}}
                     <div class="form-group">
                         <label>@lang('equipments.serial_no')<span class="text-danger">*</span></label>
-                        <input type="text" name="serial_no" class="form-control @error('serial_no') custom-select @enderror" value="{{ old('serial_no', $equipment->serial_no) }}" required autofocus>
+                        <input type="text" name="serial_no" class="form-control @error('serial_no') custom-select @enderror" value="{{ old('serial_no', $equipment->serial_no) }}" autofocus>
                         @error('serial_no')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -125,7 +125,7 @@
                     {{--model--}}
                     <div class="form-group @error('model') custom-select @enderror">
                         <label>@lang('equipments.model') <span class="text-danger">*</span></label>
-                        <select name="model" class="form-control select2" required>
+                        <select name="model" class="form-control select2">
                             <option value="" disabled>@lang('site.choose') @lang('equipments.model')</option>
                             @foreach ($models as $model)
                                 <option value="{{ $model->name }}" {{ $model->name == old('model', $equipment->model) ? 'selected' : '' }}>{{ $model->name }}</option>
@@ -153,7 +153,7 @@
                     {{--registration_expiry--}}
                     <div class="form-group">
                         <label>@lang('equipments.registration_expiry')<span class="text-danger">*</span></label>
-                        <input type="date" name="registration_expiry" class="form-control @error('registration_expiry') custom-select @enderror" value="{{ old('registration_expiry', date('Y-m-d', strtotime($equipment->registration_expiry))) }}" autofocus>
+                        <input {{ $equipment->type == 'Vehicle' ? '' : 'disabled' }} id="registration-expiry" type="date" name="registration_expiry" class="form-control @error('registration_expiry') custom-select @enderror" value="{{  old('registration_expiry', $equipment->registration_expiry ? date('Y-m-d', strtotime($equipment->registration_expiry)) : '') }}" autofocus>
                         @error('registration_expiry')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -408,6 +408,8 @@
                 }//end of each
             });
             
+            $('#registration-expiry').attr('disabled', value == 'Vehicle' ? false : true);
+
         });//end of chage
         
         $('#operator').on('change', function () {
