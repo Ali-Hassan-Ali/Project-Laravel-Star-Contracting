@@ -80,35 +80,30 @@
                             </div>
 
                         @endforeach
+                        {{--unit--}}
+                        <div class="form-group col-6">
+                            <label>@lang('fuels.unit') <span class="text-danger">*</span></label>
+                            <select name="unit" class="form-control select2" required>
+                                <option value="" selected disabled>@lang('site.choose') @lang('fuels.unit')</option>
+                                @foreach ($units as $unit)
+                                    <option value="{{ $unit->name }}" {{ $unit->name == old('unit') ? 'selected' : '' }}>{{ $unit->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{--$data_time--}}
+                        <div class="form-group col-6">
+                            <label>@lang('fuels.no_of_units_filled')<span class="text-danger">*</span></label>
+                            <input type="number" id="no-of-unit-filled" name="no_of_units_filled" class="form-control @error('no_of_units_filled') is-invalid @enderror" value="{{ old('no_of_units_filled', 0) }}" required autofocus>
+                            @error('no_of_units_filled')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
                     </div>{{-- row --}}
 
-                    {{--unit--}}
-                    <div class="form-group @error('unit') custom-select @enderror">
-                        <label>@lang('fuels.unit') <span class="text-danger">*</span></label>
-                        <select name="unit" class="form-control select2" required>
-                            <option value="" selected disabled>@lang('site.choose') @lang('fuels.unit')</option>
-                            @foreach ($units as $unit)
-                                <option value="{{ $unit->name }}" {{ $unit->name == old('unit') ? 'selected' : '' }}>{{ $unit->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('unit')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{--$data_time--}}
-                    <div class="form-group">
-                        <label>@lang('fuels.no_of_units_filled')<span class="text-danger">*</span></label>
-                        <input type="number" id="no-of-unit-filled" name="no_of_units_filled" class="form-control @error('no_of_units_filled') is-invalid @enderror" value="{{ old('no_of_units_filled', 0) }}" required autofocus>
-                        @error('no_of_units_filled')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
 
                     {{--fuel_types--}}
                     <div class="form-group @error('fuel_type') custom-select @enderror">
