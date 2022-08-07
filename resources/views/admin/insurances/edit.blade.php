@@ -140,54 +140,53 @@
                                 </span>
                             @enderror
                         </div>
-                        
-                    </div>{{-- row --}}
 
-
-                    {{-- insurance_expiry --}}
-                    <div class="form-group">
-                        <label>@lang('insurances.insurance_expiry') <span class="text-danger">*</span></label>
-                        <input type="date" name="insurance_expiry" id="insurance_expiry" disabled autofocus class="form-control @error('insurance_expiry') is-invalid @enderror" value="{{ old('insurance_expiry', $insurance->insurance_expiry ? date('Y-m-d', strtotime($insurance->insurance_expiry)) : '' ) }}" required>
-                        @error('insurance_expiry')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <input type="date" name="insurance_expiry" id="insurance_expiry_hidden" value="{{ old('insurance_expiry', date('Y-m-d', strtotime($insurance->insurance_expiry))) }}" hidden>
-
-
-                   {{--claim--}}
-                    <div class="form-group ml-3">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" id="claim" type="checkbox" name="claim" value="{{ old('claim', $insurance->claim) }}" {{ $insurance->claim == '1' ? 'checked' : '' }}>
-                          <label class="form-check-label">@lang('insurances.claim')</label>
+                        {{-- insurance_expiry --}}
+                        <div class="form-group">
+                            <label>@lang('insurances.insurance_expiry') <span class="text-danger">*</span></label>
+                            <input type="date" name="insurance_expiry" id="insurance_expiry" disabled autofocus class="form-control @error('insurance_expiry') is-invalid @enderror" value="{{ old('insurance_expiry', $insurance->insurance_expiry ? date('Y-m-d', strtotime($insurance->insurance_expiry)) : '' ) }}" required>
+                            @error('insurance_expiry')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                    </div>
+
+                        <input type="date" name="insurance_expiry" id="insurance_expiry_hidden" value="{{ old('insurance_expiry', date('Y-m-d', strtotime($insurance->insurance_expiry))) }}" hidden>
 
 
-                    {{-- claim_date --}}
-                    <div class="form-group">
-                        <label>@lang('insurances.claim_date') <span class="text-danger">*</span></label>
-                        <input type="date" {{ old('claim', $insurance->claim) == '0' ? 'disabled' : '' }} name="claim_date" id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date', $insurance->claim_date ? date('Y-m-d', strtotime($insurance->claim_date)) : '' ) }}" max="{{ date('Y-m-d', strtotime(now())) }}">
-                        @error('claim_date')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                       {{--claim--}}
+                        <div class="form-group ml-3">
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" id="claim" type="checkbox" name="claim" value="{{ old('claim', $insurance->claim) }}" {{ $insurance->claim == '1' ? 'checked' : '' }}>
+                              <label class="form-check-label">@lang('insurances.claim')</label>
+                            </div>
+                        </div>
 
-                    {{-- claim_amount --}}
-                    <div class="form-group">
-                        <label>@lang('insurances.claim_amount') <span class="text-danger">*</span></label>
-                        <input type="number" {{ old('claim', $insurance->claim) == '0' ? 'disabled' : '' }} name="claim_amount" id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount', $insurance->claim_amount) }}">
-                        @error('claim_amount')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+
+                        {{-- claim_date --}}
+                        <div class="form-group col-6">
+                            <label>@lang('insurances.claim_date') <span class="text-danger">*</span></label>
+                            <input type="date" {{ old('claim', $insurance->claim) == '0' ? 'disabled' : '' }} name="claim_date" id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date', $insurance->claim_date ? date('Y-m-d', strtotime($insurance->claim_date)) : '' ) }}" max="{{ date('Y-m-d', strtotime(now())) }}">
+                            @error('claim_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- claim_amount --}}
+                        <div class="form-group col-6">
+                            <label>@lang('insurances.claim_amount') <span class="text-danger">*</span></label>
+                            <input type="number" {{ old('claim', $insurance->claim) == '0' ? 'disabled' : '' }} name="claim_amount" id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount', $insurance->claim_amount) }}">
+                            @error('claim_amount')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                    </div>{{-- row --}}
 
 
                     {{-- claim_description --}}
