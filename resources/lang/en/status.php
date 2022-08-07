@@ -7,9 +7,9 @@ return [
     'Breakdown'  => 'Breakdown',
     'Working'    => 'Working',
 
-    'working_status'      => 'working status',
-    'hours_worked'        => 'hours worked',
-    'break_down_date'     => 'breakdown date',
-    'descrption'          => 'breakdown descrption',
-    'break_down_duration' => 'breakdown duration',
+    'working_status'      => 'Working Status',
+    'hours_worked'        => 'Hours Worked',
+    'break_down_date'     => 'Breakdown Date',
+    'descrption'          => 'Breakdown Descrption',
+    'break_down_duration' => 'Breakdown Duration',
 ];
