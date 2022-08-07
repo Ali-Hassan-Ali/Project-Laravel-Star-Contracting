@@ -22,10 +22,10 @@
                     @csrf
                     @method('put')
 
-                    <div class="row mb-1">
+                    <div class="row">
                         
                         {{--equipment_id--}}
-                        <div class="col-6">
+                        <div class="form-group col-6">
                             <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
                             <select class="form-control col-6 select2" id="equipment-countrey">
                                 <option value="" selected disabled>@lang('site.choose') @lang('countrys.countrys')</option>
@@ -37,101 +37,102 @@
                         </div>
 
                         {{--equipment_id--}}
-                        <div class="col-6">
+                        <div class="form-group col-6">
                             <label>@lang('citys.citys') <span class="text-danger">*</span></label>
                             <select class="form-control select2" id="equipment-city">
                                 
                             </select>
                         </div>
 
+                        {{--equipment_id--}}
+                        <div class="form-group @error('equipment_id') custom-select @enderror">
+                            <label>@lang('maintenances.equipments') <span class="text-danger">*</span></label>
+                            <select name="equipment_id" id="equipment-man" class="form-control select2" required>
+                                <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
+                                @foreach ($equipments as $equipment)
+                                    <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $maintenance->equipment_id) ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
+                                @endforeach
+                            </select>
+                            @error('equipment_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{--last_service_date--}}
+                        <div class="form-group col-6">
+                            <label>@lang('maintenances.last_service_date')<span class="text-danger">*</span></label>
+                            <input type="date" name="last_service_date" id="last_service_date" class="form-control @error('last_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->last_service_date ? date('Y-m-d', strtotime($maintenance->last_service_date)) : '') }}" required autofocus>
+                            @error('last_service_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+
+                        {{--next_service_date--}}
+                        <div class="form-group col-6">
+                            <label>@lang('maintenances.next_service_date')<span class="text-danger">*</span></label>
+                            <input type="date" disabled name="next_service_date" id="next_service_date" class="form-control @error('next_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->next_service_date ? date('Y-m-d', strtotime($maintenance->next_service_date)) : '') }}" required autofocus>
+                            @error('next_service_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
+                        <input type="date" name="next_service_date" id="next_service_date_hidden" hidden value="{{ old('next_service_date', $maintenance->next_service_date ? date('Y-m-d', strtotime($maintenance->next_service_date)) : '') }}" hidden>
+
+                        {{--last_service_km--}}
+                        <div class="form-group col-6">
+                            <label>@lang('maintenances.last_service_km')<span class="text-danger">*</span></label>
+                            <input type="number" name="last_service_km" id="last_service_km" class="form-control @error('last_service_km') is-invalid @enderror" value="{{ old('last_service_km', $maintenance->last_service_km) }}" required autofocus>
+                            @error('last_service_km')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{--next_service_dueon_km--}}
+                        <div class="form-group col-6">
+                            <label>@lang('maintenances.next_service_dueon_km')<span class="text-danger">*</span></label>
+                            <input type="number" name="next_service_dueon_km" disabled id="next_service_dueon_km" class="form-control @error('next_service_dueon_km') is-invalid @enderror" value="{{ old('next_service_dueon_km', $maintenance->next_service_dueon_km) }}" required autofocus>
+                            @error('next_service_dueon_km')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <input type="number" name="next_service_dueon_km" id="next_service_dueon_km_hidden" hidden value="{{ old('next_service_dueon_km', $maintenance->next_service_dueon_km) }}" hidden>
+
+                        {{--actual_service_date--}}
+                        <div class="form-group col-6">
+                            <label>@lang('maintenances.actual_service_date')<span class="text-danger">*</span></label>
+                            <input type="date" name="actual_service_date" class="form-control @error('actual_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->actual_service_date ? date('Y-m-d', strtotime($maintenance->actual_service_date)) : '') }}" required autofocus>
+                            @error('actual_service_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{--actual_service_reading--}}
+                        <div class="form-group col-6">
+                            <label>@lang('maintenances.actual_service_reading')<span class="text-danger">*</span></label>
+                            <input type="number" name="actual_service_reading" class="form-control @error('actual_service_reading') is-invalid @enderror" value="{{ old('actual_service_reading', $maintenance->actual_service_reading) }}" required autofocus>
+                            @error('actual_service_reading')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
                     </div>{{-- row --}}
 
-                    {{--equipment_id--}}
-                    <div class="form-group @error('equipment_id') custom-select @enderror">
-                        <label>@lang('maintenances.equipments') <span class="text-danger">*</span></label>
-                        <select name="equipment_id" id="equipment-man" class="form-control select2" required>
-                            <option value="">@lang('site.choose') @lang('equipments.equipments')</option>
-                            @foreach ($equipments as $equipment)
-                                <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $maintenance->equipment_id) ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
-                            @endforeach
-                        </select>
-                        @error('equipment_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{--last_service_date--}}
-                    <div class="form-group">
-                        <label>@lang('maintenances.last_service_date')<span class="text-danger">*</span></label>
-                        <input type="date" name="last_service_date" id="last_service_date" class="form-control @error('last_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->last_service_date ? date('Y-m-d', strtotime($maintenance->last_service_date)) : '') }}" required autofocus>
-                        @error('last_service_date')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-
-                    {{--next_service_date--}}
-                    <div class="form-group">
-                        <label>@lang('maintenances.next_service_date')<span class="text-danger">*</span></label>
-                        <input type="date" disabled name="next_service_date" id="next_service_date" class="form-control @error('next_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->next_service_date ? date('Y-m-d', strtotime($maintenance->next_service_date)) : '') }}" required autofocus>
-                        @error('next_service_date')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    
-                    <input type="date" name="next_service_date" id="next_service_date_hidden" hidden value="{{ old('next_service_date', $maintenance->next_service_date ? date('Y-m-d', strtotime($maintenance->next_service_date)) : '') }}" hidden>
-
-                    {{--last_service_km--}}
-                    <div class="form-group">
-                        <label>@lang('maintenances.last_service_km')<span class="text-danger">*</span></label>
-                        <input type="number" name="last_service_km" id="last_service_km" class="form-control @error('last_service_km') is-invalid @enderror" value="{{ old('last_service_km', $maintenance->last_service_km) }}" required autofocus>
-                        @error('last_service_km')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{--next_service_dueon_km--}}
-                    <div class="form-group">
-                        <label>@lang('maintenances.next_service_dueon_km')<span class="text-danger">*</span></label>
-                        <input type="number" name="next_service_dueon_km" disabled id="next_service_dueon_km" class="form-control @error('next_service_dueon_km') is-invalid @enderror" value="{{ old('next_service_dueon_km', $maintenance->next_service_dueon_km) }}" required autofocus>
-                        @error('next_service_dueon_km')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <input type="number" name="next_service_dueon_km" id="next_service_dueon_km_hidden" hidden value="{{ old('next_service_dueon_km', $maintenance->next_service_dueon_km) }}" hidden>
-
-                    {{--actual_service_date--}}
-                    <div class="form-group">
-                        <label>@lang('maintenances.actual_service_date')<span class="text-danger">*</span></label>
-                        <input type="date" name="actual_service_date" class="form-control @error('actual_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->actual_service_date ? date('Y-m-d', strtotime($maintenance->actual_service_date)) : '') }}" required autofocus>
-                        @error('actual_service_date')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{--actual_service_reading--}}
-                    <div class="form-group">
-                        <label>@lang('maintenances.actual_service_reading')<span class="text-danger">*</span></label>
-                        <input type="number" name="actual_service_reading" class="form-control @error('actual_service_reading') is-invalid @enderror" value="{{ old('actual_service_reading', $maintenance->actual_service_reading) }}" required autofocus>
-                        @error('actual_service_reading')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
 
                     {{--scheduled--}}
                     <div class="form-group ml-3">
