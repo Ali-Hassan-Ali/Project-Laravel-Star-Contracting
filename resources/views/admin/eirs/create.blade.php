@@ -196,29 +196,19 @@
                     </div>{{-- row --}}
 
                     @php
-                        $status = [1, 0];
-                        $enums  = ['status'];
+                        $status = ['Under Review', 'Approved', 'PO Placed', 'Payment Processed', 'Part In Transit', 'Deliverd To Site'];
                     @endphp
 
-                    @foreach ($enums as $enum)
-                        
-                        {{--$enum--}}
-                        <div class="form-group">
-                            <label>@lang('eirs.' . $enum) <span class="text-danger">*</span></label>
-                            <select name="{{ $enum }}" class="form-control select2 @error($enum) custom-select @enderror" required>
-                                <option value="">@lang('site.choose') @lang('eirs.' . $enum)</option>
-                                @foreach ($status as $statu)
-                                    <option value="{{ $statu }}" {{ $statu == old($enum) ? 'selected' : '' }}>@lang('site.' . $statu)</option>
-                                @endforeach
-                            </select>
-                            @error($enum)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                    @endforeach
+                    {{--$enum--}}
+                    <div class="form-group">
+                        <label>@lang('eirs.status' ) <span class="text-danger">*</span></label>
+                        <select name="status" class="form-control select2 @error('status') custom-select @enderror" required>
+                            <option value="">@lang('site.choose') @lang('eirs.status')</option>
+                            @foreach ($status as $statu)
+                                <option value="{{ $statu }}" {{ $statu == old('status') ? 'selected' : '' }}>@lang('site.status')</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                                         {{-- attachments --}}
                     <div class="form-group">
