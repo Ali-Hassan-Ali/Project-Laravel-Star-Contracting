@@ -40,7 +40,7 @@ class EirController extends Controller
                 return $eir->admin->name;
             })
             ->addColumn('equipment', function (Eir $eir) {
-                return $eir->equipment->name;
+                return $eir->equipment->name ?? '';
             })
             ->addColumn('actions', 'admin.eirs.data_table.actions')
             ->rawColumns(['record_select', 'actions'])

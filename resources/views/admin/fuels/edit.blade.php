@@ -129,7 +129,7 @@
                             @enderror
                         </div>
 
-                        <input type="number" name="average_mileage_reading" value="{{ old('average_mileage_reading', $fuel->average_mileage_reading) }}" id="average_mileage_reading-hidding" hidden>
+                        <input type="test" name="average_mileage_reading" value="{{ old('average_mileage_reading', $fuel->average_mileage_reading) }}" id="average_mileage_reading-hidding" hidden>
 
                         {{--total_cost_of_fuel--}}
                         <div class="form-group col-12">
@@ -142,7 +142,7 @@
                             @enderror
                         </div>
 
-                        <input type="number" name="total_cost_of_fuel" value="{{ old('total_cost_of_fuel', $fuel->total_cost_of_fuel) }}" id="total_cost_of_fuel-hidding" hidden>
+                        <input type="test" name="total_cost_of_fuel" value="{{ old('total_cost_of_fuel', $fuel->total_cost_of_fuel) }}" id="total_cost_of_fuel-hidding" hidden>
 
 
                         {{--last_mileage_reading--}}
@@ -207,6 +207,8 @@
 @endsection
 
 @push('scripts')
+    
+    <script src="{{ asset('admin_assets/js/query.number.min.js') }}" type="text/javascript"></script>
 
     <script>
         
@@ -219,8 +221,8 @@
             var subUnit = parseInt(current) - parseInt(lastCurrent);
             var total   =  parseInt(subUnit) / parseInt(unit);
 
-            $('#average_mileage_reading').val(total);
-            $('#average_mileage_reading-hidding').val(total);
+            $('#average_mileage_reading').val($.number(total, 2));
+            $('#average_mileage_reading-hidding').val($.number(total, 2));
             
         });//end of chage
 
@@ -231,10 +233,16 @@
 
             var total = parseInt(fuelRate) * parseInt(unit);
 
-            $('#total_cost_of_fuel').val(total);
-            $('#total_cost_of_fuel-hidding').val(total);
+            $('#total_cost_of_fuel').val($.number(total, 2));
+            $('#total_cost_of_fuel-hidding').val($.number(total, 2));
             
         });//end of chage
+
+        //select 2
+        $('.select2').select2({
+            'width': '100%',
+            'tags': false,
+        });
 
     </script>
 
