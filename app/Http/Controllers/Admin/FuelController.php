@@ -37,6 +37,12 @@ class FuelController extends Controller
             ->editColumn('created_at', function (Fuel $fuel) {
                 return $fuel->created_at->format('Y-m-d');
             })
+            ->editColumn('last_date', function (Fuel $fuel) {
+                return $fuel->last_date ? date('d-m-Y', strtotime($fuel->last_date)) : '';
+            })
+            ->editColumn('last_date', function (Fuel $fuel) {
+                return $fuel->last_date ? date('d-m-Y', strtotime($fuel->last_date)) : '';
+            })
             ->addColumn('admin', function (Fuel $fuel) {
                 return $fuel->admin->name ?? '';
             })

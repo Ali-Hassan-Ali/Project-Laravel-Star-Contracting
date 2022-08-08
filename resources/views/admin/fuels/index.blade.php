@@ -65,10 +65,19 @@
                                             </label>
                                         </div>
                                     </th>
-                                    <th>@lang('fuels.unit')</th>
+                                    <th>@lang('equipments.equipments')</th>
                                     <th>@lang('fuels.fuel_type')</th>
                                     <th>@lang('fuels.last_date')</th>
-                                    <th>@lang('fuels.next_date')</th>
+                                    <th>@lang('fuels.fuel_type')</th>
+                                    <th>@lang('fuels.unit')</th>
+                                    <th>@lang('fuels.no_of_units_filled')</th>
+                                    <th>@lang('fuels.fuel_rate_per_litre')</th>
+                                    <th>@lang('fuels.total_cost_of_fuel')</th>
+                                    <th>@lang('fuels.last_mileage_reading')</th>
+                                    <th>@lang('fuels.current_mileage_reading')</th>
+                                    <th>@lang('fuels.average_mileage_reading')</th>
+                                    <th>@lang('fuels.hours_worked_weekly')</th>
+                                    {{-- <th>@lang('fuels.next_date')</th> --}}
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -104,12 +113,18 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'unit', name: 'unit'},
-                {data: 'fuel_type', name: 'fuel_type'},
+                {data: 'equipment', name: 'equipment'},
                 {data: 'last_date', name: 'last_date'},
                 {data: 'next_date', name: 'next_date'},
-                {data: 'admin', name: 'admin'},
-                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'fuel_type', name: 'fuel_type'},
+                {data: 'unit', name: 'unit'},
+                {data: 'no_of_units_filled', name: 'no_of_units_filled'},
+                {data: 'fuel_rate_per_litre', name: 'fuel_rate_per_litre'},
+                {data: 'total_cost_of_fuel', name: 'total_cost_of_fuel'},
+                {data: 'last_mileage_reading', name: 'last_mileage_reading'},
+                {data: 'current_mileage_reading', name: 'current_mileage_reading'},
+                {data: 'average_mileage_reading', name: 'average_mileage_reading'},
+                {data: 'hours_worked_weekly', name: 'hours_worked_weekly'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[2, 'desc']],
