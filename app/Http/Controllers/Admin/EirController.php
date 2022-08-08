@@ -62,7 +62,6 @@ class EirController extends Controller
     
     public function store(EirRequest $request)
     {
-        dd('dff');
         $validated            = $request->validated();
         $validated            = $request->safe()->except(['attachments']);
         $validated['user_id'] = auth()->id();
