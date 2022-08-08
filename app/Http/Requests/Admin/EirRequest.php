@@ -26,24 +26,23 @@ class EirRequest extends FormRequest
         $rules = [
             'equipment_id'                   => ['required','numeric'],
             'eir_no'                         => ['required','numeric'],
-            'description'                    => ['required'],
             'status'                         => ['required'],
-            'date'                           => ['required'],
-            'expected_process_date'          => ['required'],
-            'expected_po_released_date'      => ['required'],
-            'expected_payment_transfer_date' => ['required'],
-            'expected_shipment_pickup_date'  => ['required'],
-            'expected_arrival_to_site_date'  => ['required'],
-            'actual_process_date'            => ['required'],
-            'actual_po_released_date'        => ['required'],
-            'actual_payment_transfer_date'   => ['required'],
-            'actual_shipment_pickup_date'    => ['required'],
-            'actual_arrival_to_site_date'    => ['required'],
+            'date'                           => ['required','date'],
+            'expected_process_date'          => ['required','date'],
+            'expected_po_released_date'      => ['required','date'],
+            'expected_payment_transfer_date' => ['required','date'],
+            'expected_shipment_pickup_date'  => ['required','date'],
+            'expected_arrival_to_site_date'  => ['required','date'],
+            'actual_process_date'            => ['required','date'],
+            'actual_po_released_date'        => ['required','date'],
+            'actual_payment_transfer_date'   => ['required','date'],
+            'actual_shipment_pickup_date'    => ['required','date'],
+            'actual_arrival_to_site_date'    => ['required','date'],
         ];
 
         if (in_array($this->method(), ['post'])) {
 
-            $rules['attachments'] = ['required'];
+            $rules['attachments'] = ['required', 'array'];
 
         }//end of if
 

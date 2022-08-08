@@ -116,17 +116,23 @@ class EquipmentController extends Controller
         $validated = $request->validated();
         $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to','attachments']);
 
-        $validated['make']     = $this->tagMake($request);
+        $validated['make'] = $this->tagMake($request);
         if ($request->model) {
-            $validated['model']    = $this->tagModel($request);
+
+            $validated['model'] = $this->tagModel($request);
+
         } else {
-            $validated['model']    = null;
+
+            $validated['model'] = null;
+
         }
         $validated['type']     = $this->tagType($request);
         $validated['name']     = $this->tagEquipment($request);
         $validated['operator'] = $this->tagOperator($request);
-        $validated['responsible_person'] = $this->tagResponsiblePerson($request);
         $validated['email']    = $this->tagEmail($request);
+
+        $validated['responsible_person'] = $this->tagResponsiblePerson($request);
+
         if ($request->allocated_to == 'Project') {
             $validated['project_allocated_to']    = json_encode($this->tagProjectAllocatedTo($request));
         }

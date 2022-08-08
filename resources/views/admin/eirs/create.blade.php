@@ -93,6 +93,8 @@
                             @enderror
                         </div>
 
+                        <input type="date" name="expected_process_date" id="expected_process_date-hidden" hidden>
+
                         {{--expected_po_released_date--}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.expected_po_released_date')<span class="text-danger">*</span></label>
@@ -103,6 +105,8 @@
                                 </span>
                             @enderror
                         </div>
+
+                        <input type="date" name="expected_po_released_date" id="expected_po_released_date-hidden" hidden>
 
                         {{--expected_payment_transfer_date--}}
                         <div class="form-group col-6">
@@ -115,6 +119,8 @@
                             @enderror
                         </div>
 
+                        <input type="date" name="expected_payment_transfer_date" id="expected_payment_transfer_date-hidden" hidden>
+
                         {{--expected_shipment_pickup_date--}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.expected_shipment_pickup_date')<span class="text-danger">*</span></label>
@@ -126,6 +132,8 @@
                             @enderror
                         </div>
 
+                        <input type="date" name="expected_shipment_pickup_date" id="expected_shipment_pickup_date-hidden" hidden>
+
                         {{--expected_arrival_to_site_date--}}
                         <div class="form-group col-12">
                             <label>@lang('eirs.expected_arrival_to_site_date')<span class="text-danger">*</span></label>
@@ -136,6 +144,8 @@
                                 </span>
                             @enderror
                         </div>
+
+                        <input type="date" name="expected_arrival_to_site_date" id="expected_arrival_to_site_date-hidden" hidden>
 
                         {{-- actual_process_date --}}
                         <div class="form-group col-6">
@@ -212,10 +222,10 @@
 
                     <input type="text" name="status" value="{{ old('status') }}" id="statu-hidden" hidden>
 
-                                        {{-- attachments --}}
+                    {{-- attachments --}}
                     <div class="form-group">
                         <label>@lang('eirs.attachments') <span class="text-danger">*</span></label>
-                        <input type="file" name="attachments" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
+                        <input type="file" name="attachments[]" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
                         @error('attachments')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -271,30 +281,35 @@
                     ////////////////////////////////////////
 
                     $('#expected_process_date').val(calculateDays(2, date));
+                    $('#expected_process_date-hidden').val(calculateDays(2, date));
 
                     ////////////////////////////////////////
 
                     var expectedProcessDate = $('#expected_process_date').val();
 
                     $('#expected_po_released_date').val(calculateDays(10, expectedProcessDate));//2
+                    $('#expected_po_released_date-hidden').val(calculateDays(10, expectedProcessDate));//2
 
                     ////////////////////////////////////////
 
                     var expectedPaymentTransferDate = $('#expected_po_released_date').val();//3
 
                     $('#expected_payment_transfer_date').val(calculateDays(14, expectedPaymentTransferDate));//2
+                    $('#expected_payment_transfer_date-hidden').val(calculateDays(14, expectedPaymentTransferDate));//2
 
                     ////////////////////////////////////////
 
                     var expectedShipmentPickupDate = $('#expected_payment_transfer_date').val();//3
 
                     $('#expected_shipment_pickup_date').val(calculateDays(14, expectedShipmentPickupDate));//2
+                    $('#expected_shipment_pickup_date-hidden').val(calculateDays(14, expectedShipmentPickupDate));//2
 
                     ////////////////////////////////////////
 
                     var expectedArrivalToSiteDate = $('#expected_shipment_pickup_date').val();//3
 
                     $('#expected_arrival_to_site_date').val(calculateDays(7, expectedArrivalToSiteDate));//2
+                    $('#expected_arrival_to_site_date-hidden').val(calculateDays(7, expectedArrivalToSiteDate));//2
 
 
                 }//end of if

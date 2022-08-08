@@ -62,10 +62,26 @@ class EirController extends Controller
     
     public function store(EirRequest $request)
     {
-        $requestData                = $request->validated();
-        $requestData['user_id']     = auth()->id();
-        $requestData['attachments'] = $request->file('attachments')->store('attachments_eirs_file', 'public');
-        eir::create($requestData);
+        dd('dff');
+        $validated            = $request->validated();
+        $validated            = $request->safe()->except(['attachments']);
+        $validated['user_id'] = auth()->id();
+        
+        $eir = eir::create($validated);
+
+        if ($request->attachments) {
+            
+            foreach ($request->file('attachments') as $file) {
+
+                Attachment::create([
+                    'path'     => $file->store('eir_attachments_file'),
+                    'name'     => $file->getClientOriginalName(),
+                    'eir_id'   => $eir->id,
+                ]);
+
+            }//end of rach
+
+        }//end of check file attachments
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.eirs.index');

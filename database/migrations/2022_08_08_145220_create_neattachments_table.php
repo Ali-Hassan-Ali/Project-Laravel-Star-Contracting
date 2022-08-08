@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPaidToSparesTable extends Migration
+class CreateNeattachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddPaidToSparesTable extends Migration
      */
     public function up()
     {
-        Schema::table('spares', function (Blueprint $table) {
-            $table->json('equipments');
+        Schema::table('attachments', function (Blueprint $table) {
+            $table->foreignIdFor(\App\Models\Eir::class)->nullable();
         });
     }
 
@@ -25,8 +25,6 @@ class AddPaidToSparesTable extends Migration
      */
     public function down()
     {
-        Schema::table('spares', function (Blueprint $table) {
-            //
-        });
+        // Schema::dropIfExists('attachments');
     }
 }
