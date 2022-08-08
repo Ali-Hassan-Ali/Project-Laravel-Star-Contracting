@@ -44,7 +44,7 @@
                                 
                             </select>
                         </div>
-                        
+
                         {{--equipment_id--}}
                         <div class="form-group @error('equipment_id') custom-select @enderror">
                             <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
@@ -61,12 +61,32 @@
                             @enderror
                         </div>
 
+                        {{--$number--}}
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.eir_no')<span class="text-danger">*</span></label>
+                            <input type="number" name="eir_no" class="form-control @error('eir_no') is-invalid @enderror" value="{{ old('eir_no') }}" required autofocus>
+                            @error('eir_no')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.date')<span class="text-danger">*</span></label>
+                            <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}" required autofocus>
+                            @error('date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                     </div>{{-- row --}}
 
 
 
                     @php
-                        $numbers    = ['eir_no'];
                         $textareas  = ['description'];
                         $data_times_expected = ['expected_process_date','expected_po_released_date','expected_payment_transfer_date',
                                        'expected_shipment_pickup_date','expected_arrival_to_site_date'];
@@ -75,21 +95,6 @@
                                        'actual_payment_transfer_date','actual_shipment_pickup_date',
                                        'actual_arrival_to_site_date'];
                     @endphp
-
-                    @foreach ($numbers as $number)
-                        
-                        {{--$number--}}
-                        <div class="form-group">
-                            <label>@lang('eirs.' . $number)<span class="text-danger">*</span></label>
-                            <input type="number" name="{{ $number }}" class="form-control @error($number) is-invalid @enderror" value="{{ old($number) }}" required autofocus>
-                            @error($number)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                    @endforeach
 
                     {{--$expected--}}
                     <div class="form-group">
@@ -197,5 +202,19 @@
     </div><!-- end of row -->
 
 @endsection
+
+@push('scripts')
+    
+    <script>
+        //select 2
+        $('.select2').select2({
+            'width': '100%',
+            'tags': false,
+            'minimumResultsForSearch': Infinity
+        });
+
+    </script>
+
+@endpush
 
 
