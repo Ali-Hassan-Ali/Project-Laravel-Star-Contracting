@@ -21,7 +21,7 @@ class CreateEirsTable extends Migration
             
             $table->text('description');
             $table->string('attachments')->default('attachments_eirs_file/default.png');
-            $table->enum('status', [true, false])->default(true);
+            $table->string('status')->nullable();
             $table->dateTime('date');
 
             $table->dateTime('expected_process_date');

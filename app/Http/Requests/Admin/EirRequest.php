@@ -26,7 +26,7 @@ class EirRequest extends FormRequest
         $rules = [
             'equipment_id'                   => ['required','numeric'],
             'eir_no'                         => ['required','numeric'],
-            'status'                         => ['required'],
+            'status'                         => ['required','string'],
             'date'                           => ['required','date'],
             'expected_process_date'          => ['required','date'],
             'expected_po_released_date'      => ['required','date'],

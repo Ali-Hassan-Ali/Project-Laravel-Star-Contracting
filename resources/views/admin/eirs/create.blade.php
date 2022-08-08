@@ -335,7 +335,7 @@
                 }
 
                 if(name == 'actual_arrival_to_site_date') {
-                    $('#status').val('Deliverd To Site').change();
+                    $('#status').val('Delivered To Site').change();
                     $('#statu-hidden').val('Delivered To Site');
                 }
 

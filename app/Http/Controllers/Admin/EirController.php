@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\EirRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Country;
+use App\Models\Attachment;
 use App\Models\Equipment;
 use App\Models\Eir;
 use Illuminate\Http\Request;
