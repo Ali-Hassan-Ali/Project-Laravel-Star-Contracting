@@ -130,6 +130,8 @@
                             @enderror
                         </div>
 
+                        <input type="number" name="average_mileage_reading" value="{{ old('average_mileage_reading', 0) }}" id="average_mileage_reading-hidding" hidden>
+
                         {{--total_cost_of_fuel--}}
                         <div class="form-group col-12">
                             <label>@lang('fuels.total_cost_of_fuel')<span class="text-danger">*</span></label>
@@ -140,6 +142,8 @@
                                 </span>
                             @enderror
                         </div>
+
+                        <input type="number" name="total_cost_of_fuel" value="{{ old('total_cost_of_fuel', 0) }}" id="total_cost_of_fuel-hidding" hidden>
 
 
                         {{--last_mileage_reading--}}
@@ -188,10 +192,6 @@
                             </span>
                         @enderror
                     </div>
-
-                    <input type="number" name="average_mileage_reading" id="average_mileage_reading-hidding" hidden>
-                    <input type="number" name="total_cost_of_fuel" id="total_cost_of_fuel-hidding" hidden>
-
                 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>

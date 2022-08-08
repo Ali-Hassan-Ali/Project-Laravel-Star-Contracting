@@ -31,9 +31,9 @@ class FuelRequest extends FormRequest
             'last_mileage_reading'     => ['required','numeric'],
             'current_mileage_reading'  => ['required','numeric'],
             'average_mileage_reading'  => ['required','numeric'],
-            'fuel_rate_per_litre'      => ['required','string'],
-            'hours_worked_weekly'      => ['required','string'],
-            'total_cost_of_fuel'       => ['required','string'],
+            'fuel_rate_per_litre'      => ['required','numeric'],
+            'hours_worked_weekly'      => ['required','numeric'],
+            'total_cost_of_fuel'       => ['required','numeric'],
             'last_date'                => ['required','date'],
             'next_date'                => ['required','date'],
         ];
