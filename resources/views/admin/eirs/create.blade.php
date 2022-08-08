@@ -74,7 +74,7 @@
 
                         <div class="form-group col-6">
                             <label>@lang('eirs.date')<span class="text-danger">*</span></label>
-                            <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}" required autofocus>
+                            <input type="date" name="date" class="form-control actual @error('date') is-invalid @enderror" value="{{ old('date') }}" required autofocus>
                             @error('date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -140,7 +140,7 @@
                         {{-- actual_process_date --}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.actual_process_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_process_date" class="form-control @error('actual_process_date') is-invalid @enderror" value="{{ old('actual_process_date') }}" required autofocus>
+                            <input type="date" name="actual_process_date" class="form-control actual @error('actual_process_date') is-invalid @enderror" value="{{ old('actual_process_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_process_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -151,7 +151,7 @@
                         {{-- actual_po_released_date --}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.actual_po_released_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_po_released_date" class="form-control @error('actual_po_released_date') is-invalid @enderror" value="{{ old('actual_po_released_date') }}" required autofocus>
+                            <input type="date" name="actual_po_released_date" class="form-control actual @error('actual_po_released_date') is-invalid @enderror" value="{{ old('actual_po_released_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_po_released_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -162,7 +162,7 @@
                         {{-- actual_payment_transfer_date --}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.actual_payment_transfer_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_payment_transfer_date" class="form-control @error('actual_payment_transfer_date') is-invalid @enderror" value="{{ old('actual_payment_transfer_date') }}" required autofocus>
+                            <input type="date" name="actual_payment_transfer_date" class="form-control actual @error('actual_payment_transfer_date') is-invalid @enderror" value="{{ old('actual_payment_transfer_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_payment_transfer_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -173,7 +173,7 @@
                         {{-- actual_shipment_pickup_date --}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.actual_shipment_pickup_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_shipment_pickup_date" class="form-control @error('actual_shipment_pickup_date') is-invalid @enderror" value="{{ old('actual_shipment_pickup_date') }}" required autofocus>
+                            <input type="date" name="actual_shipment_pickup_date" class="form-control actual @error('actual_shipment_pickup_date') is-invalid @enderror" value="{{ old('actual_shipment_pickup_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_shipment_pickup_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -184,7 +184,7 @@
                         {{-- actual_arrival_to_site_date --}}
                         <div class="form-group col-12">
                             <label>@lang('eirs.actual_arrival_to_site_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_arrival_to_site_date" class="form-control @error('actual_arrival_to_site_date') is-invalid @enderror" value="{{ old('actual_arrival_to_site_date') }}" required autofocus>
+                            <input type="date" name="actual_arrival_to_site_date" class="form-control actual @error('actual_arrival_to_site_date') is-invalid @enderror" value="{{ old('actual_arrival_to_site_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_arrival_to_site_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -202,13 +202,15 @@
                     {{--$enum--}}
                     <div class="form-group">
                         <label>@lang('eirs.status' ) <span class="text-danger">*</span></label>
-                        <select name="status" class="form-control select2 @error('status') custom-select @enderror" required>
+                        <select id="status" class="form-control select2 @error('status') custom-select @enderror" required>
                             <option value="">@lang('site.choose') @lang('eirs.status')</option>
                             @foreach ($status as $statu)
-                                <option value="{{ $statu }}" {{ $statu == old('status') ? 'selected' : '' }}>@lang('site.status')</option>
+                                <option value="{{ $statu }}" {{ $statu == old('status') ? 'selected' : '' }}>{{ $statu }}</option>
                             @endforeach
                         </select>
                     </div>
+
+                    <input type="text" name="status" value="{{ old('status') }}" id="statu-hidden" hidden>
 
                                         {{-- attachments --}}
                     <div class="form-group">
@@ -239,6 +241,48 @@
 @push('scripts')
     
     <script>
+
+        $(document).ready(function() {
+            
+            $(document).on('change', '.actual', function(e) {
+                e.preventDefault();
+
+                var name = $(this).attr('name');
+
+                if(name == 'date') {
+                    $('#status').val('Under Review').change();
+                    $('#statu-hidden').val('Under Review');
+                }
+
+                if(name == 'actual_process_date') {
+                    $('#status').val('Approved').change();
+                    $('#statu-hidden').val('Approved');
+                }
+
+                if(name == 'actual_po_released_date') {
+                    $('#status').val('PO Placed').change();
+                    $('#statu-hidden').val('PO Placed');
+                }
+
+                if(name == 'actual_payment_transfer_date') {
+                    $('#status').val('Payment Processed').change();
+                    $('#statu-hidden').val('Payment Processed');
+                }
+
+                if(name == 'actual_shipment_pickup_date') {
+                    $('#status').val('Part In Transit').change();
+                    $('#statu-hidden').val('Part In Transit');
+                }
+
+                if(name == 'actual_arrival_to_site_date') {
+                    $('#status').val('Deliverd To Site').change();
+                    $('#statu-hidden').val('Deliverd To Site');
+                }
+
+            });//end of change
+
+        });//end of redy fun
+
         //select 2
         $('.select2').select2({
             'width': '100%',
