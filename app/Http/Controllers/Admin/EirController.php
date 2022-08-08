@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\EirRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Country;
 use App\Models\Equipment;
 use App\Models\Eir;
 use Illuminate\Http\Request;
@@ -52,8 +53,9 @@ class EirController extends Controller
     public function create()
     {
         $equipments = Equipment::all();
+        $countrys   = Country::all();
 
-        return view('admin.eirs.create', compact('equipments'));
+        return view('admin.eirs.create', compact('equipments', 'countrys'));
 
     }//end of create
 
