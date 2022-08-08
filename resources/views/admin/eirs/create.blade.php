@@ -140,7 +140,7 @@
                         {{-- actual_process_date --}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.actual_process_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_process_date" id="actual_process_date" class="form-control actual @error('actual_process_date') is-invalid @enderror" value="{{ old('actual_process_date') }}" required autofocus>
+                            <input type="date" name="actual_process_date" id="actual_process_date" class="form-control actual @error('actual_process_date') is-invalid @enderror" value="{{ old('actual_process_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_process_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -151,7 +151,7 @@
                         {{-- actual_po_released_date --}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.actual_po_released_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_po_released_date" id="actual_po_released_date" class="form-control actual @error('actual_po_released_date') is-invalid @enderror" value="{{ old('actual_po_released_date') }}" required autofocus>
+                            <input type="date" name="actual_po_released_date" id="actual_po_released_date" class="form-control actual @error('actual_po_released_date') is-invalid @enderror" value="{{ old('actual_po_released_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_po_released_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -162,7 +162,7 @@
                         {{-- actual_payment_transfer_date --}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.actual_payment_transfer_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_payment_transfer_date" id="actual_payment_transfer_date" class="form-control actual @error('actual_payment_transfer_date') is-invalid @enderror" value="{{ old('actual_payment_transfer_date') }}" required autofocus>
+                            <input type="date" name="actual_payment_transfer_date" id="actual_payment_transfer_date" class="form-control actual @error('actual_payment_transfer_date') is-invalid @enderror" value="{{ old('actual_payment_transfer_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_payment_transfer_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -173,7 +173,7 @@
                         {{-- actual_shipment_pickup_date --}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.actual_shipment_pickup_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_shipment_pickup_date" id="actual_shipment_pickup_date" class="form-control actual @error('actual_shipment_pickup_date') is-invalid @enderror" value="{{ old('actual_shipment_pickup_date') }}" required autofocus>
+                            <input type="date" name="actual_shipment_pickup_date" id="actual_shipment_pickup_date" class="form-control actual @error('actual_shipment_pickup_date') is-invalid @enderror" value="{{ old('actual_shipment_pickup_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_shipment_pickup_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -184,7 +184,7 @@
                         {{-- actual_arrival_to_site_date --}}
                         <div class="form-group col-12">
                             <label>@lang('eirs.actual_arrival_to_site_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_arrival_to_site_date" id="actual_arrival_to_site_date" class="form-control actual @error('actual_arrival_to_site_date') is-invalid @enderror" value="{{ old('actual_arrival_to_site_date') }}" required autofocus>
+                            <input type="date" name="actual_arrival_to_site_date" id="actual_arrival_to_site_date" class="form-control actual @error('actual_arrival_to_site_date') is-invalid @enderror" value="{{ old('actual_arrival_to_site_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_arrival_to_site_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
