@@ -251,8 +251,6 @@
 
                 var newDate = startDate.setDate(startDate.getDate() + days);
 
-                // $("#insurance_expiry").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
-
                 return new Date(newDate).toLocaleDateString('en-CA');
 
             }//end of fun
@@ -263,8 +261,6 @@
                 var name = $(this).attr('name');
 
                 if(name == 'date') {
-
-                    alert('aSome');
 
                     $('#status').val('Under Review').change();
                     $('#statu-hidden').val('Under Review');
