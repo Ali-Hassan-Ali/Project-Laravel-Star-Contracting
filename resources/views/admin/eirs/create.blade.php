@@ -85,7 +85,7 @@
                         {{--expected_process_date--}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.expected_process_date')<span class="text-danger">*</span></label>
-                            <input type="date" disabled name="expected_process_date" class="form-control @error('expected_process_date') is-invalid @enderror" value="{{ old('expected_process_date') }}" required autofocus>
+                            <input type="date" disabled name="expected_process_date" id="expected_process_date" class="form-control @error('expected_process_date') is-invalid @enderror" value="{{ old('expected_process_date') }}" required autofocus>
                             @error('expected_process_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -96,7 +96,7 @@
                         {{--expected_po_released_date--}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.expected_po_released_date')<span class="text-danger">*</span></label>
-                            <input type="date" disabled name="expected_po_released_date" class="form-control @error('expected_po_released_date') is-invalid @enderror" value="{{ old('expected_po_released_date') }}" required autofocus>
+                            <input type="date" disabled name="expected_po_released_date" id="expected_po_released_date" class="form-control @error('expected_po_released_date') is-invalid @enderror" value="{{ old('expected_po_released_date') }}" required autofocus>
                             @error('expected_po_released_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -107,7 +107,7 @@
                         {{--expected_payment_transfer_date--}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.expected_payment_transfer_date')<span class="text-danger">*</span></label>
-                            <input type="date" disabled name="expected_payment_transfer_date" class="form-control @error('expected_payment_transfer_date') is-invalid @enderror" value="{{ old('expected_payment_transfer_date') }}" required autofocus>
+                            <input type="date" disabled name="expected_payment_transfer_date" id="expected_payment_transfer_date" class="form-control @error('expected_payment_transfer_date') is-invalid @enderror" value="{{ old('expected_payment_transfer_date') }}" required autofocus>
                             @error('expected_payment_transfer_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -118,7 +118,7 @@
                         {{--expected_shipment_pickup_date--}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.expected_shipment_pickup_date')<span class="text-danger">*</span></label>
-                            <input type="date" disabled name="expected_shipment_pickup_date" class="form-control @error('expected_shipment_pickup_date') is-invalid @enderror" value="{{ old('expected_shipment_pickup_date') }}" required autofocus>
+                            <input type="date" disabled name="expected_shipment_pickup_date" id="expected_shipment_pickup_date" class="form-control @error('expected_shipment_pickup_date') is-invalid @enderror" value="{{ old('expected_shipment_pickup_date') }}" required autofocus>
                             @error('expected_shipment_pickup_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -129,7 +129,7 @@
                         {{--expected_arrival_to_site_date--}}
                         <div class="form-group col-12">
                             <label>@lang('eirs.expected_arrival_to_site_date')<span class="text-danger">*</span></label>
-                            <input type="date" disabled name="expected_arrival_to_site_date" class="form-control @error('expected_arrival_to_site_date') is-invalid @enderror" value="{{ old('expected_arrival_to_site_date') }}" required autofocus>
+                            <input type="date" disabled name="expected_arrival_to_site_date" id="expected_arrival_to_site_date" class="form-control @error('expected_arrival_to_site_date') is-invalid @enderror" value="{{ old('expected_arrival_to_site_date') }}" required autofocus>
                             @error('expected_arrival_to_site_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -243,6 +243,19 @@
     <script>
 
         $(document).ready(function() {
+
+            function calculateDays(Countdays, startDay) {
+                
+                var startDate = new Date(startDay),
+                    days      = parseInt(Countdays);
+
+                var newDate = startDate.setDate(startDate.getDate() + days);
+
+                // $("#insurance_expiry").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
+
+                return new Date(newDate).toLocaleDateString('en-CA');
+
+            }//end of fun
             
             $(document).on('change', '.actual', function(e) {
                 e.preventDefault();
@@ -250,9 +263,45 @@
                 var name = $(this).attr('name');
 
                 if(name == 'date') {
+
+                    alert('aSome');
+
                     $('#status').val('Under Review').change();
                     $('#statu-hidden').val('Under Review');
-                }
+
+                    let date = $(this).val();
+                    $('#actual_process_date').attr('min', date);
+
+                    ////////////////////////////////////////
+
+                    $('#expected_process_date').val(calculateDays(2, date));
+
+                    ////////////////////////////////////////
+
+                    var expectedProcessDate = $('#expected_process_date').val();
+
+                    $('#expected_po_released_date').val(calculateDays(10, expectedProcessDate));//2
+
+                    ////////////////////////////////////////
+
+                    var expectedPaymentTransferDate = $('#expected_po_released_date').val();//3
+
+                    $('#expected_payment_transfer_date').val(calculateDays(14, expectedPaymentTransferDate));//2
+
+                    ////////////////////////////////////////
+
+                    var expectedShipmentPickupDate = $('#expected_payment_transfer_date').val();//3
+
+                    $('#expected_shipment_pickup_date').val(calculateDays(14, expectedShipmentPickupDate));//2
+
+                    ////////////////////////////////////////
+
+                    var expectedArrivalToSiteDate = $('#expected_shipment_pickup_date').val();//3
+
+                    $('#expected_arrival_to_site_date').val(calculateDays(7, expectedArrivalToSiteDate));//2
+
+
+                }//end of if
 
                 if(name == 'actual_process_date') {
                     $('#status').val('Approved').change();
@@ -278,15 +327,6 @@
                     $('#status').val('Deliverd To Site').change();
                     $('#statu-hidden').val('Delivered To Site');
                 }
-
-            });//end of change
-
-            $(document).on('change', '#erd-data', function(e) {
-                e.preventDefault();
-
-                let date = $(this).val();
-
-                $('#actual_process_date').attr('min', date);
 
             });//end of change
 
