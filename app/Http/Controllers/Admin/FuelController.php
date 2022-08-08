@@ -38,7 +38,7 @@ class FuelController extends Controller
                 return $fuel->created_at->format('Y-m-d');
             })
             ->addColumn('admin', function (Fuel $fuel) {
-                return $fuel->admin->name;
+                return $fuel->admin->name ?? '';
             })
             ->addColumn('equipment', function (Fuel $fuel) {
                 return $fuel->equipment->name ?? '';
