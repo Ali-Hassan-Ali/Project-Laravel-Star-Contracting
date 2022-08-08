@@ -74,7 +74,7 @@
 
                         <div class="form-group col-6">
                             <label>@lang('eirs.date')<span class="text-danger">*</span></label>
-                            <input type="date" name="date" id="erd-data" class="form-control actual @error('date') is-invalid @enderror" value="{{ old('date') }}" required autofocus>
+                            <input type="date" name="date" id="erd-data" class="form-control actual @error('date') is-invalid @enderror" value="{{ old('date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
