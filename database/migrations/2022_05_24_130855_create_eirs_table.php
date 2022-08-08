@@ -19,21 +19,20 @@ class CreateEirsTable extends Migration
             $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
             $table->integer('eir_no');
             
-            $table->text('description');
             $table->string('attachments')->default('attachments_eirs_file/default.png');
             $table->string('status')->nullable();
-            $table->dateTime('date');
 
-            $table->dateTime('expected_process_date');
-            $table->dateTime('expected_po_released_date');
-            $table->dateTime('expected_payment_transfer_date');
-            $table->dateTime('expected_shipment_pickup_date');
-            $table->dateTime('expected_arrival_to_site_date');
-            $table->dateTime('actual_process_date');
-            $table->dateTime('actual_po_released_date');
-            $table->dateTime('actual_payment_transfer_date');
-            $table->dateTime('actual_shipment_pickup_date');
-            $table->dateTime('actual_arrival_to_site_date');
+            $table->date('date');
+            $table->date('expected_process_date');
+            $table->date('expected_po_released_date');
+            $table->date('expected_payment_transfer_date');
+            $table->date('expected_shipment_pickup_date');
+            $table->date('expected_arrival_to_site_date');
+            $table->date('actual_process_date');
+            $table->date('actual_po_released_date');
+            $table->date('actual_payment_transfer_date');
+            $table->date('actual_shipment_pickup_date');
+            $table->date('actual_arrival_to_site_date');
 
             $table->softDeletes();
             $table->timestamps();

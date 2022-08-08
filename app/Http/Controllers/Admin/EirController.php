@@ -35,8 +35,43 @@ class EirController extends Controller
 
         return DataTables::of($eirs)
             ->addColumn('record_select', 'admin.eirs.data_table.record_select')
-            ->editColumn('created_at', function (Eir $eir) {
-                return $eir->created_at->format('Y-m-d');
+            ->editColumn('date', function (Eir $eir) {
+                return $eir->date ? date('d-m-Y', strtotime($eir->date)) : '';
+            })
+            ->editColumn('expected_process_date', function (Eir $eir) {
+                return $eir->expected_process_date ? date('d-m-Y', strtotime($eir->expected_process_date)) : '';
+            })
+            ->editColumn('expected_po_released_date', function (Eir $eir) {
+                return $eir->expected_po_released_date ? date('d-m-Y', strtotime($eir->expected_po_released_date)) : '';
+            })
+            ->editColumn('expected_payment_transfer_date', function (Eir $eir) {
+                return $eir->expected_payment_transfer_date ? date('d-m-Y', strtotime($eir->expected_payment_transfer_date)) : '';
+            })
+            ->editColumn('expected_shipment_pickup_date', function (Eir $eir) {
+                return $eir->expected_shipment_pickup_date ? date('d-m-Y', strtotime($eir->expected_shipment_pickup_date)) : '';
+            })
+            ->editColumn('expected_arrival_to_site_date', function (Eir $eir) {
+                return $eir->expected_arrival_to_site_date ? date('d-m-Y', strtotime($eir->expected_arrival_to_site_date)) : '';
+            })
+
+            ->editColumn('actual_process_date', function (Eir $eir) {
+                return $eir->actual_process_date ? date('d-m-Y', strtotime($eir->actual_process_date)) : '';
+            })
+
+            ->editColumn('actual_po_released_date', function (Eir $eir) {
+                return $eir->actual_po_released_date ? date('d-m-Y', strtotime($eir->actual_po_released_date)) : '';
+            })
+
+            ->editColumn('actual_payment_transfer_date', function (Eir $eir) {
+                return $eir->actual_payment_transfer_date ? date('d-m-Y', strtotime($eir->actual_payment_transfer_date)) : '';
+            })
+
+            ->editColumn('actual_shipment_pickup_date', function (Eir $eir) {
+                return $eir->actual_shipment_pickup_date ? date('d-m-Y', strtotime($eir->actual_shipment_pickup_date)) : '';
+            })
+
+            ->editColumn('actual_arrival_to_site_date', function (Eir $eir) {
+                return $eir->actual_arrival_to_site_date ? date('d-m-Y', strtotime($eir->actual_arrival_to_site_date)) : '';
             })
             ->addColumn('admin', function (Eir $eir) {
                 return $eir->admin->name;
@@ -93,23 +128,34 @@ class EirController extends Controller
     public function edit(Eir $eir)
     {
         $equipments = Equipment::all();
+        $countrys   = Country::all();
 
-        return view('admin.eirs.edit', compact('eir','equipments'));
+        return view('admin.eirs.edit', compact('eir','equipments', 'countrys'));
 
     }//end of edit
 
 
     public function update(eirRequest $request, Eir $eir)
     {
-        $requestData                 = $request->validated();
+        $validated            = $request->validated();
+        $validated            = $request->safe()->except(['attachments']);
+        $validated['user_id'] = auth()->id();
+
         if ($request->attachments) {
+            
+            foreach ($request->file('attachments') as $file) {
 
-            Storage::disk('local')->delete('public/'. $eir->attachments);
+                Attachment::create([
+                    'path'     => $file->store('eir_attachments_file'),
+                    'name'     => $file->getClientOriginalName(),
+                    'eir_id'   => $eir->id,
+                ]);
 
-            $requestData['attachments'] = $request->file('attachments')->store('attachments_eirs_file','public');
-        }
+            }//end of rach
+
+        }//end of check file attachments
         
-        $eir->update($requestData);
+        $eir->update($validated);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.eirs.index');

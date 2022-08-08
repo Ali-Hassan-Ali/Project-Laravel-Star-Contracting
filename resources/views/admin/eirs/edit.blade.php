@@ -22,7 +22,7 @@
                     @csrf
                     @method('put')
 
-                    <div class="row">
+                                        <div class="row">
                         {{--equipment_id--}}
                         <div class="form-group col-6">
                             <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
@@ -59,93 +59,172 @@
                             @enderror
                         </div>
 
+                        {{--$number--}}
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.eir_no')<span class="text-danger">*</span></label>
+                            <input type="number" name="eir_no" class="form-control @error('eir_no') is-invalid @enderror" value="{{ old('eir_no', $eir->eir_no) }}" required autofocus>
+                            @error('eir_no')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.date')<span class="text-danger">*</span></label>
+                            <input type="date" name="date" id="erd-data" class="form-control actual @error('date') is-invalid @enderror" value="{{ old('date', $eir->date ? date('Y-m-d', strtotime($eir->date)) : '') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                            @error('date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{--expected_process_date--}}
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.expected_process_date')<span class="text-danger">*</span></label>
+                            <input type="date" disabled name="expected_process_date" id="expected_process_date" class="form-control @error('expected_process_date') is-invalid @enderror" value="{{ old('expected_process_date', $eir->expected_process_date ? date('Y-m-d', strtotime($eir->expected_process_date)) : '') }}" required autofocus>
+                            @error('expected_process_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <input type="date" name="expected_process_date" id="expected_process_date-hidden" value="{{ old('expected_process_date', $eir->expected_process_date ? date('Y-m-d', strtotime($eir->expected_process_date)) : '') }}" hidden>
+
+                        {{--expected_po_released_date--}}
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.expected_po_released_date')<span class="text-danger">*</span></label>
+                            <input type="date" disabled name="expected_po_released_date" id="expected_po_released_date" class="form-control @error('expected_po_released_date') is-invalid @enderror" value="{{ old('expected_po_released_date', $eir->expected_po_released_date ? date('Y-m-d', strtotime($eir->expected_po_released_date)) : '') }}" required autofocus>
+                            @error('expected_po_released_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <input type="date" name="expected_po_released_date" id="expected_po_released_date-hidden" value="{{ old('expected_po_released_date', $eir->expected_po_released_date ? date('Y-m-d', strtotime($eir->expected_po_released_date)) : '') }}" hidden>
+
+                        {{--expected_payment_transfer_date--}}
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.expected_payment_transfer_date')<span class="text-danger">*</span></label>
+                            <input type="date" disabled name="expected_payment_transfer_date" id="expected_payment_transfer_date" class="form-control @error('expected_payment_transfer_date') is-invalid @enderror" value="{{ old('expected_payment_transfer_date', $eir->expected_payment_transfer_date ? date('Y-m-d', strtotime($eir->expected_payment_transfer_date)) : '') }}" required autofocus>
+                            @error('expected_payment_transfer_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <input type="date" name="expected_payment_transfer_date" id="expected_payment_transfer_date-hidden" 
+                        value="{{ old('expected_payment_transfer_date', $eir->expected_payment_transfer_date ? date('Y-m-d', strtotime($eir->expected_payment_transfer_date)) : '') }}" hidden>
+
+                        {{--expected_shipment_pickup_date--}}
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.expected_shipment_pickup_date')<span class="text-danger">*</span></label>
+                            <input type="date" disabled name="expected_shipment_pickup_date" id="expected_shipment_pickup_date" class="form-control @error('expected_shipment_pickup_date') is-invalid @enderror" value="{{ old('expected_shipment_pickup_date', $eir->expected_shipment_pickup_date ? date('Y-m-d', strtotime($eir->expected_shipment_pickup_date)) : '') }}" required autofocus>
+                            @error('expected_shipment_pickup_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <input type="date" name="expected_shipment_pickup_date" id="expected_shipment_pickup_date-hidden" value="{{ old('expected_shipment_pickup_date', $eir->expected_shipment_pickup_date ? date('Y-m-d', strtotime($eir->expected_shipment_pickup_date)) : '') }}" hidden>
+
+                        {{--expected_arrival_to_site_date--}}
+                        <div class="form-group col-12">
+                            <label>@lang('eirs.expected_arrival_to_site_date')<span class="text-danger">*</span></label>
+                            <input type="date" disabled name="expected_arrival_to_site_date" id="expected_arrival_to_site_date" class="form-control @error('expected_arrival_to_site_date') is-invalid @enderror" value="{{ old('expected_arrival_to_site_date', $eir->expected_arrival_to_site_date ? date('Y-m-d', strtotime($eir->expected_arrival_to_site_date)) : '') }}" required autofocus>
+                            @error('expected_arrival_to_site_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <input type="date" name="expected_arrival_to_site_date" id="expected_arrival_to_site_date-hidden" value="{{ old('expected_arrival_to_site_date', $eir->expected_arrival_to_site_date ? date('Y-m-d', strtotime($eir->expected_arrival_to_site_date)) : '') }}" hidden>
+
+                        {{-- actual_process_date --}}
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.actual_process_date')<span class="text-danger">*</span></label>
+                            <input type="date" name="actual_process_date" id="actual_process_date" class="form-control actual @error('actual_process_date') is-invalid @enderror" value="{{ old('actual_process_date', $eir->actual_process_date ? date('Y-m-d', strtotime($eir->actual_process_date)) : '') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                            @error('actual_process_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- actual_po_released_date --}}
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.actual_po_released_date')<span class="text-danger">*</span></label>
+                            <input type="date" name="actual_po_released_date" id="actual_po_released_date" class="form-control actual @error('actual_po_released_date') is-invalid @enderror" value="{{ old('actual_po_released_date', $eir->expected_process_date ? date('Y-m-d', strtotime($eir->expected_process_date)) : '') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                            @error('actual_po_released_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- actual_payment_transfer_date --}}
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.actual_payment_transfer_date')<span class="text-danger">*</span></label>
+                            <input type="date" name="actual_payment_transfer_date" id="actual_payment_transfer_date" class="form-control actual @error('actual_payment_transfer_date') is-invalid @enderror" value="{{ old('actual_payment_transfer_date', $eir->actual_payment_transfer_date ? date('Y-m-d', strtotime($eir->actual_payment_transfer_date)) : '') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                            @error('actual_payment_transfer_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- actual_shipment_pickup_date --}}
+                        <div class="form-group col-6">
+                            <label>@lang('eirs.actual_shipment_pickup_date')<span class="text-danger">*</span></label>
+                            <input type="date" name="actual_shipment_pickup_date" id="actual_shipment_pickup_date" class="form-control actual @error('actual_shipment_pickup_date') is-invalid @enderror" value="{{ old('actual_shipment_pickup_date', $eir->actual_shipment_pickup_date ? date('Y-m-d', strtotime($eir->actual_shipment_pickup_date)) : '') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                            @error('actual_shipment_pickup_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- actual_arrival_to_site_date --}}
+                        <div class="form-group col-12">
+                            <label>@lang('eirs.actual_arrival_to_site_date')<span class="text-danger">*</span></label>
+                            <input type="date" name="actual_arrival_to_site_date" id="actual_arrival_to_site_date" class="form-control actual @error('actual_arrival_to_site_date') is-invalid @enderror" value="{{ old('actual_arrival_to_site_date', $eir->actual_arrival_to_site_date ? date('Y-m-d', strtotime($eir->actual_arrival_to_site_date)) : '') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                            @error('actual_arrival_to_site_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+
                     </div>{{-- row --}}
 
-
                     @php
-                        $numbers    = ['eir_no'];
-                        $textareas  = ['description'];
-                        $data_times = ['date','expected_process_date','expected_po_released_date','expected_payment_transfer_date',
-                                       'expected_shipment_pickup_date','expected_arrival_to_site_date',
-                                       'actual_process_date','actual_po_released_date',
-                                       'actual_payment_transfer_date','actual_shipment_pickup_date',
-                                       'actual_arrival_to_site_date'];
+                        $status = ['Under Review', 'Approved', 'PO Placed', 'Payment Processed', 'Part In Transit', 'Delivered To Site'];
                     @endphp
 
-                    @foreach ($numbers as $number)
-                        
-                        {{--$number--}}
-                        <div class="form-group">
-                            <label>@lang('eirs.' . $number)<span class="text-danger">*</span></label>
-                            <input type="number" name="{{ $number }}" class="form-control @error($number) is-invalid @enderror" value="{{ old($number, $eir[$number]) }}" required autofocus>
-                            @error($number)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                    {{--$enum--}}
+                    <div class="form-group">
+                        <label>@lang('eirs.status' ) <span class="text-danger">*</span></label>
+                        <select id="status" disabled class="form-control select2 @error('status') custom-select @enderror" required>
+                            <option value="">@lang('site.choose') @lang('eirs.status')</option>
+                            @foreach ($status as $statu)
+                                <option value="{{ $statu }}" {{ $statu == old('status') ? 'selected' : '' }}>{{ $statu }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                    @endforeach
+                    <input type="text" name="status" value="{{ old('status', $eir->status) }}" id="statu-hidden" hidden>
 
-                    @foreach ($data_times as $data_time)
-                        
-                        {{--$data_time--}}
-                        <div class="form-group">
-                            <label>@lang('eirs.' . $data_time)<span class="text-danger">*</span></label>
-                            <input type="date" name="{{ $data_time }}" class="form-control @error($data_time) is-invalid @enderror" value="{{ old($data_time, date('Y-m-d', strtotime($eir[$data_time]))) }}" required autofocus>
-                            @error($data_time)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                    @endforeach
-
-                    @foreach ($textareas as $textarea)
-                        
-                        {{-- $textarea --}}
-                        <div class="form-group">
-                            <label>@lang('eirs.'.$textarea) <span class="text-danger">*</span></label>
-                            <textarea class="form-control @error($textarea) is-invalid @enderror" name="{{ $textarea }}" rows="6">{{ old($textarea, $eir[$textarea]) }}</textarea>
-                            @error($textarea)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        
-                    @endforeach
-
-                    @php
-                        $status = [1, 0];
-                        $enums  = ['status'];
-                    @endphp
-
-                    @foreach ($enums as $enum)
-                        
-                        {{--$enum--}}
-                        <div class="form-group">
-                            <label>@lang('eirs.' . $enum) <span class="text-danger">*</span></label>
-                            <select name="{{ $enum }}" class="form-control select2 @error($enum) custom-select @enderror" required>
-                                <option value="">@lang('site.choose') @lang('eirs.' . $enum)</option>
-                                @foreach ($status as $statu)
-                                    <option value="{{ $statu }}" {{ $statu == old($enum, $eir[$enum]) ? 'selected' : '' }}>@lang('site.' . $statu)</option>
-                                @endforeach
-                            </select>
-                            @error($enum)
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                    @endforeach
-
-                                        {{-- attachments --}}
+                    {{-- attachments --}}
                     <div class="form-group">
                         <label>@lang('eirs.attachments') <span class="text-danger">*</span></label>
-                        <input type="file" name="attachments" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
+                        <input type="file" name="attachments[]" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
                         @error('attachments')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -167,3 +246,144 @@
 
 @endsection
 
+@push('scripts')
+    
+    <script>
+
+        $(document).ready(function() {
+
+            function calculateDays(Countdays, startDay) {
+                
+                var startDate = new Date(startDay),
+                    days      = parseInt(Countdays);
+
+                var newDate = startDate.setDate(startDate.getDate() + days);
+
+                return new Date(newDate).toLocaleDateString('en-CA');
+
+            }//end of fun
+            
+            $(document).on('change', '.actual', function(e) {
+                e.preventDefault();
+
+                var name = $(this).attr('name');
+
+                if(name == 'date') {
+
+                    $('#status').val('Under Review').change();
+                    $('#statu-hidden').val('Under Review');
+
+                    let date = $(this).val();
+                    $('#actual_process_date').attr('min', date);
+
+                    ////////////////////////////////////////
+
+                    $('#expected_process_date').val(calculateDays(2, date));
+                    $('#expected_process_date-hidden').val(calculateDays(2, date));
+
+                    ////////////////////////////////////////
+
+                    var expectedProcessDate = $('#expected_process_date').val();
+
+                    $('#expected_po_released_date').val(calculateDays(10, expectedProcessDate));//2
+                    $('#expected_po_released_date-hidden').val(calculateDays(10, expectedProcessDate));//2
+
+                    ////////////////////////////////////////
+
+                    var expectedPaymentTransferDate = $('#expected_po_released_date').val();//3
+
+                    $('#expected_payment_transfer_date').val(calculateDays(14, expectedPaymentTransferDate));//2
+                    $('#expected_payment_transfer_date-hidden').val(calculateDays(14, expectedPaymentTransferDate));//2
+
+                    ////////////////////////////////////////
+
+                    var expectedShipmentPickupDate = $('#expected_payment_transfer_date').val();//3
+
+                    $('#expected_shipment_pickup_date').val(calculateDays(14, expectedShipmentPickupDate));//2
+                    $('#expected_shipment_pickup_date-hidden').val(calculateDays(14, expectedShipmentPickupDate));//2
+
+                    ////////////////////////////////////////
+
+                    var expectedArrivalToSiteDate = $('#expected_shipment_pickup_date').val();//3
+
+                    $('#expected_arrival_to_site_date').val(calculateDays(7, expectedArrivalToSiteDate));//2
+                    $('#expected_arrival_to_site_date-hidden').val(calculateDays(7, expectedArrivalToSiteDate));//2
+
+
+                }//end of if
+
+                if(name == 'actual_process_date') {
+                    $('#status').val('Approved').change();
+                    $('#statu-hidden').val('Approved');
+                }
+
+                if(name == 'actual_po_released_date') {
+                    $('#status').val('PO Placed').change();
+                    $('#statu-hidden').val('PO Placed');
+                }
+
+                if(name == 'actual_payment_transfer_date') {
+                    $('#status').val('Payment Processed').change();
+                    $('#statu-hidden').val('Payment Processed');
+                }
+
+                if(name == 'actual_shipment_pickup_date') {
+                    $('#status').val('Part In Transit').change();
+                    $('#statu-hidden').val('Part In Transit');
+                }
+
+                if(name == 'actual_arrival_to_site_date') {
+                    $('#status').val('Delivered To Site').change();
+                    $('#statu-hidden').val('Delivered To Site');
+                }
+
+            });//end of change
+
+            $(document).on('change', '#actual_process_date', function(e) {
+                e.preventDefault();
+
+                let date = $(this).val();
+
+                $('#actual_po_released_date').attr('min', date);
+
+            });//end of change
+
+            $(document).on('change', '#actual_po_released_date', function(e) {
+                e.preventDefault();
+
+                let date = $(this).val();
+
+                $('#actual_payment_transfer_date').attr('min', date);
+
+            });//end of change
+
+            $(document).on('change', '#actual_payment_transfer_date', function(e) {
+                e.preventDefault();
+
+                let date = $(this).val();
+
+                $('#actual_shipment_pickup_date').attr('min', date);
+
+            });//end of change
+
+            $(document).on('change', '#actual_shipment_pickup_date', function(e) {
+                e.preventDefault();
+
+                let date = $(this).val();
+
+                $('#actual_arrival_to_site_date').attr('min', date);
+
+            });//end of change
+
+        });//end of redy fun
+
+        //select 2
+        $('.select2').select2({
+            'width': '100%',
+            'tags': false,
+            'minimumResultsForSearch': Infinity
+        });
+
+    </script>
+
+@endpush

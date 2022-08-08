@@ -69,8 +69,16 @@
                                     <th>@lang('eirs.eir_no')</th>
                                     <th>@lang('eirs.date')</th>
                                     <th>@lang('eirs.expected_process_date')</th>
-                                    <th>@lang('admins.name')</th>
-                                    <th>@lang('site.created_at')</th>
+                                    <th>@lang('eirs.expected_po_released_date')</th>
+                                    <th>@lang('eirs.expected_payment_transfer_date')</th>
+                                    <th>@lang('eirs.expected_shipment_pickup_date')</th>
+                                    <th>@lang('eirs.expected_arrival_to_site_date')</th>
+
+                                    <th>@lang('eirs.actual_process_date')</th>
+                                    <th>@lang('eirs.actual_po_released_date')</th>
+                                    <th>@lang('eirs.actual_payment_transfer_date')</th>
+                                    <th>@lang('eirs.actual_shipment_pickup_date')</th>
+                                    <th>@lang('eirs.actual_arrival_to_site_date')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -110,8 +118,15 @@
                 {data: 'eir_no', name: 'eir_no'},
                 {data: 'date', name: 'date'},
                 {data: 'expected_process_date', name: 'expected_process_date'},
-                {data: 'admin', name: 'admin'},
-                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'expected_po_released_date', name: 'expected_po_released_date'},
+                {data: 'expected_payment_transfer_date', name: 'expected_payment_transfer_date'},
+                {data: 'expected_shipment_pickup_date', name: 'expected_shipment_pickup_date'},
+                {data: 'expected_arrival_to_site_date', name: 'expected_arrival_to_site_date'},
+                {data: 'actual_process_date', name: 'actual_process_date'},
+                {data: 'actual_po_released_date', name: 'actual_po_released_date'},
+                {data: 'actual_payment_transfer_date', name: 'actual_payment_transfer_date'},
+                {data: 'actual_shipment_pickup_date', name: 'actual_shipment_pickup_date'},
+                {data: 'actual_arrival_to_site_date', name: 'actual_arrival_to_site_date'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[2, 'desc']],
