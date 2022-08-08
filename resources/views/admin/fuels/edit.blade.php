@@ -242,6 +242,7 @@
         $('.select2').select2({
             'width': '100%',
             'tags': false,
+            'minimumResultsForSearch': Infinity
         });
 
     </script>
