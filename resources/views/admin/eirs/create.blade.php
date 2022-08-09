@@ -239,34 +239,34 @@
                         </h3>
                         <hr/>
                         {{-- request part --}}
-                        <div class="row" id="append-request-part">
+                        <div class="row col-12">
 
-                                
-                            <div class="row">
-
-                                <div class="col-1">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">@lang('eirs.eir_no')</th>
+                                  <th scope="col">@lang('request_parts.requested_part_no')</th>
+                                  <th scope="col">@lang('request_parts.requested_part')</th>
+                                  <th scope="col">@lang('request_parts.quantity')</th>
+                                  <th scope="col">@lang('request_parts.unit')</th>
+                                </tr>
+                              </thead>
+                              <tbody id="append-request-part">
+                                <tr>
+                                  <th scope="row">
                                     <button class="btn btn-danger remove-form-request-part">
                                         <i class="fa fa-remove"></i>
                                     </button>
-                                </div>
-
-                                <div class="form-group col-5">
-                                    <input type="number" disabled name="requested_part_no" class="form-control" required autofocus placeholder="Requested Part No">
-                                </div>
-
-                                <div class="form-group col-6">
-                                    <input type="text" name="requested_part" class="form-control" required autofocus placeholder="Requested Part">
-                                </div>
-
-                                <div class="form-group col-6">
-                                    <input type="number" name="quantity" class="form-control" required autofocus placeholder="Quantity">
-                                </div>
-
-                                <div class="form-group col-6">
-                                    <input type="text" name="unit" class="form-control" required autofocus placeholder="Unit">
-                                </div>
-                                
-                            </div>
+                                  </th>
+                                  <td><input type="number" disabled name="eir_no" class="form-control" required autofocus placeholder="Eir No"></td>
+                                  <td><input type="text" name="requested_part_no" class="form-control" required autofocus placeholder="Requested Part No"></td>
+                                  <td><input type="text" name="requested_part" class="form-control" required autofocus placeholder="Requested Part No"></td>
+                                  <td><input type="text" name="quantity" class="form-control" required autofocus placeholder="Requested Part No"></td>
+                                  <td><input type="text" name="unit" class="form-control" required autofocus placeholder="Requested Part No"></td>
+                                </tr>
+                              </tbody>
+                            </table>
                             
                         </div>
 
@@ -296,33 +296,18 @@
             $(document).on('click', '#add-request-part', function(e) {
                 e.preventDefault();
 
-                let html = `<div class="row">
-
-                                <div class="col-1">
-                                    <button class="btn btn-danger remove-form-request-part">
-                                        <i class="fa fa-remove"></i>
-                                    </button>
-                                </div>
-
-                                <div class="form-group col-5">
-                                    <input type="number" disabled name="requested_part_no" class="form-control" required autofocus placeholder="Requested Part No">
-                                </div>
-
-                                <div class="form-group col-6">
-                                    <input type="text" name="requested_part" class="form-control" required autofocus placeholder="Requested Part">
-                                </div>
-
-                                <div class="form-group col-6">
-                                    <input type="number" name="quantity" class="form-control" required autofocus placeholder="Quantity">
-                                </div>
-
-                                <div class="form-group col-6">
-                                    <input type="text" name="unit" class="form-control" required autofocus placeholder="Unit">
-                                </div>
-                                
-                            </div>
-                            
-                        </div>`;
+                let html = `<tr>
+                              <th scope="row">
+                                <button class="btn btn-danger remove-form-request-part">
+                                    <i class="fa fa-remove"></i>
+                                </button>
+                              </th>
+                              <td><input type="number" disabled name="eir_no" class="form-control" required autofocus placeholder="Eir No"></td>
+                              <td><input type="text" name="requested_part_no" class="form-control" required autofocus placeholder="Requested Part No"></td>
+                              <td><input type="text" name="requested_part" class="form-control" required autofocus placeholder="Requested Part"></td>
+                              <td><input type="text" name="quantity" class="form-control" required autofocus placeholder="Quantity"></td>
+                              <td><input type="text" name="unit" class="form-control" required autofocus placeholder="Unit"></td>
+                            </tr>`;
 
                 $('#append-request-part').append(html);
 
@@ -331,7 +316,7 @@
             $(document).on('click', '.remove-form-request-part', function(e) {
                 e.preventDefault();
 
-                $(this).closest('.row').remove();
+                $(this).closest('tr').remove();
 
             });//end of change
 
