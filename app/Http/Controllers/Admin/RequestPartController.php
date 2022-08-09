@@ -35,11 +35,8 @@ class RequestPartController extends Controller
             ->editColumn('created_at', function (RequestPart $request_part) {
                 return $request_part->created_at->format('Y-m-d');
             })
-            ->addColumn('admin', function (RequestPart $request_part) {
-                return $request_part->admin->name;
-            })
             ->addColumn('eir', function (RequestPart $request_part) {
-                return $request_part->eir->description;
+                return $request_part->eir->eir_no ?? '';
             })
             ->addColumn('actions', 'admin.request_parts.data_table.actions')
             ->rawColumns(['record_select', 'actions'])

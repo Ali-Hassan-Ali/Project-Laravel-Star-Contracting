@@ -70,8 +70,6 @@
                                     <th>@lang('request_parts.requested_part')</th>
                                     <th>@lang('request_parts.requested_part_no')</th>
                                     <th>@lang('request_parts.unit')</th>
-                                    <th>@lang('admins.name')</th>
-                                    <th>@lang('site.created_at')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
                                 </thead>
@@ -112,8 +110,6 @@
                 {data: 'requested_part', name: 'requested_part'},
                 {data: 'requested_part_no', name: 'requested_part_no'},
                 {data: 'unit', name: 'unit'},
-                {data: 'admin', name: 'admin'},
-                {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[2, 'desc']],

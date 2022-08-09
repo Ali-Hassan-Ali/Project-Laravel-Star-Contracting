@@ -64,7 +64,7 @@
                         {{--$number--}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.eir_no')<span class="text-danger">*</span></label>
-                            <input type="number" name="eir_no" class="form-control @error('eir_no') is-invalid @enderror" value="{{ old('eir_no') }}" required autofocus>
+                            <input type="number" name="eir_no" id="eir-no" class="form-control @error('eir_no') is-invalid @enderror" value="{{ old('eir_no') }}" required autofocus>
                             @error('eir_no')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -218,6 +218,8 @@
                         </div>
 
                         <input type="text" name="status" value="{{ old('status') }}" id="statu-hidden" hidden>
+                        
+                        <input type="number" name="requested_part_eir_no" id="RequestedPart-eir-no" value="{{ old('requested_part_eir_no') }}" hidden>
 
 
                         {{-- attachments --}}
@@ -239,36 +241,39 @@
                         </h3>
                         <hr/>
                         {{-- request part --}}
-                        <div class="row col-12">
+                        <div class="table-responsive">
 
                             <table class="table">
-                              <thead>
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">@lang('eirs.eir_no')</th>
-                                  <th scope="col">@lang('request_parts.requested_part_no')</th>
-                                  <th scope="col">@lang('request_parts.requested_part')</th>
-                                  <th scope="col">@lang('request_parts.quantity')</th>
-                                  <th scope="col">@lang('request_parts.unit')</th>
-                                </tr>
-                              </thead>
-                              <tbody id="append-request-part">
-                                <tr>
-                                  <th scope="row">
-                                    <button class="btn btn-danger remove-form-request-part">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">@lang('eirs.eir_no')</th>
+                                        <th scope="col">@lang('request_parts.requested_part_no')</th>
+                                        <th scope="col">@lang('request_parts.requested_part')</th>
+                                        <th scope="col">@lang('request_parts.quantity')</th>
+                                        <th scope="col">@lang('request_parts.unit')</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="append-request-part">
+                                    <tr>
+                                    <th scope="row">
+
+                                    <button class="btn btn-danger remove-form-request-part" data-eir-no="">
                                         <i class="fa fa-remove"></i>
                                     </button>
-                                  </th>
-                                  <td><input type="number" disabled name="eir_no" class="form-control" required autofocus placeholder="Eir No"></td>
-                                  <td><input type="text" name="requested_part_no" class="form-control" required autofocus placeholder="Requested Part No"></td>
-                                  <td><input type="text" name="requested_part" class="form-control" required autofocus placeholder="Requested Part No"></td>
-                                  <td><input type="text" name="quantity" class="form-control" required autofocus placeholder="Requested Part No"></td>
-                                  <td><input type="text" name="unit" class="form-control" required autofocus placeholder="Requested Part No"></td>
-                                </tr>
-                              </tbody>
+
+                                    </th>
+                                        <td><input type="number" disabled name="eir_no[]" class="form-control requested-part-eir_no" required autofocus placeholder="Eir No"></td>
+                                        <td><input type="text" name="requested_part_no[]" class="form-control" required autofocus placeholder="Requested Part No"></td>
+                                        <td><input type="text" name="requested_part[]" class="form-control" required autofocus placeholder="Requested Part"></td>
+                                        <td><input type="text" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
+                                        <td><input type="text" name="unit[]" class="form-control" required autofocus placeholder="Unit"></td>
+                                    </tr>
+                                </tbody>
+
                             </table>
                             
-                        </div>
+                        </div>{{-- table-responsive --}}
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
@@ -296,17 +301,19 @@
             $(document).on('click', '#add-request-part', function(e) {
                 e.preventDefault();
 
+                var dataNo = $(this).data('eir-no');
+
                 let html = `<tr>
-                              <th scope="row">
+                              <td scope="row">
                                 <button class="btn btn-danger remove-form-request-part">
                                     <i class="fa fa-remove"></i>
                                 </button>
-                              </th>
-                              <td><input type="number" disabled name="eir_no" class="form-control" required autofocus placeholder="Eir No"></td>
-                              <td><input type="text" name="requested_part_no" class="form-control" required autofocus placeholder="Requested Part No"></td>
-                              <td><input type="text" name="requested_part" class="form-control" required autofocus placeholder="Requested Part"></td>
-                              <td><input type="text" name="quantity" class="form-control" required autofocus placeholder="Quantity"></td>
-                              <td><input type="text" name="unit" class="form-control" required autofocus placeholder="Unit"></td>
+                              </td>
+                              <td><input type="number" disabled name="eir_no[]" value="${dataNo}" class="form-control requested-part-eir_no" required autofocus placeholder="Eir No"></td>
+                              <td><input type="text" name="requested_part_no[]" class="form-control" required autofocus placeholder="Requested Part No"></td>
+                              <td><input type="text" name="requested_part[]" class="form-control" required autofocus placeholder="Requested Part"></td>
+                              <td><input type="text" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
+                              <td><input type="text" name="unit[]" class="form-control" required autofocus placeholder="Unit"></td>
                             </tr>`;
 
                 $('#append-request-part').append(html);
@@ -317,6 +324,17 @@
                 e.preventDefault();
 
                 $(this).closest('tr').remove();
+
+            });//end of change
+
+            $(document).on('change', '#eir-no', function(e) {
+                e.preventDefault();
+
+                var value = $(this).val();
+
+                $('.requested-part-eir_no').val(value);
+                $('#RequestedPart-eir-no').val(value);
+                $('#add-request-part').data('eir-no', value);
 
             });//end of change
 

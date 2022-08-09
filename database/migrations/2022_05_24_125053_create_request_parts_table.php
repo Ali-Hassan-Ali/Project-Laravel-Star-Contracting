@@ -16,12 +16,13 @@ class CreateRequestPartsTable extends Migration
         Schema::create('request_parts', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Eir::class)->onDelete('cascade');
-            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
+
+            $table->integer('eir_no');
             $table->integer('quantity');
 
-            $table->text('requested_part');
-            $table->text('requested_part_no');
-            $table->text('unit');
+            $table->string('requested_part_no');
+            $table->string('requested_part');
+            $table->string('unit');
 
             $table->softDeletes();
             $table->timestamps();

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\EirRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Country;
+use App\Models\RequestPart;
 use App\Models\Attachment;
 use App\Models\Equipment;
 use App\Models\Eir;
@@ -93,11 +94,12 @@ class EirController extends Controller
     
     public function store(EirRequest $request)
     {
+
         $validated            = $request->validated();
-        $validated            = $request->safe()->except(['attachments']);
+        $validated            = $request->safe()->except(['attachments', 'requested_part_eir_no']);
         $validated['user_id'] = auth()->id();
         
-        $eir = eir::create($validated);
+        $eir = eir::create($validated);        
 
         if ($request->attachments) {
             
@@ -112,6 +114,23 @@ class EirController extends Controller
             }//end of rach
 
         }//end of check file attachments
+
+        if ($request->requested_part_eir_no) {
+            
+            foreach ($request->requested_part as $key=>$data) {
+                
+                RequestPart::create([
+                    'eir_id'            => $eir->id,
+                    'eir_no'            => $request->requested_part_eir_no,
+                    'requested_part_no' => $request['requested_part_no'][$key],
+                    'requested_part'    => $request['requested_part'][$key],
+                    'quantity'          => $request['quantity'][$key],
+                    'unit'              => $request['requested_part_no'][$key],
+                ]);
+
+            }//end of rach
+
+        }//end of requested part
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.eirs.index');
