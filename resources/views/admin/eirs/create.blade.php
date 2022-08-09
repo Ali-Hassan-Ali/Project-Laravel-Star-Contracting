@@ -202,41 +202,80 @@
                             @enderror
                         </div>
 
+                        @php
+                            $status = ['Under Review', 'Approved', 'PO Placed', 'Payment Processed', 'Part In Transit', 'Delivered To Site'];
+                        @endphp
+
+                        {{--$enum--}}
+                        <div class="form-group">
+                            <label>@lang('eirs.status' ) <span class="text-danger">*</span></label>
+                            <select id="status" disabled class="form-control select2 @error('status') custom-select @enderror" required>
+                                <option value="">@lang('site.choose') @lang('eirs.status')</option>
+                                @foreach ($status as $statu)
+                                    <option value="{{ $statu }}" {{ $statu == old('status') ? 'selected' : '' }}>{{ $statu }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <input type="text" name="status" value="{{ old('status') }}" id="statu-hidden" hidden>
+
+
+                        {{-- attachments --}}
+                        <div class="form-group">
+                            <label>@lang('eirs.attachments') <span class="text-danger">*</span></label>
+                            <input type="file" name="attachments[]" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
+                            @error('attachments')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
+                        <h3>
+                            <button class="btn btn-primary" id="add-request-part">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            @lang('request_parts.request_parts')
+                        </h3>
+                        <hr/>
+                        {{-- request part --}}
+                        <div class="row" id="append-request-part">
+
+                                
+                            <div class="row">
+
+                                <div class="col-1">
+                                    <button class="btn btn-danger remove-form-request-part">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+
+                                <div class="form-group col-5">
+                                    <input type="number" disabled name="requested_part_no" class="form-control" required autofocus placeholder="Requested Part No">
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <input type="text" name="requested_part" class="form-control" required autofocus placeholder="Requested Part">
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <input type="number" name="quantity" class="form-control" required autofocus placeholder="Quantity">
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <input type="text" name="unit" class="form-control" required autofocus placeholder="Unit">
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                        </div>
 
                     </div>{{-- row --}}
-
-                    @php
-                        $status = ['Under Review', 'Approved', 'PO Placed', 'Payment Processed', 'Part In Transit', 'Delivered To Site'];
-                    @endphp
-
-                    {{--$enum--}}
-                    <div class="form-group">
-                        <label>@lang('eirs.status' ) <span class="text-danger">*</span></label>
-                        <select id="status" disabled class="form-control select2 @error('status') custom-select @enderror" required>
-                            <option value="">@lang('site.choose') @lang('eirs.status')</option>
-                            @foreach ($status as $statu)
-                                <option value="{{ $statu }}" {{ $statu == old('status') ? 'selected' : '' }}>{{ $statu }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <input type="text" name="status" value="{{ old('status') }}" id="statu-hidden" hidden>
-
-                    {{-- attachments --}}
-                    <div class="form-group">
-                        <label>@lang('eirs.attachments') <span class="text-danger">*</span></label>
-                        <input type="file" name="attachments[]" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
-                        @error('attachments')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
                 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
-                    </div>
 
                 </form><!-- end of form -->
 
@@ -253,6 +292,48 @@
     <script>
 
         $(document).ready(function() {
+
+            $(document).on('click', '#add-request-part', function(e) {
+                e.preventDefault();
+
+                let html = `<div class="row">
+
+                                <div class="col-1">
+                                    <button class="btn btn-danger remove-form-request-part">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+
+                                <div class="form-group col-5">
+                                    <input type="number" disabled name="requested_part_no" class="form-control" required autofocus placeholder="Requested Part No">
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <input type="text" name="requested_part" class="form-control" required autofocus placeholder="Requested Part">
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <input type="number" name="quantity" class="form-control" required autofocus placeholder="Quantity">
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <input type="text" name="unit" class="form-control" required autofocus placeholder="Unit">
+                                </div>
+                                
+                            </div>
+                            
+                        </div>`;
+
+                $('#append-request-part').append(html);
+
+            });//end of change
+
+            $(document).on('click', '.remove-form-request-part', function(e) {
+                e.preventDefault();
+
+                $(this).closest('.row').remove();
+
+            });//end of change
 
             function calculateDays(Countdays, startDay) {
                 
@@ -389,5 +470,3 @@
     </script>
 
 @endpush
-
-

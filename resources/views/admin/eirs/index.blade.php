@@ -73,7 +73,6 @@
                                     <th>@lang('eirs.expected_payment_transfer_date')</th>
                                     <th>@lang('eirs.expected_shipment_pickup_date')</th>
                                     <th>@lang('eirs.expected_arrival_to_site_date')</th>
-
                                     <th>@lang('eirs.actual_process_date')</th>
                                     <th>@lang('eirs.actual_po_released_date')</th>
                                     <th>@lang('eirs.actual_payment_transfer_date')</th>

@@ -53,23 +53,18 @@ class EirController extends Controller
             ->editColumn('expected_arrival_to_site_date', function (Eir $eir) {
                 return $eir->expected_arrival_to_site_date ? date('d-m-Y', strtotime($eir->expected_arrival_to_site_date)) : '';
             })
-
             ->editColumn('actual_process_date', function (Eir $eir) {
                 return $eir->actual_process_date ? date('d-m-Y', strtotime($eir->actual_process_date)) : '';
             })
-
             ->editColumn('actual_po_released_date', function (Eir $eir) {
                 return $eir->actual_po_released_date ? date('d-m-Y', strtotime($eir->actual_po_released_date)) : '';
             })
-
             ->editColumn('actual_payment_transfer_date', function (Eir $eir) {
                 return $eir->actual_payment_transfer_date ? date('d-m-Y', strtotime($eir->actual_payment_transfer_date)) : '';
             })
-
             ->editColumn('actual_shipment_pickup_date', function (Eir $eir) {
                 return $eir->actual_shipment_pickup_date ? date('d-m-Y', strtotime($eir->actual_shipment_pickup_date)) : '';
             })
-
             ->editColumn('actual_arrival_to_site_date', function (Eir $eir) {
                 return $eir->actual_arrival_to_site_date ? date('d-m-Y', strtotime($eir->actual_arrival_to_site_date)) : '';
             })
