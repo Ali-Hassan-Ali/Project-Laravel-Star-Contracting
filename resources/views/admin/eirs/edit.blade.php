@@ -311,12 +311,12 @@
 
             function selectRefresh() {
 
-                $('.aa').select2({
+                $('.select2-tags-true').select2({
                     'width': '100%',
                     'tags': true,
-                    'dropdownParent': $('#append-request-part'),
                 });
-            }
+                
+            }//end of fun
 
             $(document).on('click', '#add-request-part', function(e) {
                 e.preventDefault();
@@ -335,7 +335,7 @@
                               <td><input type="number" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
                               <td>
                               <div class="form-group">
-                                    <select name="unit[]" class="form-control aa" required>
+                                    <select name="unit[]" class="form-control select2-tags-true" required>
                                         <option value="">aa</option>
                                         <option value="">afdf</option>
                                     </select>
@@ -500,7 +500,13 @@
         });
 
         //select 2
-        $('#unit').select2({
+        $('.select2').select2({
+            'width': '100%',
+            'tags': false,
+            'minimumResultsForSearch': Infinity
+        });
+
+        $('.select2-tags-true').select2({
             'width': '100%',
             'tags': true,
         });
