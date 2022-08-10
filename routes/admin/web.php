@@ -91,6 +91,7 @@ Route::middleware([
             //spares routes
             Route::get('/spares/data', 'SpareController@data')->name('spares.data');
             Route::delete('/spares/bulk_delete', 'SpareController@bulkDelete')->name('spares.bulk_delete');
+            Route::resource('spares.attachment', 'SpareAttachmentController');
             Route::resource('spares', 'SpareController');
 
             //maintenances routes

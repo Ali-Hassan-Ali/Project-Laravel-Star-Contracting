@@ -29,6 +29,12 @@ class Spare extends Model
         return $this->belongsTo(City::class);
         
     }//end of  belongsTo
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class);
+        
+    }//end of  belongsTo
     
 }//end of model
 

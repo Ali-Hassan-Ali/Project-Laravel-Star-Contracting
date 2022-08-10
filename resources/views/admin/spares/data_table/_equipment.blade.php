@@ -1,4 +1,4 @@
-@if ($spare->equipments()->count() > 0)
+@if ($spare->equipment()->count() > 0)
 	
 	@foreach (json_decode($spare->equipments) as $data)
 		@php

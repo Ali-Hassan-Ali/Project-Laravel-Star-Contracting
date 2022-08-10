@@ -3,13 +3,13 @@
 @section('content')
 
     <div>
-        <h2>@lang('eirs.eirs')</h2>
+        <h2>@lang('spares.spares')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.eirs.index') }}">@lang('eirs.eirs')</a></li>
-        <li class="breadcrumb-item">@lang('eirs.attachments')</li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.spares.index') }}">@lang('spares.spares')</a></li>
+        <li class="breadcrumb-item">@lang('spares.attachments')</li>
     </ul>
 
     <div class="row">
@@ -22,8 +22,8 @@
 
                     <div class="col-md-12">
 
-                        @if (auth()->user()->hasPermission('read_eirs'))
-                            <a href="{{ route('admin.eirs.attachment.create', ['eir' => $eir->id]) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
+                        @if (auth()->user()->hasPermission('read_spares'))
+                            <a href="{{ route('admin.spares.attachment.create', ['spare' => $spare->id]) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
                         @endif
 
                     </div>
@@ -46,16 +46,16 @@
                                 </tr>
                                 </thead>
                                 <body>
-                                    @foreach ($eir->attachments()->get() as $data)
+                                    @foreach ($spare->attachments()->get() as $data)
                                     <tr>
-                                        <td>{{ $eir->equipment->name ?? '' }}</td>
-                                        <td>{{ $eir->equipment->make ?? '' }}</td>
+                                        <td>{{ $spare->equipment->name ?? '' }}</td>
+                                        <td>{{ $spare->equipment->make ?? '' }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>
                                             <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
-                                            @if (auth()->user()->hasPermission('delete_eirs'))
+                                            @if (auth()->user()->hasPermission('delete_spares'))
                                                 
-                                                <form action="{{ route('admin.eirs.attachment.destroy', ['eir' => $eir->id,'attachment' => $data->id]) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+                                                <form action="{{ route('admin.spares.attachment.destroy', ['spare' => $spare->id,'attachment' => $data->id]) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
                                                     @csrf
                                                     @method('delete')
 
