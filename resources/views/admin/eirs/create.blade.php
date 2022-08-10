@@ -218,7 +218,7 @@
                         </div>
 
                         <input type="text" name="status" value="{{ old('status') }}" id="statu-hidden" hidden>
-                        
+
                         <input type="number" name="requested_part_eir_no" id="RequestedPart-eir-no" value="{{ old('requested_part_eir_no') }}" hidden>
 
 
@@ -266,8 +266,17 @@
                                         <td><input type="number" disabled name="eir_no[]" class="form-control requested-part-eir_no" required autofocus placeholder="Eir No"></td>
                                         <td><input type="text" name="requested_part_no[]" class="form-control" required autofocus placeholder="Requested Part No"></td>
                                         <td><input type="text" name="requested_part[]" class="form-control" required autofocus placeholder="Requested Part"></td>
-                                        <td><input type="text" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
-                                        <td><input type="text" name="unit[]" class="form-control" required autofocus placeholder="Unit"></td>
+                                        <td><input type="number" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select id="status" class="form-control select2" required>
+                                                    <option value="">@lang('site.choose') @lang('eirs.status')</option>
+                                                    @foreach ($units as $unit)
+                                                        <option value="{{ $unit }}" {{ $unit == old('unit') ? 'selected' : '' }}>{{ $unit }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
 
@@ -298,6 +307,15 @@
 
         $(document).ready(function() {
 
+            function selectRefresh() {
+
+                $('.aa').select2({
+                    'width': '100%',
+                    'tags': true,
+                    'dropdownParent': $('#append-request-part'),
+                });
+            }
+
             $(document).on('click', '#add-request-part', function(e) {
                 e.preventDefault();
 
@@ -312,20 +330,30 @@
                               <td><input type="number" disabled name="eir_no[]" value="${dataNo}" class="form-control requested-part-eir_no" required autofocus placeholder="Eir No"></td>
                               <td><input type="text" name="requested_part_no[]" class="form-control" required autofocus placeholder="Requested Part No"></td>
                               <td><input type="text" name="requested_part[]" class="form-control" required autofocus placeholder="Requested Part"></td>
-                              <td><input type="text" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
-                              <td><input type="text" name="unit[]" class="form-control" required autofocus placeholder="Unit"></td>
+                              <td><input type="number" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
+                              <td>
+                              <div class="form-group">
+                                    <select name="unit[]" class="form-control aa" required>
+                                        <option value="">aa</option>
+                                        <option value="">afdf</option>
+                                    </select>
+                                </div>
+                              </td>
                             </tr>`;
+
 
                 $('#append-request-part').append(html);
 
-            });//end of change
+                selectRefresh();
+
+            });//end of clickadd-request-part 
 
             $(document).on('click', '.remove-form-request-part', function(e) {
                 e.preventDefault();
 
                 $(this).closest('tr').remove();
 
-            });//end of change
+            });//end of click remove-form-request-part
 
             $(document).on('change', '#eir-no', function(e) {
                 e.preventDefault();
@@ -336,7 +364,7 @@
                 $('#RequestedPart-eir-no').val(value);
                 $('#add-request-part').data('eir-no', value);
 
-            });//end of change
+            });//end of change eir-no
 
             function calculateDays(Countdays, startDay) {
                 
@@ -466,8 +494,8 @@
         //select 2
         $('.select2').select2({
             'width': '100%',
-            'tags': false,
-            'minimumResultsForSearch': Infinity
+            // 'tags': false,
+            // 'minimumResultsForSearch': Infinity
         });
 
     </script>

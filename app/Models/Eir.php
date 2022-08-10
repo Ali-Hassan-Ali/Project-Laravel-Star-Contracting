@@ -23,5 +23,11 @@ class Eir extends Model
         return $this->belongsTo(Equipment::class);
         
     }//end of  belongsTo
+
+    public function RequestPart()
+    {
+        return $this->hasMany(RequestPart::class);
+        
+    }//end of  belongsTo
     
 }//end of model

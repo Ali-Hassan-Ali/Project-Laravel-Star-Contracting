@@ -22,7 +22,7 @@
                     @csrf
                     @method('put')
 
-                                        <div class="row">
+                    <div class="row">
                         {{--equipment_id--}}
                         <div class="form-group col-6">
                             <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
@@ -62,7 +62,7 @@
                         {{--$number--}}
                         <div class="form-group col-6">
                             <label>@lang('eirs.eir_no')<span class="text-danger">*</span></label>
-                            <input type="number" name="eir_no" class="form-control @error('eir_no') is-invalid @enderror" value="{{ old('eir_no', $eir->eir_no) }}" required autofocus>
+                            <input type="number" name="eir_no" id="eir-no" class="form-control @error('eir_no') is-invalid @enderror" value="{{ old('eir_no', $eir->eir_no) }}" required autofocus>
                             @error('eir_no')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -202,39 +202,96 @@
                         </div>
 
 
+                        @php
+                            $status = ['Under Review', 'Approved', 'PO Placed', 'Payment Processed', 'Part In Transit', 'Delivered To Site'];
+                        @endphp
+
+                        {{--$enum--}}
+                        <div class="form-group">
+                            <label>@lang('eirs.status' ) <span class="text-danger">*</span></label>
+                            <select id="status" disabled class="form-control select2 @error('status') custom-select @enderror" required>
+                                <option value="">@lang('site.choose') @lang('eirs.status')</option>
+                                @foreach ($status as $statu)
+                                    <option value="{{ $statu }}" {{ $statu == old('status') ? 'selected' : '' }}>{{ $statu }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <input type="text" name="status" value="{{ old('status', $eir->status) }}" id="statu-hidden" hidden>
+
+                        <input type="number" name="requested_part_eir_no" id="RequestedPart-eir-no" value="{{ old('requested_part_eir_no', $eir->eir_no) }}" hidden>
+
+                        {{-- attachments --}}
+                        <div class="form-group">
+                            <label>@lang('eirs.attachments') <span class="text-danger">*</span></label>
+                            <input type="file" name="attachments[]" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
+                            @error('attachments')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <h3>
+                            <button class="btn btn-primary" id="add-request-part" data-eir-no="{{ $eir->eir_no }}">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            @lang('request_parts.request_parts')
+                        </h3>
+                        <hr/>
+                        {{-- request part --}}
+                        <div class="table-responsive">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">@lang('eirs.eir_no')</th>
+                                        <th scope="col">@lang('request_parts.requested_part_no')</th>
+                                        <th scope="col">@lang('request_parts.requested_part')</th>
+                                        <th scope="col">@lang('request_parts.quantity')</th>
+                                        <th scope="col">@lang('request_parts.unit')</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="append-request-part">
+                                    @foreach ($eir->RequestPart as $data)
+                                    <tr>
+                                    <th scope="row">
+
+                                    <button class="btn btn-danger remove-form-request-part">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                        
+                                        </th>
+                                            <td><input type="number" disabled name="eir_no[]" value="{{ $data->eir_no }}" class="form-control requested-part-eir_no" required autofocus placeholder="Eir No"></td>
+                                            <td><input type="text" name="requested_part_no[]" value="{{ $data->requested_part_no }}" class="form-control" required autofocus placeholder="Requested Part No"></td>
+                                            <td><input type="text" name="requested_part[]" value="{{ $data->requested_part }}" class="form-control" required autofocus placeholder="Requested Part"></td>
+                                            <td><input type="number" name="quantity[]" value="{{ $data->quantity }}" class="form-control" required autofocus placeholder="Quantity"></td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <select id="status" class="form-control select2" required>
+                                                        <option value="">@lang('site.choose') @lang('eirs.status')</option>
+                                                        @foreach ($units as $unit)
+                                                            <option value="{{ $unit }}" {{ $unit == old('unit') ? 'selected' : '' }}>{{ $unit }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    @endforeach
+
+                                </tbody>
+
+                            </table>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> @lang('site.update')</button>
+                            </div>
+                            
+                        </div>{{-- table-responsive --}}
+
                     </div>{{-- row --}}
-
-                    @php
-                        $status = ['Under Review', 'Approved', 'PO Placed', 'Payment Processed', 'Part In Transit', 'Delivered To Site'];
-                    @endphp
-
-                    {{--$enum--}}
-                    <div class="form-group">
-                        <label>@lang('eirs.status' ) <span class="text-danger">*</span></label>
-                        <select id="status" disabled class="form-control select2 @error('status') custom-select @enderror" required>
-                            <option value="">@lang('site.choose') @lang('eirs.status')</option>
-                            @foreach ($status as $statu)
-                                <option value="{{ $statu }}" {{ $statu == old('status') ? 'selected' : '' }}>{{ $statu }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <input type="text" name="status" value="{{ old('status', $eir->status) }}" id="statu-hidden" hidden>
-
-                    {{-- attachments --}}
-                    <div class="form-group">
-                        <label>@lang('eirs.attachments') <span class="text-danger">*</span></label>
-                        <input type="file" name="attachments[]" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
-                        @error('attachments')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> @lang('site.update')</button>
-                    </div>
 
                 </form><!-- end of form -->
 
@@ -251,6 +308,64 @@
     <script>
 
         $(document).ready(function() {
+
+            function selectRefresh() {
+
+                $('.aa').select2({
+                    'width': '100%',
+                    'tags': true,
+                    'dropdownParent': $('#append-request-part'),
+                });
+            }
+
+            $(document).on('click', '#add-request-part', function(e) {
+                e.preventDefault();
+
+                var dataNo = $(this).data('eir-no');
+
+                let html = `<tr>
+                              <td scope="row">
+                                <button class="btn btn-danger remove-form-request-part">
+                                    <i class="fa fa-remove"></i>
+                                </button>
+                              </td>
+                              <td><input type="number" disabled name="eir_no[]" value="${dataNo}" class="form-control requested-part-eir_no" required autofocus placeholder="Eir No"></td>
+                              <td><input type="text" name="requested_part_no[]" class="form-control" required autofocus placeholder="Requested Part No"></td>
+                              <td><input type="text" name="requested_part[]" class="form-control" required autofocus placeholder="Requested Part"></td>
+                              <td><input type="number" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
+                              <td>
+                              <div class="form-group">
+                                    <select name="unit[]" class="form-control aa" required>
+                                        <option value="">aa</option>
+                                        <option value="">afdf</option>
+                                    </select>
+                                </div>
+                              </td>
+                            </tr>`;
+
+                $('#append-request-part').append(html);
+
+                selectRefresh();
+
+            });//end of clickadd-request-part 
+
+            $(document).on('click', '.remove-form-request-part', function(e) {
+                e.preventDefault();
+
+                $(this).closest('tr').remove();
+
+            });//end of click remove-form-request-part
+
+            $(document).on('change', '#eir-no', function(e) {
+                e.preventDefault();
+
+                var value = $(this).val();
+
+                $('.requested-part-eir_no').val(value);
+                $('#RequestedPart-eir-no').val(value);
+                $('#add-request-part').data('eir-no', value);
+
+            });//end of change eir-no
 
             function calculateDays(Countdays, startDay) {
                 
@@ -380,8 +495,14 @@
         //select 2
         $('.select2').select2({
             'width': '100%',
-            'tags': false,
-            'minimumResultsForSearch': Infinity
+            'tags': true,
+            // 'minimumResultsForSearch': Infinity
+        });
+
+        //select 2
+        $('#unit').select2({
+            'width': '100%',
+            'tags': true,
         });
 
     </script>

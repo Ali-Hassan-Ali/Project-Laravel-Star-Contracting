@@ -86,8 +86,9 @@ class EirController extends Controller
     {
         $equipments = Equipment::all();
         $countrys   = Country::all();
+        $units      = RequestPart::pluck('unit')->unique();
 
-        return view('admin.eirs.create', compact('equipments', 'countrys'));
+        return view('admin.eirs.create', compact('equipments', 'countrys', 'units'));
 
     }//end of create
 
@@ -99,7 +100,7 @@ class EirController extends Controller
         $validated            = $request->safe()->except(['attachments', 'requested_part_eir_no']);
         $validated['user_id'] = auth()->id();
         
-        $eir = eir::create($validated);        
+        $eir = Eir::create($validated);        
 
         if ($request->attachments) {
             
@@ -141,10 +142,12 @@ class EirController extends Controller
 
     public function edit(Eir $eir)
     {
+
         $equipments = Equipment::all();
         $countrys   = Country::all();
+        $units      = RequestPart::pluck('unit')->unique();
 
-        return view('admin.eirs.edit', compact('eir','equipments', 'countrys'));
+        return view('admin.eirs.edit', compact('eir','equipments', 'countrys', 'units'));
 
     }//end of edit
 
@@ -152,7 +155,7 @@ class EirController extends Controller
     public function update(eirRequest $request, Eir $eir)
     {
         $validated            = $request->validated();
-        $validated            = $request->safe()->except(['attachments']);
+        $validated            = $request->safe()->except(['attachments','requested_part_eir_no']);
         $validated['user_id'] = auth()->id();
 
         if ($request->attachments) {
@@ -168,6 +171,26 @@ class EirController extends Controller
             }//end of rach
 
         }//end of check file attachments
+
+
+        if ($request->requested_part_eir_no) {
+
+            $eir->RequestPart()->forceDelete();
+            
+            foreach ($request->requested_part as $key=>$data) {
+                
+                RequestPart::create([
+                    'eir_id'            => $eir->id,
+                    'eir_no'            => $request->requested_part_eir_no,
+                    'requested_part_no' => $request['requested_part_no'][$key],
+                    'requested_part'    => $request['requested_part'][$key],
+                    'quantity'          => $request['quantity'][$key],
+                    'unit'              => $request['requested_part_no'][$key],
+                ]);
+
+            }//end of rach
+
+        }//end of requested part
         
         $eir->update($validated);
 
