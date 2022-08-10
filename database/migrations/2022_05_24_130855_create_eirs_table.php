@@ -30,11 +30,11 @@ class CreateEirsTable extends Migration
             $table->date('expected_shipment_pickup_date');
             $table->date('expected_arrival_to_site_date');
 
-            $table->date('actual_process_date');
-            $table->date('actual_po_released_date');
-            $table->date('actual_payment_transfer_date');
-            $table->date('actual_shipment_pickup_date');
-            $table->date('actual_arrival_to_site_date');
+            $table->date('actual_process_date')->nullable();
+            $table->date('actual_po_released_date')->nullable();
+            $table->date('actual_payment_transfer_date')->nullable();
+            $table->date('actual_shipment_pickup_date')->nullable();
+            $table->date('actual_arrival_to_site_date')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

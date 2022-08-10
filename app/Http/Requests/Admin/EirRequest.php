@@ -34,11 +34,11 @@ class EirRequest extends FormRequest
             'expected_payment_transfer_date' => ['required','date'],
             'expected_shipment_pickup_date'  => ['required','date'],
             'expected_arrival_to_site_date'  => ['required','date'],
-            'actual_process_date'            => ['required','date'],
-            'actual_po_released_date'        => ['required','date'],
-            'actual_payment_transfer_date'   => ['required','date'],
-            'actual_shipment_pickup_date'    => ['required','date'],
-            'actual_arrival_to_site_date'    => ['required','date'],
+            'actual_process_date'            => ['nullable','date'],
+            'actual_po_released_date'        => ['nullable','date'],
+            'actual_payment_transfer_date'   => ['nullable','date'],
+            'actual_shipment_pickup_date'    => ['nullable','date'],
+            'actual_arrival_to_site_date'    => ['nullable','date'],
         ];
 
         if (in_array($this->method(), ['post'])) {
