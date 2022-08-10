@@ -53,7 +53,9 @@ class MaintenanceController extends Controller
                 return $maintenance->admin->name ?? '';
             })
             ->addColumn('equipment', function (Maintenance $maintenance) {
-                return $maintenance->equipment->name ?? '';
+                return $maintenance->equipment ?
+                    $maintenance->equipment->name . ' ' . $maintenance->equipment->make . ' ' . $maintenance->equipment->plate_no 
+                 : '';
             })
             ->addColumn('actions', 'admin.maintenances.data_table.actions')
             ->rawColumns(['record_select', 'actions'])

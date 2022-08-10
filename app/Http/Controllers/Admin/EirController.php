@@ -39,6 +39,9 @@ class EirController extends Controller
             ->editColumn('date', function (Eir $eir) {
                 return $eir->date ? date('d-m-Y', strtotime($eir->date)) : '';
             })
+            ->addColumn('attachments', function (Eir $eir) {
+                return view('admin.eirs.data_table._attachments', compact('eir'));
+            })
             ->editColumn('expected_process_date', function (Eir $eir) {
                 return $eir->expected_process_date ? date('d-m-Y', strtotime($eir->expected_process_date)) : '';
             })
@@ -73,7 +76,9 @@ class EirController extends Controller
                 return $eir->admin->name;
             })
             ->addColumn('equipment', function (Eir $eir) {
-                return $eir->equipment->name ?? '';
+                return $eir->equipment ?
+                    $eir->equipment->name . ' ' . $eir->equipment->make . ' ' . $eir->equipment->plate_no 
+                 : '';
             })
             ->addColumn('actions', 'admin.eirs.data_table.actions')
             ->rawColumns(['record_select', 'actions'])

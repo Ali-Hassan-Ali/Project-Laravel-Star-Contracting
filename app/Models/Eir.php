@@ -29,5 +29,11 @@ class Eir extends Model
         return $this->hasMany(RequestPart::class);
         
     }//end of  belongsTo
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class);
+        
+    }//end of  belongsTo
     
 }//end of model

@@ -107,6 +107,7 @@ Route::middleware([
             //eirs routes
             Route::get('/eirs/data', 'EirController@data')->name('eirs.data');
             Route::delete('/eirs/bulk_delete', 'EirController@bulkDelete')->name('eirs.bulk_delete');
+            Route::resource('eirs.attachment', 'EirAttachmentController');
             Route::resource('eirs', 'EirController');
 
 

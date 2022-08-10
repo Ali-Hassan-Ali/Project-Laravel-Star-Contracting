@@ -1,5 +1,5 @@
 @if (auth()->user()->hasPermission('update_request_parts'))
-    <a href="{{ route('admin.request_parts.edit', $id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+    {{-- <a href="{{ route('admin.request_parts.edit', $id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a> --}}
 @endif
 
 @if (auth()->user()->hasPermission('delete_request_parts'))

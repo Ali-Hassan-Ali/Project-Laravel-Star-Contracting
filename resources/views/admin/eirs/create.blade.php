@@ -208,7 +208,7 @@
 
                         {{--$enum--}}
                         <div class="form-group">
-                            <label>@lang('eirs.status' ) <span class="text-danger">*</span></label>
+                            <label>@lang('eirs.status') <span class="text-danger">*</span></label>
                             <select id="status" disabled class="form-control select2 @error('status') custom-select @enderror" required>
                                 <option value="">@lang('site.choose') @lang('eirs.status')</option>
                                 @foreach ($status as $statu)

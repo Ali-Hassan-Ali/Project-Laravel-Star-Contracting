@@ -3,12 +3,12 @@
 @section('content')
 
     <div>
-        <h2>@lang('equipments.equipments')</h2>
+        <h2>@lang('eirs.eirs')</h2>
     </div>
 
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.equipments.index') }}">@lang('equipments.equipments')</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.eirs.index') }}">@lang('eirs.eirs')</a></li>
         <li class="breadcrumb-item">@lang('site.create')</li>
     </ul>
 
@@ -18,7 +18,7 @@
 
             <div class="tile shadow">
 
-                <form method="post" action="{{ route('admin.equipments.attachment.store', ['equipment' => $equipment->id]) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.eirs.attachment.store', ['eir' => $eir->id]) }}" enctype="multipart/form-data">
                     @csrf
                     @method('post')
 

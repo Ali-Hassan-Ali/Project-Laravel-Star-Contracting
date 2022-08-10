@@ -47,7 +47,9 @@ class FuelController extends Controller
                 return $fuel->admin->name ?? '';
             })
             ->addColumn('equipment', function (Fuel $fuel) {
-                return $fuel->equipment->name ?? '';
+                return $fuel->equipment ?
+                    $fuel->equipment->name . ' ' . $fuel->equipment->make . ' ' . $fuel->equipment->plate_no 
+                 : '';
             })
             ->addColumn('actions', 'admin.fuels.data_table.actions')
             ->rawColumns(['record_select', 'actions'])

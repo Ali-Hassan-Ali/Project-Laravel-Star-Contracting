@@ -47,7 +47,9 @@ class StatusController extends Controller
                 return $status->admin->name ?? '';
             })
             ->addColumn('equipment', function (Status $status) {
-                return $status->equipment->name  ?? '';
+                return $status->equipment ?
+                    $status->equipment->name . ' ' . $status->equipment->make . ' ' . $status->equipment->plate_no 
+                 : '';
             })
             ->addColumn('actions','admin.status.data_table.actions')
             ->rawColumns(['record_select', 'actions', 'admin', 'equipment'])

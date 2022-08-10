@@ -22,7 +22,7 @@
                     <div class="col-md-12">
 
                         @if (auth()->user()->hasPermission('read_request_parts'))
-                            <a href="{{ route('admin.request_parts.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
+                            {{-- <a href="{{ route('admin.request_parts.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a> --}}
                         @endif
 
                         @if (auth()->user()->hasPermission('delete_request_parts'))

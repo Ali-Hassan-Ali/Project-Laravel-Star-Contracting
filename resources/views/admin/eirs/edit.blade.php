@@ -318,12 +318,29 @@
                 
             }//end of fun
 
+            var units      = "{{ $units }}";
+                console.log(units);
+
+                for( i in units ) {
+                    console.log( units );
+                  }
+            // var arr = Object.value(units);
+
             $(document).on('click', '#add-request-part', function(e) {
                 e.preventDefault();
 
                 var dataNo = $(this).data('eir-no');
 
-                // var units  = [];
+                var units      = "{{ $units }}";
+                
+                var itemUnits  = [];
+
+
+                $.each(units, function(index,item) {
+                
+                    itemUnits.push(`<option value="${item}">${item}</option>`);
+
+                });//end of each
 
 
                 let html = `<tr>
@@ -339,8 +356,7 @@
                               <td>
                               <div class="form-group">
                                     <select name="unit[]" class="form-control select2-tags-true" required>
-                                        <option value="">aa</option>
-                                        <option value="">afdf</option>
+                                        // ${itemUnits}
                                     </select>
                                 </div>
                               </td>
