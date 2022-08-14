@@ -11,7 +11,6 @@ class ReportController extends Controller
 {
     public function equipments()
     {
-        return 'fdf';
         $equipments = Equipment::with('spares')->get();
 
         return view('admin.reports.equipments', compact('equipments'));
