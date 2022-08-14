@@ -80,46 +80,41 @@
 
                                     <div class="table-responsive">
 
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>@lang('spares.part_no')</th>
-                                    <th>@lang('spares.cost')</th>
-                                    <th>@lang('spares.freight_charges')</th>
-                                    <th>@lang('spares.used')</th>
-                                    <th>@lang('spares.usage_date')</th>
-                                    <th>@lang('spares.description')</th>
-                                    <th>@lang('spares.location')</th>
-                                </tr>
-                                </thead>
-                                <body>
-                                    @foreach ($equipment->spares as $spare)
-                                    <tr>
-                                        <td>{{ $spare->part_no }}</td>
-                                        <td>{{ $spare->cost }}</td>
-                                        <td>{{ $spare->type ?? '' }}</td>
-                                        <td>{{ $spare->freight_charges ?? '' }}</td>
-                                        <td>{{ $spare->used }}</td>
-                                        <td>{{ $spare->usage_date }}</td>
-                                        <td>{{ $spare->description }}</td>
-                                        <td>{{ $spare->location }}</td>
-                                    </tr>
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>@lang('spares.part_no')</th>
+                                                <th>@lang('spares.cost')</th>
+                                                <th>@lang('spares.freight_charges')</th>
+                                                <th>@lang('spares.used')</th>
+                                                <th>@lang('spares.usage_date')</th>
+                                                <th>@lang('spares.description')</th>
+                                                <th>@lang('spares.location')</th>
+                                            </tr>
+                                            </thead>
+                                            <body>
+                                                @foreach ($equipment->spares as $spare)
+                                                <tr>
+                                                    <td>{{ $spare->part_no }}</td>
+                                                    <td>{{ $spare->cost }}</td>
+                                                    <td>{{ $spare->type ?? '' }}</td>
+                                                    <td>{{ $spare->freight_charges ?? '' }}</td>
+                                                    <td>{{ $spare->used }}</td>
+                                                    <td>{{ $spare->usage_date }}</td>
+                                                    <td>{{ $spare->description }}</td>
+                                                    <td>{{ $spare->location }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </body>
+                                        </table>
+
+                                    </div><!-- end of table responsive -->
+
                                     @endforeach
                                 </body>
                             </table>
 
                         </div><!-- end of table responsive -->
-
-                                    @endforeach
-                                </body>
-                            </table>
-
-                        </div><!-- end of table responsive -->
-
-                    </div><!-- end of col -->
-
-                    <div class="col-md-12">
-
 
                     </div><!-- end of col -->
 
