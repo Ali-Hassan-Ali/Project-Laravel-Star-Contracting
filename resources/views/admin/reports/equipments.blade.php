@@ -54,7 +54,7 @@
                                 <body>
                                     @foreach ($equipments as $equipment)
                                     <tr>
-                                        {{-- <td>{{ $equipment->make }}</td>
+                                        <td>{{ $equipment->make }}</td>
                                         <td>{{ $equipment->name }}</td>
                                         <td>{{ $equipment->type ?? '' }}</td>
                                         <td>{{ $equipment->specs ?? '' }}</td>
@@ -74,8 +74,8 @@
                                         <td>{{ $equipment->driver_salary }}</td>
                                         <td>{{ $equipment->responsible_person }}</td>
                                         <td>{{ $equipment->email }}</td>
-                                        <td>{{ $equipment->allocated_to }}</td>
-                                        <td>{{ $equipment->project_allocated_to }}</td> --}}
+                                        {{-- <td>{{ $equipment->allocated_to }}</td> --}}
+                                        {{-- <td>{{ $equipment->project_allocated_to }}</td> --}}
                                     </tr>
 
                                     <div class="table-responsive">
@@ -93,7 +93,7 @@
                                             </tr>
                                             </thead>
                                             <body>
-                                                {{-- @foreach ($equipment->spares as $spare)
+                                                @foreach ($equipment->spares as $spare)
                                                 <tr>
                                                     <td>{{ $spare->part_no }}</td>
                                                     <td>{{ $spare->cost }}</td>
@@ -104,7 +104,7 @@
                                                     <td>{{ $spare->description }}</td>
                                                     <td>{{ $spare->location }}</td>
                                                 </tr>
-                                                @endforeach --}}
+                                                @endforeach
                                             </body>
                                         </table>
 
