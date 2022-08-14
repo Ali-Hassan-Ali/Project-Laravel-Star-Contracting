@@ -27,7 +27,7 @@
                         {{--equipment_id--}}
                         <div class="form-group col-6">
                             <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
-                            <select class="form-control col-6 select2" id="equipment-countrey">
+                            <select class="form-control col-6 select2-tags-false" id="equipment-countrey">
                                 <option value="" disabled>@lang('site.choose') @lang('countrys.countrys')</option>
                                 @foreach ($countrys as $country)
                                     <option value="{{ $country->id }}" 
@@ -39,7 +39,7 @@
                         {{--equipment_id--}}
                         <div class="form-group col-6">
                             <label>@lang('citys.citys') <span class="text-danger">*</span></label>
-                            <select class="form-control select2" id="equipment-city">
+                            <select class="form-control select2-tags-false" id="equipment-city">
                                 
                             </select>
                         </div>
@@ -47,7 +47,7 @@
                         {{--equipment_id--}}
                         <div class="form-group col-6 @error('equipment_id') custom-select @enderror">
                             <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
-                            <select name="equipment_id" id="equipment-man" class="form-control select2" required>
+                            <select name="equipment_id" id="equipment-man" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.equipments')</option>
                                 @foreach ($equipments as $equipment)
                                     <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id', $status->equipment_id) ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
