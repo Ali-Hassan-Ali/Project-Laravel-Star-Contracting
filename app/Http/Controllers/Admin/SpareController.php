@@ -86,7 +86,7 @@ class SpareController extends Controller
         $validated['equipments'] = json_encode($request->equipments);
 
         $spare = Spare::create($validated);
-        $spare->equipments()->detach($request->equipments);
+        $spare->equipments()->sync($request->equipments);
 
         foreach ($request->file('attachments') as $file) {
             
@@ -125,7 +125,7 @@ class SpareController extends Controller
         $validated['equipments'] = json_encode($request->equipments);
 
         $spare->update($validated);
-        $spare->equipments()->detach($request->equipments);
+        $spare->equipments()->sync($request->equipments);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.spares.index');
