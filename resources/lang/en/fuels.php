@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'fuels'                   => 'Fuels',
+    'fuels'                   => 'Fuel',
     'unit'                    => 'unit',
     'fuel_type'               => 'fuel type',
     'no_of_units_filled'      => 'no of units filled',

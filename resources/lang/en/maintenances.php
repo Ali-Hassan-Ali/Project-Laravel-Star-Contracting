@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'maintenances'           => 'Maintenances',
+    'maintenances'           => 'Maintenance',
     'equipments'             => 'Equipment',
     'last_service_km'        => 'last Service KM/HMR',
     'next_service_dueon_km'  => 'Next Service Due On KM/HMR',
