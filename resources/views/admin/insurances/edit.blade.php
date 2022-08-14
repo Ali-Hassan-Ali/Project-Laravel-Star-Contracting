@@ -27,7 +27,7 @@
                         <div class="form-group col-6">
                             <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
                             <select class="form-control col-6 select2-tags-false" id="equipment-countrey">
-                                <option value="" selected disabled>@lang('site.choose') @lang('countrys.countrys')</option>
+                                <option value="">@lang('site.choose') @lang('countrys.countrys')</option>
                                 @foreach ($countrys as $country)
                                     <option value="{{ $country->id }}" 
                                         data-url="{{ route('admin.ajax.country', $country->id) }}">{{ $country->name }}</option>
