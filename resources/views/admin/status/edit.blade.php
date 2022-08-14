@@ -80,7 +80,7 @@
                         {{--working_status--}}
                         <div class="form-group col-6">
                             <label>@lang('status.working_status') <span class="text-danger">*</span></label>
-                            <select name="working_status" id="working-status" class="form-control select2" required>
+                            <select name="working_status" id="working-status" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('status.working_status')</option>
                                 @foreach ($statusing as $statu)
                                     <option value="{{ $statu }}" {{ $statu == old('working_status', $status->working_status) ? 'selected' : '' }}>@lang('status.' . $statu)</option>
