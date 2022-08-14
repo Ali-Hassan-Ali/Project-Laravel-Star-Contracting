@@ -58,15 +58,15 @@
                                         <td>{{ $equipment->name }}</td>
                                         <td>{{ $equipment->type ?? '' }}</td>
                                         <td>{{ $equipment->specs ?? '' }}</td>
-                                        <td>{{ $equipment->plate_no }}</td>
+                                        {{-- <td>{{ $equipment->plate_no }}</td>
                                         <td>{{ $equipment->chasis_no }}</td>
                                         <td>{{ $equipment->engine_no }}</td>
                                         <td>{{ $equipment->serial_no }}</td>
                                         <td>{{ $equipment->model }}</td>
                                         <td>{{ $equipment->year_of_manufacture }}</td>
-                                        <td>{{ $equipment->registration_expiry }}</td>
-                                        <td>{{ $equipment->country->name }}</td>
-                                        <td>{{ $equipment->city->name }}</td>
+                                        <td>{{ $equipment->registration_expiry }}</td> --}}
+                                        {{-- <td>{{ $equipment->country->name }}</td> --}}
+                                        {{-- <td>{{ $equipment->city->name }}</td>
                                         <td>{{ $equipment->owner_ship }}</td>
                                         <td>{{ $equipment->rental_basis }}</td>
                                         <td>{{ $equipment->rental_cost_basis }}</td>
@@ -74,8 +74,8 @@
                                         <td>{{ $equipment->driver_salary }}</td>
                                         <td>{{ $equipment->responsible_person }}</td>
                                         <td>{{ $equipment->email }}</td>
-                                        {{-- <td>{{ $equipment->allocated_to }}</td> --}}
-                                        {{-- <td>{{ $equipment->project_allocated_to }}</td> --}}
+                                        <td>{{ $equipment->allocated_to }}</td>
+                                        <td>{{ $equipment->project_allocated_to }}</td> --}}
                                     </tr>
 
                                     <div class="table-responsive">
