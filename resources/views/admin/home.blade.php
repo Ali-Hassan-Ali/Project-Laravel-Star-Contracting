@@ -163,7 +163,7 @@
 
                 @if (auth()->user()->hasPermission('read_request_parts'))
                 {{-- request_parts --}}
-                <div class="col-md-6 mb-2">
+                <div class="col-md-4 mb-2">
 
                     <div class="card">
 
@@ -186,7 +186,7 @@
 
                 @if (auth()->user()->hasPermission('read_insurances'))
                 {{-- insurances --}}
-                <div class="col-md-6 mb-2">
+                <div class="col-md-4 mb-2">
 
                     <div class="card">
 
