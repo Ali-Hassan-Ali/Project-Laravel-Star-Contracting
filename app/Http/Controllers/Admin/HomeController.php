@@ -30,6 +30,7 @@ class HomeController extends Controller
 
     public function topStatistics()
     {
+        $equipmentsCount  = number_format(Equipment::count(), 1);
         $rolesCount       = number_format(Role::count(), 1);
         $adminsCount      = number_format(User::count(), 1);
         $countrysCount    = number_format(country::count(), 1);
@@ -38,7 +39,6 @@ class HomeController extends Controller
         $statusCount      = number_format(Status::count(), 1);
         $specsCount       = number_format(Spec::count(), 1);
         $insurancesCount  = number_format(Insurance::count(), 1);
-        $equipmentsCount  = number_format(Equipment::count(), 1);
         $sparesCount      = number_format(Spare::count(), 1);
         $MaintenancesCount= number_format(Maintenance::count(), 1);
         $FuelsCount       = number_format(Fuel::count(), 1);
@@ -46,6 +46,7 @@ class HomeController extends Controller
         $RequestPartsCount= number_format(RequestPart::count(), 1);
 
         return response()->json([
+            'equipments_count'    => $equipmentsCount,
             'roles_count'         => $rolesCount,
             'admins_count'        => $adminsCount,
             'countrys_count'      => $countrysCount,
@@ -54,7 +55,6 @@ class HomeController extends Controller
             'status_count'        => $statusCount,
             'specs_count'         => $specsCount,
             'insurances_count'    => $insurancesCount,
-            'equipments_count'    => $equipmentsCount,
             'spares_count'        => $sparesCount,
             'maintenances_count'  => $MaintenancesCount,
             'fuels_count'         => $FuelsCount,
