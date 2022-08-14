@@ -161,9 +161,32 @@
                 </div><!-- end of col -->
                 @endif
 
+                @if (auth()->user()->hasPermission('read_request_parts'))
+                {{-- request_parts --}}
+                <div class="col-md-6 mb-2">
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <div class="d-flex justify-content-between mb-2">
+                                <p class="mb-0"><span class="fa-solid fa-code-compare"></span> @lang('request_parts.request_parts')</p>
+                                <a href="{{ route('admin.request_parts.index') }}">@lang('site.show_all')</a>
+                            </div>
+
+                            <div class="loader loader-sm"></div>
+
+                            <h3 class="mb-0" id="request_parts-count" style="display: none;"></h3>
+                        </div>
+
+                    </div>
+
+                </div><!-- end of col -->
+                @endif
+
                 @if (auth()->user()->hasPermission('read_insurances'))
                 {{-- insurances --}}
-                <div class="col-md-4 mb-2">
+                <div class="col-md-6 mb-2">
 
                     <div class="card">
 
@@ -178,56 +201,6 @@
                             <div class="loader loader-sm"></div>
 
                             <h3 class="mb-0" id="insurances-count" style="display: none;"></h3>
-                        </div>
-
-                    </div>
-
-                </div><!-- end of col -->
-                @endif
-
-
-
-                
-                @if (auth()->user()->hasPermission('read_specs'))
-                {{-- specs --}}
-                <div class="col-md-4 mb-2">
-
-                    <div class="card">
-
-                        <div class="card-body">
-
-                            <div class="d-flex justify-content-between mb-2">
-                                <p class="mb-0"><span class="fas fa-check-double"></span> @lang('specs.specs')</p>
-                                <a href="{{ route('admin.specs.index') }}">@lang('site.show_all')</a>
-                                <a href="{{ route('admin.specs.create') }}">@lang('site.add')</a>
-                            </div>
-
-                            <div class="loader loader-sm"></div>
-
-                            <h3 class="mb-0" id="specs-count" style="display: none"></h3>
-                        </div>
-
-                    </div>
-
-                </div><!-- end of col -->
-                @endif
-
-                @if (auth()->user()->hasPermission('read_request_parts'))
-                {{-- request_parts --}}
-                <div class="col-md-4 mb-2">
-
-                    <div class="card">
-
-                        <div class="card-body">
-
-                            <div class="d-flex justify-content-between mb-2">
-                                <p class="mb-0"><span class="fa-solid fa-code-compare"></span> @lang('request_parts.request_parts')</p>
-                                <a href="{{ route('admin.request_parts.index') }}">@lang('site.show_all')</a>
-                            </div>
-
-                            <div class="loader loader-sm"></div>
-
-                            <h3 class="mb-0" id="request_parts-count" style="display: none;"></h3>
                         </div>
 
                     </div>
@@ -267,10 +240,8 @@
                     $('#top-statistics #eirs-count').show().text(data.eirs_count);
                     $('#top-statistics #maintenances-count').show().text(data.maintenances_count);
                     $('#top-statistics #fuels-count').show().text(data.fuels_count);
-                    $('#top-statistics #insurances-count').show().text(data.insurances_count);
-
-                    $('#top-statistics #specs-count').show().text(data.specs_count);
                     $('#top-statistics #request_parts-count').show().text(data.request_parts_count);
+                    $('#top-statistics #insurances-count').show().text(data.insurances_count);
 
                 },//ajac success
 
