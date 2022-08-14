@@ -120,26 +120,36 @@
 
                         {{--fuel_rate_per_litre--}}
                         <div class="form-group col-6">
-                            <label>@lang('fuels.fuel_rate_per_litre')<span class="text-danger">*</span></label>
-                            <input type="number" id="fuel_rate_per_litre" name="fuel_rate_per_litre" class="form-control @error('average_mileage_reading') is-invalid @enderror" value="{{ old('fuel_rate_per_litre', $fuel->fuel_rate_per_litre) }}" required autofocus>
-                            @error('fuel_rate_per_litre')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <label>@lang('fuels.fuel_rate_per_litre') <span class="text-danger">*</span></label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" id="fuel_rate_per_litre" name="fuel_rate_per_litre" class="form-control @error('fuel_rate_per_litre') is-invalid @enderror" value="{{ old('fuel_rate_per_litre', $fuel->fuel_rate_per_litre) }}">
+                                @error('fuel_rate_per_litre')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
                         <input type="test" name="average_mileage_reading" value="{{ old('average_mileage_reading', $fuel->average_mileage_reading) }}" id="average_mileage_reading-hidding" hidden>
 
                         {{--total_cost_of_fuel--}}
                         <div class="form-group col-12">
-                            <label>@lang('fuels.total_cost_of_fuel')<span class="text-danger">*</span></label>
-                            <input type="number" disabled id="total_cost_of_fuel" name="total_cost_of_fuel" class="form-control @error('average_mileage_reading') is-invalid @enderror" value="{{ old('total_cost_of_fuel', $fuel->total_cost_of_fuel) }}" required autofocus>
-                            @error('total_cost_of_fuel')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <label>@lang('fuels.total_cost_of_fuel') <span class="text-danger">*</span></label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" disabled id="total_cost_of_fuel" name="total_cost_of_fuel" class="form-control @error('total_cost_of_fuel') is-invalid @enderror" value="{{ old('total_cost_of_fuel', $fuel->total_cost_of_fuel) }}">
+                                @error('total_cost_of_fuel')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
                         <input type="test" name="total_cost_of_fuel" value="{{ old('total_cost_of_fuel', $fuel->total_cost_of_fuel) }}" id="total_cost_of_fuel-hidding" hidden>
