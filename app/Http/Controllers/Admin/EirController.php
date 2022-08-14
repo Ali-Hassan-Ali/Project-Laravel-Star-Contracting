@@ -131,7 +131,7 @@ class EirController extends Controller
                     'requested_part_no' => $request['requested_part_no'][$key],
                     'requested_part'    => $request['requested_part'][$key],
                     'quantity'          => $request['quantity'][$key],
-                    'unit'              => $request['requested_part_no'][$key],
+                    'unit'              => $request['unit'][$key],
                 ]);
 
             }//end of rach
@@ -190,7 +190,7 @@ class EirController extends Controller
                     'requested_part_no' => $request['requested_part_no'][$key],
                     'requested_part'    => $request['requested_part'][$key],
                     'quantity'          => $request['quantity'][$key],
-                    'unit'              => $request['requested_part_no'][$key],
+                    'unit'              => $request['unit'][$key],
                 ]);
 
             }//end of rach
@@ -233,5 +233,13 @@ class EirController extends Controller
         $eir->delete();
 
     }// end of delete
+
+    public function unit()
+    {
+        $units = RequestPart::pluck('unit')->unique();
+
+        return response()->json($units);
+
+    }//end of unit
 
 }//end of controller

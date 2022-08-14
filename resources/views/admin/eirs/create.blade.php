@@ -269,7 +269,7 @@
                                         <td><input type="number" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
                                         <td>
                                             <div class="form-group">
-                                                <select class="form-control select2-tags-true" required>
+                                                <select name="unit[]" class="form-control select2-tags-true" required>
                                                     <option value="">@lang('site.choose') @lang('request_parts.unit')</option>
                                                     @foreach ($units as $unit)
                                                         <option value="{{ $unit }}" {{ $unit == old('unit') ? 'selected' : '' }}>{{ $unit }}</option>
@@ -320,31 +320,49 @@
                 e.preventDefault();
 
                 var dataNo = $(this).data('eir-no');
+                var url    = "{{ route('admin.eirs.request_parts.unit') }}";
+                var method = 'get';
 
-                let html = `<tr>
-                              <td scope="row">
-                                <button class="btn btn-danger remove-form-request-part">
-                                    <i class="fa fa-remove"></i>
-                                </button>
-                              </td>
-                              <td><input type="number" disabled name="eir_no[]" value="${dataNo}" class="form-control requested-part-eir_no" required autofocus placeholder="Eir No"></td>
-                              <td><input type="text" name="requested_part_no[]" class="form-control" required autofocus placeholder="Requested Part No"></td>
-                              <td><input type="text" name="requested_part[]" class="form-control" required autofocus placeholder="Requested Part"></td>
-                              <td><input type="number" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
-                              <td>
-                              <div class="form-group">
-                                    <select name="unit[]" class="form-control select2-tags-true" required>
-                                        <option value="">aa</option>
-                                        <option value="">afdf</option>
-                                    </select>
-                                </div>
-                              </td>
-                            </tr>`;
+                $.ajax({
+                    url: url,
+                    method: method,
+                    success: function (data) {
+
+                        var items = [];
+
+                        $.each(data, function(index, item) {
+
+                            items += `<option value="${item}">${item}</option>`;
+
+                        }); //end of each
+
+                        let html = `<tr>
+                                      <td scope="row">
+                                        <button class="btn btn-danger remove-form-request-part">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                                      </td>
+                                      <td><input type="number" disabled name="eir_no[]" value="${dataNo}" class="form-control requested-part-eir_no" required autofocus placeholder="Eir No"></td>
+                                      <td><input type="text" name="requested_part_no[]" class="form-control" required autofocus placeholder="Requested Part No"></td>
+                                      <td><input type="text" name="requested_part[]" class="form-control" required autofocus placeholder="Requested Part"></td>
+                                      <td><input type="number" name="quantity[]" class="form-control" required autofocus placeholder="Quantity"></td>
+                                      <td>
+                                      <div class="form-group">
+                                            <select name="unit[]" class="form-control select2-tags-true" required>
+                                                ${items}
+                                            </select>
+                                        </div>
+                                      </td>
+                                    </tr>`;
 
 
-                $('#append-request-part').append(html);
+                        $('#append-request-part').append(html);
 
-                selectRefresh();
+                        selectRefresh();
+                        
+                    }//end of success
+                });//end of ajax
+
 
             });//end of clickadd-request-part 
 
