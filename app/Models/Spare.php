@@ -10,7 +10,25 @@ class Spare extends Model
 {
     use HasFactory, SoftDeletes;
 
+    use \Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
+
     protected $guarded = [];
+    protected $appends = ['equipments_ids'];
+
+    protected $casts = [
+       'equipments' => 'json',
+    ];
+
+    public function equipments()
+    {
+        return $this->belongsToJson(Equipment::class, 'equipments->equipments_ids');
+    }
+
+    public function getEquipmentsIdsAttribute()
+    {
+        return json_decode($this->equipments);
+
+    }//end of fun
 
     public function admin()
     {

@@ -11,8 +11,11 @@ Route::middleware([
 
         Route::name('admin.')->prefix('admin')->group(function () {
 
+            // equipments
+            Route::get('/reports/equipments', 'ReportController@equipments')->name('reports.equipments');
+
+
             //home
-           
             Route::get('/top_statistics', 'HomeController@topStatistics')->name('home.top_statistics');
             Route::get('/home', 'HomeController@index')->name('home');
 

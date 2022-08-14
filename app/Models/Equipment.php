@@ -10,7 +10,14 @@ class Equipment extends Model
 {
     use HasFactory, SoftDeletes;
 
+    use \Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
+
     protected $guarded = [];
+
+    public function spares()
+    {
+       return $this->hasManyJson(Spare::class, 'equipments->equipments_ids');
+    }
 
     public function admin()
     {

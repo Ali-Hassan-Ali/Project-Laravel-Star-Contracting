@@ -22,6 +22,13 @@
             </ul>
         </li>
 
+        {{--reports--}}
+        <li class="treeview {{ request()->is('*reports*') || request()->is('*reports*')  ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fas fa-chart-area"></i><span class="app-menu__label">@lang('reports.reports')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item {{ request()->is('*reports*') ? 'active' : '' }}" href="{{ route('admin.reports.equipments') }}"><i class="icon fas fa-chart-line"></i>@lang('equipments.equipments')</a></li>
+            </ul>
+        </li>
+
         {{--equipments--}}
         @if (auth()->user()->hasPermission('read_equipments'))
             <li><a class="app-menu__item {{ request()->is('*equipments*') ? 'active' : '' }}" href="{{ route('admin.equipments.index') }}"><i class="app-menu__icon fas fa-tools"></i> <span class="app-menu__label">@lang('equipments.equipments')</span></a></li>
