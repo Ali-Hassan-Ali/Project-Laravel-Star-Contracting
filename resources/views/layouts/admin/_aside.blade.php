@@ -32,9 +32,9 @@
             <li><a class="app-menu__item {{ request()->is('*status*') ? 'active' : '' }}" href="{{ route('admin.status.index') }}"><i class="app-menu__icon fa-solid fa-list-check"></i> <span class="app-menu__label">@lang('status.status')</span></a></li>
         @endif
 
-        {{--specs--}}
-        @if (auth()->user()->hasPermission('read_specs'))
-            <li><a class="app-menu__item {{ request()->is('*specs*') ? 'active' : '' }}" href="{{ route('admin.specs.index') }}"><i class="app-menu__icon fas fa-check-double"></i> <span class="app-menu__label">@lang('specs.specs')</span></a></li>
+        {{--spares--}}
+        @if (auth()->user()->hasPermission('read_spares'))
+            <li><a class="app-menu__item {{ request()->is('*spares*') ? 'active' : '' }}" href="{{ route('admin.spares.index') }}"><i class="app-menu__icon fa-solid fa-server"></i> <span class="app-menu__label">@lang('spares.spares')</span></a></li>
         @endif
 
         {{--eirs--}}
@@ -72,9 +72,9 @@
             <li><a class="app-menu__item {{ request()->is('*citys*') ? 'active' : '' }}" href="{{ route('admin.citys.index') }}"><i class="app-menu__icon fa-solid fa-city"></i> <span class="app-menu__label">@lang('citys.citys')</span></a></li>
         @endif
 
-        {{--spares--}}
-        @if (auth()->user()->hasPermission('read_spares'))
-            <li><a class="app-menu__item {{ request()->is('*spares*') ? 'active' : '' }}" href="{{ route('admin.spares.index') }}"><i class="app-menu__icon fa-solid fa-server"></i> <span class="app-menu__label">@lang('spares.spares')</span></a></li>
+        {{--specs--}}
+        @if (auth()->user()->hasPermission('read_specs'))
+            <li><a class="app-menu__item {{ request()->is('*specs*') ? 'active' : '' }}" href="{{ route('admin.specs.index') }}"><i class="app-menu__icon fas fa-check-double"></i> <span class="app-menu__label">@lang('specs.specs')</span></a></li>
         @endif
 
         {{--roles--}}
