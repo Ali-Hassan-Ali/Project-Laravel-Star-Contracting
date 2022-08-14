@@ -65,10 +65,10 @@
                                             </label>
                                         </div>
                                     </th>
-                                    <th>@lang('eirs.eirs')</th>
-                                    <th>@lang('request_parts.quantity')</th>
+                                    <th>@lang('eirs.eir_no')</th>
                                     <th>@lang('request_parts.requested_part')</th>
                                     <th>@lang('request_parts.requested_part_no')</th>
+                                    <th>@lang('request_parts.quantity')</th>
                                     <th>@lang('request_parts.unit')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
@@ -106,9 +106,9 @@
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'eir', name: 'eir'},
-                {data: 'quantity', name: 'quantity'},
                 {data: 'requested_part', name: 'requested_part'},
                 {data: 'requested_part_no', name: 'requested_part_no'},
+                {data: 'quantity', name: 'quantity'},
                 {data: 'unit', name: 'unit'},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
