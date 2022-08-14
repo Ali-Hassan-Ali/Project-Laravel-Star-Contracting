@@ -10,15 +10,8 @@ class Equipment extends Model
 {
     use HasFactory, SoftDeletes;
 
-    use \Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
-
     protected $guarded = [];
-
-    public function spares()
-    {
-       return $this->hasManyJson(Spare::class, 'equipments->equipments_ids');
-    }
-
+    
     public function admin()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -48,6 +41,12 @@ class Equipment extends Model
         return $this->hasMany(Attachment::class);
         
     }//end of  belongsTo
+
+    public function spares()
+    {
+        return $this->belongsToMany(Spare::class, 'equipment_has_manies');
+
+    }//end of fun
 
     public function getProjectAllocatedToAttribute($value)
     {

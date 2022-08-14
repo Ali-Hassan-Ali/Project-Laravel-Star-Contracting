@@ -12,7 +12,7 @@ class ReportController extends Controller
     public function equipments()
     {
         $equipments = Equipment::with('spares')->get();
-        dd($equipments);
+        return $equipments;
 
         return view('admin.reports.equipments', compact('equipments'));
 
