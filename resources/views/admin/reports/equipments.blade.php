@@ -93,7 +93,7 @@
                                             </tr>
                                             </thead>
                                             <body>
-                                                @foreach ($equipment->spares as $spare)
+                                                {{-- @foreach ($equipment->spares as $spare)
                                                 <tr>
                                                     <td>{{ $spare->part_no }}</td>
                                                     <td>{{ $spare->cost }}</td>
@@ -104,7 +104,7 @@
                                                     <td>{{ $spare->description }}</td>
                                                     <td>{{ $spare->location }}</td>
                                                 </tr>
-                                                @endforeach
+                                                @endforeach --}}
                                             </body>
                                         </table>
 
