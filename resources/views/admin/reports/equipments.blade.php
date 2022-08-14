@@ -54,7 +54,7 @@
                                 <body>
                                     @foreach ($equipments as $equipment)
                                     <tr>
-                                        <td>{{ $equipment->make }}</td>
+                                        {{-- <td>{{ $equipment->make }}</td>
                                         <td>{{ $equipment->name }}</td>
                                         <td>{{ $equipment->type ?? '' }}</td>
                                         <td>{{ $equipment->specs ?? '' }}</td>
@@ -75,7 +75,7 @@
                                         <td>{{ $equipment->responsible_person }}</td>
                                         <td>{{ $equipment->email }}</td>
                                         <td>{{ $equipment->allocated_to }}</td>
-                                        <td>{{ $equipment->project_allocated_to }}</td>
+                                        <td>{{ $equipment->project_allocated_to }}</td> --}}
                                     </tr>
 
                                     <div class="table-responsive">
