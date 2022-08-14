@@ -230,7 +230,7 @@
                 success: function (data) {
                     
                     $('#equipment-man').empty('');
-                    $('#equipment-man').append(`<option selected disabled>Choose Equipment</option>`);
+                    $('#equipment-man').append(`<option disabled>Choose Equipment</option>`);
 
                     $.each(data, function(index,item) {
 
@@ -317,6 +317,12 @@
     $('.select2').select2({
         'width': '100%',
         'tags': true,
+    });
+
+    $('.select2-tags-false').select2({
+        'width': '100%',
+        'tags': false,
+        'minimumResultsForSearch': Infinity
     });
 
 </script>
