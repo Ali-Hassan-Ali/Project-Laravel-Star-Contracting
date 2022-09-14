@@ -18,7 +18,7 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
                     ->select(
                         DB::raw('MONTHNAME(equipment.created_at) AS month'),
                         DB::raw('YEAR(equipment.created_at) as year'),
-                        DB::raw('SUM(fuels.total_cost_of_fuel) + SUM(fuels.total_cost_of_fuel) as total'),
+                        DB::raw('equipment.rental_cost_basis + equipment.driver_salary + fuels.total_cost_of_fuel as total'),
                     )->groupBy('month')
                      ->get();
 
