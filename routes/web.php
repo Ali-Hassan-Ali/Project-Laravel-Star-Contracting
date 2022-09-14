@@ -38,10 +38,10 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
     return $equipments;
 
     $mprs = Estimate::join('mprs', 'estimates.id', '=', 'mprs.estimate_id')
-->join('materials', 'estimates.material_id', '=', 'materials.id')
-->select('estimates.material_id','mprquantity')
-->get();
-return $mprs;
+                    ->join('materials', 'estimates.material_id', '=', 'materials.id')
+                    ->select('estimates.material_id','mprquantity')
+                    ->get();
+                    return $mprs;
 
     return $equipments;
 
