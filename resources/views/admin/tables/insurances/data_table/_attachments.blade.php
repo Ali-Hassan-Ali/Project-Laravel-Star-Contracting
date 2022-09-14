@@ -1,0 +1,1 @@
+<a download="{{ $insurance->attachments }}" href="{{ $insurance->attachments }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> @lang('site.download')</a>

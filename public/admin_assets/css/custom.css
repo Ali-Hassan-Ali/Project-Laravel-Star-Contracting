@@ -1,0 +1,64 @@
+.form-control {
+    padding: 0.20rem 0.75rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+/*google maps in modal*/
+.pac-container {
+    z-index: 10000 !important;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #22A7F0;
+    width: 100px;
+    height: 100px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+.loader-small {
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #22A7F0;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.mfp-wrap, .mfp-container, .mfp-bg.mfp-ready {
+    z-index: 2000;
+}
+
+.app-sidebar__user {
+    margin-bottom: 0;
+}
+
+.app-sidebar__user-avatar {
+    width: 60px;
+    height: 60px;
+}

@@ -1,0 +1,122 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Equipment;
+
+Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale())->group(function () {
+    
+    Auth::routes();
+
+    Route::get('/test', function () {
+
+    $equipments = DB::table('equipment')
+                    ->select('equipment.*', 'fuels.total_cost_of_fuel', 'equipment.driver_salary')
+                    ->leftJoin('fuels', 'equipment.id', '=', 'fuels.equipment_id')
+                    ->select(
+                        DB::raw('MONTHNAME(equipment.created_at) AS month'),
+                        DB::raw('YEAR(equipment.created_at) as year'),
+                        DB::raw('SUM(fuels.total_cost_of_fuel) + SUM(fuels.total_cost_of_fuel) as total'),
+                    )->groupBy('month')
+                     ->get();
+
+    return $equipments;
+
+
+    $equipments = Equipment::leftJoin('fuels', 'fuels.equipment_id', '=', 'equipment.id')
+                             ->select('*', 'fuels.total_cost_of_fuel', DB::raw('SUM(fuels.total_cost_of_fuel) As revenue'))
+                             ->get();
+
+    dd($equipments);
+
+    $equipments = Equipment::leftJoin('fuels', 'equipment.id', '=', 'fuels.equipment_id')
+                            ->select('equipment.*', 'fuels.total_cost_of_fuel')
+                            ->get();
+
+    return $equipments;
+
+    $mprs = Estimate::join('mprs', 'estimates.id', '=', 'mprs.estimate_id')
+->join('materials', 'estimates.material_id', '=', 'materials.id')
+->select('estimates.material_id','mprquantity')
+->get();
+return $mprs;
+
+    return $equipments;
+
+        $devlist = DB::table("cities")
+                       ->select(
+                            '*',
+                            'commodities.*',
+                            DB::raw('MONTHNAME(created_at) AS month')
+                        )->groupBy('month')
+                         ->get();
+
+        return $devlist->pluck('month','name');
+
+        dd(\App\Models\Equipment::count());
+
+        // $attachment = \App\Models\Spec::all();
+        return $statuss = \App\Models\Status::query()->whereYear('created_at', now()->year)->latest()->get();
+        return $attachment;
+
+        return now()->createFromFormat('Y-m-d', '2021-06-01');
+
+
+        return view('admin.test');
+        $equipments = Equipment::whereYear('created_at', request()->year)
+            ->select(
+                '*',
+                DB::raw('MONTH(created_at) as month'),
+                DB::raw('YEAR(created_at) as year'),
+                DB::raw('COUNT(id) as total'),
+            )
+            ->groupBy('month')
+            ->get();
+        $attachment = \App\Models\Spec::all();
+        return $attachment;
+        $filename = 'Ali-Hassan.pdf';
+        $path = public_path($filename);
+//        return $attachment;
+        return 'ffffffffffff';
+//        $path = 'http://star-contracting.test/storage/equipment_attachments_file/M0E06161TvfbGHjH5oEM23kvmu8zcawI1sRwVYTk.pdf';
+//         header
+//        $data["info"] = $user;
+//        $pdf = \PDF::loadView('whateveryourviewname', $data);
+//        return $pdf->stream('whateveryourviewname.pdf');
+
+
+        return $equipments = \App\Models\Equipment::withCount('status')->having('status_count', '>', '0')->orderBy('city_id')->get();
+
+        dd($equipments);
+
+        $date = date('Y-d-m', strtotime(now()->subDays(30)));
+
+        $equipments = \App\Models\Equipment::where('registration_expiry', '>=', now()->subDays(30))->get();
+        dd($equipments);
+
+        $users = \App\Models\EmailSystem::where('type', 'eir')->pluck('email');
+        $eir = \App\Models\Eir::first();
+        \App\Jobs\Admin\EIRJob::dispatch($users,$eir);
+        dd('doney');
+
+        $data = ['name' => 'name', 'id' => '1'];
+        $user = 'ah965961@gmail.com';
+        \Illuminate\Support\Facades\Mail::send('admin.reports.emails.eir_email', ['data' => $data], function($message) use ($data,$user) {
+            $message->to($user)->subject('report star-contracting');
+        });
+
+
+        dd('done');
+
+        return ucwords('foo bar');
+
+    });
+
+
+    Route::get('/', 'WelcomeController@index')->name('welcome');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+});

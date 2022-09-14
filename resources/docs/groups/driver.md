@@ -1,0 +1,463 @@
+# Driver
+
+APIs for driver trips
+
+## Trips
+
+<small class="badge badge-darkred">requires authentication</small>
+
+
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://mudunelmanar.theportal.agency/api/driver/trips?status=corporis" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://mudunelmanar.theportal.agency/api/driver/trips"
+);
+
+let params = {
+    "status": "corporis",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response => response.json());
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+<div id="execution-results-GETapi-driver-trips" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-driver-trips"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-driver-trips"></code></pre>
+</div>
+<div id="execution-error-GETapi-driver-trips" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-driver-trips"></code></pre>
+</div>
+<form id="form-GETapi-driver-trips" data-method="GET" data-path="api/driver/trips" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-driver-trips', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/driver/trips</code></b>
+</p>
+<p>
+<label id="auth-GETapi-driver-trips" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-driver-trips" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p>
+<b><code>status</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="status" data-endpoint="GETapi-driver-trips" data-component="query"  hidden>
+<br>
+the trip status e.g. completed for completed trips, on_going for on_going trips</p>
+</form>
+
+
+## Update trip Status
+
+<small class="badge badge-darkred">requires authentication</small>
+
+
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://mudunelmanar.theportal.agency/api/driver/trips/libero/update_status" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"status":"mollitia"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://mudunelmanar.theportal.agency/api/driver/trips/libero/update_status"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "status": "mollitia"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response => response.json());
+```
+
+
+<div id="execution-results-PUTapi-driver-trips--trip--update_status" hidden>
+    <blockquote>Received response<span id="execution-response-status-PUTapi-driver-trips--trip--update_status"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-driver-trips--trip--update_status"></code></pre>
+</div>
+<div id="execution-error-PUTapi-driver-trips--trip--update_status" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-driver-trips--trip--update_status"></code></pre>
+</div>
+<form id="form-PUTapi-driver-trips--trip--update_status" data-method="PUT" data-path="api/driver/trips/{trip}/update_status" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-driver-trips--trip--update_status', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-darkblue">PUT</small>
+ <b><code>api/driver/trips/{trip}/update_status</code></b>
+</p>
+<p>
+<label id="auth-PUTapi-driver-trips--trip--update_status" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="PUTapi-driver-trips--trip--update_status" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>trip</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="trip" data-endpoint="PUTapi-driver-trips--trip--update_status" data-component="url" required  hidden>
+<br>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>status</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="status" data-endpoint="PUTapi-driver-trips--trip--update_status" data-component="body" required  hidden>
+<br>
+the new trip status e.g: 'assigned_driver_and_truck', 'not_assigned_driver_and_truck', 'arrived', 'on_loading', 'on_way', 'on_half_way', 'off_loading', 'completed']</p>
+
+</form>
+
+
+## Upload on loading image
+
+<small class="badge badge-darkred">requires authentication</small>
+
+
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://mudunelmanar.theportal.agency/api/driver/trips/ea/upload_on_loading_image" \
+    -H "Content-Type: multipart/form-data" \
+    -H "Accept: application/json" \
+    -F "on_loading_image=@C:\Users\Abdelrahman\AppData\Local\Temp\php206D.tmp" 
+```
+
+```javascript
+const url = new URL(
+    "http://mudunelmanar.theportal.agency/api/driver/trips/ea/upload_on_loading_image"
+);
+
+let headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('on_loading_image', document.querySelector('input[name="on_loading_image"]').files[0]);
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body,
+}).then(response => response.json());
+```
+
+
+<div id="execution-results-PUTapi-driver-trips--trip--upload_on_loading_image" hidden>
+    <blockquote>Received response<span id="execution-response-status-PUTapi-driver-trips--trip--upload_on_loading_image"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-driver-trips--trip--upload_on_loading_image"></code></pre>
+</div>
+<div id="execution-error-PUTapi-driver-trips--trip--upload_on_loading_image" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-driver-trips--trip--upload_on_loading_image"></code></pre>
+</div>
+<form id="form-PUTapi-driver-trips--trip--upload_on_loading_image" data-method="PUT" data-path="api/driver/trips/{trip}/upload_on_loading_image" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-driver-trips--trip--upload_on_loading_image', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-darkblue">PUT</small>
+ <b><code>api/driver/trips/{trip}/upload_on_loading_image</code></b>
+</p>
+<p>
+<label id="auth-PUTapi-driver-trips--trip--upload_on_loading_image" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="PUTapi-driver-trips--trip--upload_on_loading_image" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>trip</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="trip" data-endpoint="PUTapi-driver-trips--trip--upload_on_loading_image" data-component="url" required  hidden>
+<br>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>on_loading_image</code></b>&nbsp;&nbsp;<small>file</small>  &nbsp;
+<input type="file" name="on_loading_image" data-endpoint="PUTapi-driver-trips--trip--upload_on_loading_image" data-component="body" required  hidden>
+<br>
+on loading image</p>
+
+</form>
+
+
+## Upload completed image
+
+<small class="badge badge-darkred">requires authentication</small>
+
+
+
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://mudunelmanar.theportal.agency/api/driver/trips/et/upload_completed_image" \
+    -H "Content-Type: multipart/form-data" \
+    -H "Accept: application/json" \
+    -F "completed_image=@C:\Users\Abdelrahman\AppData\Local\Temp\php207D.tmp" 
+```
+
+```javascript
+const url = new URL(
+    "http://mudunelmanar.theportal.agency/api/driver/trips/et/upload_completed_image"
+);
+
+let headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('completed_image', document.querySelector('input[name="completed_image"]').files[0]);
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body,
+}).then(response => response.json());
+```
+
+
+<div id="execution-results-PUTapi-driver-trips--trip--upload_completed_image" hidden>
+    <blockquote>Received response<span id="execution-response-status-PUTapi-driver-trips--trip--upload_completed_image"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-driver-trips--trip--upload_completed_image"></code></pre>
+</div>
+<div id="execution-error-PUTapi-driver-trips--trip--upload_completed_image" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-driver-trips--trip--upload_completed_image"></code></pre>
+</div>
+<form id="form-PUTapi-driver-trips--trip--upload_completed_image" data-method="PUT" data-path="api/driver/trips/{trip}/upload_completed_image" data-authed="1" data-hasfiles="1" data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-driver-trips--trip--upload_completed_image', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-darkblue">PUT</small>
+ <b><code>api/driver/trips/{trip}/upload_completed_image</code></b>
+</p>
+<p>
+<label id="auth-PUTapi-driver-trips--trip--upload_completed_image" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="PUTapi-driver-trips--trip--upload_completed_image" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>trip</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="trip" data-endpoint="PUTapi-driver-trips--trip--upload_completed_image" data-component="url" required  hidden>
+<br>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>completed_image</code></b>&nbsp;&nbsp;<small>file</small>  &nbsp;
+<input type="file" name="completed_image" data-endpoint="PUTapi-driver-trips--trip--upload_completed_image" data-component="body" required  hidden>
+<br>
+completed image</p>
+
+</form>
+
+
+## Store location
+
+<small class="badge badge-darkred">requires authentication</small>
+
+
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://mudunelmanar.theportal.agency/api/driver/locations/voluptatum" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"trip_id":16,"lat":"velit","lng":"in"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://mudunelmanar.theportal.agency/api/driver/locations/voluptatum"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "trip_id": 16,
+    "lat": "velit",
+    "lng": "in"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response => response.json());
+```
+
+
+<div id="execution-results-POSTapi-driver-locations--driver-" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-driver-locations--driver-"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-driver-locations--driver-"></code></pre>
+</div>
+<div id="execution-error-POSTapi-driver-locations--driver-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-driver-locations--driver-"></code></pre>
+</div>
+<form id="form-POSTapi-driver-locations--driver-" data-method="POST" data-path="api/driver/locations/{driver}" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-driver-locations--driver-', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/driver/locations/{driver}</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-driver-locations--driver-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-driver-locations--driver-" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>driver</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="driver" data-endpoint="POSTapi-driver-locations--driver-" data-component="url" required  hidden>
+<br>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>trip_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<input type="number" name="trip_id" data-endpoint="POSTapi-driver-locations--driver-" data-component="body" required  hidden>
+<br>
+The id of the trip.</p>
+<p>
+<b><code>lat</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="lat" data-endpoint="POSTapi-driver-locations--driver-" data-component="body" required  hidden>
+<br>
+The current lat of the driver.</p>
+<p>
+<b><code>lng</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="lng" data-endpoint="POSTapi-driver-locations--driver-" data-component="body" required  hidden>
+<br>
+The current lng of the driver.</p>
+
+</form>
+
+
+## Update profile data
+
+<small class="badge badge-darkred">requires authentication</small>
+
+
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://mudunelmanar.theportal.agency/api/driver/profile" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"enim","email":"dolores","fcm_token":"adipisci"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://mudunelmanar.theportal.agency/api/driver/profile"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "enim",
+    "email": "dolores",
+    "fcm_token": "adipisci"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response => response.json());
+```
+
+
+<div id="execution-results-POSTapi-driver-profile" hidden>
+    <blockquote>Received response<span id="execution-response-status-POSTapi-driver-profile"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-driver-profile"></code></pre>
+</div>
+<div id="execution-error-POSTapi-driver-profile" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-driver-profile"></code></pre>
+</div>
+<form id="form-POSTapi-driver-profile" data-method="POST" data-path="api/driver/profile" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-driver-profile', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+    </h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>api/driver/profile</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-driver-profile" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-driver-profile" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="name" data-endpoint="POSTapi-driver-profile" data-component="body" required  hidden>
+<br>
+the new driver name</p>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-driver-profile" data-component="body" required  hidden>
+<br>
+the new driver email</p>
+<p>
+<b><code>fcm_token</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+<input type="text" name="fcm_token" data-endpoint="POSTapi-driver-profile" data-component="body"  hidden>
+<br>
+optional the driver fcm_token</p>
+
+</form>
+
+
+
