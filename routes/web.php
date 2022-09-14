@@ -12,13 +12,18 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
 
     Route::get('/test', function () {
 
+    $equipments = DB::table('equipment')->join('fuels', 'equipment.id', '=', 'fuels.equipment_id')
+                ->get(['equipment.*', 'fuels.total_cost_of_fuel']);
+
+    return $equipments;
+
     $equipments = DB::table('equipment')
                     ->select('equipment.*', 'fuels.total_cost_of_fuel', 'equipment.driver_salary')
                     ->leftJoin('fuels', 'equipment.id', '=', 'fuels.equipment_id')
                     ->select(
                         DB::raw('MONTHNAME(equipment.created_at) AS month'),
-                        DB::raw('YEAR(equipment.created_at) as year'),
-                        DB::raw('equipment.rental_cost_basis + equipment.driver_salary + fuels.total_cost_of_fuel as total'),
+                        DB::raw('YEAR(equipment.created_at) AS year'),
+                        DB::raw('SUM(equipment.rental_cost_basis + equipment.driver_salary + fuels.total_cost_of_fuel) AS totaling'),
                     )->groupBy('month')
                      ->get();
 

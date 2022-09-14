@@ -341,7 +341,11 @@ class ReportController extends Controller
             }
         } else {
             foreach($equipments as $equipment) {
-                $total += $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+                $total += $equipment->rental_cost_basis + 
+                          $equipment->driver_salary + 
+                          $equipment->spares->sum('cost') + 
+                          $equipment->spares->sum('freight_charges') + 
+                          !empty($equipment->fuel->total_cost_of_fuel) ?? '';
             }
         }
 
