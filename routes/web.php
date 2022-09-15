@@ -25,13 +25,8 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
     })->name('view.pdf');
 
     Route::get('/test', function () {
-
-        // $startMonth = now()->parse('2022-08-17')->addMonth(1)->format('d-m-Y');
-        // dd($startMonth);
-        // dd(now()->subMonth(1)->format('Y-m-d'));
-        $equipmens = Equipment::whereDate('registration_expiry', '<=', now()->subMonth(1)->format('Y-m-d'))->get();
-        $equipmens = Equipment::whereDate('registration_expiry', '<=', now()->subMonth(1)->format('Y-m-d'))->get();
-        dd($equipmens);
+        $equipmens = Equipment::where('registration_expiry', '<=', now()->addMonth(1)->format('Y-m-d'))->get();
+        dd($equipmens, now()->addMonth(1)->format('Y-m-d'));
 
         // 2022-08-17 > 2022-08-16
 
