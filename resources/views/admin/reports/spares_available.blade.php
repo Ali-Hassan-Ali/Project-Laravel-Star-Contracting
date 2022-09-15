@@ -9,7 +9,7 @@
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item">@lang('reports.reports')</li>
-        <li class="breadcrumb-item">@lang('reports.spares_available')</li>
+        <li class="breadcrumb-item title-download">@lang('reports.spares_available')</li>
     </ul>
     
     <div class="row">
@@ -122,7 +122,7 @@
             buttons: [{
                 footer: true,
                 extend: "pdf",
-                title: `Star-Contracting`,
+                title: $('.title-download').html() + ' - ' +"{{ now()->format('d-m-Y') }}",
                 className: 'btn btn-primary',
                 orientation: 'landscape',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
