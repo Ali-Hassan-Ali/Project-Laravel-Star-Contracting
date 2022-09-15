@@ -52,7 +52,7 @@
                             <h3 class="mb-0 text-center" id="eir-in-transit-count" style="display: none;"></h3>
 
                             <div class="d-flex justify-content-center mb-2">
-                                <p class="mb-0">@lang('statistics.eir_pending_approved')</p>
+                                <p class="mb-0">@lang('statistics.eir_in_transit')</p>
                             </div>
 
                             <div class="loader loader-sm"></div>
