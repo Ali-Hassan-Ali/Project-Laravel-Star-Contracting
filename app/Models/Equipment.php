@@ -156,11 +156,8 @@ class Equipment extends Model
     public function scopeWhereBetweenDataRegistrationExpiry($query)
     {
 
-        $startDate = now()->createFromFormat('Y-m-d', now());
-        $endDate   = now()->createFromFormat('Y-m-d', now()->addMonth(1));
-
-        return $query->whereDate('registration_expiry', '>=',$startDate)
-                     ->whereDate('registration_expiry','<=',$endDate);
+        return $query->whereDate('registration_expiry', '>=', now())
+                     ->whereDate('registration_expiry','<=', now()->addMonth(1));
 
     }//end of fun
 
