@@ -47,7 +47,7 @@
 
                     <a href="#" class="btn btn-sm card data-ajax pb-2-1 font-weight-bold" style="border: 4px solid green;" data-url="{{ route('admin.home.ajax.eir_in_transit') }}">
                         
-                        <div class="card-body p-1">
+                        <div class="card-body p-0">
 
                             <h3 class="mb-0 text-center" id="eir-in-transit-count" style="display: none;font-size: 50px;"></h3>
 
