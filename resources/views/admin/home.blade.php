@@ -75,7 +75,7 @@
 
                             <h3 class="mb-0 text-center" id="equipment-vehicle-count" style="display: none;"></h3>
 
-                            <div class="d-flex justify-content-center text-center mb-2">
+                            <div class="d-flex justify-content-center text-centerw mb-2">
                                 <p class="mb-0">@lang('statistics.equipment_vehicle')</p>
                             </div>
 
