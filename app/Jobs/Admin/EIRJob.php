@@ -35,7 +35,7 @@ class EIRJob implements ShouldQueue
      */
     public function handle()
     {
-        $data   = $this->title;
+        $data   = $this->data;
         $emails = $this->emails;
 
         foreach ($emails as $index=>$email) {
