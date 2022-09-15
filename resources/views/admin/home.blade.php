@@ -116,13 +116,13 @@
 
                 @if (auth()->user()->hasPermission('read_maintenances'))
                 {{-- status --}}
-                <div class="col-md-2 mb-2">
+                <div class="col-md-2">
 
-                    <a href="#" style="background: red; color: black;" class="card data-ajax pb-2-1" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
+                    <a href="#" style="background: red; color: black;" class="card data-ajax" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
                         
                         <div class="card-body">
 
-                            <h3 class="mb-0 text-center" id="equipment-barkdown-count" style="display: none;"></h3>
+                            <h1 class="mb-0 text-center" id="equipment-barkdown-count" style="display: none; font-size: 50px;"></h1>
 
                             <div class="d-flex justify-content-center mb-2">
                                 <p class="mb-0">@lang('statistics.equipment_barkdown')</p>
