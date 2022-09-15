@@ -23,7 +23,7 @@
 
                     <a href="#" class="btn btn-sm card data-ajax font-weight-bold" style="background: #d5b209; color: #fff;" data-url="{{ route('admin.home.ajax.eir_pending_approved') }}">
                         
-                        <div class="card-body">
+                        <div class="card-body p-0">
 
                             <h3 class="mb-0 text-center" id="eir-under-review-count" style="display: none;font-size: 50px;"></h3>
 
@@ -47,7 +47,7 @@
 
                     <a href="#" class="btn btn-sm card data-ajax pb-2-1 font-weight-bold" style="background: green; color: #fff;" data-url="{{ route('admin.home.ajax.eir_in_transit') }}">
                         
-                        <div class="card-body">
+                        <div class="card-body p-0">
 
                             <h3 class="mb-0 text-center" id="eir-in-transit-count" style="display: none;font-size: 50px;"></h3>
 
@@ -71,7 +71,7 @@
 
                     <a href="#" class="btn btn-sm card data-ajax font-weight-bold" style="background: blue; color: #fff;padding: inherit;padding-bottom: 32px;" data-url="{{ route('admin.home.ajax.equipment_vehicle') }}">
                         
-                        <div class="card-body p-3">
+                        <div class="card-body p-0">
 
                             <h3 class="mb-0 text-center" id="equipment-vehicle-count" style="display: none;font-size: 50px;"></h3>
 
@@ -96,7 +96,7 @@
 
                     <a href="#" class="btn btn-sm card data-ajax pb-2-1 font-weight-bold" data-url="{{ route('admin.home.ajax.equipment_rented') }}">
                         
-                        <div class="card-body">
+                        <div class="card-body p-0">
 
                             <h3 class="mb-0 text-center" id="equipment-rented-count" style="display: none;font-size: 50px;"></h3>
 
@@ -120,7 +120,7 @@
 
                     <a href="#" style="background: #cc0808; color: #fff;padding-bottom: 14px" class="btn btn-sm card data-ajax font-weight-bold" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
                         
-                        <div class="card-body pb-4">
+                        <div class="card-body p-0">
 
                             <h1 class="mb-0 text-center font-weight-bold" id="equipment-barkdown-count" style="display: none; font-size: 50px;"></h1>
 

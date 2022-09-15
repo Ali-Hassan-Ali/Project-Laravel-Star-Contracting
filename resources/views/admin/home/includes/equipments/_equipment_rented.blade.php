@@ -17,7 +17,7 @@
           <td class="text-center">{{ $equipment->city->name }}</td>
           <td class="text-center">{{ $equipment->make .' '. $equipment->name .' '. $equipment->plate_no }}</td>
           <td class="text-center">{{ $equipment->rental_basis }}</td>
-          <td class="text-center">{{ $equipment->rental_cost_basis }}</td>
+          <td class="text-center">${{ $equipment->rental_cost_basis }}</td>
         </tr>
       @endforeach
 
