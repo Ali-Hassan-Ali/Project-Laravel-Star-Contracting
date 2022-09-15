@@ -9,7 +9,7 @@
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item">@lang('reports.reports')</li>
-        <li class="breadcrumb-item">@lang('reports.material_delivery_time')</li>
+        <li class="breadcrumb-item title-download">@lang('reports.material_delivery_time')</li>
     </ul>
     
     <div class="row">
@@ -119,7 +119,7 @@
                 footer: true,
                 extend: "pdf",
                 pageSize: 'A4',
-                title: `Star-Contracting`,
+                title: $('.title-download').html() + ' - ' +"{{ now()->format('d-m-Y') }}",
                 className: 'btn btn-primary',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
                 customize: function(doc) {
