@@ -73,7 +73,7 @@
                         
                         <div class="card-body">
 
-                            <h3 class="mb-0 text-center" style="display: none;">30</h3>
+                            <h3 class="mb-0 text-center">30</h3>
 
                             <div class="d-flex justify-content-center mb-2">
                                 <p class="mb-0">@lang('statistics.equipment_vehicle')</p>
