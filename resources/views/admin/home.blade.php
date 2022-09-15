@@ -19,7 +19,7 @@
 
                 @if (auth()->user()->hasPermission('read_equipments'))
                 {{-- status --}}
-                <div class="col-md-3">
+                <div class="col-md-3 mb-2">
 
                     <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.eir_pending_approved') }}">
                         
@@ -43,7 +43,7 @@
                 
                 @if (auth()->user()->hasPermission('read_status'))
                 {{-- status --}}
-                <div class="col-md-3">
+                <div class="col-md-3 mb-2">
 
                     <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.eir_in_transit') }}">
                         
@@ -67,7 +67,7 @@
 
                 @if (auth()->user()->hasPermission('read_spares'))
                 {{-- status --}}
-                <div class="col-md-3">
+                <div class="col-md-3 mb-2">
 
                     <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.equipment_vehicle') }}">
                         
@@ -92,7 +92,7 @@
 
                 @if (auth()->user()->hasPermission('read_maintenances'))
                 {{-- status --}}
-                <div class="col-md-3">
+                <div class="col-md-3 mb-2">
 
                     <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.equipment_rented') }}">
                         
@@ -116,7 +116,7 @@
 
                 @if (auth()->user()->hasPermission('read_maintenances'))
                 {{-- status --}}
-                <div class="col-md-3">
+                <div class="col-md-3 mb-2">
 
                     <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
                         
