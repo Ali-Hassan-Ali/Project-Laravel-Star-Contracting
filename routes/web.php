@@ -26,7 +26,7 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
 
     Route::get('/test', function () {
 
-        $equipmens = Equipment::where('registration_expiry', '>', now()->subDay(30))->get();
+        $equipmens = Equipment::where('registration_expiry', '<', now()->subDay(30)->format('Y-m-d'))->get();
         dd($equipmens);
 
     $equipments = DB::table('equipment')->join('fuels', 'equipment.id', '=', 'fuels.equipment_id')
