@@ -9,7 +9,7 @@
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item">@lang('reports.reports')</li>
-        <li class="breadcrumb-item">@lang('reports.breakdown_overview')</li>
+        <li class="breadcrumb-item title-download">@lang('reports.breakdown_overview')</li>
     </ul>
     
     <div class="row">
@@ -173,7 +173,7 @@
             buttons: [{
                 footer: true,
                 extend: "pdf",
-                title: `Star-Contracting`,
+                title: $('.title-download').html() + ' - ' +"{{ now()->format('d-m-Y') }}",
                 className: 'btn btn-primary',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
                 customize: function(doc) {
@@ -206,12 +206,15 @@
                 method: method,
                 data: {equipment_id: id},
                 success: function (data) {
-                    let total = data.averages / data.count;
-                    $('.count').html(data.count);
-                    $('.average').html($.number(total, 2));
                     
+                    let total = data.averages / data.count;
+                    
+                    $('.count').html(data.count);
                     $('.count-min').html('No Of Breakdowns ' + data.count);
+
+                    $('.average').html($.number(total, 2));            
                     $('.average-min').html('Average Breakdown Duration ' + $.number(total, 2));
+
                 }//end of success
             });//end of ajax
             
