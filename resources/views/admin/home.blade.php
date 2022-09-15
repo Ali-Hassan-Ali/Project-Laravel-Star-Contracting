@@ -118,7 +118,7 @@
                 {{-- status --}}
                 <div class="col-md-2 mb-2">
 
-                    <a href="#" class="card data-ajax pb-2-1" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
+                    <a href="#" style="color: red;" class="card data-ajax pb-2-1" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
                         
                         <div class="card-body">
 
