@@ -69,13 +69,13 @@
                 {{-- status --}}
                 <div class="col-md-2 mb-2">
 
-                    <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.equipment_vehicle') }}">
+                    <a href="#" class="card data-ajax pb-2-1" data-url="{{ route('admin.home.ajax.equipment_vehicle') }}">
                         
                         <div class="card-body">
 
                             <h3 class="mb-0 text-center" id="equipment-vehicle-count" style="display: none;"></h3>
 
-                            <div class="d-flex justify-content-center text-centerw mb-2">
+                            <div class="d-flex justify-content-center text-center text-centerw mb-2">
                                 <p class="mb-0">@lang('statistics.equipment_vehicle')</p>
                             </div>
 
