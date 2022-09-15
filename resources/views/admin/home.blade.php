@@ -21,7 +21,7 @@
                 {{-- status --}}
                 <div class="col-md-2 mb-2">
 
-                    <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.eir_pending_approved') }}">
+                    <a href="#" class="card data-ajax" style="background: yellow; color: #fff;" data-url="{{ route('admin.home.ajax.eir_pending_approved') }}">
                         
                         <div class="card-body">
 
@@ -45,7 +45,7 @@
                 {{-- status --}}
                 <div class="col-md-2 mb-2">
 
-                    <a href="#" class="card data-ajax pb-2-1" data-url="{{ route('admin.home.ajax.eir_in_transit') }}">
+                    <a href="#" class="card data-ajax pb-2-1" style="background: green; color: #fff;" data-url="{{ route('admin.home.ajax.eir_in_transit') }}">
                         
                         <div class="card-body">
 
@@ -69,7 +69,7 @@
                 {{-- status --}}
                 <div class="col-md-2 mb-2">
 
-                    <a href="#" class="card data-ajax pb-2-1" data-url="{{ route('admin.home.ajax.equipment_vehicle') }}">
+                    <a href="#" class="card data-ajax pb-2-1" style="background: blue; color: #fff;" data-url="{{ route('admin.home.ajax.equipment_vehicle') }}">
                         
                         <div class="card-body">
 
