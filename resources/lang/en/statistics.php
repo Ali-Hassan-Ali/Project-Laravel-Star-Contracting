@@ -7,7 +7,7 @@ return [
 
     'eir_pending_approved'   => 'EIRs Pending Approval',
     'eir_in_transit'         => 'EIRs In Transit',
-    'equipment_vehicle'      => 'Days To Expire',
+    'equipment_vehicle'      => '30 Days To Expire',
     'equipment_rented'       => 'Rentals',
     'equipment_barkdown'     => 'Breakdowns',
 ];
