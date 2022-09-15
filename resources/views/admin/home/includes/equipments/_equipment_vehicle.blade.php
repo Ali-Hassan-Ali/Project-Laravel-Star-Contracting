@@ -17,7 +17,7 @@
           <td class="text-center">{{ $equipment->city->name }}</td>
           <td class="text-center">{{ $equipment->make .' '. $equipment->name .' '. $equipment->plate_no }}</td>
           <td class="text-center">{{ $equipment->registration_expiry ? date('d-m-Y', strtotime($equipment->registration_expiry)) : '' }}</td>
-          <td class="text-center">{{ $equipment->registration_expiry ? now()->parse($equipment->registration_expiry)->addMonth()->format('d') : '' }}</td>
+          <td class="text-center">{{ $equipment->registration_expiry ? now()->parse($equipment->registration_expiry)->addMonth(1)->format('d') : '' }}</td>
         </tr>
       @endforeach
 
