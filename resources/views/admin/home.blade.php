@@ -19,7 +19,7 @@
 
                 @if (auth()->user()->hasPermission('read_equipments'))
                 {{-- status --}}
-                <div class="col-md-2 mb-2">
+                <div class="col-md-3 mb-2">
 
                     <a href="#" class="btn btn-sm card data-ajax font-weight-bold" style="border: 4px solid #d5b209;" data-url="{{ route('admin.home.ajax.eir_pending_approved') }}">
                         
@@ -116,7 +116,7 @@
 
                 @if (auth()->user()->hasPermission('read_maintenances'))
                 {{-- status --}}
-                <div class="col-md-2 mb-2">
+                <div class="col-md-3 mb-2">
 
                     <a href="#" style="border: 4px solid #cc0808;padding-bottom: 20px;" class="btn btn-sm card p-2 data-ajax font-weight-bold" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
                         
