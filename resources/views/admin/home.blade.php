@@ -28,7 +28,7 @@
                             <h3 class="mb-0 text-center" id="eir-under-review-count" style="display: none;font-size: 50px;"></h3>
 
                             <div class="d-flex justify-content-center mb-2 text-center">
-                                <p class="mb-0">@lang('statistics.eir_pending_approved')</p>
+                                <p class="mb-0" style="font-size: initial;">@lang('statistics.eir_pending_approved')</p>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -52,7 +52,7 @@
                             <h3 class="mb-0 text-center" id="eir-in-transit-count" style="display: none;font-size: 50px;"></h3>
 
                             <div class="d-flex justify-content-center mb-2 text-center">
-                                <p class="mb-0">@lang('statistics.eir_in_transit')</p>
+                                <p class="mb-0" style="font-size: initial;">@lang('statistics.eir_in_transit')</p>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -76,7 +76,7 @@
                             <h3 class="mb-0 text-center" id="equipment-vehicle-count" style="display: none;font-size: 50px;"></h3>
 
                             <div class="d-flex justify-content-center text-center text-centerw mb-2">
-                                <p class="mb-0">@lang('statistics.equipment_vehicle')</p>
+                                <p class="mb-0" style="font-size: initial;">@lang('statistics.equipment_vehicle')</p>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -101,7 +101,7 @@
                             <h3 class="mb-0 text-center" id="equipment-rented-count" style="display: none;font-size: 50px;"></h3>
 
                             <div class="d-flex justify-content-center mb-2">
-                                <p class="mb-0">@lang('statistics.equipment_rented')</p>
+                                <p class="mb-0" style="font-size: initial;">@lang('statistics.equipment_rented')</p>
                             </div>
 
                             <div class="loader loader-sm"></div>
@@ -125,7 +125,7 @@
                             <h1 class="mb-0 text-center font-weight-bold" id="equipment-barkdown-count" style="display: none; font-size: 50px;"></h1>
 
                             <div class="d-flex justify-content-center mb-2">
-                                <p class="mb-0">@lang('statistics.equipment_barkdown')</p>
+                                <p class="mb-0" style="font-size: initial;">@lang('statistics.equipment_barkdown')</p>
                             </div>
 
                             <div class="loader loader-sm"></div>
