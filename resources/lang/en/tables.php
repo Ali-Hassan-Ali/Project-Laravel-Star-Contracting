@@ -2,6 +2,6 @@
 
 return [
 
-    'tables' => 'tables',
+    'tables' => 'Archive',
 
 ];

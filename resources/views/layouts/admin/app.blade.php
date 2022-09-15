@@ -79,6 +79,9 @@
         .has-error .select2-selection {
             border-color: rgb(185, 74, 72) !important;
         }
+        .pb-2-1 {
+            padding-bottom: 21px;
+        }
         .app-sidebar::-webkit-scrollbar {
             width: 15px;
             height: 8px;

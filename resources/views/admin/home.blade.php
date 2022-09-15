@@ -19,7 +19,7 @@
 
                 @if (auth()->user()->hasPermission('read_equipments'))
                 {{-- status --}}
-                <div class="col-md-3 mb-2">
+                <div class="col-md-2 mb-2">
 
                     <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.eir_pending_approved') }}">
                         
@@ -27,7 +27,7 @@
 
                             <h3 class="mb-0 text-center" id="eir-under-review-count" style="display: none;"></h3>
 
-                            <div class="d-flex justify-content-center mb-2">
+                            <div class="d-flex justify-content-center mb-2 text-center">
                                 <p class="mb-0">@lang('statistics.eir_pending_approved')</p>
                             </div>
 
@@ -43,15 +43,15 @@
                 
                 @if (auth()->user()->hasPermission('read_status'))
                 {{-- status --}}
-                <div class="col-md-3 mb-2">
+                <div class="col-md-2 mb-2">
 
-                    <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.eir_in_transit') }}">
+                    <a href="#" class="card data-ajax pb-2-1" data-url="{{ route('admin.home.ajax.eir_in_transit') }}">
                         
                         <div class="card-body">
 
                             <h3 class="mb-0 text-center" id="eir-in-transit-count" style="display: none;"></h3>
 
-                            <div class="d-flex justify-content-center mb-2">
+                            <div class="d-flex justify-content-center mb-2 text-center">
                                 <p class="mb-0">@lang('statistics.eir_in_transit')</p>
                             </div>
 
@@ -67,7 +67,7 @@
 
                 @if (auth()->user()->hasPermission('read_spares'))
                 {{-- status --}}
-                <div class="col-md-3 mb-2">
+                <div class="col-md-2 mb-2">
 
                     <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.equipment_vehicle') }}">
                         
@@ -75,7 +75,7 @@
 
                             <h3 class="mb-0 text-center" id="equipment-vehicle-count" style="display: none;"></h3>
 
-                            <div class="d-flex justify-content-center mb-2">
+                            <div class="d-flex justify-content-center text-center mb-2">
                                 <p class="mb-0">@lang('statistics.equipment_vehicle')</p>
                             </div>
 
@@ -92,9 +92,9 @@
 
                 @if (auth()->user()->hasPermission('read_maintenances'))
                 {{-- status --}}
-                <div class="col-md-3 mb-2">
+                <div class="col-md-2 mb-2">
 
-                    <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.equipment_rented') }}">
+                    <a href="#" class="card data-ajax pb-2-1" data-url="{{ route('admin.home.ajax.equipment_rented') }}">
                         
                         <div class="card-body">
 
@@ -116,9 +116,9 @@
 
                 @if (auth()->user()->hasPermission('read_maintenances'))
                 {{-- status --}}
-                <div class="col-md-3 mb-2">
+                <div class="col-md-2 mb-2">
 
-                    <a href="#" class="card data-ajax" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
+                    <a href="#" class="card data-ajax pb-2-1" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
                         
                         <div class="card-body">
 
