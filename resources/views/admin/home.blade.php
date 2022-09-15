@@ -73,9 +73,9 @@
                         
                         <div class="card-body">
 
-                            {{-- <h3 class="mb-0 text-center" id="equipment-vehicle-count" style="display: none;"></h3> --}}
+                            <h3 class="mb-0 text-center" style="display: none;">30</h3>
 
-                            <div class="d-flex justify-content-center mb-2 py-3">
+                            <div class="d-flex justify-content-center mb-2">
                                 <p class="mb-0">@lang('statistics.equipment_vehicle')</p>
                             </div>
 
@@ -449,7 +449,7 @@
 
                     $('#top-statistics #eir-under-review-count').show().text(data.eir_under_review_count);
                     $('#top-statistics #eir-in-transit-count').show().text(data.eir_in_transit_count);
-                    $('#top-statistics #equipment-vehicle-count').show().text(data.equipment_vehicle_count);
+                    // $('#top-statistics #equipment-vehicle-count').show().text(data.equipment_vehicle_count);
                     $('#top-statistics #equipment-rented-count').show().text(data.equipment_rented_count);
                     $('#top-statistics #equipment-barkdown-count').show().text(data.equipment_barkdown_count);
 
