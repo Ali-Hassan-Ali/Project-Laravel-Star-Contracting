@@ -18,7 +18,7 @@
           <td class="text-center">{{ $eir->equipment->city->name }}</td>
           <td class="text-center">{{ $eir->eir_no }}</td>
           <td class="text-center">{{ $eir->date ? date('Y-m-d', strtotime($eir->date)) : '' }}</td>
-          <td class="text-center">{{ $eir->equipment->name }}</td>
+          <td class="text-center">{{ $eir->equipment->make .' '. $eir->equipment->name .' '. $eir->equipment->plate_no }}</td>
           <td class="text-center">{{ $eir->actual_process_date ? date('Y-m-d', strtotime($eir->actual_process_date)) : '' }}</td>
         </tr>
       @endforeach
