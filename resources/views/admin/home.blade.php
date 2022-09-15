@@ -120,7 +120,7 @@
 
                     <a href="#" style="background: red; color: #fff;" class="card data-ajax" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
                         
-                        <div class="card-body">
+                        <div class="card-body p-0">
 
                             <h1 class="mb-0 text-center" id="equipment-barkdown-count" style="display: none; font-size: 50px;"></h1>
 
