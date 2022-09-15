@@ -15,7 +15,7 @@ class HomeController extends Controller
         $eirInTransitCount      = Eir::where('status', 'Part In Transit')->count();
         $equipmentVehicleCount  = Equipment::WhereBetweenDataRegistrationExpiry()->count();
         $equipmentRentedCount   = Equipment::where('owner_ship', 'Rented')->count();
-        $equipmentBarkdownCount = Equipment::whereRelation('statusone', 'working_status', 'barkdown')->count();
+        $equipmentBarkdownCount = Equipment::withCount('statusone')->having('statusone_count', '>', '0')->count();
 
         return response()->json([
             'eir_under_review_count'   => $eirUnderReviewCount,
