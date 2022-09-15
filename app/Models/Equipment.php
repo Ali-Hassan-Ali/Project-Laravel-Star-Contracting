@@ -157,7 +157,7 @@ class Equipment extends Model
     {
 
         return $query->whereDate('registration_expiry', '>=', now())
-                     ->whereDate('registration_expiry','<=', now()->addMonth(1));
+                     ->whereDate('registration_expiry', '<=', now()->addMonth(1));
 
     }//end of fun
 
