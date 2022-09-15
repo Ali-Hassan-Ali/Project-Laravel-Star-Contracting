@@ -21,7 +21,7 @@
                 {{-- status --}}
                 <div class="col-md-2 mb-2">
 
-                    <a href="#" class="card data-ajax" style="background: yellow; color: #fff;" data-url="{{ route('admin.home.ajax.eir_pending_approved') }}">
+                    <a href="#" class="card data-ajax" style="background: yellow; color: black;" data-url="{{ route('admin.home.ajax.eir_pending_approved') }}">
                         
                         <div class="card-body">
 
