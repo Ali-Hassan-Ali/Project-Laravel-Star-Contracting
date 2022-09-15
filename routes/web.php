@@ -4,13 +4,30 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Attachment;
 use App\Models\Equipment;
+use Illuminate\Support\Facades\Storage;
 
 Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale())->group(function () {
     
     Auth::routes();
 
+    Route::get('/testing/{id}', function ($id) {
+        
+        $pdf = Attachment::find($id);
+
+        // dd($pdf->path, Storage::disk('public')->getDriver()->getAdapter(), Storage::disk('public')->path($pdf->path));
+
+        return $book_file = Storage::disk('public')->getDriver()->getAdapter()->applyPathPrefix($pdf->path);
+
+        return response()->file($book_file);
+
+    })->name('view.pdf');
+
     Route::get('/test', function () {
+
+        $equipmens = Equipment::where('registration_expiry', '>', now()->subDay(30))->get();
+        dd($equipmens);
 
     $equipments = DB::table('equipment')->join('fuels', 'equipment.id', '=', 'fuels.equipment_id')
                 ->get(['equipment.*', 'fuels.total_cost_of_fuel']);

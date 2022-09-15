@@ -32,7 +32,7 @@ class AjaxController extends Controller
 
     public function EquipmentVehicle()
     {
-        $equipmens = Equipment::where('type', 'Vehicle')->get();
+        $equipmens = Equipment::where('registration_expiry', '>', now()->subDay(30))->get();
 
         $data = view('admin.home.includes.equipments._equipment_vehicle', compact('equipmens'));
 
@@ -52,7 +52,7 @@ class AjaxController extends Controller
 
     public function EquipmentBarkdown()
     {
-        $equipmens = Equipment::whereRelation('statusone', 'working_status', 'barkdown')->get();
+        $equipmens = Equipment::withCount('statusone')->having('statusone_count', '>', '0')->get();
 
         $data = view('admin.home.includes.equipments._equipment_barkdown', compact('equipmens'));
 
