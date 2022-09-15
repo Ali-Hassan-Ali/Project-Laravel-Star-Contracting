@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $eirUnderReviewCount    = Eir::where('status', 'Under Review')->count();
         $eirInTransitCount      = Eir::where('status', 'Part In Transit')->count();
-        $equipmentVehicleCount  = Equipment::whereDate('registration_expiry', '>=', now()->subDays(30))->count();
+        $equipmentVehicleCount  = Equipment::whereDate('registration_expiry', '>=', now()->addDays(30))->count();
         $equipmentRentedCount   = Equipment::where('owner_ship', 'Rented')->count();
         $equipmentBarkdownCount = Equipment::whereRelation('statusone', 'working_status', 'barkdown')->count();
 
