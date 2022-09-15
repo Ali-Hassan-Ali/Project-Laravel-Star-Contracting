@@ -25,9 +25,11 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
     })->name('view.pdf');
 
     Route::get('/test', function () {
+        $equipmens = Equipment::whereDate('registration_expiry', now()->subDays(30))->get();
 
-        $equipmens = Equipment::where('registration_expiry', '<', now()->subDay(30)->format('Y-m-d'))->get();
         dd($equipmens);
+
+        // 2022-08-17 > 2022-08-16
 
     $equipments = DB::table('equipment')->join('fuels', 'equipment.id', '=', 'fuels.equipment_id')
                 ->get(['equipment.*', 'fuels.total_cost_of_fuel']);

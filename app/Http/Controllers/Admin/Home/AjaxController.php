@@ -32,7 +32,7 @@ class AjaxController extends Controller
 
     public function EquipmentVehicle()
     {
-        $equipmens = Equipment::where('registration_expiry', '>', now()->subDay(30))->get();
+        $equipmens = Equipment::whereDate('registration_expiry', now()->subDays(30))->get();
 
         $data = view('admin.home.includes.equipments._equipment_vehicle', compact('equipmens'));
 
