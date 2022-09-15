@@ -5,6 +5,7 @@
     <th class="text-center">@lang('citys.citys')</th>
     <th class="text-center">@lang('equipments.equipments')</th>
     <th class="text-center">@lang('equipments.registration_expiry')</th>
+    <th class="text-center">@lang('statistics.equipment_vehicle')</th>
   </tr>
   </thead>
   <tbody>
@@ -16,6 +17,7 @@
           <td class="text-center">{{ $equipment->city->name }}</td>
           <td class="text-center">{{ $equipment->make .' '. $equipment->name .' '. $equipment->plate_no }}</td>
           <td class="text-center">{{ $equipment->registration_expiry ? date('Y-m-d', strtotime($equipment->registration_expiry)) : '' }}</td>
+          <td class="text-center">{{ $equipment->registration_expiry ? now()->parse($equipment->registration_expiry)->addDays(1)->format('d') : '' }}</td>
         </tr>
       @endforeach
 
