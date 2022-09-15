@@ -69,7 +69,7 @@
                 {{-- status --}}
                 <div class="col-md-2 mb-2">
 
-                    <a href="#" class="btn btn-sm card data-ajax font-weight-bold" style="background: blue; color: #fff;" data-url="{{ route('admin.home.ajax.equipment_vehicle') }}">
+                    <a href="#" class="btn btn-sm card data-ajax font-weight-bold" style="background: blue; color: #fff;padding: inherit;" data-url="{{ route('admin.home.ajax.equipment_vehicle') }}">
                         
                         <div class="card-body p-2">
 
@@ -118,7 +118,7 @@
                 {{-- status --}}
                 <div class="col-md-2 mb-2">
 
-                    <a href="#" style="background: #cc0808; color: #fff;" class="btn btn-sm card data-ajax font-weight-bold b-2" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
+                    <a href="#" style="background: #cc0808; color: #fff;" class="btn btn-sm card data-ajax font-weight-bold" data-url="{{ route('admin.home.ajax.equipment_barkdown') }}">
                         
                         <div class="card-body pb-2 p-2">
 
