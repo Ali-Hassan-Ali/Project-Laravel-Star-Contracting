@@ -25,7 +25,7 @@ class EIRJob implements ShouldQueue
     public function __construct($emails, $data)
     {
         $this->emails = $emails;
-        $this->data = $data;
+        $this->data   = $data;
     }
 
     /**
@@ -40,7 +40,7 @@ class EIRJob implements ShouldQueue
 
         foreach ($emails as $index=>$email) {
 
-            Mail::send('admin.reports.emails.eir_email', ['data' => $data], function($message) use ($data,$email) {
+            Mail::send('admin.reports.emails.eir_email', ['data' => $data], function($message) use ($data, $email) {
                 $message->to($email)->subject('report star-contracting')->title('title');
             });
 
