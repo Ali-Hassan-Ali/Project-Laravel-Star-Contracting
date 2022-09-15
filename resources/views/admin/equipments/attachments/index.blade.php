@@ -57,6 +57,7 @@
                                             <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
                                             @if($data->type == 'pdf')
                                                 {{-- <a target="_blank" href="{{ route('view.pdf', 1) }}" class="btn btn-primary btn-sm"> --}}
+                                                    
                                                 <a target="_blank" href="{{ Storage::disk('public')->path($data->path) }}" class="btn btn-primary btn-sm open-pdf">
                                                     <i class="fa fa-eye"></i> @lang('site.show')
                                                 </a>
