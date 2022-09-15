@@ -5,7 +5,7 @@ return [
     'chart'         => 'Chart',
     'table'         => 'Table',
 
-    'eir_pending_approved'   => 'EIRs Pendings Approval',
+    'eir_pending_approved'   => 'EIRs Pending Approval',
     'eir_in_transit'         => 'EIRs In Transit',
     'equipment_vehicle'      => 'Days To Expire',
     'equipment_rented'       => 'Rentals',
