@@ -75,7 +75,7 @@
                             <select name="spec_id" id="spec-id" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('specs.specs')</option>
                                 @foreach ($specs as $spec)
-                                    <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id', $equipment->spec_id) ? 'selected' : '' }}>{{ $spec->name }}</option>
+                                    <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id', $equipment->spec_id) ? 'selected' : '' }}>{{ $spec->space->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -204,7 +204,7 @@
                         {{--rental_basis--}}
                         <div class="form-group col-6">
                             <label>@lang('equipments.rental_basis') <span class="text-danger">*</span></label>
-                            <select name="rental_basis" {{ old('owner_ship', $equipment->owner_ship) != 'Rented' ? 'disabled' : '' }} id="rental-basis" class="form-control select2">
+                            <select name="rental_basis" {{ old('owner_ship', $equipment->owner_ship) != 'Rented' ? 'disabled' : '' }} id="rental-basis" class="form-control select2-tags-false">
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.rental_basis')</option>
                                 @foreach ($rental_basis as $rental)
                                     <option value="{{ $rental->name }}" {{ $rental->name == old('rental_basis', $equipment->rental_basis) ? 'selected' : '' }}>{{ $rental->name }}</option>
