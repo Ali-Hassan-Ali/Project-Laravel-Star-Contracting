@@ -1,7 +1,7 @@
 @if (auth()->user()->hasPermission('update_equipments'))
-    <a href="{{ route('admin.equipments.edit', $id) }}" class="btn btn-warning btn-sm">
-        <i class="fa fa-edit"></i> 
-        {{-- @lang('site.edit') --}}
+    <a href="{{ route('admin.equipments.edit', $id) }}" class="btn btn-warning btn-sm px-3 my-1">
+        {{-- <i class="fa fa-edit"></i>  --}}
+        @lang('site.edit')
     </a>
 @endif
 
@@ -10,8 +10,8 @@
         @csrf
         @method('delete')
         <button type="submit" class="btn btn-danger btn-sm delete">
-            <i class="fa fa-trash"></i> 
-            {{-- @lang('site.delete') --}}
+            {{-- <i class="fa fa-trash"></i>  --}}
+            @lang('site.delete')
         </button>
     </form>
 @endif
