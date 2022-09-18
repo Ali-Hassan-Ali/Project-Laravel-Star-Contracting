@@ -228,6 +228,7 @@ class EquipmentController extends Controller
     
     public function update(EquipmentRequest $request, Equipment $equipment)
     {
+        dd($validated->rental_basis);
         $validated = $request->validated();
         $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to','attachments']);
 

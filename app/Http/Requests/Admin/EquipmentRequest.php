@@ -23,7 +23,6 @@ class EquipmentRequest extends FormRequest
      */
     public function rules()
     {
-        dd(\Request()->rental_basis);
         $rules = [
             'name'                  => ['required','string','min:1','max:255'],
             'make'                  => ['required','string','min:1','max:255'],
