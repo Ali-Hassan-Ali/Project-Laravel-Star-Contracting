@@ -37,4 +37,12 @@ class StatusRequest extends FormRequest
 
     }//end of rules
 
+    protected function prepareForValidation()
+    {
+        return $this->merge([
+            'break_down_duration' => request()->break_down_duration ?? '0',
+        ]);
+
+    }//end of prepare for validation
+
 }//end of request

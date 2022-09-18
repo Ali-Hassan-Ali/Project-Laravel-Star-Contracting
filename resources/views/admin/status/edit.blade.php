@@ -31,7 +31,8 @@
                                 <option value="">@lang('site.choose') @lang('countrys.countrys')</option>
                                 @foreach ($countrys as $country)
                                     <option value="{{ $country->id }}" 
-                                        data-url="{{ route('admin.ajax.country', $country->id) }}">{{ $country->name }}</option>
+                                        data-url="{{ route('admin.ajax.country', $country->id) }}"
+                                        {{ $status->equipment->country->id == $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -40,7 +41,11 @@
                         <div class="form-group col-6">
                             <label>@lang('citys.citys') <span class="text-danger">*</span></label>
                             <select class="form-control select2-tags-false" id="equipment-city">
-                                
+                                <option value="">@lang('site.choose') @lang('citys.citys')</option>
+                                @foreach ($citys as $city)
+                                    <option value="{{ $city->id }}"
+                                        {{ $status->equipment->city->id == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 

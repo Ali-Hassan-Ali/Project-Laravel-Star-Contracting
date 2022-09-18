@@ -51,9 +51,11 @@
                             <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
                             <select name="equipment_id" id="equipment-man" class="form-control select2-tags-false" required>
                                 <option value="" disabled>@lang('site.choose') @lang('equipments.equipments')</option>
-                                {{-- @foreach ($equipments as $equipment)
-                                    <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
-                                @endforeach --}}
+                                @if(old('equipment_id'))
+                                    @foreach ($equipments as $equipment)
+                                        <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
+                                    @endforeach
+                                @endif
                             </select>
                             @error('equipment_id')
                                 <span class="invalid-feedback" role="alert">
@@ -93,7 +95,7 @@
                         {{--hours_worked--}}
                         <div class="form-group col-6">
                             <label>@lang('status.hours_worked') <span class="text-danger">*</span></label>
-                            <input type="number" id="hours_worked" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked') }}" autofocus>
+                            <input type="number" id="hours_worked" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', 0) }}" autofocus>
                             @error('hours_worked')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

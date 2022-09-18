@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StatusRequest;
 use App\Models\Equipment;
 use App\Models\Status;
 use App\Models\Country;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -110,8 +111,9 @@ class StatusController extends Controller
     {
         $equipments = Equipment::all();
         $countrys   = Country::all();
+        $citys      = City::where('country_id', $status->equipment->country->id)->get();
 
-        return view('admin.status.edit', compact('status', 'equipments', 'countrys'));
+        return view('admin.status.edit', compact('status', 'equipments', 'countrys', 'citys'));
 
     }// end of edit
 
