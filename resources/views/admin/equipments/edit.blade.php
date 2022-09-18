@@ -220,12 +220,17 @@
                         {{--rental_cost_basis--}}
                         <div class="form-group col-6">
                             <label>@lang('equipments.rental_cost_basis')<span class="text-danger">*</span></label>
-                            <input type="number" name="rental_cost_basis" {{ old('owner_ship', $equipment->owner_ship) != 'Rented' ? 'disabled' : '' }} id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', $equipment->rental_cost_basis) }}" autofocus>
-                            @error('rental_cost_basis')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" name="rental_cost_basis" {{ old('owner_ship', $equipment->owner_ship) != 'Rented' ? 'disabled' : '' }} id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', $equipment->rental_cost_basis) }}" autofocus>
+                                @error('rental_cost_basis')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                         
                         {{--operator--}}
@@ -247,12 +252,17 @@
                         {{--driver_salary--}}
                         <div class="form-group col-6">
                             <label>@lang('equipments.driver_salary')<span class="text-danger">*</span></label>
-                            <input type="text" {{ old('owner_ship', $equipment->owner_ship) == 'Rented' ? 'disabled' : '' }} id="driver-salary" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', $equipment->driver_salary) }}" required autofocus>
-                            @error('driver_salary')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" {{ old('owner_ship', $equipment->owner_ship) == 'Rented' ? 'disabled' : '' }} id="driver-salary" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', $equipment->driver_salary) }}" required autofocus>
+                                @error('driver_salary')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                         
                         {{--responsible_person--}}

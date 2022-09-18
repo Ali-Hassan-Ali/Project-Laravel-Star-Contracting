@@ -219,8 +219,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" name="owner_ship" class="form-control @error('owner_ship') is-invalid @enderror" value="{{ old('owner_ship') }}" required>
-                                @error('owner_ship')
+                                <input type="number" name="rental_cost_basis" {{ old('owner_ship') != 'Rented' ? 'disabled' : '' }} id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
+                                @error('rental_cost_basis')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -247,12 +247,17 @@
                         {{--driver_salary--}}
                         <div class="form-group col-6">
                             <label>@lang('equipments.driver_salary')<span class="text-danger">*</span></label>
-                            <input type="number" id="driver-salary" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', 0) }}" required autofocus>
-                            @error('driver_salary')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" {{ old('owner_ship') == 'Rented' ? 'disabled' : '' }} id="driver-salary" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', 0) }}" required autofocus>
+                                @error('driver_salary')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
 
