@@ -510,7 +510,6 @@
 
         });//end of chage
 
-
     </script>
 
 @endpush
