@@ -70,6 +70,12 @@ class EquipmentController extends Controller
             ->editColumn('created_at', function (Equipment $equipment) {
                 return $equipment->created_at->format('Y-m-d');
             })
+            ->editColumn('driver_salary', function (Equipment $equipment) {
+                return "$ $equipment->driver_salary";
+            })
+            ->editColumn('rental_cost_basis', function (Equipment $equipment) {
+                return "$ $equipment->rental_cost_basis";
+            })
             ->addColumn('country', function (Equipment $equipment) {
                 return ucfirst($equipment->country->name);
             })
