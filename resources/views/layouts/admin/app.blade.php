@@ -388,6 +388,10 @@
         'minimumResultsForSearch': Infinity
     });
 
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
 </script>
 
 @stack('scripts')
