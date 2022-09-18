@@ -230,7 +230,7 @@
                         {{-- attachments --}}
                         <div class="form-group">
                             <label>@lang('eirs.attachments') <span class="text-danger">*</span></label>
-                            <input type="file" name="attachments[]" multiple autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
+                            <input type="file" name="attachments[]" multiple autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
                             @error('attachments')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
