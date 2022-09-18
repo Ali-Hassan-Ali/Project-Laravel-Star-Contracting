@@ -231,8 +231,6 @@ class EquipmentController extends Controller
         $validated = $request->validated();
         $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to','attachments']);
 
-        dd($validated);
-
         $validated['make']     = $this->tagMake($request);
         if ($request->model) {
             $validated['model']    = $this->tagModel($request);
