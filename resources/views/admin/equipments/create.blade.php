@@ -500,8 +500,9 @@
 
         $('#registration-date').on('change', function () {
 
-            var registrationDate = new Date(this.value);
-            var newDate = registrationDate.addMonths(1);
+            var CurrentDate = new Date(this.value);
+            var newDate = CurrentDate.setMonth(CurrentDate.getMonth() + 1);
+
             $('#registration-expiry-hidding').val(newDate);
 
         });//end of chage
