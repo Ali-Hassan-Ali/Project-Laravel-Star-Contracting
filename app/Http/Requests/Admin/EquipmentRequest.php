@@ -23,8 +23,6 @@ class EquipmentRequest extends FormRequest
      */
     public function rules()
     {
-
-        // dd(\Request::all());
         $rules = [
             'name'                  => ['required','string','min:1','max:255'],
             'make'                  => ['required','string','min:1','max:255'],
@@ -54,5 +52,16 @@ class EquipmentRequest extends FormRequest
         return $rules;
 
     }//end of rules
+
+    // rental_basis
+
+    protected function prepareForValidation()
+    {
+        return $this->merge([
+            'rental_basis' => request()->has('rental_basis') ?? '',
+        ]);
+
+    }//end of prepare for validation
+
 
 }//end of request
