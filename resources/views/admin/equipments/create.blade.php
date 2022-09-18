@@ -500,12 +500,9 @@
 
         $('#registration-date').on('change', function () {
 
-            alert('gfg')
-
             var startDate = new Date(this.value);
             var endDateMoment = moment(startDate);
-            endDateMoment.add(1, 'months');
-            alert(endDateMoment.add(1, 'months'));
+            $('#registration-expiry-hidding').val(endDateMoment.add(1, 'months'));
 
         });//end of chage
 
