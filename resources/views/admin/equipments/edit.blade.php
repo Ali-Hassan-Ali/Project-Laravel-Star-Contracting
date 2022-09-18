@@ -417,8 +417,6 @@
 
             var value = $(this).val();
 
-            alert(value);
-
             if (value == 'driver' || value == 'Driver') {
 
                 $('#driver-salary').attr('disabled', false);
@@ -451,26 +449,26 @@
         $('#owner-ship').on('change', function () {
             
             var value = $(this).val();
-    
+
             if (value == 'rented' || value == 'Rented') {
-        
+
                 $('#rental-cost-basis').attr('disabled', false);
                 $('#rental-basis').attr('disabled', false);
-        
+                
                 $('#driver-salary').attr('disabled', true);
                 $('#operator').attr('disabled', true);
                 let massage = `(Please attach <strong class="font-weight-bold">owner details</strong> and <strong class="font-weight-bold">rental work order</strong>)`;
                 $('#rented-attachments').html(massage);
-        
+
             } else {
-        
+    
                 $('#rental-cost-basis').attr('disabled', true);
                 $('#rental-basis').attr('disabled', true);
-        
+    
                 $('#driver-salary').attr('disabled', false);
                 $('#operator').attr('disabled', false);
                 $('#rented-attachments').empty();
-        
+
             }//end of if
             
         });//end of chage
