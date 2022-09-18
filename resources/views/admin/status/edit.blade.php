@@ -107,7 +107,8 @@
                         {{--break_down_date--}}
                         <div class="form-group col-6">
                             <label>@lang('status.break_down_date') <span class="text-danger">*</span></label>
-                            <input type="date" {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} id="break_down_date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date', date('Y-m-d', strtotime( $status->hours_worked ))) }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                            <input type="date" {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} id="break_down_date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" 
+                            value="{{ old('break_down_date', isset($status->hours_worked) ? date('Y-m-d', strtotime( $status->hours_worked )) : '') }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('break_down_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
