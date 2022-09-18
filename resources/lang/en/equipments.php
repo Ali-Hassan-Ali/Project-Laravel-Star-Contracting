@@ -24,5 +24,6 @@ return [
     'allocated_to'        => 'Allocated To',
     'email'               => 'Email',
     'registration_expiry' => 'Registration Expiry',
+    'registration_date'   => 'Registration Date',
     'expiry_reminder_sent'=> 'Expiry Reminder Sent',
 ];

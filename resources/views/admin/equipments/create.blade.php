@@ -147,8 +147,18 @@
                             @enderror
                         </div>
 
-                        {{--registration_expiry--}}
-                        <div class="form-group col-12">
+                        {{--registration_date--}}
+                        <div class="form-group col-6">
+                            <label>@lang('equipments.registration_date')</label>
+                            <input {{ old('type') == 'Vehicle' ? '' : 'disabled' }} type="date" name="registration_date" id="registration-expiry" class="form-control @error('registration_date') custom-select @enderror" value="{{ old('registration_date') }}" autofocus>
+                            @error('registration_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-6">
                             <label>@lang('equipments.registration_expiry')</label>
                             <input {{ old('type') == 'Vehicle' ? '' : 'disabled' }} type="date" name="registration_expiry" id="registration-expiry" class="form-control @error('registration_expiry') custom-select @enderror" value="{{ old('registration_expiry') }}" autofocus>
                             @error('registration_expiry')
