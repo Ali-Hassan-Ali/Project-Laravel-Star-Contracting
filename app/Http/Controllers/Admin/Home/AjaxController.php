@@ -55,7 +55,8 @@ class AjaxController extends Controller
     {
         $equipmens = Equipment::withCount('statusone','city')
                                 ->having('statusone_count', '>', '0')
-                                ->orderBy('city.name');
+                                ->get()
+                                ->sortByDesc('city.name', 'desc');
 
         $data = view('admin.home.includes.equipments._equipment_barkdown', compact('equipmens'));
 
