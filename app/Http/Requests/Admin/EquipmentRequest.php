@@ -34,7 +34,7 @@ class EquipmentRequest extends FormRequest
             'allocated_to'          => ['required','string','min:1','max:255'],
             'email'                 => ['required','email','min:1','max:255'],
             'driver_salary'         => ['nullable','numeric'],
-            'registration_expiry'   => ['required_if:type,==,Vehicle'],
+            'registration_expiry'   => ['required_if:type,==,Vehicle','date'],
             'registration_date'     => ['required','date'],
             'year_of_manufacture'   => ['nullable','string','min:1','max:255'],
             'rental_basis'          => ['required_if:owner_ship,==,Rented,rented','string','max:255'],
@@ -60,7 +60,8 @@ class EquipmentRequest extends FormRequest
             'rental_basis'        => request()->rental_basis ?? '',
             'driver_salary'       => request()->rental_basis ?? '0',
             'rental_cost_basis'   => request()->rental_cost_basis ?? '0',
-            'registration_expiry' => request()->rental_cost_basis ?? '',
+            'registration_expiry' => request()->registration_expiry ?? '',
+            'registration_date'   => request()->registration_date ?? '',
         ]);
 
     }//end of prepare for validation
