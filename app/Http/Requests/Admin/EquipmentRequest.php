@@ -56,9 +56,10 @@ class EquipmentRequest extends FormRequest
     protected function prepareForValidation()
     {
         return $this->merge([
-            'rental_basis' => request()->rental_basis ?? '',
-            'driver_salary' => request()->rental_basis ?? '0',
-            'rental_cost_basis' => request()->rental_cost_basis ?? '0',
+            'rental_basis'        => request()->rental_basis ?? '',
+            'driver_salary'       => request()->rental_basis ?? '0',
+            'rental_cost_basis'   => request()->rental_cost_basis ?? '0',
+            'registration_expiry' => request()->rental_cost_basis ?? '',
         ]);
 
     }//end of prepare for validation
