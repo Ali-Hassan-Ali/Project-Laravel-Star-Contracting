@@ -166,7 +166,7 @@
                         {{--countrys--}}
                         <div class="form-group col-6">
                             <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
-                            <select name="country_id" id="country" class="form-control select2" required>
+                            <select name="country_id" id="country" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('countrys.countrys')</option>
                                 @foreach ($countrys as $country)
                                     <option value="{{ $country->id }}" {{ $country->id == old('country_id', $equipment->country_id) ? 'selected' : '' }}>{{ $country->name }}</option>
@@ -177,7 +177,7 @@
                         {{--citys--}}
                         <div class="form-group col-6">
                             <label>@lang('citys.citys') <span class="text-danger">*</span></label>
-                            <select name="city_id" id="city" class="form-control select2" required>
+                            <select name="city_id" id="city" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('citys.citys')</option>
                                 @foreach ($citys as $city)
                                     <option value="{{ $city->id }}" {{ $city->id == old('city_id', $equipment->city_id) ? 'selected' : '' }}>{{ $city->name }}</option>
@@ -188,7 +188,7 @@
                         {{--owner_ship--}}
                         <div class="form-group col-12">
                             <label>@lang('equipments.owner_ship') <span class="text-danger">*</span></label>
-                            <select name="owner_ship" id="owner-ship" class="form-control select2" required>
+                            <select name="owner_ship" id="owner-ship" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.owner_ship')</option>
                                 @foreach ($owner_ship as $owner)
                                     <option value="{{ $owner->name }}" {{ $owner->name == old('owner_ship', $equipment->owner_ship) ? 'selected' : '' }}>{{ $owner->name }}</option>
