@@ -12,7 +12,7 @@ class AjaxController extends Controller
 
     public function EirPendingApproved()
     {
-        $eirs  = Eir::where('status', 'Under Review')->get();
+        $eirs  = Eir::where('status', 'Under Review')->get()->sortBy('equipment.city.name');
 
         $data = view('admin.home.includes.eirs._eir_under_review_count', compact('eirs'));
 
@@ -22,7 +22,7 @@ class AjaxController extends Controller
 
     public function EirInTransit()
     {
-        $eirs  = Eir::where('status', 'Part In Transit')->get();
+        $eirs  = Eir::where('status', 'Part In Transit')->get()->sortBy('equipment.city.name');
 
         $data = view('admin.home.includes.eirs._eir_in_transit', compact('eirs'));
 
@@ -33,7 +33,7 @@ class AjaxController extends Controller
     public function EquipmentVehicle()
     {
         $equipmens = Equipment::whereDate('registration_expiry', '>=', now())
-                     ->whereDate('registration_expiry', '<=', now()->addMonth(1))->get();
+                     ->whereDate('registration_expiry', '<=', now()->addMonth(1))->get()->sortBy('city.name');
 
         $data = view('admin.home.includes.equipments._equipment_vehicle', compact('equipmens'));
 
@@ -43,7 +43,7 @@ class AjaxController extends Controller
 
     public function EquipmentRented()
     {
-        $equipmens = Equipment::where('owner_ship', 'Rented')->get();
+        $equipmens = Equipment::where('owner_ship', 'Rented')->get()->sortBy('city.name');
 
         $data = view('admin.home.includes.equipments._equipment_rented', compact('equipmens'));
 
