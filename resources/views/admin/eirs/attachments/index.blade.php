@@ -53,6 +53,8 @@
                                         <td>{{ $data->name }}</td>
                                         <td>
                                             <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+
+                                            <a href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> @lang('site.show')</a>
                                             @if (auth()->user()->hasPermission('delete_eirs'))
                                                 
                                                 <form action="{{ route('admin.eirs.attachment.destroy', ['eir' => $eir->id,'attachment' => $data->id]) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
