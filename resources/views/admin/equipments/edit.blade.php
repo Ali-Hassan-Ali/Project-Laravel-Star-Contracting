@@ -75,7 +75,7 @@
                             <select name="spec_id" id="spec-id" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('specs.specs')</option>
                                 @foreach ($specs as $spec)
-                                    <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id', $equipment->spec_id) ? 'selected' : '' }}>{{ $spec->space->name }}</option>
+                                    <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id', $equipment->spec_id) ? 'selected' : '' }}>{{ $spec->name }}</option>
                                 @endforeach
                             </select>
                         </div>
