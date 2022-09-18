@@ -5,7 +5,7 @@
     <th class="text-center">@lang('citys.citys')</th>
     <th class="text-center">@lang('equipments.equipments')</th>
     <th class="text-center">@lang('status.status')</th>
-    <th class="text-center">@lang('status.break_down_date')</th>
+    <th class="text-center">@lang('status.as_of')</th>
   </tr>
   </thead>
   <tbody>
@@ -17,8 +17,8 @@
           <td class="text-center">{{ $equipment->city->name }}</td>
           <td class="text-center">{{ $equipment->make .' '. $equipment->name .' '. $equipment->plate_no }}</td>
           <td class="text-center">Breakdown</td>
-          <td class="text-center">{{ isset($equipment->statusBreakdown->first()->break_down_date) ? 
-                                     date('d-m-Y', strtotime($equipment->statusBreakdown->first()->break_down_date)) : '' }}</td>
+          <td class="text-center">{{ isset($equipment->statusBreakdown->first()->as_of) ? 
+                                     date('d-m-Y', strtotime($equipment->statusBreakdown->first()->as_of)) : '' }}</td>
         </tr>
       @endforeach
 
