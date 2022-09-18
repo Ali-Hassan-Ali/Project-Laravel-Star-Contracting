@@ -431,7 +431,7 @@
                 }//end of each
             });
 
-            $('#registration-expiry').attr('disabled', value == 'Vehicle' ? false : true);
+            // $('#registration-expiry').attr('disabled', value == 'Vehicle' ? false : true);
             
         });//end of change
 
