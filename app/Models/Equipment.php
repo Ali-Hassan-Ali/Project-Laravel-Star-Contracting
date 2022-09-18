@@ -109,7 +109,7 @@ class Equipment extends Model
 
     public function statusone()
     {
-        return $this->hasOne(Status::class)->where('working_status', 'breakdown');
+        return $this->hasOne(Status::class)->where('working_status', 'Breakdown');
 
     }//end of fun
 
