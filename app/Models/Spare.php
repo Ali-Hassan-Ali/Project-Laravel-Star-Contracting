@@ -36,6 +36,12 @@ class Spare extends Model
 
     }//end of fun
 
+    public function equipmentsOne()
+    {
+        return $this->belongsToMany(Equipment::class, 'equipment_has_manies');
+
+    }//end of fun
+
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {
         $startDate = now()->createFromFormat('Y-m-d', $startDate);

@@ -140,7 +140,7 @@ class SpareController extends Controller
     public function edit(Spare $spare)
     {
         $equipments = Equipment::all();
-        $citys      = City::all();
+        $citys      = City::where('country_id', $spare->equipmentsOne->first()->country->id)->get();
         $countrys   = Country::all();
 
         return view('admin.spares.edit', compact('spare', 'equipments', 'citys', 'countrys'));
