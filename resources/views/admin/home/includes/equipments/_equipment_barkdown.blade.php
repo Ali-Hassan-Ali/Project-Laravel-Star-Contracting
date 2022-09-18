@@ -17,7 +17,7 @@
           <td class="text-center">{{ $equipment->city->name }}</td>
           <td class="text-center">{{ $equipment->make .' '. $equipment->name .' '. $equipment->plate_no }}</td>
           <td class="text-center">Breakdown</td>
-          <td class="text-center">{{ $equipment->statusone->break_down_date ? date('d-m-Y', strtotime($equipment->statusone->break_down_date)) : '' }}</td>
+          <td class="text-center">{{ isset($equipment->statusone->break_down_date) ? date('d-m-Y', strtotime($equipment->statusone->break_down_date)) : '' }}</td>
         </tr>
       @endforeach
 
