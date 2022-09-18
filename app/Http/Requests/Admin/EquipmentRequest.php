@@ -57,7 +57,7 @@ class EquipmentRequest extends FormRequest
     {
         return $this->merge([
             'rental_basis' => request()->rental_basis ?? '',
-            'rental_cost_basis' => request()->rental_cost_basis ?? '',
+            'rental_cost_basis' => request()->rental_cost_basis ?? '0',
         ]);
 
     }//end of prepare for validation
