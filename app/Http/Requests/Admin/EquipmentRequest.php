@@ -53,4 +53,13 @@ class EquipmentRequest extends FormRequest
 
     }//end of rules
 
+    protected function prepareForValidation()
+    {
+        return $this->merge([
+            'rental_basis' => request()->rental_basis ?? '',
+        ]);
+
+    }//end of prepare for validation
+
+
 }//end of request
