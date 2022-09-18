@@ -503,13 +503,15 @@
 
             var startDate = new Date(this.value);
                 years     = parseInt(1);
+                days      = parseInt(1);
+
             var newDate = startDate.setFullYear(startDate.getFullYear() + years);
+            var newDate = startDate.setDate(startDate.getDate() - days);
 
             $("#registration-expiry").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
             $("#registration-expiry-hidding").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
 
         });//end of chage
-
 
     </script>
 
