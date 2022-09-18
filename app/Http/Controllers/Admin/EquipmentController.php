@@ -229,7 +229,7 @@ class EquipmentController extends Controller
     public function update(EquipmentRequest $request, Equipment $equipment)
     {
         $validated = $request->validated();
-        dd($validated->rental_basis);
+        dd($validated['rental_basis']);
         $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to','attachments']);
 
         $validated['make']     = $this->tagMake($request);
