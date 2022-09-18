@@ -97,7 +97,7 @@ class Equipment extends Model
 
     public function statusBreakdown()
     {
-        return $this->hasMany(Status::class)->where('working_status', 'Breakdown');
+        return $this->hasMany(Status::class)->where('working_status', 'Breakdown')->orderBy('id', 'desc');
 
     }//end of fun
 
