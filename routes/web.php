@@ -47,7 +47,13 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
 
         }//end of each
 
-        dd($collection->all(), $collection->first());
+        $stats = $collection->groupBy('month');
+
+        $grouped = $collection->groupBy('month')->map(function ($row) {
+                        return $row->sum('total');
+                    });
+
+        dd($collection->all(), $collection->first(), $grouped);
 
 
         $equipmens = Equipment::WhereBetweenDataRegistrationExpiry()->get();
