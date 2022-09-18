@@ -454,6 +454,9 @@
 
                 $('#rental-cost-basis').attr('disabled', false);
                 $('#rental-basis').attr('disabled', false);
+
+                $('#rental-cost-basis').val('');
+                $('#rental-basis').val('');
                 
                 $('#driver-salary').attr('disabled', true);
                 $('#operator').attr('disabled', true);
