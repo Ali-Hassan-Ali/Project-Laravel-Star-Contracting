@@ -22,7 +22,8 @@
             <ul class="treeview-menu">
                 <li><a class="treeview-item {{ request()->is('*statistics_chart*') ? 'active' : '' }}" href="{{ route('admin.statistics.chart') }}"><i class="icon fas fa-chart-line"></i>@lang('statistics.chart')</a></li>
                 <li><a class="treeview-item {{ request()->is('*fuel_consumption*') ? 'active' : '' }}" href="{{ route('admin.chart.fuel_consumption.index') }}"><i class="icon fas fa-chart-line"></i>@lang('chart.fuel_consumption')</a></li>
-{{--                <li><a class="treeview-item {{ request()->is('*statistics_table*') ? 'active' : '' }}" href="{{ route('admin.statistics.table') }}"><i class="icon fa-solid fa-table"></i>@lang('statistics.table')</a></li>--}}
+                <li><a class="treeview-item {{ request()->is('*equipment_expenditure*') ? 'active' : '' }}" href="{{ route('admin.chart.equipment_expenditure.index') }}"><i class="icon fas fa-chart-line"></i>@lang('chart.equipment_expenditure')</a></li>
+                <li><a class="treeview-item {{ request()->is('*average_expenditure*') ? 'active' : '' }}" href="{{ route('admin.chart.average_expenditure.index') }}"><i class="icon fas fa-chart-line"></i>@lang('chart.average_expenditure')</a></li>
             </ul>
         </li>
 

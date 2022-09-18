@@ -61,7 +61,7 @@
                         {{--types--}}
                         <div class="form-group col-6">
                             <label>@lang('types.types') <span class="text-danger">*</span></label>
-                            <select name="type" id="types-equipment" class="form-control select2" required>
+                            <select name="type" id="types-equipment" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('types.types')</option>
                                 @foreach ($types as $type)
                                     <option value="{{ $type->name }}" {{ $type->name == old('type') ? 'selected' : '' }}>{{ $type->name }}</option>
@@ -72,7 +72,7 @@
                         {{--specs--}}
                         <div class="form-group col-6">
                             <label>@lang('specs.specs') <span class="text-danger">*</span></label>
-                            <select name="spec_id" id="spec-id" class="form-control select2" required>
+                            <select name="spec_id" id="spec-id" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('specs.specs')</option>
                                 {{-- @foreach ($specs as $spec)
                                     <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id') ? 'selected' : '' }}>{{ $spec->name }}</option>

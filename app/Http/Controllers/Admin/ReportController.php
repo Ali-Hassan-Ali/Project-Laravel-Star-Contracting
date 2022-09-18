@@ -394,7 +394,11 @@ class ReportController extends Controller
         $total = 0;
 
         foreach($equipments as $equipment) {
-            $total += $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+            $total += $equipment->rental_cost_basis + 
+                      $equipment->driver_salary + 
+                      $equipment->spares->sum('cost') + 
+                      $equipment->spares->sum('freight_charges') + 
+                      !empty($equipment->fuel->total_cost_of_fuel) ?? 0;
         }
 
         return view('admin.reports.total_equipment_expenditure', compact('equipments', 'citys', 'total'));
