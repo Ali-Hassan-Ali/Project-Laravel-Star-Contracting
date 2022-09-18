@@ -55,20 +55,11 @@ class EquipmentExpenditureController extends Controller
         }//end of if
 
         if (request()->city_id) {
-            
-            $fuels = Fuel::whereYear('created_at', request()->year)
-                    ->whereRelation('equipment.city', 'id', request()->city_id)->select(
-                    DB::raw('MONTHNAME(created_at) as month'),
-                    DB::raw('YEAR(created_at) as year'),
-                    DB::raw('SUM(no_of_units_filled) as total_units'),
-                    DB::raw('SUM(total_cost_of_fuel) as total_cost'),
-                )
-                ->groupBy('month')
-                ->get();
 
             $collection = collect();
 
-            $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+            $equipments = Equipment::whereYear('created_at', request()->year)
+                    ->where('city_id', request()->city_id)->with('fuel','spares')->orderBy('city_id')->get();
 
             foreach($equipments as $equipment) {
                 
@@ -96,17 +87,37 @@ class EquipmentExpenditureController extends Controller
         }//end of if
 
         if (request()->city_id && request()->equipment_id) {
-            
-            $fuels = Fuel::whereYear('created_at', request()->year)
-                    ->whereRelation('equipment.city', 'id', request()->city_id)
-                    ->where('equipment_id', request()->equipment_id)->select(
-                    DB::raw('MONTHNAME(created_at) as month'),
-                    DB::raw('YEAR(created_at) as year'),
-                    DB::raw('SUM(no_of_units_filled) as total_units'),
-                    DB::raw('SUM(total_cost_of_fuel) as total_cost'),
-                )
-                ->groupBy('month')
-                ->get();
+
+            $collection = collect();
+
+            $equipments = Equipment::whereYear('created_at', request()->year)
+                    ->where([
+                        'city_id' => request()->city_id,
+                        'id' => request()->equipment_id,
+                    ])->with('fuel','spares')->orderBy('city_id')->get();
+
+            foreach($equipments as $equipment) {
+                
+                $total = $equipment->rental_cost_basis + 
+                         $equipment->driver_salary + 
+                         $equipment->spares->sum('cost') + 
+                         $equipment->spares->sum('freight_charges') + 
+                         !empty($equipment->fuel->total_cost_of_fuel) ?? 0;
+
+                $month = $equipment->created_at->format('F');
+
+                $collection->push([
+                    'total' => $total,
+                    'month' => $month,
+                ]);
+
+            }//end of each
+
+            $stats = $collection->groupBy('month');
+
+            $equipments = $collection->groupBy('month')->map(function ($row) {
+                            return $row->sum('total');
+                        });
 
         }//end of if
 
