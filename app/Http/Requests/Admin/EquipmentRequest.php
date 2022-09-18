@@ -57,6 +57,7 @@ class EquipmentRequest extends FormRequest
     {
         return $this->merge([
             'rental_basis' => request()->rental_basis ?? '',
+            'driver_salary' => request()->rental_basis ?? '0',
             'rental_cost_basis' => request()->rental_cost_basis ?? '0',
         ]);
 
