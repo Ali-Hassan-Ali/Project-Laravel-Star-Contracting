@@ -35,6 +35,7 @@ class EquipmentRequest extends FormRequest
             'email'                 => ['required','email','min:1','max:255'],
             'driver_salary'         => ['nullable','numeric'],
             'registration_expiry'   => ['required_if:type,==,Vehicle'],
+            'registration_date'     => ['required','date'],
             'year_of_manufacture'   => ['nullable','string','min:1','max:255'],
             'rental_basis'          => ['required_if:owner_ship,==,Rented,rented','string','max:255'],
             'rental_cost_basis'     => ['required_if:owner_ship,==,Rented,rented','numeric'],
