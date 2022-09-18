@@ -291,7 +291,7 @@
                         {{--allocated_to--}}
                         <div class="form-group col-6 @error('allocated_to') custom-select @enderror">
                             <label>@lang('equipments.allocated_to') <span class="text-danger">*</span></label>
-                            <select name="allocated_to" id="allocated-to" class="form-control select2" required>
+                            <select name="allocated_to" id="allocated-to" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.allocated_to')</option>
                                 @foreach ($allocated_to as $allocated)
                                     <option value="{{ $allocated->name }}" {{ $allocated->name == old('allocated_to', $equipment->allocated_to) ? 'selected' : '' }}>{{ $allocated->name }}</option>

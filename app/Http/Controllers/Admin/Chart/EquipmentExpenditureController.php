@@ -66,6 +66,33 @@ class EquipmentExpenditureController extends Controller
                 ->groupBy('month')
                 ->get();
 
+            $collection = collect();
+
+            $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+
+            foreach($equipments as $equipment) {
+                
+                $total = $equipment->rental_cost_basis + 
+                         $equipment->driver_salary + 
+                         $equipment->spares->sum('cost') + 
+                         $equipment->spares->sum('freight_charges') + 
+                         !empty($equipment->fuel->total_cost_of_fuel) ?? 0;
+
+                $month = $equipment->created_at->format('F');
+
+                $collection->push([
+                    'total' => $total,
+                    'month' => $month,
+                ]);
+
+            }//end of each
+
+            $stats = $collection->groupBy('month');
+
+            $equipments = $collection->groupBy('month')->map(function ($row) {
+                            return $row->sum('total');
+                        });
+
         }//end of if
 
         if (request()->city_id && request()->equipment_id) {
