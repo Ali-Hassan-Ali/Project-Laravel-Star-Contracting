@@ -168,7 +168,7 @@
                             @enderror
                         </div>
 
-                        <input type="date" name="registration_expiry" id="registration-expiry-hidding" value="{{ old('registration_expiry') }}">
+                        <input type="date" name="registration_expiry" hidden id="registration-expiry-hidding" value="{{ old('registration_expiry') }}">
 
                         {{--countrys--}}
                         <div class="form-group col-6">
@@ -497,13 +497,16 @@
             }//end of if
             
         });//end of chage
+    
 
         $('#registration-date').on('change', function () {
 
-            var CurrentDate = new Date(this.value);
-            var newDate = CurrentDate.setMonth(CurrentDate.getMonth() + 1);
+            var startDate = new Date(this.value);
+                years     = parseInt(1);
+            var newDate = startDate.setFullYear(startDate.getFullYear() + years);
 
-            $('#registration-expiry-hidding').val(newDate);
+            $("#registration-expiry").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
+            $("#registration-expiry-hidding").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
 
         });//end of chage
 

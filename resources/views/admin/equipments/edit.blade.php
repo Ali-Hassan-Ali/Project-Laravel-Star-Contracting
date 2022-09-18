@@ -152,8 +152,19 @@
                             @enderror
                         </div>
 
+                        {{--registration_date--}}
+                        <div class="form-group col-6">
+                            <label>@lang('equipments.registration_date')</label>
+                            <input type="date" name="registration_date" id="registration-date" class="form-control @error('registration_date') custom-select @enderror" value="{{  old('registration_date', $equipment->registration_date ? date('Y-m-d', strtotime($equipment->registration_date)) : '') }}" autofocus>
+                            @error('registration_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                         {{--registration_expiry--}}
-                        <div class="form-group col-12">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.registration_expiry')</label>
                             <input {{ old('type', $equipment->type) == 'Vehicle' ? '' : 'disabled' }} id="registration-expiry" type="date" name="registration_expiry" class="form-control @error('registration_expiry') custom-select @enderror" value="{{  old('registration_expiry', $equipment->registration_expiry ? date('Y-m-d', strtotime($equipment->registration_expiry)) : '') }}" autofocus>
                             @error('registration_expiry')
@@ -162,6 +173,8 @@
                                 </span>
                             @enderror
                         </div>
+
+                        <input type="date" name="registration_expiry" hidden id="registration-expiry-hidding" value="{{  old('registration_expiry', $equipment->registration_expiry ? date('Y-m-d', strtotime($equipment->registration_expiry)) : '') }}">
 
                         {{--countrys--}}
                         <div class="form-group col-6">
@@ -484,6 +497,17 @@
 
             }//end of if
             
+        });//end of chage
+
+        $('#registration-date').on('change', function () {
+
+            var startDate = new Date(this.value);
+                years     = parseInt(1);
+            var newDate = startDate.setFullYear(startDate.getFullYear() + years);
+
+            $("#registration-expiry").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
+            $("#registration-expiry-hidding").val(new Date(newDate).toLocaleDateString('en-CA'));//YYYY-MM-dd
+
         });//end of chage
 
 
