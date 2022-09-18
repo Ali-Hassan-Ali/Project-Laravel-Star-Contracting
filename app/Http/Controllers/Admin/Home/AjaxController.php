@@ -53,7 +53,10 @@ class AjaxController extends Controller
 
     public function EquipmentBarkdown()
     {
-        $equipmens = Equipment::withCount('statusone')->having('statusone_count', '>', '0')->get();
+        $equipmens = Equipment::withCount('statusone','city')
+                                ->having('statusone_count', '>', '0')
+                                ->get()
+                                ->sortByDesc('city.name');
 
         $data = view('admin.home.includes.equipments._equipment_barkdown', compact('equipmens'));
 
