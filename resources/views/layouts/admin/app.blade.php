@@ -98,7 +98,7 @@
         .table-bordered {
             border: 3px solid #dee2e6 !important;
         }
-        td {
+        td, th {
             text-align: center;
         }
         label, th, li {
