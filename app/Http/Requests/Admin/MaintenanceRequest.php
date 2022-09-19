@@ -29,7 +29,7 @@ class MaintenanceRequest extends FormRequest
             'last_service_km'        => ['required','numeric'],
             'next_service_dueon_km'  => ['required','numeric'],
             'actual_service_reading' => ['required','numeric'],
-            'non_scheduled'          => ['required_if:scheduled,==,0','min:2','max:255'],
+            'non_scheduled'          => ['nullable','required_if:scheduled,==,0','min:2','max:255'],
             'scheduled'              => ['nullable','in:1,0'],
             'last_service_date'      => ['required','date'],
             'next_service_date'      => ['required','date'],
@@ -39,5 +39,13 @@ class MaintenanceRequest extends FormRequest
         return $rules;
 
     }//end of rules
+
+    protected function prepareForValidation()
+    {
+        return $this->merge([
+            'non_scheduled' => request()->non_scheduled ?? '',
+        ]);
+
+    }//end of prepare for validation
 
 }//end of request
