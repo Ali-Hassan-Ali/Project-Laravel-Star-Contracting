@@ -159,7 +159,7 @@
                             <small>( @lang('spares.attachments_mssage') </small> 
                             <small style="font-weight: bold;"> @lang('spares.attachments_site') </small>
                             <small>@lang('spares.attachments_or')</small> 
-                            <small style="font-weight: bold;"> @lang('spares.attachments_site') )</small>
+                            <small style="font-weight: bold;"> @lang('spares.attachments_note') )</small>
                         </label>
                         <input type="file" name="attachments[]" multiple autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
                         @error('attachments')
