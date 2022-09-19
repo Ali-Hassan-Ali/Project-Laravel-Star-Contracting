@@ -232,8 +232,8 @@
                             <label>
                                 @lang('eirs.attachments') 
                                 <span class="text-danger">*</span>
-                                {{-- <small>( @lang('eirs.attachments_mssage') </small> 
-                                <small style="font-weight: bold;"> @lang('eirs.attachments_docum') )</small> --}}
+                                <small>( @lang('eirs.attachments_mssage') </small> 
+                                <small style="font-weight: bold;"> @lang('eirs.attachments_docum') )</small>
                             </label>
                             <input type="file" name="attachments[]" multiple autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
                             @error('attachments')

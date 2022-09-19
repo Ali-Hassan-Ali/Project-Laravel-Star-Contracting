@@ -21,5 +21,5 @@ return [
     'actual_arrival_to_site_date'    => 'Actual Arrival To Site Date',
 
     'attachments_mssage'             => 'Please Attach',
-    'attachments_docum'              => 'Part catalog',
+    'attachments_docum'              => 'Part Catalog',
 ];
