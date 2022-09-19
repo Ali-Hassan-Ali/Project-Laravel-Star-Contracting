@@ -19,4 +19,7 @@ return [
     'actual_payment_transfer_date'   => 'Actual Payment Transfer Date',
     'actual_shipment_pickup_date'    => 'Actual Shipment Pickup Date',
     'actual_arrival_to_site_date'    => 'Actual Arrival To Site Date',
+
+    'attachments_mssage'             => 'Please Attach',
+    'attachments_docum'              => 'Part catalog',
 ];
