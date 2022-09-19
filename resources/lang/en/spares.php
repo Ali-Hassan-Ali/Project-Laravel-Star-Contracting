@@ -12,6 +12,8 @@ return [
     'usage_date'      => 'Usage Date',
     'attachments'     => 'Attachments',
 
-    'attachments_mssage' => 'Please Attach Site Acceptance Or Delivery Note',
-    'attachments_docum'  => '',
+    'attachments_mssage' => 'Please Attach',
+    'attachments_site'   => 'Site Acceptance',
+    'attachments_or'     => 'Or',
+    'attachments_note'   => 'Delivery Note',
 ];

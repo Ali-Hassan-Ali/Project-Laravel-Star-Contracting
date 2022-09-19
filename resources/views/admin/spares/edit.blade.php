@@ -162,7 +162,9 @@
                     <div class="form-group">
                         <label>@lang('spares.attachments') <span class="text-danger">*</span>
                             <small>( @lang('spares.attachments_mssage') </small> 
-                            <small style="font-weight: bold;"> @lang('spares.attachments_docum') )</small>
+                            <small style="font-weight: bold;"> @lang('spares.attachments_site') </small>
+                            <small>@lang('spares.attachments_or')</small> 
+                            <small style="font-weight: bold;"> @lang('spares.attachments_site') )</small>
                         </label>
                         <input type="file" name="attachments[]" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
                         @error('attachments')
