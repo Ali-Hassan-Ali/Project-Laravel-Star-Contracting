@@ -11,4 +11,7 @@ return [
     'location'        => 'location',
     'usage_date'      => 'Usage Date',
     'attachments'     => 'Attachments',
+
+    'attachments_mssage' => 'Please Attach',
+    'attachments_docum'  => 'Part catalog',
 ];
