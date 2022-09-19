@@ -156,8 +156,8 @@
                     {{-- attachments --}}
                     <div class="form-group">
                         <label>@lang('spares.attachments') <span class="text-danger">*</span>
-                            {{-- <small>( @lang('spares.attachments_mssage') </small> 
-                            <small style="font-weight: bold;"> @lang('spares.attachments_docum') )</small> --}}
+                            <small>( @lang('spares.attachments_mssage') </small> 
+                            <small style="font-weight: bold;"> @lang('spares.attachments_docum') )</small>
                         </label>
                         <input type="file" name="attachments[]" multiple autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
                         @error('attachments')
