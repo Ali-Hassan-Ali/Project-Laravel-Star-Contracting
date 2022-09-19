@@ -15,4 +15,6 @@ return [
     
     'insurance_start_date' => 'Insurance Start Date',
     'claim_attachments'    => 'Attachments',
+    'attachments_mssage'   => 'Please Attach',
+    'attachments_docum'    => 'Insurance Policy',
 ];

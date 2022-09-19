@@ -203,7 +203,10 @@
 
                     {{-- claim_attachments --}}
                     <div class="form-group">
-                        <label>@lang('insurances.claim_attachments') <span class="text-danger">*</span></label>
+                        <label>@lang('insurances.claim_attachments') <span class="text-danger">*</span>
+                            <small>( @lang('insurances.attachments_mssage')</small>
+                            <small style="font-weight: bold;">@lang('insurances.attachments_docum') )</small>
+                        </label>
                         <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
                         @error('attachments')
                             <span class="invalid-feedback" role="alert">
