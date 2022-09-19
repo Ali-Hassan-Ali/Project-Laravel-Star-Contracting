@@ -44,4 +44,13 @@ class SpareRequest extends FormRequest
 
     }//end of rules
 
+
+    protected function prepareForValidation()
+    {
+        return $this->merge([
+            'usage_date'        => request()->usage_date ?? '',
+        ]);
+
+    }//end of prepare for validation
+
 }//end of request
