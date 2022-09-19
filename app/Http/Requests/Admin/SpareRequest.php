@@ -31,7 +31,7 @@ class SpareRequest extends FormRequest
             'freight_charges'        => ['required','numeric'],
             'cost'                   => ['required','numeric'],
             'description'            => ['required_if:used,==,1'],
-            'usage_date'             => ['required_if:used,==,1','date'],
+            'usage_date'             => ['nullable','required_if:used,==,1','date'],
         ];
 
         if (in_array($this->method(), ['POST'])) {
@@ -48,7 +48,7 @@ class SpareRequest extends FormRequest
     protected function prepareForValidation()
     {
         return $this->merge([
-            'usage_date'        => request()->usage_date ?? '',
+            'usage_date'        => request()->usage_date ?? NULL,
         ]);
 
     }//end of prepare for validation
