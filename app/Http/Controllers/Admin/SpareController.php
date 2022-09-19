@@ -151,7 +151,7 @@ class SpareController extends Controller
     public function update(SpareRequest $request, Spare $spare)
     {
         $validated = $request->validated();
-        dd($validated->usage_date);
+        dd($validated);
         $validated = $request->safe()->except(['attachments','used', 'equipments']);
 
         $validated['used']       = request()->has('used') ? '1' : '0';
