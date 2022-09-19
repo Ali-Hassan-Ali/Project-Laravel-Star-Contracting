@@ -81,7 +81,6 @@
                                     <th>@lang('fuels.project')</th>
                                     <th>@lang('fuels.last_date')</th>
                                     <th>@lang('fuels.fuel_type')</th>
-                                    <th>@lang('fuels.unit')</th>
                                     <th>@lang('fuels.no_of_units_filled')</th>
                                     <th>@lang('fuels.fuel_rate_per_litre')</th>
                                     <th>@lang('fuels.total_cost_of_fuel')</th>
@@ -136,7 +135,6 @@
                 {data: 'project', name: 'project'},
                 {data: 'last_date', name: 'last_date'},
                 {data: 'fuel_type', name: 'fuel_type'},
-                {data: 'unit', name: 'unit'},
                 {data: 'no_of_units_filled', name: 'no_of_units_filled'},
                 {data: 'fuel_rate_per_litre', name: 'fuel_rate_per_litre'},
                 {data: 'total_cost_of_fuel', name: 'total_cost_of_fuel'},

@@ -23,7 +23,6 @@ class MaintenanceRequest extends FormRequest
      */
     public function rules()
     {
-        // dd(\Request::all());
         $rules = [
             'equipment_id'           => ['required','numeric'],
             'last_service_km'        => ['required','numeric'],
