@@ -26,4 +26,6 @@ return [
     'registration_expiry' => 'Registration Expiry',
     'registration_date'   => 'Registration Date',
     'expiry_reminder_sent'=> 'Expiry Reminder Sent',
+
+    'attachments_mssages' => 'Please Attach Registration Documents',
 ];

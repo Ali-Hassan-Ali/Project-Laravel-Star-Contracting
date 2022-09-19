@@ -2,7 +2,7 @@
     <a href="{{ route('admin.roles.edit', $id) }}" class="btn btn-warning btn-sm" 
         data-html="true" data-placement="right" title="@lang('site.edit')">
         <i class="fa fa-edit"></i> 
-        @lang('site.edit')
+        {{-- @lang('site.edit') --}}
     </a>
 @endif
 
