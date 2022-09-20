@@ -25,15 +25,15 @@ class InsuranceRequest extends FormRequest
     {
         $rules = [
             'equipment_id'        => ['required','numeric'],
-            'claim_amount'        => ['required_if:claim,==,1','numeric'],
+            'claim_amount'        => ['nullable','required_if:claim,==,1','numeric'],
             'insurance_duration'  => ['required','numeric'],
             'policy_number'       => ['required'],
             'premium'             => ['required','numeric'],
             'insurer'             => ['required','min:2','max:255'],
-            'claim_description'   => ['required_if:claim,==,1'],
+            'claim_description'   => ['nullable','required_if:claim,==,1'],
             'type_of_insurance'   => ['required','min:2','max:255'],
             'claim'               => ['nullable','in:1,0','numeric'],
-            'claim_date'          => ['required_if:claim,==,1','date'],
+            'claim_date'          => ['nullable','required_if:claim,==,1','date'],
             'insurance_start_date'=> ['required','date'],
             'insurance_expiry'    => ['required','date'],
         ];
@@ -46,5 +46,15 @@ class InsuranceRequest extends FormRequest
         return $rules;
 
     }//end of rules
+
+    protected function prepareForValidation()
+    {
+        return $this->merge([
+            'claim_date'            => request()->claim_date ?? '',
+            'claim_amount'          => request()->claim_amount ?? '',
+            'claim_description'     => request()->claim_description ?? '',
+        ]);
+
+    }//end of prepare for validation
 
 }//end of request
