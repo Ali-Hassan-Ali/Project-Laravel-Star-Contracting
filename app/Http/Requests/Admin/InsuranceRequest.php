@@ -30,7 +30,7 @@ class InsuranceRequest extends FormRequest
             'policy_number'       => ['required'],
             'premium'             => ['required','numeric'],
             'insurer'             => ['required','min:2','max:255'],
-            'claim_description'   => ['nullable','required_if:claim,==,1'],
+            'claim_description'   => ['required_if:claim,==,1'],
             'type_of_insurance'   => ['required','min:2','max:255'],
             'claim'               => ['nullable','in:1,0','numeric'],
             'claim_date'          => ['nullable','required_if:claim,==,1','date'],
