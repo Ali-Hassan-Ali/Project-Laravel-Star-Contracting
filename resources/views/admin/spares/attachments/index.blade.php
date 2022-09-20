@@ -23,7 +23,7 @@
                     <div class="col-md-12">
 
                         @if (auth()->user()->hasPermission('read_spares'))
-                            <a href="{{ route('admin.spares.attachment.create', ['spare' => $spare->id]) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a>
+                            <a href="{{ route('admin.spares.attachment.create', ['spare' => $spare->id]) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
                         @endif
 
                     </div>
@@ -52,15 +52,24 @@
                                         <td>{{ $spare->equipment->make ?? '' }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>
-                                            <a target="_blank" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> @lang('site.show')</a>
-                                            <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                            <a target="_blank" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"
+                                                data-html="true" data-placement="right" title="@lang('site.show')">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"
+                                                data-html="true" data-placement="right" title="@lang('site.download')">
+                                                <i class="fa fa-download"></i>
+                                            </a>
                                             @if (auth()->user()->hasPermission('delete_spares'))
                                                 
                                                 <form action="{{ route('admin.spares.attachment.destroy', ['spare' => $spare->id,'attachment' => $data->id]) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
                                                     @csrf
                                                     @method('delete')
 
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                        data-html="true" data-placement="right" title="@lang('site.delete')">
+                                                        <i class="fa fa-trash"></i> 
+                                                    </button>
                                                 </form>
                                             @endif
                                         </td>

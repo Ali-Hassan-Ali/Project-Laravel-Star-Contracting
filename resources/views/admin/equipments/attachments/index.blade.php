@@ -52,8 +52,12 @@
                                         <td>{{ $equipment->name . ' ' . $equipment->make . ' ' . $equipment->plate_no }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>
-                                            <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> </a>
-                                            <a target="_blank" href="{{ $data->file_path }}" class="btn btn-primary btn-sm">
+                                            <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"
+                                                data-html="true" data-placement="right" title="@lang('site.download')">
+                                                <i class="fa fa-download"></i> 
+                                            </a>
+                                            <a target="_blank" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"
+                                                data-html="true" data-placement="right" title="@lang('site.show')">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             
@@ -63,8 +67,12 @@
                                                     @csrf
                                                     @method('delete')
 
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                        data-html="true" data-placement="right" title="@lang('site.delete')">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
                                                 </form>
+
                                             @endif
                                         </td>
                                     </tr>
