@@ -50,7 +50,7 @@ class InsuranceRequest extends FormRequest
     protected function prepareForValidation()
     {
         return $this->merge([
-            'claim_date'            => request()->claim_date ?? '',
+            'claim_date'            => request()->claim_date ?? null,
             'claim_amount'          => request()->claim_amount ?? '',
             'claim_description'     => request()->claim_description ?? '',
         ]);
