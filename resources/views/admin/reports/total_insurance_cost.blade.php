@@ -174,7 +174,7 @@
             dataTable.search(this.value).draw();
         });
 
-        $(document).on('keyup', '.report-search', function () {
+        $(document).on('keyup change', '.report-search', function () {
 
             cityID      = $('#report-city').val()  ?? false;
             startData   = $('#start-date').val()  ?? false;
@@ -194,7 +194,7 @@
                 },
                 success: function (data) {
                     $('.total').html(data);
-                    $('.total-min').html('Total Cost Of Insurance  ' + data);
+                    $('.total-min').html('Total Cost Of Insurance ' + data);
                 }//end of success
             });//end of ajax
             dataTable.ajax.reload();
