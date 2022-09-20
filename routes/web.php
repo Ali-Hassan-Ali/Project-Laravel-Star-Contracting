@@ -26,6 +26,9 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
 
     Route::get('/test', function () {
 
+        $name = 'fgg';
+        dd(empty($name));
+
         $collection = collect();
 
         $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
@@ -53,7 +56,7 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
                         return $row->sum('total');
                     });
 
-        dd($collection->all(), $collection->first(), $grouped);
+        dd($collection->all(), $grouped, $grouped->keys(), $grouped->values());
 
 
         $equipmens = Equipment::WhereBetweenDataRegistrationExpiry()->get();

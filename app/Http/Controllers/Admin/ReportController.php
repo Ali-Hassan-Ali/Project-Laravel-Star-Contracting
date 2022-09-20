@@ -336,7 +336,11 @@ class ReportController extends Controller
         if ($cityID) {
             foreach($equipments as $equipment) {
                 if ($equipment->city_id == $cityID) {
-                    $total += $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+                    $total += $equipment->rental_cost_basis + 
+                              $equipment->driver_salary + 
+                              $equipment->spares->sum('cost') + 
+                              $equipment->spares->sum('freight_charges') + 
+                              isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : '';
                 }
             }
         } else {
@@ -345,7 +349,7 @@ class ReportController extends Controller
                           $equipment->driver_salary + 
                           $equipment->spares->sum('cost') + 
                           $equipment->spares->sum('freight_charges') + 
-                          !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+                          isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : '';
             }
         }
 

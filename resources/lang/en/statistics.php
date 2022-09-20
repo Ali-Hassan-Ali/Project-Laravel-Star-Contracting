@@ -10,4 +10,5 @@ return [
     'equipment_vehicle'      => 'Days To Expire',
     'equipment_rented'       => 'Rentals',
     'equipment_barkdown'     => 'Breakdowns',
+    'equipment_expenditure'  => 'equipment expenditure',
 ];

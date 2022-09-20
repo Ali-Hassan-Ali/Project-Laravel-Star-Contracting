@@ -35,7 +35,7 @@ class EquipmentExpenditureController extends Controller
                          $equipment->driver_salary + 
                          $equipment->spares->sum('cost') + 
                          $equipment->spares->sum('freight_charges') + 
-                         !empty($equipment->fuel->total_cost_of_fuel) ?? 0;
+                         !empty($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : 0;
 
                 $month = $equipment->created_at->format('F');
 
@@ -48,9 +48,13 @@ class EquipmentExpenditureController extends Controller
 
             $stats = $collection->groupBy('month');
 
+
             $equipments = $collection->groupBy('month')->map(function ($row) {
                             return $row->sum('total');
                         });
+
+            $month = $equipments->keys();
+            $total = $equipments->values();
 
         }//end of if
 
@@ -59,7 +63,10 @@ class EquipmentExpenditureController extends Controller
             $collection = collect();
 
             $equipments = Equipment::whereYear('created_at', request()->year)
-                    ->where('city_id', request()->city_id)->with('fuel','spares')->orderBy('city_id')->get();
+                                    ->where('city_id', request()->city_id)
+                                    ->with('fuel','spares')
+                                    ->orderBy('city_id')
+                                    ->get();
 
             foreach($equipments as $equipment) {
                 
@@ -67,7 +74,7 @@ class EquipmentExpenditureController extends Controller
                          $equipment->driver_salary + 
                          $equipment->spares->sum('cost') + 
                          $equipment->spares->sum('freight_charges') + 
-                         !empty($equipment->fuel->total_cost_of_fuel) ?? 0;
+                         isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : 0;
 
                 $month = $equipment->created_at->format('F');
 
@@ -83,6 +90,9 @@ class EquipmentExpenditureController extends Controller
             $equipments = $collection->groupBy('month')->map(function ($row) {
                             return $row->sum('total');
                         });
+
+            $month = $equipments->keys();
+            $total = $equipments->values();
 
         }//end of if
 
@@ -91,10 +101,12 @@ class EquipmentExpenditureController extends Controller
             $collection = collect();
 
             $equipments = Equipment::whereYear('created_at', request()->year)
-                    ->where([
-                        'city_id' => request()->city_id,
-                        'id' => request()->equipment_id,
-                    ])->with('fuel','spares')->orderBy('city_id')->get();
+                                    ->where([
+                                        'city_id' => request()->city_id,
+                                        'id'      => request()->equipment_id,
+                                    ])->with('fuel','spares')
+                                      ->orderBy('city_id')
+                                      ->get();
 
             foreach($equipments as $equipment) {
                 
@@ -102,7 +114,7 @@ class EquipmentExpenditureController extends Controller
                          $equipment->driver_salary + 
                          $equipment->spares->sum('cost') + 
                          $equipment->spares->sum('freight_charges') + 
-                         !empty($equipment->fuel->total_cost_of_fuel) ?? 0;
+                         isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : 0;
 
                 $month = $equipment->created_at->format('F');
 
@@ -119,9 +131,12 @@ class EquipmentExpenditureController extends Controller
                             return $row->sum('total');
                         });
 
+            $month = $equipments->keys();
+            $total = $equipments->values();
+
         }//end of if
 
-        return view('admin.charts.fuel_consumption._chart', compact('fuels'));
+        return view('admin.charts.equipment_expenditure._chart', compact('equipments', 'month', 'total'));
 
     }// end of equipmentChart
 

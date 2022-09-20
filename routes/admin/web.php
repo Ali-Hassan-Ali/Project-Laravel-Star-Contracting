@@ -36,7 +36,7 @@ Route::middleware([
             Route::get('/total_fuel_consumption/data', 'ReportController@dataTotalFuelConsumption')->name('total_fuel_consumption.data');
             Route::get('reports/total_fuel_consumption', 'ReportController@totalFuelConsumption')->name('reports.total_fuel_consumption');
 
-            Route::get('/total_equipment_expenditure/sum', 'ReportController@sumTotalEquipmentExpenditure')->name('total_equipment_expenditure.sum');
+            Route::get('/totalequipment_expenditure/sum', 'ReportController@sumTotalEquipmentExpenditure')->name('total_equipment_expenditure.sum');
             Route::get('/total_equipment_expenditure/data', 'ReportController@dataTotalEquipmentExpenditure')->name('total_equipment_expenditure.data');
             Route::get('reports/total_equipment_expenditure', 'ReportController@totalEquipmentExpenditure')->name('reports.total_equipment_expenditure');
 
