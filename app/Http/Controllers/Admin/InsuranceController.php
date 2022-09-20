@@ -152,6 +152,7 @@ class InsuranceController extends Controller
     {
 
         $validated = $request->validated();
+        dd($validated);
         $validated = $request->safe()->except(['claim_attachments','insurer','type_of_insurance','claim']);
 
         $validated['insurer']           = $this->tagInsurer($request);
