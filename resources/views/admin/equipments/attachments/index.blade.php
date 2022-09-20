@@ -24,7 +24,7 @@
 
                         @if (auth()->user()->hasPermission('read_equipments'))
                             <a href="{{ route('admin.equipments.attachment.create', ['equipment' => $equipment->id]) }}" class="btn btn-primary">
-                                <i class="fa fa-plus"></i> @lang('site.create')
+                                <i class="fa fa-plus"></i> @lang('site.add')
                             </a>
                         @endif
 
@@ -54,17 +54,10 @@
                                         <td>{{ $equipment->make }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>
-                                            <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
-                                            @if($data->type == 'pdf')
-                                                    
-                                                <a target="_blank" href="{{ $data->file_path }}" class="btn btn-primary btn-sm open-pdf">
-                                                    <i class="fa fa-eye"></i> @lang('site.show')
-                                                </a>
-                                            @else
-                                                <a target="_blank" href="{{ $data->file_path }}" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-eye"></i> @lang('site.view')
-                                                </a>
-                                            @endif
+                                            <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> </a>
+                                            <a target="_blank" href="{{ $data->file_path }}" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                             
                                             @if (auth()->user()->hasPermission('delete_equipments'))
                                                 
@@ -72,7 +65,7 @@
                                                     @csrf
                                                     @method('delete')
 
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                                 </form>
                                             @endif
                                         </td>
