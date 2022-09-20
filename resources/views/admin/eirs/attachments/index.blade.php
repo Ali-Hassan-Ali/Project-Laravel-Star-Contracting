@@ -56,7 +56,7 @@
                                                 <i class="fa fa-download"></i>
                                             </a>
 
-                                            <a target="_blank" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"
+                                            <a target="_blank" href="{{ $data->file_path }}" class="btn btn-warning btn-sm"
                                                 data-html="true" data-placement="right" title="@lang('site.show')">
                                                 <i class="fa fa-eye"></i>
                                             </a>

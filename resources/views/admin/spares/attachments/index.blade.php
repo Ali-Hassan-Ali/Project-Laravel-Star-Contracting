@@ -50,13 +50,13 @@
                                         <td>{{ $spare->name ?? '' }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>
-                                            <a target="_blank" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"
-                                                data-html="true" data-placement="right" title="@lang('site.show')">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
                                             <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"
                                                 data-html="true" data-placement="right" title="@lang('site.download')">
                                                 <i class="fa fa-download"></i>
+                                            </a>
+                                            <a target="_blank" href="{{ $data->file_path }}" class="btn btn-warning btn-sm"
+                                                data-html="true" data-placement="right" title="@lang('site.show')">
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                             @if (auth()->user()->hasPermission('delete_spares'))
                                                 
