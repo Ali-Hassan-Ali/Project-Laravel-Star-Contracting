@@ -47,14 +47,14 @@ class InsuranceRequest extends FormRequest
 
     }//end of rules
 
-    // protected function prepareForValidation()
-    // {
-    //     return $this->merge([
-    //         'claim_date'          => request()->claim_date ?? NULL,
-    //         'claim_description'   => request()->claim_description ?? NULL,
-    //         'claim_amount'        => request()->claim_amount ?? NULL,
-    //     ]);
+    protected function prepareForValidation()
+    {
+        return $this->merge([
+            'claim_date'          => request()->claim_date ?? NULL,
+            // 'claim_description'   => request()->claim_description ?? NULL,
+            // 'claim_amount'        => request()->claim_amount ?? NULL,
+        ]);
 
-    // }//end of prepare for validation
+    }//end of prepare for validation
 
 }//end of request
