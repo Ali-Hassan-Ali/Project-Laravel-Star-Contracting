@@ -49,7 +49,7 @@ class SpareRequest extends FormRequest
     {
         return $this->merge([
             'usage_date'    => request()->usage_date ?? NULL,
-            'description'   => request()->description ?? '',
+            'description'   => request()->description ?? NULL,
         ]);
 
     }//end of prepare for validation
