@@ -34,9 +34,9 @@ class EquipmentExpenditureController extends Controller
                 $total = $equipment->rental_cost_basis + 
                          $equipment->driver_salary + 
                          $equipment->spares->sum('cost') + 
-                         $equipment->spares->sum('freight_charges') +
-                         $equipment->fuel()->count() > 0 ? $equipment->fuel()->sum('total_cost_of_fuel') : 0;
-                         // $equipment->fuel()->count() > 0 ? 0 : 0;
+                         $equipment->spares->sum('freight_charges');
+                         // $equipment->fuel()->count() > 0 ? $equipment->fuel()->sum('total_cost_of_fuel') : 0;
+                         // $equipment->fuel->count() > 0 ? 0 : 0;
 
                 $month = $equipment->created_at->format('F');
 
@@ -74,8 +74,8 @@ class EquipmentExpenditureController extends Controller
                 $total = $equipment->rental_cost_basis + 
                          $equipment->driver_salary + 
                          $equipment->spares->sum('cost') + 
-                         $equipment->spares->sum('freight_charges') + 
-                         isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : 0;
+                         $equipment->spares->sum('freight_charges');
+                         // isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : 0;
 
                 $month = $equipment->created_at->format('F');
 
@@ -114,8 +114,8 @@ class EquipmentExpenditureController extends Controller
                 $total = $equipment->rental_cost_basis + 
                          $equipment->driver_salary + 
                          $equipment->spares->sum('cost') + 
-                         $equipment->spares->sum('freight_charges') + 
-                         isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : 0;
+                         $equipment->spares->sum('freight_charges'); 
+                         // isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : 0;
 
                 $month = $equipment->created_at->format('F');
 
