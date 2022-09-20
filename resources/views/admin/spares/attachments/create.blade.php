@@ -9,6 +9,7 @@
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.spares.index') }}">@lang('spares.spares')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.spares.attachment.index', $spares->id) }}">@lang('equipments.attachments')</a></li>
         <li class="breadcrumb-item">@lang('site.create')</li>
     </ul>
 
