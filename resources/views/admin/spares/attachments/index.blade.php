@@ -39,7 +39,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>@lang('spare.name')</th>
+                                    <th>@lang('spares.name')</th>
                                     <th>@lang('equipments.attachments_name')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
