@@ -27,7 +27,9 @@ class EquipmentExpenditureController extends Controller
 
             $collection = collect();
 
-            $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+            $equipments = Equipment::with('fuel','spares')
+            ->whereYear('created_at', request()->year)
+            ->orderBy('city_id')->get();
 
             foreach($equipments as $equipment) {
                 
@@ -63,7 +65,7 @@ class EquipmentExpenditureController extends Controller
 
             $collection = collect();
 
-            $equipments = Equipment::whereYear('created_at', request()->year)
+            $equipments = Equipment::whereYear('created_at', request()->year ?? now()->year)
                                     ->where('city_id', request()->city_id)
                                     ->with('fuel','spares')
                                     ->orderBy('city_id')
@@ -101,7 +103,7 @@ class EquipmentExpenditureController extends Controller
 
             $collection = collect();
 
-            $equipments = Equipment::whereYear('created_at', request()->year)
+            $equipments = Equipment::whereYear('created_at', request()->year ?? now()->year)
                                     ->where([
                                         'city_id' => request()->city_id,
                                         'id'      => request()->equipment_id,
