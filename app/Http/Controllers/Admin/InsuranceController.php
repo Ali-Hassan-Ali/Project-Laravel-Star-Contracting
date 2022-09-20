@@ -152,13 +152,15 @@ class InsuranceController extends Controller
     {
 
         $validated = $request->validated();
-        dd($validated);
-        $validated = $request->safe()->except(['claim_attachments','insurer','type_of_insurance','claim']);
+        $validated = $request->safe()->except(['claim_attachments','insurer','type_of_insurance','claim','claim_date','claim_description','claim_amount']);
 
         $validated['insurer']           = $this->tagInsurer($request);
         $validated['type_of_insurance'] = $this->tagInsurerType($request);
         $validated['user_id']           = auth()->id();
         $validated['claim']             = request()->has('claim') ? '1' : '0';
+        $validated['claim_date']        = request()->claim_date ?? NULL;
+        $validated['claim_description']        = request()->claim_description ?? NULL;
+        $validated['claim_amount']        = request()->claim_amount ?? NULL;
 
         $insurance->update($validated);
 
