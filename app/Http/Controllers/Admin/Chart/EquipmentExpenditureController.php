@@ -28,8 +28,8 @@ class EquipmentExpenditureController extends Controller
             $collection = collect();
 
             $equipments = Equipment::with('fuel','spares')
-            ->whereYear('created_at', request()->year)
-            ->orderBy('city_id')->get();
+                                    ->whereYear('created_at', request()->year ?? now()->year)
+                                    ->orderBy('city_id')->get();
 
             foreach($equipments as $equipment) {
                 
