@@ -8,7 +8,8 @@
 	
 	<ul class="breadcrumb mt-2">
 		<li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
-		<li class="breadcrumb-item">@lang('statistics.statistics') @lang('statistics.equipment_expenditure')</li>
+		<li class="breadcrumb-item">@lang('statistics.statistics')</li>
+		<li class="breadcrumb-item">@lang('statistics.equipment_expenditure')</li>
 	</ul>
 	
 	<div class="row">
