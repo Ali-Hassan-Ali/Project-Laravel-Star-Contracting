@@ -78,7 +78,7 @@
                                         </div>
                                     </th>
                                     <th>@lang('equipments.equipments')</th>
-                                    <th>@lang('status.as_of')</th>
+                                    <th style="width: 150px">@lang('status.as_of')</th>
                                     <th>@lang('status.working_status')</th>
                                     <th>@lang('status.hours_worked')</th>
                                     <th>@lang('status.break_down_date')</th>
