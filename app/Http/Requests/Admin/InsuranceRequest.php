@@ -47,18 +47,18 @@ class InsuranceRequest extends FormRequest
 
     }//end of rules
 
-    public function attributes()
-    {
-        return [
-            'equipment_id' => 'equipment',
-        ];
-    }
+    // public function attributes()
+    // {
+    //     return [
+    //         'equipment_id' => 'equipment',
+    //     ];
+    // }
 
-    public function messages()
-    {
-        return [
-            'claim_amount.required_if' => 'A claim_amount is required',
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'claim_amount.required_if' => 'A claim_amount is required',
+    //     ];
+    // }
 
 }//end of request
