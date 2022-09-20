@@ -41,8 +41,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">@lang('equipments.name')</th>
-                                    <th class="text-center">@lang('equipments.make')</th>
+                                    <th class="text-center">@lang('equipments.equipments')</th>
                                     <th class="text-center">@lang('equipments.attachments_name')</th>
                                     <th class="text-center">@lang('site.action')</th>
                                 </tr>
@@ -50,8 +49,7 @@
                                 <body>
                                     @foreach ($equipment->attachments as $data)
                                     <tr>
-                                        <td>{{ $equipment->name }}</td>
-                                        <td>{{ $equipment->make }}</td>
+                                        <td>{{ $equipment->name . ' ' . $equipment->make . ' ' . $equipment->plate_no }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>
                                             <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> </a>
