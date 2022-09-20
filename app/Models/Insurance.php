@@ -35,6 +35,12 @@ class Insurance extends Model
         
     }//end of  belongsTo
 
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class);
+        
+    }//end of  belongsTo
+
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {
         $startDate = now()->createFromFormat('Y-m-d', $startDate);
