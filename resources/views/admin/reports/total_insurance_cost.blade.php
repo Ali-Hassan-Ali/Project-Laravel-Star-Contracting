@@ -32,9 +32,6 @@
                         </div>
                     </div>
 
-                </div><!-- end of row -->
-				
-				<div class="row">
 					{{--city--}}
 					<div class="col-md-4">
 						<div class="form-group">
@@ -53,6 +50,11 @@
 						</div>
 					</div>
 					
+				
+				</div><!-- end of row -->
+
+				<div class="row">
+				
 					<div class="col-md-4" for="total-insurance">
 						<div class="d-flex flex-row-reverse" for="total-insurance">
 							<div class="form-check form-switch" for="total-insurance" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
@@ -61,9 +63,9 @@
 							</div>
 						</div>
 					</div>
-				
+
 				</div><!-- end of row -->
-				
+
 				<div class="collapse" id="collapse">
 					
 					<div class="row">
