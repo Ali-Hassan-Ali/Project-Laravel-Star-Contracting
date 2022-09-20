@@ -57,8 +57,8 @@ class SpareRequest extends FormRequest
     public function messages()
     {
         return [
-            'usage_date.required_if' => 'The usage date field is required when claim is Yes',
-            'description.required_if' => 'The description field is required when claim is Yes',
+            'usage_date.required_if' => 'The usage date field is required when used is Yes',
+            'description.required_if' => 'The description field is required when used is Yes',
         ];
     }
 
