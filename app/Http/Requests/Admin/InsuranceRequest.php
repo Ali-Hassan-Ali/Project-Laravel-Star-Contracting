@@ -50,15 +50,17 @@ class InsuranceRequest extends FormRequest
     // public function attributes()
     // {
     //     return [
-    //         'equipment_id' => 'equipment',
+    //         'claim' => 'equipment',
     //     ];
     // }
 
-    // public function messages()
-    // {
-    //     return [
-    //         'claim_amount.required_if' => 'A claim_amount is required',
-    //     ];
-    // }
+    public function messages()
+    {
+        return [
+            'claim_amount.required_if' => 'The claim amount field is required when claim is Yes',
+            'claim_date.required_if' => 'The claim date field is required when claim is Yes',
+            'claim_description.required_if' => 'The claim description field is required when claim is Yes',
+        ];
+    }
 
 }//end of request
