@@ -25,7 +25,7 @@ class InsuranceRequest extends FormRequest
     {
         $rules = [
             'equipment_id'        => ['required','numeric'],
-            'claim_amount'        => ['nullable','required_if:claim,==,1','numeric'],
+            'claim_amount'        => ['required_if:claim,==,1','numeric'],
             'insurance_duration'  => ['required','numeric'],
             'policy_number'       => ['required'],
             'premium'             => ['required','numeric'],
@@ -33,7 +33,7 @@ class InsuranceRequest extends FormRequest
             'claim_description'   => ['required_if:claim,==,1'],
             'type_of_insurance'   => ['required','min:2','max:255'],
             'claim'               => ['nullable','in:1,0','numeric'],
-            'claim_date'          => ['nullable','required_if:claim,==,1','date'],
+            'claim_date'          => ['required_if:claim,==,1','date'],
             'insurance_start_date'=> ['required','date'],
             'insurance_expiry'    => ['required','date'],
         ];
