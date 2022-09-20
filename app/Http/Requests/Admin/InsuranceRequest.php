@@ -51,7 +51,7 @@ class InsuranceRequest extends FormRequest
     {
         return $this->merge([
             'claim_date'            => request()->claim_date ?? NULL,
-            'claim_amount'          => request()->claim_amount ?? NULL,
+            'claim_amount'          => request()->claim_amount ?? 0,
             'claim_description'     => request()->claim_description ?? NULL,
         ]);
 
