@@ -39,8 +39,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>@lang('equipments.name')</th>
-                                    <th>@lang('equipments.make')</th>
+                                    <th>@lang('equipments.equipments')</th>
                                     <th>@lang('equipments.attachments_name')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
@@ -48,8 +47,7 @@
                                 <body>
                                     @foreach ($eir->attachments()->get() as $data)
                                     <tr>
-                                        <td>{{ $eir->equipment->name ?? '' }}</td>
-                                        <td>{{ $eir->equipment->make ?? '' }}</td>
+                                        <td>{{ $eir->equipment->name . ' ' . $eir->equipment->make . ' ' . $eir->equipment->plate_no }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>
                                             <a download="{{ $data->file_path }}" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i></a>
