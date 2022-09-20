@@ -208,8 +208,7 @@
                             <small>( @lang('insurances.attachments_mssage')</small>
                             <small style="font-weight: bold;">@lang('insurances.attachments_docum') )</small>
                         </label>
-                        <input type="file" name="claim_attachments[]" autofocus multiple class="form-control" 
-                               value="{{ old('claim_attachments') }}">
+                        <input type="file" name="claim_attachments[]" autofocus multiple class="form-control">
                     </div>
 
                     <div class="form-group">
