@@ -39,8 +39,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>@lang('equipments.name')</th>
-                                    <th>@lang('equipments.make')</th>
+                                    <th>@lang('spare.name')</th>
                                     <th>@lang('equipments.attachments_name')</th>
                                     <th>@lang('site.action')</th>
                                 </tr>
@@ -48,8 +47,7 @@
                                 <body>
                                     @foreach ($spare->attachments()->get() as $data)
                                     <tr>
-                                        <td>{{ $spare->equipment->name ?? '' }}</td>
-                                        <td>{{ $spare->equipment->make ?? '' }}</td>
+                                        <td>{{ $spare->name ?? '' }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>
                                             <a target="_blank" href="{{ $data->file_path }}" class="btn btn-primary btn-sm"
