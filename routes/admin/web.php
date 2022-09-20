@@ -141,6 +141,7 @@ Route::middleware([
             Route::post('/insurances/claim', 'InsuranceController@claim')->name('insurances.claim');
             Route::get('/insurances/data', 'InsuranceController@data')->name('insurances.data');
             Route::delete('/insurances/bulk_delete', 'InsuranceController@bulkDelete')->name('insurances.bulk_delete');
+            Route::resource('insurances.attachment', 'InsurancesAttachmentController');
             Route::resource('insurances', 'InsuranceController');
 
             //equipments routes
