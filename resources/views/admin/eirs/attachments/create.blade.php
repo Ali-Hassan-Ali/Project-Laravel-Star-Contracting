@@ -9,7 +9,7 @@
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.eirs.index') }}">@lang('eirs.eirs')</a></li>
-        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.eirs.attachment.index', $equipment->id) }}">@lang('equipments.attachments')</a></li>
+        <li class="breadcrumb-item"><a class="back-page" href="{{ route('admin.eirs.attachment.index', ['eir' => $eir->id]) }}">@lang('equipments.attachments')</a></li>
         <li class="breadcrumb-item">@lang('site.create')</li>
     </ul>
 
