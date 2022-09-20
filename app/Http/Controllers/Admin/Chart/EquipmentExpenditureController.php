@@ -35,7 +35,7 @@ class EquipmentExpenditureController extends Controller
                          $equipment->driver_salary + 
                          $equipment->spares->sum('cost') + 
                          $equipment->spares->sum('freight_charges') + 
-                         !empty($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : 0;
+                         isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : 0;
 
                 $month = $equipment->created_at->format('F');
 
