@@ -142,7 +142,7 @@
                 {data: 'insurance_duration', name: 'insurance_duration'},
                 {data: 'insurance_expiry', name: 'insurance_expiry'},
                 {data: 'claim', name: 'claim'},
-                {data: 'claim_date', name: 'claim_date'},
+                {data: 'claim_date', name: 'claim_date', width: '250px'},
                 {data: 'claim_amount', name: 'claim_amount'},
                 {data: 'claim_description', name: 'claim_description'},
                 {data: 'attachments', name: 'attachments'},
