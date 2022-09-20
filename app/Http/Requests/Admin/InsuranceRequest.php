@@ -23,6 +23,7 @@ class InsuranceRequest extends FormRequest
      */
     public function rules()
     {
+        dd('gfg');
         $rules = [
             'equipment_id'        => ['required','numeric'],
             'claim_amount'        => ['required_if:claim,==,1','numeric'],
