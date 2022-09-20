@@ -53,7 +53,7 @@
 				
 				</div><!-- end of row -->
 
-				<div class="row">
+				<div class="row mb-2">
 				
 					<div class="col-md-12" for="total-insurance">
 						<div class="d-flex flex-row-reverse" for="total-insurance">
