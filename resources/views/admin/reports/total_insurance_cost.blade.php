@@ -174,7 +174,7 @@
             dataTable.search(this.value).draw();
         });
 
-        $('.report-search').change(function () {
+        $(document).on('keyup change', '.report-search', function () {
 
             cityID      = $('#report-city').val()  ?? false;
             startData   = $('#start-date').val()  ?? false;
