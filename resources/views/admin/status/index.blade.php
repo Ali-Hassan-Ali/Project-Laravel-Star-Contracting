@@ -77,14 +77,14 @@
                                             </label>
                                         </div>
                                     </th>
-                                    <th>@lang('equipments.equipments')</th>
+                                    <th style="width: 150px">@lang('equipments.equipments')</th>
                                     <th style="width: 150px">@lang('status.as_of')</th>
-                                    <th>@lang('status.working_status')</th>
-                                    <th>@lang('status.hours_worked')</th>
-                                    <th>@lang('status.break_down_date')</th>
-                                    <th>@lang('status.break_down_duration')</th>
-                                    <th>@lang('status.descrption')</th>
-                                    <th>@lang('site.action')</th>
+                                    <th style="width: 150px">@lang('status.working_status')</th>
+                                    <th style="width: 150px">@lang('status.hours_worked')</th>
+                                    <th style="width: 150px">@lang('status.break_down_date')</th>
+                                    <th style="width: 150px">@lang('status.break_down_duration')</th>
+                                    <th style="width: 150px">@lang('status.descrption')</th>
+                                    <th style="width: 150px">@lang('site.action')</th>
                                 </tr>
                                 </thead>
                             </table>
