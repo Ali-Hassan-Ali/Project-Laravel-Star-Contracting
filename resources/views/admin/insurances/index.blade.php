@@ -86,7 +86,7 @@
                                     <th>@lang('insurances.insurance_duration')</th>
                                     <th>@lang('insurances.insurance_expiry')</th>
                                     <th>@lang('insurances.claim')</th>
-                                    <th style="width: 150px">@lang('insurances.claim_date')</th>
+                                    <th style="width: 250px">@lang('insurances.claim_date')</th>
                                     <th>@lang('insurances.claim_amount')</th>
                                     <th>@lang('insurances.claim_description')</th>
                                     <th>@lang('insurances.claim_attachments')</th>
