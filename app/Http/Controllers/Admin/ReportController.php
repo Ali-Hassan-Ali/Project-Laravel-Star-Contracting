@@ -417,7 +417,42 @@ class ReportController extends Controller
 
     public function sumMaterialDeliveryTime()
     {
-        $equipments = Equipment::with('eir')->orderBy('city_id')->get();
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('eir')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+
+            } else {
+
+                $equipments = Equipment::with('eir')
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('eir')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->orderBy('city_id')
+                                        ->get();
+                
+            } else {
+
+                $equipments = Equipment::with('eir')->orderBy('city_id')->get();
+
+            }
+
+
+        }//end of if
 
         $total = 0;
         $count = 0;
