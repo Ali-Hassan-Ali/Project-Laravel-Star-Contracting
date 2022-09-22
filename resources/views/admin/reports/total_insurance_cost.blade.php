@@ -195,7 +195,7 @@
                     end_data: $('#end-date').val() ?? false,
                 },
                 success: function (data) {
-                    $('.total').html(data);
+                    $('.total').html('$ ' + data);
                     $('.total-min').html('Total Cost Of Insurance $ ' + data);
                 }//end of success
             });//end of ajax
