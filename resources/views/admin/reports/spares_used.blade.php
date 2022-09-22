@@ -9,7 +9,7 @@
     <ul class="breadcrumb mt-2">
         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">@lang('site.home')</a></li>
         <li class="breadcrumb-item">@lang('reports.reports')</li>
-        <li class="breadcrumb-item title-download">@lang('reports.spares_available')</li>
+        <li class="breadcrumb-item title-download">@lang('reports.spares_used')</li>
     </ul>
     
     <div class="row">
