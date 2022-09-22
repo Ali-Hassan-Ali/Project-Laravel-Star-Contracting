@@ -286,7 +286,7 @@ class ReportController extends Controller
             if (isset($statu->equipment->eir)) {
                 $total_break_down = isset($statu->equipment->eir->total_break_down_duration) ? $statu->equipment->eir->total_break_down_duration : 0;
                 $average += $statu->break_down_duration;
-//                $average += $statu->break_down_duration + $total_break_down;
+               // $average += $statu->break_down_duration + $total_break_down;
             }
         }
         $citys = City::all();
