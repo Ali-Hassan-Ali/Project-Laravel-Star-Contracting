@@ -213,7 +213,7 @@
             dataTable.search(this.value).draw();
 
             // $('.average').html('$ ' + sum);
-            $('.average-min').html('Average Breakdown Duration' + sum + 'Days');
+            $('.average-min').html('Average Delivery Time' + sum);
         });
 
 
