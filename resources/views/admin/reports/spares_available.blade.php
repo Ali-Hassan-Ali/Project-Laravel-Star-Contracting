@@ -17,32 +17,57 @@
         <div class="col-md-12">
             
             <div class="tile shadow">
-                
+
                 <div class="row">
-                    
+
+                    {{--city--}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <select class="form-control col-6 select2-tags-false" id="data-table-search-city">
+                            <select class="form-control report-search col-6 select2-tags-false" id="report-city">
                                 <option value="">@lang('site.all') @lang('citys.citys')</option>
                                 @foreach ($citys as $city)
-                                    <option data-id="{{ $city->id }}" value="{{ $city->name }}">{{ $city->name }}</option>
+                                    <option data-id="{{ $city->id }}" value="{{ $city->id }}">{{ $city->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    
+
+                    {{-- from data --}}
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input placeholder="From" class="date-search report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start-date">
+                        </div>
+                    </div>
+
+                    {{-- to data --}}
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input placeholder="To" class="date-search report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="end-date">
+                        </div>
+                    </div>
+
+                </div><!-- end of row -->
+
+                <div class="row">
+                    {{--search--}}
                     <div class="col-md-6">
-                        <div class="d-flex flex-row-reverse">
-                            <div class="form-check form-switch" data-toggle="collapse" href="#collapse{{ $city->id }}" role="button" aria-expanded="false" aria-controls="collapse{{ $city->id }}">
-                                <label class="form-check-label mr-5">@lang('reports.show_details')</label>
-                                <input class="form-check-input" type="checkbox">
+                        <div class="form-group">
+                            <input type="text" id="data-table-search" class="form-control" autofocus placeholder="@lang('site.search')">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" for="total-insurance">
+                        <div class="d-flex flex-row-reverse" for="total-insurance">
+                            <div class="form-check form-switch" for="total-insurance" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+                                <label class="form-check-label mr-5" for="total-insurance">@lang('reports.show_details')</label>
+                                <input class="form-check-input" id="spares-available" type="checkbox">
                             </div>
                         </div>
                     </div>
-                
+
                 </div><!-- end of row -->
                 
-                <div class="collapse" id="collapse{{ $city->id }}">
+                <div class="collapse" id="collapse">
                     
                     <div class="row">
                         
@@ -60,19 +85,19 @@
                                         <th class="text-center" style="width: 50px">@lang('spares.cost')</th>
                                         <th class="text-center" style="width: 121px">@lang('spares.freight_charges')</th>
                                         <th class="text-center" style="width: 121px">@lang('spares.used')</th>
-                                        <th class="text-center" style="width: 100px">@lang('spares.location')</th>
                                         <th class="text-center" style="width: 100px">@lang('reports.total_cost')</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
-                                        <td class="text-center" style="width: 121px"></td>
-                                        <td class="text-center" style="width: 116px"></td>
-                                        <td class="text-center" style="width: 121px"></td>
-                                        <td class="text-center" style="width: 121px"></td>
-                                        <td class="text-center" style="width: 121px"></td>
-                                        <td class="text-end" olspan="2">@lang('reports.total_cost_spare')</td>
-                                        <td class="text-center" style="width: 50px">$ {{ $totalCostSpare }}</td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center">@lang('reports.total_cost_spare')</td>
+                                        <td class="text-center">$ {{ $totalCostSpare }}</td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -96,8 +121,12 @@
 @push('scripts')
     
     <script>
-        let cityId;
-        let DataTable = $('#spares_available-table').DataTable({
+        
+        var startData;
+        var endData;
+        let cityID;
+
+        let dataTable = $('#spares_available-table').DataTable({
             dom: "Bfrtip",
             paging: false,
             serverSide: true,
@@ -107,6 +136,11 @@
             },
             ajax: {
                 url: '{{ route('admin.spares_available.data') }}',
+                data: function (d) {
+                    d.city_id = cityID;
+                    d.start_data = startData;
+                    d.end_data = endData;
+                }
             },
             columns: [
                 {data: 'site', name: 'site'},
@@ -116,7 +150,6 @@
                 {data: 'cost', name: 'cost'},
                 {data: 'cost', name: 'cost'},
                 {data: 'used', name: 'used'},
-                {data: 'location', name: 'location'},
                 {data: 'total_cost', name: 'total_cost'},
             ],
             buttons: [{
@@ -133,28 +166,46 @@
                 },
             }],
         });
-        $('#data-table-search-city').change(function () {
-            
-            DataTable.search(this.value).draw();
-            
-            let url    = '{{ route('admin.spares_available.sum') }}';
-            let count  = '{{ $spares->count() }}';
-            var id     = $(this).find(':selected').data('id');
-            var method = 'get';
-            
+
+        $(document).on('keyup change', '#data-table-search',function () {
+            var sum = dataTable.column(7).data().sum();
+            $('.average').html('$ ' + sum);
+            $('.average-min').html('Average Delivery Time $ ' + sum);
+            dataTable.search(this.value).draw();
+        });
+
+
+        $(document).on('keyup change', '.report-search', function () {
+
+            cityID      = $('#report-city').val()  ?? false;
+            startData   = $('#start-date').val()  ?? false;
+            endData     = $('#end-date').val() ?? false;
+
+            let url     = '{{ route('admin.spares_available.sum') }}';
+            var id      = $('#report-city').find(':selected').val();
+            var method  = 'get';
+
             $.ajax({
                 url: url,
                 method: method,
-                data: {city_id: id},
+                data: {
+                    city_id: $('#report-city').val()  ?? false,
+                    start_data: $('#start-date').val()  ?? false,
+                    end_data: $('#end-date').val() ?? false,
+                },
                 success: function (data) {
+
                     let total = data.total / data.count;
                     let sum = $.number(total, 2);
-                    $('.average').html(sum);
-                    $('.average-min').html('Average Delivery Time ' + sum);
+                    $('.average').html('$ ' + sum);
+                    $('.average-min').html('Average Delivery Time $ ' + sum);
+
                 }//end of success
             });//end of ajax
-            
+            dataTable.ajax.reload();
+
         });//end of data-table-search-city
+
     </script>
 
 @endpush

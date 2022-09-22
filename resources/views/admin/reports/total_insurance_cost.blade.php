@@ -32,12 +32,14 @@
 						</div>
 					</div>
 
+					{{-- from data --}}
                     <div class="col-md-3">
                         <div class="form-group">
                             <input placeholder="From" class="date-search report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start-date">
                         </div>
                     </div>
 
+                    {{-- to data --}}
                     <div class="col-md-3">
                         <div class="form-group">
                             <input placeholder="To" class="date-search report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="end-date">
