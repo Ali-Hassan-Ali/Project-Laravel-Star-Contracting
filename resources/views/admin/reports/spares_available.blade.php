@@ -160,8 +160,7 @@
                 text: 'All',
                 title: function () { 
                     let title = $('.title-download').html() + ' - ' + "{{ now()->format('d-m-Y') }}" 
-                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n'
-                                + $('#start-date').val() + ' ' + $('#end-date').val();
+                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + $('#start-date').val() + ' ' + $('#end-date').val();
 
                     return title;
                 },
