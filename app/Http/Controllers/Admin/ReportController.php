@@ -417,24 +417,14 @@ class ReportController extends Controller
 
     public function sumMaterialDeliveryTime()
     {
-        $cityID = request()->city_id;
         $equipments = Equipment::with('eir')->orderBy('city_id')->get();
 
         $total = 0;
         $count = 0;
 
-        if ($cityID) {
-            foreach($equipments as $equipment) {
-                if ($equipment->city_id == $cityID) {
-                    $total += $equipment->eir->total_break_down_duration ?? 0;
-                    $count +=1;
-                }
-            }
-        } else {
-            foreach($equipments as $equipment) {
-                $total += $equipment->eir->total_break_down_duration ?? 0;
-                $count +=1;
-            }
+        foreach($equipments as $equipment) {
+            $total += $equipment->eir->total_break_down_duration ?? 0;
+            $count +=1;
         }
 
         return response()->json(['total' => $total, 'count' => $count]);
@@ -458,7 +448,43 @@ class ReportController extends Controller
 
     public function dataMaterialDeliveryTime()
     {
-        $equipments = Equipment::with('eir')->orderBy('city_id')->get();
+
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('eir')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->where('city_id', 'id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+
+            } else {
+
+                $equipments = Equipment::with('eir')
+                                        ->where('city_id', 'id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('eir')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->orderBy('city_id')
+                                        ->get();
+                
+            } else {
+
+                $equipments = Equipment::with('eir')->orderBy('city_id')->get();
+
+            }
+
+
+        }//end of if
 
         return DataTables::of($equipments)
             ->addColumn('city', function (Equipment $equipment) {
@@ -487,27 +513,52 @@ class ReportController extends Controller
 
     public function sumTotalFuelConsumption()
     {
-        $equipments = Equipment::with('fuel')->orderBy('city_id')->get();
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('eir')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->where('city_id', 'id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+
+            } else {
+
+                $equipments = Equipment::with('eir')
+                                        ->where('city_id', 'id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('eir')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->orderBy('city_id')
+                                        ->get();
+                
+            } else {
+
+                $equipments = Equipment::with('eir')->orderBy('city_id')->get();
+
+            }
+
+
+        }//end of if
 
         $cityID = request()->city_id;
         $count = 0;
         $totalCost = 0;
         $totalUnit = 0;
 
-        if ($cityID) {
-            foreach($equipments as $equipment) {
-                if ($equipment->city_id == $cityID) {
-                    $totalCost += $equipment->fuel->total_cost_of_fuel ?? 0;
-                    $totalUnit += $equipment->fuel->no_of_units_filled ?? 0;
-                    $count +=1;
-                }
-            }
-        } else {
-            foreach($equipments as $equipment) {
-                $totalCost += $equipment->fuel->total_cost_of_fuel ?? 0;
-                $totalUnit += $equipment->fuel->no_of_units_filled ?? 0;
-                $count +=1;
-            }
+        foreach($equipments as $equipment) {
+            $totalCost += $equipment->fuel->total_cost_of_fuel ?? 0;
+            $totalUnit += $equipment->fuel->no_of_units_filled ?? 0;
+            $count +=1;
         }
 
         return response()->json(['totalCost' => $totalCost, 'totalUnit' => $totalUnit]);

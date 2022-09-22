@@ -19,31 +19,55 @@
             <div class="tile shadow">
                 
                 <div class="row">
-                    
+
+                    {{--city--}}
                     <div class="col-md-6">
                         <div class="form-group">
-{{--                            <label>@lang('citys.citys') <span class="text-danger">*</span></label>--}}
-                            <select class="form-control col-6 select2-tags-false" id="data-table-search-city">
+                            <select class="form-control report-search col-6 select2-tags-false" id="report-city">
                                 <option value="">@lang('site.all') @lang('citys.citys')</option>
                                 @foreach ($citys as $city)
-                                    <option data-id="{{ $city->id }}" value="{{ $city->name }}">{{ $city->name }}</option>
+                                    <option data-id="{{ $city->id }}" value="{{ $city->id }}">{{ $city->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-	                
-	                <div class="col-md-6">
-		                <div class="d-flex flex-row-reverse">
-			                <div class="form-check form-switch" data-toggle="collapse" href="#collapse{{ $city->id }}" role="button" aria-expanded="false" aria-controls="collapse{{ $city->id }}">
-				                <label class="form-check-label mr-5">@lang('reports.show_details')</label>
-				                <input class="form-check-input" type="checkbox">
-			                </div>
-		                </div>
-	                </div>
-                
+
+                    {{-- from data --}}
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input placeholder="From" class="date-search start-date report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start-date">
+                        </div>
+                    </div>
+
+                    {{-- to data --}}
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input placeholder="To" class="date-search report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="end-date">
+                        </div>
+                    </div>
+
+                </div><!-- end of row -->
+
+                <div class="row">
+                    {{--search--}}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="data-table-search" class="form-control" autofocus placeholder="@lang('site.search')">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" for="total-insurance">
+                        <div class="d-flex flex-row-reverse" for="total-insurance">
+                            <div class="form-check form-switch" for="total-insurance" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+                                <label class="form-check-label mr-5" for="total-insurance">@lang('reports.show_details')</label>
+                                <input class="form-check-input" id="spares-available" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+
                 </div><!-- end of row -->
 	
-	            <div class="collapse" id="collapse{{ $city->id }}">
+	            <div class="collapse" id="collapse">
 		            
                     <div class="row">
                     
@@ -82,7 +106,10 @@
 		            
 	            </div>{{--end of collapse --}}
     
-                <h4 class="text-end average-min">@lang('reports.average_delivery_time') {{ number_format($total / $equipments->count(), 2) }}</h4>
+                <h4 class="text-end average-min">
+                    @lang('reports.average_delivery_time') 
+                    {{ number_format($total / $equipments->count(), 2) }}
+                </h4>
                 
             </div><!-- end of tile -->
         
@@ -95,8 +122,32 @@
 @push('scripts')
     
     <script>
-        let cityId;
-        let DataTable = $('#material_delivery_time-table').DataTable({
+
+        function getStartDate(EData) {
+            if (EData) {
+
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+                return 'From ' + newDate;
+            }
+
+            return '';
+        }
+
+        function getEndDate(EData) {
+            if (EData) {
+
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+                return 'To ' + newDate;
+            }
+
+            return '';
+        }
+
+        var startData;
+        var endData;
+        let cityID;
+
+        let dataTable = $('#material_delivery_time-table').DataTable({
             dom: "Bfrtip",
             paging: false,
             serverSide: true,
@@ -106,6 +157,11 @@
             },
             ajax: {
                 url: '{{ route('admin.material_delivery_time.data') }}',
+                data: function (d) {
+                    d.city_id = cityID;
+                    d.start_data = startData;
+                    d.end_data = endData;
+                }
             },
             columns: [
                 {data: 'city', name: 'city'},
@@ -151,6 +207,49 @@
             });//end of ajax
             
         });//end of data-table-search-city
+
+        $(document).on('keyup change', '#data-table-search',function () {
+            var sum = dataTable.column(5).data().sum();
+            dataTable.search(this.value).draw();
+
+            // $('.average').html('$ ' + sum);
+            $('.average-min').html('Average Breakdown Duration' + sum + 'Days');
+        });
+
+
+        $(document).on('keyup change', '.report-search', function () {
+
+            cityID      = $('#report-city').val()  ?? false;
+            startData   = $('#start-date').val()  ?? false;
+            endData     = $('#end-date').val() ?? false;
+
+            let url     = '{{ route('admin.material_delivery_time.sum') }}';
+            var id      = $('#report-city').find(':selected').val();
+            var method  = 'get';
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: {
+                    city_id: $('#report-city').val()  ?? false,
+                    start_data: $('#start-date').val()  ?? false,
+                    end_data: $('#end-date').val() ?? false,
+                },
+                success: function (data) {
+
+                    let total = data.total / data.count;
+                    let sum = $.number(total, 2);
+
+                    $('.count').html(data.count);
+                    $('.average').html(sum);
+                    $('.average-min').html('Average Breakdown Duration' + sum + 'Days');
+
+                }//end of success
+            });//end of ajax
+            dataTable.ajax.reload();
+
+        });//end of data-table-search-city
+
     </script>
 
 @endpush
