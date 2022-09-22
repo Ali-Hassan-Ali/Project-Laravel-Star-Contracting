@@ -112,7 +112,7 @@ class ReportController extends Controller
                 
             } else {
 
-                $spares = Spare::query()->withCount('equipments')->having('equipments', '>', '0');
+                $spares = Spare::withCount('equipments')->having('equipments', '>', '0')->get();
             }
 
 
@@ -127,7 +127,6 @@ class ReportController extends Controller
             $collection->push(['premium' => $total]);
 
         }//end of each
-
 
         $total = $collection->sum('premium');  
 

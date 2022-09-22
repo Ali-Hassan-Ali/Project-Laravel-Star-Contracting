@@ -197,7 +197,7 @@
                 },
                 success: function (data) {
 
-                    console.log(data.total);
+                    console.log(data);
 
                     let total = data.total / data.count;
                     let sum = $.number(total, 2);
