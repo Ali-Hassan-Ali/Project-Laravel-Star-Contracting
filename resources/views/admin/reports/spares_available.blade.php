@@ -125,8 +125,13 @@
     <script>
         
         function getDate(EData) {
-            var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
-            return newDate;
+            if (EData) {
+
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+                return newDate;
+            }
+
+            return '';
         }
 
         var startData;
@@ -164,8 +169,8 @@
                 extend: "pdf",
                 text: 'All',
                 title: function () { 
-                    let title = $('.title-download').html() + '\n' + 'Data ' + "{{ now()->format('d-m-Y') }}" 
-                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + getDate($('#start-date').val()); + getDate($('#start-date').val());
+                    let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
+                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + getDate($('#start-date').val()) + ' ' + getDate($('#start-date').val());
 
                     return title;
                 },
