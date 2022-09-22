@@ -42,6 +42,12 @@ class Spare extends Model
 
     }//end of fun
 
+    public function equipmentsFirst()
+    {
+        return $this->equipments()->take(1);
+
+    }//end of fun
+
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {
         $startDate = now()->createFromFormat('Y-m-d', $startDate);

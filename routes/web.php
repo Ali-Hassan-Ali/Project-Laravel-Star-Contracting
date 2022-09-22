@@ -27,7 +27,11 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
 
     Route::get('/test', function () {
 
-        $spares = Spare::all();
+        $spares = Spare::with('equipmentsFirst')
+                        ->whereRelation('equipmentsFirst.city', 'id', 1)
+                        ->get();
+
+        return $spares;
 
         $collection = collect();
 

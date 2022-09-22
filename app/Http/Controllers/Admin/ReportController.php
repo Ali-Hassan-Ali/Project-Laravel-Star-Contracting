@@ -35,15 +35,11 @@ class ReportController extends Controller
 
                 $spares = Spare::withCount('equipments')->having('equipments', '>', '0')
                                 ->whereDateBetween(request()->start_data, request()->end_data)
-                                // ->whereRelation('equipment.city', 'id', request()->city_id)
+                                ->whereRelation('equipmentsFirst.city', 'id', request()->city_id)
                                 ->orderBy('id')->get();
             } else {
 
-                // $insurances = Insurance::query()->whereRelation('equipment.city', 'id', request()->city_id);
-
-                // $spares = Spare::withCount('equipments')->having('equipments', '>', '0')
-                //                 ->whereRelation('equipment.city', 'id', request()->city_id)
-                //                 ->orderBy('id')->get();
+                $spares = Spare::query()->whereRelation('equipmentsFirst.city', 'id', request()->city_id);
             }
 
 
@@ -93,12 +89,12 @@ class ReportController extends Controller
 
                 $spares = Spare::withCount('equipments')->having('equipments', '>', '0')
                                 ->whereDateBetween(request()->start_data, request()->end_data)
-                                // ->whereRelation('equipment.city', 'id', request()->city_id)
+                                ->whereRelation('equipmentsFirst.city', 'id', request()->city_id)
                                 ->get();
                 
             } else {
 
-                $insurances = Insurance::whereRelation('equipment.city', 'id', request()->city_id)->get();
+                $spares = Spare::whereRelation('equipmentsFirst.city', 'id', request()->city_id)->get();
             }
 
 

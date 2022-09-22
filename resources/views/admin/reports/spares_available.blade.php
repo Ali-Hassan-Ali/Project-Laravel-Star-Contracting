@@ -170,10 +170,10 @@
         });
 
         $(document).on('keyup change', '#data-table-search',function () {
-            var sum = dataTable.column(9).data().sum();
-            $('.total').html('$ ' + sum);
-            $('.total-min').html('Average Delivery Time $ ' + sum);
+            var sum = dataTable.column(7).data().sum();
             dataTable.search(this.value).draw();
+            $('.total').html('$ ' + sum);
+            $('.total-min').html('Total Cost Of Available Spares $ ' + sum);
         });
 
 
@@ -197,12 +197,10 @@
                 },
                 success: function (data) {
 
-                    console.log(data);
-
                     let total = data.total / data.count;
                     let sum = $.number(total, 2);
                     $('.total').html('$ ' + sum);
-                    $('.total-min').html('Average Delivery Time $ ' + sum);
+                    $('.total-min').html('Total Cost Of Available Spares $ ' + sum);
 
                 }//end of success
             });//end of ajax
