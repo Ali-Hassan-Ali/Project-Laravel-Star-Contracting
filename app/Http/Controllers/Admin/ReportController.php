@@ -266,20 +266,10 @@ class ReportController extends Controller
 
     public function breakdownOverview()
     {
-        if (request()->start_data && request()->end_data) {
-
-            $status = Status::with('equipment.eir')
-                    ->whereRelation('equipment.eir', 'idle', '1')
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->get();
-            
-        } else {
-
-            $status = Status::with('equipment.eir')
-                    ->whereRelation('equipment.eir', 'idle', '1')
-                    ->get();
-
-        }//wnd of if
+        
+        $status = Status::with('equipment.eir')
+                ->whereRelation('equipment.eir', 'idle', '1')
+                ->get();
 
         $average = 0;
         foreach ($status as $statu) {
@@ -297,19 +287,43 @@ class ReportController extends Controller
 
     public function dataBreakdownOverview()
     {
-        if(request()->equipment_id) {
 
-            $status = Status::with('equipment.eir')
-                ->whereRelation('equipment.eir', 'idle', '1')
-                ->whereRelation('equipment', 'id', request()->equipment_id)
-                ->get();
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $status = Status::with('equipment.eir')
+                                ->whereRelation('equipment.eir', 'idle', '1')
+                                ->whereDateBetween(request()->start_data, request()->end_data)
+                                ->whereRelation('equipment.city', 'id', request()->city_id)
+                                ->orderBy('id')->get();
+            } else {
+
+                $status = Status::with('equipment.eir')
+                                ->whereRelation('equipment.eir', 'idle', '1')
+                                ->whereRelation('equipment.city', 'id', request()->city_id)
+                                ->orderBy('id')->get();
+            }
+
 
         } else {
 
-            $status = Status::with('equipment.eir')
-                ->whereRelation('equipment.eir', 'idle', '1')
-                ->get();
-        }
+            if (request()->start_data && request()->end_data) {
+
+                $status = Status::with('equipment.eir')
+                                ->whereRelation('equipment.eir', 'idle', '1')
+                                ->whereDateBetween(request()->start_data, request()->end_data)
+                                ->orderBy('id')->get();
+                
+            } else {
+
+                $status = Status::with('equipment.eir')
+                                ->whereRelation('equipment.eir', 'idle', '1')
+                                ->orderBy('id')->get();
+            }
+
+
+        }//end of if
 
         return DataTables::of($status)
             ->addColumn('city', function (Status $status) {
@@ -347,10 +361,42 @@ class ReportController extends Controller
 
     public function sumBreakdownOverview()
     {
-        $status = Status::with('equipment.eir')
-            ->whereRelation('equipment.eir', 'idle', '1')
-            ->whereRelation('equipment', 'id', request()->equipment_id)
-            ->get();
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $status = Status::with('equipment.eir')
+                                ->whereRelation('equipment.eir', 'idle', '1')
+                                ->whereDateBetween(request()->start_data, request()->end_data)
+                                ->whereRelation('equipment.city', 'id', request()->city_id)
+                                ->orderBy('id')->get();
+            } else {
+
+                $status = Status::with('equipment.eir')
+                                ->whereRelation('equipment.eir', 'idle', '1')
+                                ->whereRelation('equipment.city', 'id', request()->city_id)
+                                ->orderBy('id')->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $status = Status::with('equipment.eir')
+                                ->whereRelation('equipment.eir', 'idle', '1')
+                                ->whereDateBetween(request()->start_data, request()->end_data)
+                                ->orderBy('id')->get();
+                
+            } else {
+
+                $status = Status::with('equipment.eir')
+                                ->whereRelation('equipment.eir', 'idle', '1')
+                                ->orderBy('id')->get();
+            }
+
+
+        }//end of if
 
         $average = 0;
 
@@ -358,13 +404,14 @@ class ReportController extends Controller
             if (isset($statu->equipment->eir)) {
                 $total_break_down = isset($statu->equipment->eir->total_break_down_duration) ? $statu->equipment->eir->total_break_down_duration : 0;
                 $average += $statu->break_down_duration;
-//                $average += $statu->break_down_duration + $total_break_down;
             }
         }
 
         return response()->json(['averages' => $average, 'count' => $status->count()]);
 
     }//end of fun
+
+    //////////////////////////////////////////////////////////////
 
     // material_delivery_time
 
