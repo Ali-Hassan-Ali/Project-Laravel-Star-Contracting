@@ -144,7 +144,7 @@
         var endData;
         let cityID;
 
-        let DataTable = $('#material_delivery_time-table').DataTable({
+        let dataTable = $('#material_delivery_time-table').DataTable({
             dom: "Bfrtip",
             paging: false,
             serverSide: true,
@@ -207,8 +207,9 @@
         $(document).on('keyup change', '#data-table-search',function () {
             var sum = dataTable.column(7).data().sum();
             dataTable.search(this.value).draw();
+            
             $('.total').html('$ ' + sum);
-            $('.total-min').html('Total Cost Of Used Spares $ ' + sum);
+            $('.total-min').html('Total Cost Of Fuel $ ' + sum);
         });
 
 
@@ -235,8 +236,9 @@
 
                     let total = data.total / data.count;
                     let sum = $.number(total, 2);
+
                     $('.total').html('$ ' + sum);
-                    $('.total-min').html('Total Cost Of Used Spares $ ' + sum);
+                    $('.total-min').html('Total Cost Of Fuel $ ' + sum);
 
                 }//end of success
             });//end of ajax
