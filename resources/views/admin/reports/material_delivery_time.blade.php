@@ -213,7 +213,7 @@
             dataTable.search(this.value).draw();
 
             // $('.average').html('$ ' + sum);
-            $('.average-min').html('Average Delivery Time' + sum);
+            $('.average-min').html('Average Delivery Time ' + sum);
         });
 
 
@@ -242,7 +242,7 @@
 
                     $('.count').html(data.count);
                     $('.average').html(sum);
-                    $('.average-min').html('Average Delivery Time' + sum);
+                    $('.average-min').html('Average Delivery Time ' + sum);
 
                 }//end of success
             });//end of ajax
