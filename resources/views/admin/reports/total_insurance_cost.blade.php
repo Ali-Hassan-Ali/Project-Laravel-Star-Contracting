@@ -171,7 +171,7 @@
 
         $(document).on('keyup change', '#data-table-search',function () {
             var sum = dataTable.column(5).data().sum();
-            $('.total').html('*$ ' + sum);
+            $('.total').html('$ ' + sum);
             $('.total-min').html('Total Cost Of Insurance $ ' + sum);
             dataTable.search(this.value).draw();
         });
