@@ -97,7 +97,7 @@
                                         <td class="text-center"></td>
                                         <td class="text-center"></td>
                                         <td class="text-center">@lang('reports.total_cost_spare')</td>
-                                        <td class="text-center">$ {{ $totalCostSpare }}</td>
+                                        <td class="text-center total">$ {{ $totalCostSpare }}</td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -109,6 +109,8 @@
                     </div><!-- end of row -->
                 
                 </div>{{--end of collapse --}}
+
+                <h4 class="text-end total-min">@lang('reports.total_cost_spare') $ {{ $totalCostSpare }}</h4>
             
             </div><!-- end of tile -->
         
@@ -168,9 +170,9 @@
         });
 
         $(document).on('keyup change', '#data-table-search',function () {
-            var sum = dataTable.column(7).data().sum();
-            $('.average').html('$ ' + sum);
-            $('.average-min').html('Average Delivery Time $ ' + sum);
+            var sum = dataTable.column(9).data().sum();
+            $('.total').html('$ ' + sum);
+            $('.total-min').html('Average Delivery Time $ ' + sum);
             dataTable.search(this.value).draw();
         });
 
@@ -195,10 +197,12 @@
                 },
                 success: function (data) {
 
+                    console.log(data.total);
+
                     let total = data.total / data.count;
                     let sum = $.number(total, 2);
-                    $('.average').html('$ ' + sum);
-                    $('.average-min').html('Average Delivery Time $ ' + sum);
+                    $('.total').html('$ ' + sum);
+                    $('.total-min').html('Average Delivery Time $ ' + sum);
 
                 }//end of success
             });//end of ajax

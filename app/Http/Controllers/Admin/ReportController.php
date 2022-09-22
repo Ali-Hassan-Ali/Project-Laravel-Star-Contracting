@@ -28,7 +28,40 @@ class ReportController extends Controller
 
     public function dataAparesAvailable()
     {
-        $spares = Spare::withCount('equipments')->having('equipments', '>', '0')->orderBy('id')->get();
+
+         if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $spares = Spare::withCount('equipments')->having('equipments', '>', '0')
+                                ->whereDateBetween(request()->start_data, request()->end_data)
+                                // ->whereRelation('equipment.city', 'id', request()->city_id)
+                                ->orderBy('id')->get();
+            } else {
+
+                // $insurances = Insurance::query()->whereRelation('equipment.city', 'id', request()->city_id);
+
+                // $spares = Spare::withCount('equipments')->having('equipments', '>', '0')
+                //                 ->whereRelation('equipment.city', 'id', request()->city_id)
+                //                 ->orderBy('id')->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $spares = Spare::query()->withCount('equipments')
+                                ->having('equipments', '>', '0')
+                                ->whereDateBetween(request()->start_data, request()->end_data);
+                
+            } else {
+
+                $spares = Spare::query()->withCount('equipments')->having('equipments', '>', '0');
+            }
+
+
+        }//end of if
 
         return DataTables::of($spares)
             ->addColumn('site', function (Spare $spare) {
@@ -50,6 +83,57 @@ class ReportController extends Controller
 
     }// end of data
 
+
+
+    public function sumAparesAvailable()
+    {
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $spares = Spare::withCount('equipments')->having('equipments', '>', '0')
+                                ->whereDateBetween(request()->start_data, request()->end_data)
+                                // ->whereRelation('equipment.city', 'id', request()->city_id)
+                                ->get();
+                
+            } else {
+
+                $insurances = Insurance::whereRelation('equipment.city', 'id', request()->city_id)->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $spares = Spare::withCount('equipments')->having('equipments', '>', '0')
+                                ->whereDateBetween(request()->start_data, request()->end_data)
+                                ->get();
+                
+            } else {
+
+                $spares = Spare::query()->withCount('equipments')->having('equipments', '>', '0');
+            }
+
+
+        }//end of if
+
+        $collection = collect();
+
+        foreach($spares as $spare) {
+
+            $total = $spare->cost + $spare->freight_charges;
+
+            $collection->push(['premium' => $total]);
+
+        }//end of each
+
+
+        $total = $collection->sum('premium');  
+
+        return response()->json(['total' => $total, 'count' => $spares->count()]);
+
+    }//end of fun
 
 
     public function AparesUsed()

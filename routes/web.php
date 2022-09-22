@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Attachment;
 use App\Models\Equipment;
+use App\Models\Spare;
 use Illuminate\Support\Facades\Storage;
 
 Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale())->group(function () {
@@ -25,6 +26,22 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
     })->name('view.pdf');
 
     Route::get('/test', function () {
+
+        $spares = Spare::all();
+
+        $collection = collect();
+
+        foreach($spares as $spare) {
+
+            $total = $spare->cost + $spare->freight_charges;
+
+            $collection->push(['premium' => $total]);
+
+        }//end of each
+
+        return $collection->sum('premium');     
+
+        dd($spares);
 
         $name = 'fgg';
         dd(empty($name));
