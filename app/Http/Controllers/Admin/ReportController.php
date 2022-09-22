@@ -448,21 +448,20 @@ class ReportController extends Controller
 
     public function dataMaterialDeliveryTime()
     {
-
         if(request()->city_id) {
 
             if (request()->start_data && request()->end_data) {
 
                 $equipments = Equipment::with('eir')
                                         ->whereDateBetween(request()->start_data, request()->end_data)
-                                        ->where('city_id', 'id', request()->city_id)
+                                        ->where('city_id', request()->city_id)
                                         ->orderBy('city_id')
                                         ->get();
 
             } else {
 
                 $equipments = Equipment::with('eir')
-                                        ->where('city_id', 'id', request()->city_id)
+                                        ->where('city_id', request()->city_id)
                                         ->orderBy('city_id')
                                         ->get();
             }
@@ -519,14 +518,14 @@ class ReportController extends Controller
 
                 $equipments = Equipment::with('eir')
                                         ->whereDateBetween(request()->start_data, request()->end_data)
-                                        ->where('city_id', 'id', request()->city_id)
+                                        ->where('city_id', request()->city_id)
                                         ->orderBy('city_id')
                                         ->get();
 
             } else {
 
                 $equipments = Equipment::with('eir')
-                                        ->where('city_id', 'id', request()->city_id)
+                                        ->where('city_id', request()->city_id)
                                         ->orderBy('city_id')
                                         ->get();
             }
