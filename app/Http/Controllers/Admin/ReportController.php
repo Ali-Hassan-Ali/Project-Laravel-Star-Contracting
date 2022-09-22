@@ -73,6 +73,14 @@ class ReportController extends Controller
             ->editColumn('location', function (Spare $spare) {
                 return $spare->location ?? '';
             })
+            ->editColumn('cost', function (Spare $spare) {
+                $cost = $spare->cost;
+                return '$' . $cost;
+            })
+            ->editColumn('freight_charges', function (Spare $spare) {
+                $freight_charges = $spare->freight_charges;
+                return '$' . $freight_charges;
+            })
             ->addColumn('total_cost', function (Spare $spare) {
                 $total = $spare->cost + $spare->freight_charges;
                 return '$' . $total;
@@ -189,6 +197,14 @@ class ReportController extends Controller
             })
             ->editColumn('location', function (Spare $spare) {
                 return $spare->location ?? '';
+            })
+            ->editColumn('cost', function (Spare $spare) {
+                $cost = $spare->cost;
+                return '$' . $cost;
+            })
+            ->editColumn('freight_charges', function (Spare $spare) {
+                $freight_charges = $spare->freight_charges;
+                return '$' . $freight_charges;
             })
             ->addColumn('total_cost', function (Spare $spare) {
                 $total = $spare->cost + $spare->freight_charges;

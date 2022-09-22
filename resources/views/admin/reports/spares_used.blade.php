@@ -160,7 +160,7 @@
                 {data: 'name', name: 'name'},
                 {data: 'part_no', name: 'part_no'},
                 {data: 'cost', name: 'cost'},
-                {data: 'cost', name: 'cost'},
+                {data: 'freight_charges', name: 'freight_charges'},
                 {data: 'used', name: 'used'},
                 {data: 'total_cost', name: 'total_cost'},
             ],
