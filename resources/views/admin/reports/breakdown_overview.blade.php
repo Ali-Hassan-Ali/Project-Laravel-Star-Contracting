@@ -305,7 +305,7 @@
                     let sum = $.number(total, 2);
 
                     $('.count').html(data.count);
-                    $('.average').html('$ ' + sum);
+                    $('.average').html(sum);
                     $('.average-min').html('Average Breakdown Duration' + sum + 'Days');
 
                 }//end of success
