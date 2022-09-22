@@ -35,7 +35,7 @@
                     {{-- from data --}}
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input placeholder="From" class="date-search report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start-date">
+                            <input placeholder="From" class="date-search start-date report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start-date">
                         </div>
                     </div>
 
@@ -157,7 +157,14 @@
             buttons: [{
                 footer: true,
                 extend: "pdf",
-                title: $('.title-download').html() + ' - ' + "{{ now()->format('d-m-Y') }}",
+                text: 'All',
+                title: function () { 
+                    let title = $('.title-download').html() + ' - ' + "{{ now()->format('d-m-Y') }}" 
+                                + '\n' 
+                                + $('#start-date').val() + '|' + $('#end-date').val();
+
+                    return title;
+                },
                 className: 'btn btn-primary',
                 orientation: 'landscape',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
