@@ -768,7 +768,7 @@ class ReportController extends Controller
                 return $insurance->equipment->city->name  ?? '';
             })
             ->editColumn('premium', function (Insurance $insurance) {
-                $premium = $insurance->premium  ?? '';
+                $premium = $insurance->premium  ?? 0;
 
                 return "$ $premium";
             })
