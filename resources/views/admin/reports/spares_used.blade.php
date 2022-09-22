@@ -124,11 +124,21 @@
     
     <script>
         
-        function getDate(EData) {
+        function getStartDate(EData) {
             if (EData) {
 
                 var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
-                return newDate;
+                return 'From ' + newDate;
+            }
+
+            return '';
+        }
+
+        function getEndDate(EData) {
+            if (EData) {
+
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+                return 'To ' + newDate;
             }
 
             return '';
@@ -170,7 +180,7 @@
                 text: 'All',
                 title: function () { 
                     let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
-                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + 'From ' + getDate($('#start-date').val()) + ' ' + 'To ' + getDate($('#start-date').val());
+                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + 'From ' + getStartDate($('#start-date').val()) + ' ' + 'To ' + getEndDate($('#start-date').val());
 
                     return title;
                 },

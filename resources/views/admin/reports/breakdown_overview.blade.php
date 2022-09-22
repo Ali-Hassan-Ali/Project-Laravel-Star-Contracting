@@ -134,6 +134,26 @@
     
     <script>
 
+        function getStartDate(EData) {
+            if (EData) {
+
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+                return 'From ' + newDate;
+            }
+
+            return '';
+        }
+
+        function getEndDate(EData) {
+            if (EData) {
+
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+                return 'To ' + newDate;
+            }
+
+            return '';
+        }
+
         let equipmentID;
         var startData;
         var endData;
@@ -175,7 +195,12 @@
             buttons: [{
                 footer: true,
                 extend: "pdf",
-                title: $('.title-download').html() + ' - ' + "{{ now()->format('d-m-Y') }}",
+                title: function () { 
+                    let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
+                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + 'From ' + getStartDate($('#start-date').val()) + ' ' + 'To ' + getEndDate($('#start-date').val());
+
+                    return title;
+                },
                 className: 'btn btn-primary',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
                 customize: function(doc) {
@@ -246,6 +271,7 @@
             }
     
         });//end of data-table-search-city
+
     </script>
 
 @endpush
