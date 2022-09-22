@@ -80,8 +80,6 @@ class ReportController extends Controller
 
     }// end of data
 
-
-
     public function sumAparesAvailable()
     {
         if(request()->city_id) {
@@ -131,14 +129,124 @@ class ReportController extends Controller
 
     }//end of fun
 
+    //////////////////////////////////////////////////////////////
 
-    public function AparesUsed()
+
+    public function SparesUsed()
     {
-        $citys = City::with('equipments.spares')->get();
+        $spares = Spare::query()->where('used', '1');
+        $totalCostSpare = $spares->sum('cost') + $spares->sum('freight_charges');
 
-        return view('admin.reports.spares_used', compact('citys'));
+        $citys = City::all();
+
+        return view('admin.reports.spares_used', compact('spares','totalCostSpare', 'citys'));
 
     }//end of fun
+
+    public function dataSparesUsed()
+    {
+
+         if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $spares = Spare::where('used', '1')->withCount('equipments')->having('equipments', '>', '0')
+                                ->whereDateBetween(request()->start_data, request()->end_data)
+                                ->whereRelation('equipmentsFirst.city', 'id', request()->city_id)
+                                ->orderBy('id')->get();
+            } else {
+
+                $spares = Spare::query()->where('used', '1')->whereRelation('equipmentsFirst.city', 'id', request()->city_id);
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $spares = Spare::query()->where('used', '1')
+                                ->withCount('equipments')
+                                ->having('equipments', '>', '0')
+                                ->whereDateBetween(request()->start_data, request()->end_data);
+                
+            } else {
+
+                $spares = Spare::query()->where('used', '1')->withCount('equipments')->having('equipments', '>', '0');
+            }
+
+
+        }//end of if
+
+        return DataTables::of($spares)
+            ->addColumn('site', function (Spare $spare) {
+                return $spare->equipments()->first()->city->name;
+            })
+            ->addColumn('equipments', function (Spare $spare) {
+                return view('admin.spares.data_table._equipment', compact('spare'));
+            })
+            ->addColumn('used', function (Spare $spare) {
+                return $spare->used == 1 ? 'Yes' : 'No';
+            })
+            ->editColumn('location', function (Spare $spare) {
+                return $spare->location ?? '';
+            })
+            ->addColumn('total_cost', function (Spare $spare) {
+                $total = $spare->cost + $spare->freight_charges;
+                return '$' . $total;
+            })->toJson();
+
+    }// end of data
+
+    public function sumSparesUsed()
+    {
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $spares = Spare::where('used', '1')->withCount('equipments')->having('equipments', '>', '0')
+                                ->whereDateBetween(request()->start_data, request()->end_data)
+                                ->whereRelation('equipmentsFirst.city', 'id', request()->city_id)
+                                ->get();
+                
+            } else {
+
+                $spares = Spare::where('used', '1')->whereRelation('equipmentsFirst.city', 'id', request()->city_id)->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $spares = Spare::where('used', '1')->withCount('equipments')->having('equipments', '>', '0')
+                                ->whereDateBetween(request()->start_data, request()->end_data)
+                                ->get();
+                
+            } else {
+
+                $spares = Spare::where('used', '1')->withCount('equipments')->having('equipments', '>', '0')->get();
+            }
+
+
+        }//end of if
+
+        $collection = collect();
+
+        foreach($spares as $spare) {
+
+            $total = $spare->cost + $spare->freight_charges;
+
+            $collection->push(['premium' => $total]);
+
+        }//end of each
+
+        $total = $collection->sum('premium');  
+
+        return response()->json(['total' => $total, 'count' => $spares->count()]);
+
+    }//end of fun
+
+    //////////////////////////////////////////////////////////////
 
     public function breakdownOverview()
     {

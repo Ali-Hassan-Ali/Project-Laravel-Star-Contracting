@@ -20,9 +20,9 @@ Route::middleware([
             Route::get('/spares_available/sum', 'ReportController@sumAparesAvailable')->name('spares_available.sum');
             Route::get('/spares_available/data', 'ReportController@dataAparesAvailable')->name('spares_available.data');
 
-            Route::get('reports/spares_used', 'ReportController@AparesUsed')->name('reports.spares_used');
-            Route::get('/spares_used/sum', 'ReportController@sumAparesUsed')->name('spares_used.sum');
-            Route::get('/spares_used/data', 'ReportController@dataAparesUsed')->name('spares_used.data');
+            Route::get('reports/spares_used', 'ReportController@SparesUsed')->name('reports.spares_used');
+            Route::get('/spares_used/sum', 'ReportController@sumSparesUsed')->name('spares_used.sum');
+            Route::get('/spares_used/data', 'ReportController@dataSparesUsed')->name('spares_used.data');
 
             Route::get('reports/breakdown_overview', 'ReportController@breakdownOverview')->name('reports.breakdown_overview');
             Route::get('/breakdown_overview/sum', 'ReportController@sumBreakdownOverview')->name('breakdown_overview.sum');
