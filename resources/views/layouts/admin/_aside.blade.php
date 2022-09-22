@@ -89,7 +89,7 @@
 
                 {{--request_parts--}}
                 @if (auth()->user()->hasPermission('read_request_parts'))
-                    <li><a class="treeview-item {{ request()->segment(3) == 'request_parts' ? 'active' : '' }}" href="{{ route('admin.request_parts.index') }}"><i class="icon fa-solid fa-code-compare"></i> </i> @lang('request_parts.request_parts')></a></li>
+                    <li><a class="treeview-item {{ request()->segment(3) == 'request_parts' ? 'active' : '' }}" href="{{ route('admin.request_parts.index') }}"><i class="icon fa-solid fa-code-compare"></i> </i> @lang('request_parts.request_parts')</a></li>
                 @endif
 
                 {{--maintenances--}}
