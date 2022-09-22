@@ -407,7 +407,7 @@ class ReportController extends Controller
             }
         }
 
-        return response()->json(['averages' => $average, 'count' => $status->count()]);
+        return response()->json(['total' => $average, 'count' => $status->count()]);
 
     }//end of fun
 

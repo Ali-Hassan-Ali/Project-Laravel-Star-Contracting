@@ -272,6 +272,48 @@
     
         });//end of data-table-search-city
 
+        $(document).on('keyup change', '#data-table-search',function () {
+            var sum = dataTable.column(7).data().sum();
+            dataTable.search(this.value).draw();
+
+            // $('.average').html('$ ' + sum);
+            $('.average-min').html('Average Breakdown Duration' + sum + 'Days');
+        });
+
+
+        $(document).on('keyup change', '.report-search', function () {
+
+            cityID      = $('#report-city').val()  ?? false;
+            startData   = $('#start-date').val()  ?? false;
+            endData     = $('#end-date').val() ?? false;
+
+            let url     = '{{ route('admin.spares_used.sum') }}';
+            var id      = $('#report-city').find(':selected').val();
+            var method  = 'get';
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: {
+                    city_id: $('#report-city').val()  ?? false,
+                    start_data: $('#start-date').val()  ?? false,
+                    end_data: $('#end-date').val() ?? false,
+                },
+                success: function (data) {
+
+                    let total = data.total / data.count;
+                    let sum = $.number(total, 2);
+
+                    $('.count').html(data.count);
+                    $('.average').html('$ ' + sum);
+                    $('.average-min').html('Average Breakdown Duration' + sum + 'Days');
+
+                }//end of success
+            });//end of ajax
+            dataTable.ajax.reload();
+
+        });//end of data-table-search-city
+
     </script>
 
 @endpush
