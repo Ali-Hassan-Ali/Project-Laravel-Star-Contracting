@@ -32,7 +32,7 @@ class ReportController extends Controller
 
         return DataTables::of($spares)
             ->addColumn('site', function (Spare $spare) {
-                return '';
+                return $spare->equipments()->first()->city->name;
             })
             ->addColumn('equipments', function (Spare $spare) {
                 return view('admin.spares.data_table._equipment', compact('spare'));

@@ -122,7 +122,7 @@
             buttons: [{
                 footer: true,
                 extend: "pdf",
-                title: $('.title-download').html() + ' - ' +"{{ now()->format('d-m-Y') }}",
+                title: $('.title-download').html() + ' - ' + "{{ now()->format('d-m-Y') }}",
                 className: 'btn btn-primary',
                 orientation: 'landscape',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
