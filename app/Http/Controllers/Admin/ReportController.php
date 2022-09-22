@@ -767,6 +767,11 @@ class ReportController extends Controller
             ->addColumn('city', function (Insurance $insurance) {
                 return $insurance->equipment->city->name  ?? '';
             })
+            ->addColumn('premium', function (Insurance $insurance) {
+                $premium = $insurance->premium  ?? '';
+
+                return "$ $premium";
+            })
             ->toJson();
 
     }//end of fun
