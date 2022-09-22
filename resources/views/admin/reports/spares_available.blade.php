@@ -124,6 +124,11 @@
     
     <script>
         
+        function getDate(EData) {
+            var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+            return newDate;
+        }
+
         var startData;
         var endData;
         let cityID;
@@ -159,8 +164,8 @@
                 extend: "pdf",
                 text: 'All',
                 title: function () { 
-                    let title = $('.title-download').html() + ' - ' + "{{ now()->format('d-m-Y') }}" 
-                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + $('#start-date').val() + ' ' + $('#end-date').val();
+                    let title = $('.title-download').html() + '\n' + 'Data ' + "{{ now()->format('d-m-Y') }}" 
+                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + getDate($('#start-date').val()); + getDate($('#start-date').val());
 
                     return title;
                 },
@@ -184,6 +189,7 @@
 
 
         $(document).on('keyup change', '.report-search', function () {
+
 
             cityID      = $('#report-city').val()  ?? false;
             startData   = $('#start-date').val()  ?? false;
@@ -214,6 +220,8 @@
 
         });//end of data-table-search-city
 
+
     </script>
 
 @endpush
+
