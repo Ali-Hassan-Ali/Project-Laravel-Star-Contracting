@@ -86,102 +86,106 @@ Route::middleware([
             Route::get('/statistics_ro', 'StatisticsController@chart')->name('statistics.chart');
             Route::get('/statistics_table', 'StatisticsController@table')->name('statistics.table');
 
-            //combo boxs routes
-            Route::get('/combo_boxs/data', 'ComboBoxController@data')->name('combo_boxs.data');
-            Route::delete('/combo_boxs/bulk_delete', 'ComboBoxController@bulkDelete')->name('combo_boxs.bulk_delete');
-            Route::resource('combo_boxs', 'ComboBoxController');
+            Route::prefix('models')->group(function () {
 
-            //role routes
-            Route::get('/roles/data', 'RoleController@data')->name('roles.data');
-            Route::delete('/roles/bulk_delete', 'RoleController@bulkDelete')->name('roles.bulk_delete');
-            Route::resource('roles', 'RoleController');
+                //combo boxs routes
+                Route::get('/combo_boxs/data', 'ComboBoxController@data')->name('combo_boxs.data');
+                Route::delete('/combo_boxs/bulk_delete', 'ComboBoxController@bulkDelete')->name('combo_boxs.bulk_delete');
+                Route::resource('combo_boxs', 'ComboBoxController');
 
-            //admin routes
-            Route::get('/admins/data', 'AdminController@data')->name('admins.data');
-            Route::delete('/admins/bulk_delete', 'AdminController@bulkDelete')->name('admins.bulk_delete');
-            Route::resource('admins', 'AdminController');
+                //role routes
+                Route::get('/roles/data', 'RoleController@data')->name('roles.data');
+                Route::delete('/roles/bulk_delete', 'RoleController@bulkDelete')->name('roles.bulk_delete');
+                Route::resource('roles', 'RoleController');
 
-            //user routes
-            Route::get('/users/data', 'UserController@data')->name('users.data');
-            Route::delete('/users/bulk_delete', 'UserController@bulkDelete')->name('users.bulk_delete');
-            Route::resource('users', 'UserController');
+                //admin routes
+                Route::get('/admins/data', 'AdminController@data')->name('admins.data');
+                Route::delete('/admins/bulk_delete', 'AdminController@bulkDelete')->name('admins.bulk_delete');
+                Route::resource('admins', 'AdminController');
 
-            //country routes
-            Route::get('/countrys/data', 'CountryController@data')->name('countrys.data');
-            Route::delete('/countrys/bulk_delete', 'CountryController@bulkDelete')->name('countrys.bulk_delete');
-            Route::resource('countrys', 'CountryController');
+                //user routes
+                Route::get('/users/data', 'UserController@data')->name('users.data');
+                Route::delete('/users/bulk_delete', 'UserController@bulkDelete')->name('users.bulk_delete');
+                Route::resource('users', 'UserController');
 
-            //citys routes
-            Route::get('/citys/data', 'CityController@data')->name('citys.data');
-            Route::delete('/citys/bulk_delete', 'CityController@bulkDelete')->name('citys.bulk_delete');
-            Route::resource('citys', 'CityController');
+                //country routes
+                Route::get('/countrys/data', 'CountryController@data')->name('countrys.data');
+                Route::delete('/countrys/bulk_delete', 'CountryController@bulkDelete')->name('countrys.bulk_delete');
+                Route::resource('countrys', 'CountryController');
 
-            //types routes
-            Route::get('/types/data', 'TypeController@data')->name('types.data');
-            Route::delete('/types/bulk_delete', 'TypeController@bulkDelete')->name('types.bulk_delete');
-            Route::resource('types', 'TypeController');
+                //citys routes
+                Route::get('/citys/data', 'CityController@data')->name('citys.data');
+                Route::delete('/citys/bulk_delete', 'CityController@bulkDelete')->name('citys.bulk_delete');
+                Route::resource('citys', 'CityController');
 
-            //statuses routes
-            Route::get('/status/data', 'StatusController@data')->name('status.data');
-            Route::delete('/status/bulk_delete', 'StatusController@bulkDelete')->name('status.bulk_delete');
-            Route::resource('status', 'StatusController');
+                //types routes
+                Route::get('/types/data', 'TypeController@data')->name('types.data');
+                Route::delete('/types/bulk_delete', 'TypeController@bulkDelete')->name('types.bulk_delete');
+                Route::resource('types', 'TypeController');
 
-            //spares routes
-            Route::get('/spares/data', 'SpareController@data')->name('spares.data');
-            Route::delete('/spares/bulk_delete', 'SpareController@bulkDelete')->name('spares.bulk_delete');
-            Route::resource('spares.attachment', 'SpareAttachmentController');
-            Route::resource('spares', 'SpareController');
+                //statuses routes
+                Route::get('/status/data', 'StatusController@data')->name('status.data');
+                Route::delete('/status/bulk_delete', 'StatusController@bulkDelete')->name('status.bulk_delete');
+                Route::resource('status', 'StatusController');
 
-            //specs routes
-            Route::get('/specs/data', 'SpecController@data')->name('specs.data');
-            Route::delete('/specs/bulk_delete', 'SpecController@bulkDelete')->name('specs.bulk_delete');
-            Route::resource('specs', 'SpecController');
+                //spares routes
+                Route::get('/spares/data', 'SpareController@data')->name('spares.data');
+                Route::delete('/spares/bulk_delete', 'SpareController@bulkDelete')->name('spares.bulk_delete');
+                Route::resource('spares.attachment', 'SpareAttachmentController');
+                Route::resource('spares', 'SpareController');
 
-            //insurances routes
-            Route::post('/insurances/claim', 'InsuranceController@claim')->name('insurances.claim');
-            Route::get('/insurances/data', 'InsuranceController@data')->name('insurances.data');
-            Route::delete('/insurances/bulk_delete', 'InsuranceController@bulkDelete')->name('insurances.bulk_delete');
-            Route::resource('insurances.attachment', 'InsurancesAttachmentController');
-            Route::resource('insurances', 'InsuranceController');
+                //specs routes
+                Route::get('/specs/data', 'SpecController@data')->name('specs.data');
+                Route::delete('/specs/bulk_delete', 'SpecController@bulkDelete')->name('specs.bulk_delete');
+                Route::resource('specs', 'SpecController');
 
-            //equipments routes
+                //insurances routes
+                Route::post('/insurances/claim', 'InsuranceController@claim')->name('insurances.claim');
+                Route::get('/insurances/data', 'InsuranceController@data')->name('insurances.data');
+                Route::delete('/insurances/bulk_delete', 'InsuranceController@bulkDelete')->name('insurances.bulk_delete');
+                Route::resource('insurances.attachment', 'InsurancesAttachmentController');
+                Route::resource('insurances', 'InsuranceController');
 
-            Route::resource('equipments.attachment', 'EquipmentAttachmentController');
+                //equipments routes
 
-            Route::post('/equipments/country', 'EquipmentController@country')->name('equipments.country');
-            Route::post('/equipments/type', 'EquipmentController@type')->name('equipments.type');
-            Route::get('/equipments/data', 'EquipmentController@data')->name('equipments.data');
-            Route::delete('/equipments/bulk_delete', 'EquipmentController@bulkDelete')->name('equipments.bulk_delete');
-            Route::resource('equipments', 'EquipmentController');
+                Route::resource('equipments.attachment', 'EquipmentAttachmentController');
 
-            //maintenances routes
-            Route::get('/maintenances/data', 'MaintenanceController@data')->name('maintenances.data');
-            Route::delete('/maintenances/bulk_delete', 'MaintenanceController@bulkDelete')->name('maintenances.bulk_delete');
-            Route::resource('maintenances', 'MaintenanceController');
+                Route::post('/equipments/country', 'EquipmentController@country')->name('equipments.country');
+                Route::post('/equipments/type', 'EquipmentController@type')->name('equipments.type');
+                Route::get('/equipments/data', 'EquipmentController@data')->name('equipments.data');
+                Route::delete('/equipments/bulk_delete', 'EquipmentController@bulkDelete')->name('equipments.bulk_delete');
+                Route::resource('equipments', 'EquipmentController');
 
-            //fuels routes
-            Route::get('/fuels/data', 'FuelController@data')->name('fuels.data');
-            Route::delete('/fuels/bulk_delete', 'FuelController@bulkDelete')->name('fuels.bulk_delete');
-            Route::resource('fuels', 'FuelController');
+                //maintenances routes
+                Route::get('/maintenances/data', 'MaintenanceController@data')->name('maintenances.data');
+                Route::delete('/maintenances/bulk_delete', 'MaintenanceController@bulkDelete')->name('maintenances.bulk_delete');
+                Route::resource('maintenances', 'MaintenanceController');
 
-
-            //eirs routes
-            Route::get('/eirs/request_parts/unit', 'EirController@unit')->name('eirs.request_parts.unit');
-            Route::get('/eirs/data', 'EirController@data')->name('eirs.data');
-            Route::delete('/eirs/bulk_delete', 'EirController@bulkDelete')->name('eirs.bulk_delete');
-            Route::resource('eirs.attachment', 'EirAttachmentController');
-            Route::resource('eirs', 'EirController');
+                //fuels routes
+                Route::get('/fuels/data', 'FuelController@data')->name('fuels.data');
+                Route::delete('/fuels/bulk_delete', 'FuelController@bulkDelete')->name('fuels.bulk_delete');
+                Route::resource('fuels', 'FuelController');
 
 
-            //request_parts routes
-            Route::get('/request_parts/data', 'RequestPartController@data')->name('request_parts.data');
-            Route::delete('/request_parts/bulk_delete', 'RequestPartController@bulkDelete')->name('request_parts.bulk_delete');
-            Route::resource('request_parts', 'RequestPartController');
+                //eirs routes
+                Route::get('/eirs/request_parts/unit', 'EirController@unit')->name('eirs.request_parts.unit');
+                Route::get('/eirs/data', 'EirController@data')->name('eirs.data');
+                Route::delete('/eirs/bulk_delete', 'EirController@bulkDelete')->name('eirs.bulk_delete');
+                Route::resource('eirs.attachment', 'EirAttachmentController');
+                Route::resource('eirs', 'EirController');
 
-            //request_parts routes
-            Route::get('/email_systems/data', 'EmailSystemController@data')->name('email_systems.data');
-            Route::delete('/email_systems/bulk_delete', 'EmailSystemController@bulkDelete')->name('email_systems.bulk_delete');
-            Route::resource('email_systems', 'EmailSystemController');
+
+                //request_parts routes
+                Route::get('/request_parts/data', 'RequestPartController@data')->name('request_parts.data');
+                Route::delete('/request_parts/bulk_delete', 'RequestPartController@bulkDelete')->name('request_parts.bulk_delete');
+                Route::resource('request_parts', 'RequestPartController');
+
+                //request_parts routes
+                Route::get('/email_systems/data', 'EmailSystemController@data')->name('email_systems.data');
+                Route::delete('/email_systems/bulk_delete', 'EmailSystemController@bulkDelete')->name('email_systems.bulk_delete');
+                Route::resource('email_systems', 'EmailSystemController');
+
+            });//end of models
 
           
 

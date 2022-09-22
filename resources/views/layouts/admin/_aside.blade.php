@@ -27,26 +27,6 @@
             </ul>
         </li>
 
-        <li class="treeview {{ request()->is('*tables*') || request()->is('*tables*')  ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fas fa-chart-area"></i><span class="app-menu__label">@lang('tables.tables')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-            <ul class="treeview-menu">
-
-                @php
-                    $models = ['equipments', 'status', 'spares', 'eirs', 'request_parts', 'maintenances', 'fuels', 'insurances', 'specs'];     
-                @endphp
-
-                @foreach($models as $model)
-
-                    <li>
-                        <a class="treeview-item {{ request()->segment(4) == $model ? 'active' : '' }}" href="{{ route('admin.tables', ['name' => $model]) }}">
-                            <i class="icon fas fa-chart-line"></i>
-                            @lang($model .'.'. $model)
-                        </a>
-                    </li>
-
-                @endforeach
-
-            </ul>
-        </li>
 
         {{--reports--}}
         <li class="treeview {{ request()->is('*reports*') ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">@lang('reports.reports')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
@@ -67,77 +47,104 @@
             </ul>
         </li>
 
-        {{--equipments--}}
-        @if (auth()->user()->hasPermission('read_equipments'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'equipments' ? 'active' : '' }}" href="{{ route('admin.equipments.index') }}"><i class="app-menu__icon fas fa-tools"></i> <span class="app-menu__label">@lang('equipments.equipments')</span></a></li>
-        @endif
+        {{--models--}}
+        <li class="treeview {{ request()->is('*models*') ? 'is-expanded' : '' }}">
+            <a class="app-menu__item" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fa fa-file-text"></i>
+                <span class="app-menu__label">@lang('tables.models')</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
 
-        {{--statuses--}}
-        @if (auth()->user()->hasPermission('read_status'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'status' ? 'active' : '' }}" href="{{ route('admin.status.index') }}"><i class="app-menu__icon fa-solid fa-list-check"></i> <span class="app-menu__label">@lang('status.status')</span></a></li>
-        @endif
+                {{--equipments--}}
+                @if (auth()->user()->hasPermission('read_equipments'))
+                    <li>
+                        <a class="treeview-item {{ request()->segment(3) == 'equipments' ? 'active' : '' }}" 
+                            href="{{ route('admin.equipments.index') }}">
+                            <i class="icon fa-solid fas fa-tools"></i> 
+                            @lang('equipments.equipments')
+                        </a>
+                    </li>
+                @endif
 
-        {{--spares--}}
-        @if (auth()->user()->hasPermission('read_spares'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'spares' ? 'active' : '' }}" href="{{ route('admin.spares.index') }}"><i class="app-menu__icon fa-solid fa-server"></i> <span class="app-menu__label">@lang('spares.spares')</span></a></li>
-        @endif
+                {{--statuses--}}
+                @if (auth()->user()->hasPermission('read_status'))
+                    <li>
+                        <a class="treeview-item {{ request()->segment(3) == 'status' ? 'active' : '' }}" 
+                            href="{{ route('admin.status.index') }}">
+                        <i class="icon fa-solid fa-list-check"></i> 
+                            @lang('status.status')
+                        </a>
+                    </li>
+                @endif
 
-        {{--eirs--}}
-        @if (auth()->user()->hasPermission('read_eirs'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'eirs' ? 'active' : '' }}" href="{{ route('admin.eirs.index') }}"><i class="app-menu__icon fa fa-user"></i> <span class="app-menu__label">@lang('eirs.eirs')</span></a></li>
-        @endif
+                {{--spares--}}
+                @if (auth()->user()->hasPermission('read_spares'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'spares' ? 'active' : '' }}" href="{{ route('admin.spares.index') }}"><i class="icon fa-solid fa-server"></i> @lang('spares.spares')</a></li>
+                @endif
+                {{--eirs--}}
+                @if (auth()->user()->hasPermission('read_eirs'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'eirs' ? 'active' : '' }}" href="{{ route('admin.eirs.index') }}"><i class="icon fa-solid fa fa-user"></i> @lang('eirs.eirs')</a></li>
+                @endif
 
-        {{--request_parts--}}
-        @if (auth()->user()->hasPermission('read_request_parts'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'request_parts' ? 'active' : '' }}" href="{{ route('admin.request_parts.index') }}"><i class="app-menu__icon fa-solid fa-code-compare"></i> </i> <span class="app-menu__label">@lang('request_parts.request_parts')</span></a></li>
-        @endif
+                {{--request_parts--}}
+                @if (auth()->user()->hasPermission('read_request_parts'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'request_parts' ? 'active' : '' }}" href="{{ route('admin.request_parts.index') }}"><i class="icon fa-solid fa-code-compare"></i> </i> @lang('request_parts.request_parts')></a></li>
+                @endif
 
-        {{--maintenances--}}
-        @if (auth()->user()->hasPermission('read_maintenances'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'maintenances' ? 'active' : '' }}" href="{{ route('admin.maintenances.index') }}"><i class="app-menu__icon fa-solid fa-wrench"></i> <span class="app-menu__label">@lang('maintenances.maintenances')</span></a></li>
-        @endif
+                {{--maintenances--}}
+                @if (auth()->user()->hasPermission('read_maintenances'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'maintenances' ? 'active' : '' }}" href="{{ route('admin.maintenances.index') }}"><i class="icon fa-solid fa-wrench"></i> @lang('maintenances.maintenances')</a></li>
+                @endif
 
-        {{--fuels--}}
-        @if (auth()->user()->hasPermission('read_fuels'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'fuels' ? 'active' : '' }}" href="{{ route('admin.fuels.index') }}"><i class="app-menu__icon fa-solid fa-gas-pump"></i> <span class="app-menu__label">@lang('fuels.fuels')</span></a></li>
-        @endif
+                {{--fuels--}}
+                @if (auth()->user()->hasPermission('read_fuels'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'fuels' ? 'active' : '' }}" href="{{ route('admin.fuels.index') }}"><i class="icon fa-solid fa-gas-pump"></i> @lang('fuels.fuels') </a></li>
+                @endif
 
-        {{--insurances--}}
-        @if (auth()->user()->hasPermission('read_insurances'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'insurances' ? 'active' : '' }}" href="{{ route('admin.insurances.index') }}"><i class="app-menu__icon fa-solid fa-car-burst"></i> <span class="app-menu__label">@lang('insurances.insurances')</span></a></li>
-        @endif
+                {{--insurances--}}
+                @if (auth()->user()->hasPermission('read_insurances'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'insurances' ? 'active' : '' }}" href="{{ route('admin.insurances.index') }}"><i class="icon fa-solid fa-car-burst"></i> @lang('insurances.insurances')</a></li>
+                @endif
 
-        {{--countrys--}}
-        @if (auth()->user()->hasPermission('read_countrys'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'countrys' ? 'active' : '' }}" href="{{ route('admin.countrys.index') }}"><i class="app-menu__icon fa-solid fa-flag"></i> <span class="app-menu__label">@lang('countrys.countrys')</span></a></li>
-        @endif
+                {{--countrys--}}
+                @if (auth()->user()->hasPermission('read_countrys'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'countrys' ? 'active' : '' }}" href="{{ route('admin.countrys.index') }}"><i class="icon fa-solid fa-flag"></i> @lang('countrys.countrys')</a></li>
+                @endif
 
-        {{--countrys--}}
-        @if (auth()->user()->hasPermission('read_citys'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'citys' ? 'active' : '' }}" href="{{ route('admin.citys.index') }}"><i class="app-menu__icon fa-solid fa-city"></i> <span class="app-menu__label">@lang('citys.citys')</span></a></li>
-        @endif
+                {{--countrys--}}
+                @if (auth()->user()->hasPermission('read_citys'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'citys' ? 'active' : '' }}" href="{{ route('admin.citys.index') }}"><i class="icon fa-solid fa-city"></i> @lang('citys.citys')</a></li>
+                @endif
 
-        {{--specs--}}
-        @if (auth()->user()->hasPermission('read_specs'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'specs' ? 'active' : '' }}" href="{{ route('admin.specs.index') }}"><i class="app-menu__icon fas fa-check-double"></i> <span class="app-menu__label">@lang('specs.specs')</span></a></li>
-        @endif
+                {{--specs--}}
+                @if (auth()->user()->hasPermission('read_specs'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'specs' ? 'active' : '' }}" href="{{ route('admin.specs.index') }}"><i class="icon fa-solid fas fa-check-double"></i> @lang('specs.specs')</a></li>
+                @endif
 
-        {{--roles--}}
-        @if (auth()->user()->hasPermission('read_roles'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'roles' ? 'active' : '' }}" href="{{ route('admin.roles.index') }}"><i class="app-menu__icon fa fa-lock"></i> <span class="app-menu__label">@lang('roles.roles')</span></a></li>
-        @endif
+                {{--roles--}}
+                @if (auth()->user()->hasPermission('read_roles'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'roles' ? 'active' : '' }}" href="{{ route('admin.roles.index') }}"><i class="icon fa fa-lock"></i> @lang('roles.roles')</a></li>
+                @endif
 
-        {{--admins--}}
-        @if (auth()->user()->hasPermission('read_admins'))
-            <li><a class="app-menu__item {{ request()->segment(2) == 'admins' ? 'active' : '' }}" href="{{ route('admin.admins.index') }}"><i class="app-menu__icon fa-solid fa-users"></i> <span class="app-menu__label">@lang('admins.admins')</span></a></li>
-        @endif
-    
-        {{--admins--}}
-{{--        @if (auth()->user()->hasPermission('read_email_systems'))--}}
-            <li><a class="app-menu__item {{ request()->segment(2) == 'email_systems' ? 'active' : '' }}" href="{{ route('admin.email_systems.index') }}"><i class="app-menu__icon fa-solid fas fa-envelope"></i> <span class="app-menu__label">@lang('email_systems.email_systems')</span></a></li>
-{{--        @endif--}}
+                {{--admins--}}
+                @if (auth()->user()->hasPermission('read_admins'))
+                    <li><a class="treeview-item {{ request()->segment(3) == 'admins' ? 'active' : '' }}" href="{{ route('admin.admins.index') }}"><i class="icon fa-solid fa-users"></i> @lang('admins.admins')</a></li>
+                @endif
+            
+                {{--admins--}}
+        {{--        @if (auth()->user()->hasPermission('read_email_systems'))--}}
+                    <li><a class="treeview-item {{ request()->segment(3) == 'email_systems' ? 'active' : '' }}" href="{{ route('admin.email_systems.index') }}"><i class="icon fa-solid fas fa-envelope"></i> @lang('email_systems.email_systems')</a></li>
+        {{--        @endif--}}
 
-        {{--statistics--}}
+            </ul>
+        </li>
+
+
+
+
+
+        {{--combo_boxs--}}
         <li class="treeview {{ request()->is('*combo_boxs*') || request()->is('*combo_boxs*')  ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fas fa-chart-area"></i><span class="app-menu__label">@lang('combo_boxs.combo_boxs')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
 
@@ -158,6 +165,27 @@
             </ul>
         </li>
 
+        {{-- tables --}}
+        <li class="treeview {{ request()->is('*tables*') || request()->is('*tables*')  ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fas fa-chart-area"></i><span class="app-menu__label">@lang('tables.tables')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+
+                @php
+                    $models = ['equipments', 'status', 'spares', 'eirs', 'request_parts', 'maintenances', 'fuels', 'insurances', 'specs'];     
+                @endphp
+
+                @foreach($models as $model)
+
+                    <li>
+                        <a class="treeview-item {{ request()->segment(4) == $model ? 'active' : '' }}" href="{{ route('admin.tables', ['name' => $model]) }}">
+                            <i class="icon fas fa-chart-line"></i>
+                            @lang($model .'.'. $model)
+                        </a>
+                    </li>
+
+                @endforeach
+
+            </ul>
+        </li>
         {{--countrys--}}
         {{-- @if (auth()->user()->hasPermission('read_types'))
             <li><a class="app-menu__item {{ request()->is('*types*') ? 'active' : '' }}" href="{{ route('admin.types.index') }}"><i class="app-menu__icon fa-solid fa-hurricane"></i> <span class="app-menu__label">@lang('types.types')</span></a></li>

@@ -3,5 +3,6 @@
 return [
 
     'tables' => 'Archive',
+    'models' => 'tables',
 
 ];
