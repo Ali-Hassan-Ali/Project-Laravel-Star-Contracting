@@ -66,8 +66,10 @@
                     </div>
                 
                 </div><!-- end of row -->
-
-
+                
+                @php
+                    $total = $average / $status->count();
+                @endphp
                 
                 <div class="collapse" id="collapse{{ $city->id }}">
                     
@@ -102,7 +104,7 @@
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px">@lang('reports.average_break_down_duration')</td>
-                                        <td class="text-center average" style="width: 50px">{{  $average / $status->count() }}</td>
+                                        <td class="text-center average" style="width: 50px">{{ number_format($total, 2) }}</td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -116,7 +118,7 @@
                 </div>{{--end of collapse --}}
     
                 <h4 class="text-end count-min">@lang('reports.no_of_break_down') {{ $status->count() }}</h4>
-                <h4 class="text-end average-min">@lang('reports.average_break_down_duration') {{ $average / $status->count() }}</h4>
+                <h4 class="text-end average-min">@lang('reports.average_break_down_duration') {{ number_format($total, 2) }}</h4>
                 
             </div><!-- end of tile -->
             
