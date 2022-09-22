@@ -20,6 +20,18 @@
 
                 <div class="row">
 
+					{{--city--}}
+					<div class="col-md-6">
+						<div class="form-group">
+							<select class="form-control report-search col-6 select2-tags-false" id="report-city">
+								<option value="">@lang('site.all') @lang('citys.citys')</option>
+								@foreach ($citys as $city)
+									<option data-id="{{ $city->id }}" value="{{ $city->id }}">{{ $city->name }}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+
                     <div class="col-md-3">
                         <div class="form-group">
                             <input placeholder="From" class="date-search report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start-date">
@@ -32,30 +44,17 @@
                         </div>
                     </div>
 
-					{{--city--}}
-					<div class="col-md-3">
-						<div class="form-group">
-							<select class="form-control report-search col-6 select2-tags-false" id="report-city">
-								<option value="">@lang('site.all') @lang('citys.citys')</option>
-								@foreach ($citys as $city)
-									<option data-id="{{ $city->id }}" value="{{ $city->id }}">{{ $city->name }}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
+				</div><!-- end of row -->
+
+				<div class="row">
 					{{--search--}}
-					<div class="col-md-3">
+					<div class="col-md-6">
 						<div class="form-group">
 							<input type="text" id="data-table-search" class="form-control" autofocus placeholder="@lang('site.search')">
 						</div>
 					</div>
-					
-				
-				</div><!-- end of row -->
 
-				<div class="row mb-2">
-				
-					<div class="col-md-12" for="total-insurance">
+					<div class="col-md-6" for="total-insurance">
 						<div class="d-flex flex-row-reverse" for="total-insurance">
 							<div class="form-check form-switch" for="total-insurance" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
 								<label class="form-check-label mr-5" for="total-insurance">@lang('reports.show_details')</label>
