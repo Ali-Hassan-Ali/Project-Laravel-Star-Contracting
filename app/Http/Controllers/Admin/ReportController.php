@@ -17,7 +17,7 @@ class ReportController extends Controller
 {
     public function AparesAvailable()
     {
-        $spares = Spare::query();
+        $spares = Spare::query()->where('used', '0');
         $totalCostSpare = $spares->sum('cost') + $spares->sum('freight_charges');
 
         $citys = City::all();
@@ -33,13 +33,13 @@ class ReportController extends Controller
 
             if (request()->start_data && request()->end_data) {
 
-                $spares = Spare::withCount('equipments')->having('equipments', '>', '0')
+                $spares = Spare::where('used', '0')->withCount('equipments')->having('equipments', '>', '0')
                                 ->whereDateBetween(request()->start_data, request()->end_data)
                                 ->whereRelation('equipmentsFirst.city', 'id', request()->city_id)
                                 ->orderBy('id')->get();
             } else {
 
-                $spares = Spare::query()->whereRelation('equipmentsFirst.city', 'id', request()->city_id);
+                $spares = Spare::query()->where('used', '0')->whereRelation('equipmentsFirst.city', 'id', request()->city_id);
             }
 
 
@@ -47,13 +47,14 @@ class ReportController extends Controller
 
             if (request()->start_data && request()->end_data) {
 
-                $spares = Spare::query()->withCount('equipments')
+                $spares = Spare::query()->where('used', '0')
+                                ->withCount('equipments')
                                 ->having('equipments', '>', '0')
                                 ->whereDateBetween(request()->start_data, request()->end_data);
                 
             } else {
 
-                $spares = Spare::query()->withCount('equipments')->having('equipments', '>', '0');
+                $spares = Spare::query()->where('used', '0')->withCount('equipments')->having('equipments', '>', '0');
             }
 
 
@@ -87,14 +88,14 @@ class ReportController extends Controller
 
             if (request()->start_data && request()->end_data) {
 
-                $spares = Spare::withCount('equipments')->having('equipments', '>', '0')
+                $spares = Spare::where('used', '0')->withCount('equipments')->having('equipments', '>', '0')
                                 ->whereDateBetween(request()->start_data, request()->end_data)
                                 ->whereRelation('equipmentsFirst.city', 'id', request()->city_id)
                                 ->get();
                 
             } else {
 
-                $spares = Spare::whereRelation('equipmentsFirst.city', 'id', request()->city_id)->get();
+                $spares = Spare::where('used', '0')->whereRelation('equipmentsFirst.city', 'id', request()->city_id)->get();
             }
 
 
@@ -102,13 +103,13 @@ class ReportController extends Controller
 
             if (request()->start_data && request()->end_data) {
 
-                $spares = Spare::withCount('equipments')->having('equipments', '>', '0')
+                $spares = Spare::where('used', '0')->withCount('equipments')->having('equipments', '>', '0')
                                 ->whereDateBetween(request()->start_data, request()->end_data)
                                 ->get();
                 
             } else {
 
-                $spares = Spare::withCount('equipments')->having('equipments', '>', '0')->get();
+                $spares = Spare::where('used', '0')->withCount('equipments')->having('equipments', '>', '0')->get();
             }
 
 
