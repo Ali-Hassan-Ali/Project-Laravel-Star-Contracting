@@ -6,7 +6,7 @@
 		@endphp
 		
 		@if(isset($equipment))
-			<span class="badge badge-primary text-center">{{ $equipment->name . ' ' . $equipment->make . ' ' . $equipment->plate_no }}</span>
+			{{ $equipment->name . ' ' . $equipment->make . ' ' . $equipment->plate_no }} \n
 		@endif
 
 	@endforeach
