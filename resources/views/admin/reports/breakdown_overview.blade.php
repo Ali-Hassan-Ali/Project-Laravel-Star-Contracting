@@ -18,27 +18,12 @@
             
             <div class="tile shadow">
 
-                <div class="row">
+                                <div class="row">
 
+                    {{--city--}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input placeholder="From" class="date-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start-date">
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input placeholder="To" class="date-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="end-date">
-                        </div>
-                    </div>
-
-                </div><!-- end of row -->
-                
-                <div class="row">
-                    
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <select class="form-control col-6 select2-tags-false" id="equipment-city">
+                            <select class="form-control report-search col-6 select2-tags-false" id="report-city">
                                 <option value="">@lang('site.all') @lang('citys.citys')</option>
                                 @foreach ($citys as $city)
                                     <option data-id="{{ $city->id }}" value="{{ $city->id }}">{{ $city->name }}</option>
@@ -46,25 +31,40 @@
                             </select>
                         </div>
                     </div>
-                    {{--equipment_id--}}
-                    <div class="col-md-6">
-                        <select id="equipment-man" class="form-control select2-tags-false" required>
-                            <option value="" disabled>@lang('site.choose') @lang('equipments.equipments')</option>
-                            {{-- @foreach ($equipments as $equipment)
-								<option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
-							@endforeach --}}
-                        </select>
+
+                    {{-- from data --}}
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input placeholder="From" class="date-search start-date report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start-date">
+                        </div>
                     </div>
-                    
-                    <div class="col-md-12">
-                        <div class="d-flex flex-row-reverse">
-                            <div class="form-check form-switch" data-toggle="collapse" href="#collapse{{ $city->id }}" role="button" aria-expanded="false" aria-controls="collapse{{ $city->id }}">
-                                <label class="form-check-label mr-5">@lang('reports.show_details')</label>
-                                <input class="form-check-input" type="checkbox">
+
+                    {{-- to data --}}
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input placeholder="To" class="date-search report-search form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="end-date">
+                        </div>
+                    </div>
+
+                </div><!-- end of row -->
+
+                <div class="row">
+                    {{--search--}}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="data-table-search" class="form-control" autofocus placeholder="@lang('site.search')">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" for="total-insurance">
+                        <div class="d-flex flex-row-reverse" for="total-insurance">
+                            <div class="form-check form-switch" for="total-insurance" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+                                <label class="form-check-label mr-5" for="total-insurance">@lang('reports.show_details')</label>
+                                <input class="form-check-input" id="spares-available" type="checkbox">
                             </div>
                         </div>
                     </div>
-                
+
                 </div><!-- end of row -->
                 
                 @php
@@ -212,10 +212,10 @@
                     let total = data.averages / data.count;
                     
                     $('.count').html(data.count);
-                    $('.count-min').html('No Of Breakdowns ' + data.count);
+                    $('.count-min').html('No Of Breakdowns ' + data.count + ' Days');
 
                     $('.average').html($.number(total, 2));            
-                    $('.average-min').html('Average Breakdown Duration ' + $.number(total, 2));
+                    $('.average-min').html('Average Breakdown Duration ' + $.number(total, 2) + ' Days');
 
                 }//end of success
             });//end of ajax
