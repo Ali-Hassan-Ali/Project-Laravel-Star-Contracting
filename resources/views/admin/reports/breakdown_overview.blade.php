@@ -18,7 +18,7 @@
             
             <div class="tile shadow">
 
-                                <div class="row">
+                <div class="row">
 
                     {{--city--}}
                     <div class="col-md-6">

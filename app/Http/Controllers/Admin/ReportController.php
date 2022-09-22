@@ -631,7 +631,43 @@ class ReportController extends Controller
 
     public function dataTotalFuelConsumption()
     {
-        $equipments = Equipment::with('fuel')->orderBy('city_id')->get();
+
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('fuel')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+
+            } else {
+
+                $equipments = Equipment::with('fuel')
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('fuel')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->orderBy('city_id')
+                                        ->get();
+                
+            } else {
+
+                $equipments = Equipment::with('fuel')->orderBy('city_id')->get();
+
+            }
+
+
+        }//end of if
 
         return DataTables::of($equipments)
             ->addColumn('city', function (Equipment $equipment) {
