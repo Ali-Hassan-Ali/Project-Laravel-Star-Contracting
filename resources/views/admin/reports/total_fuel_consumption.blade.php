@@ -172,7 +172,12 @@
                 footer: true,
                 extend: "pdf",
                 pageSize: 'A4',
-                title: $('.title-download'*).html() + ' - ' + "{{ now()->format('d-m-Y') }}",
+                title: function () { 
+                    let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
+                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + getStartDate($('#start-date').val()) + ' ' + getEndDate($('#start-date').val());
+
+                    return title;
+                },
                 className: 'btn btn-primary',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
                 customize: function(doc) {
