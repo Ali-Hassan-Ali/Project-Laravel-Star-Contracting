@@ -71,7 +71,7 @@
                     $total = $average / $status->count();
                 @endphp
                 
-                <div class="collapse" id="collapse{{ $city->id }}">
+                <div class="collapse" id="collapse">
                     
                     <div class="row">
                         
