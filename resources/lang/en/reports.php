@@ -5,6 +5,7 @@ return [
     'reports' 	         => 'Reports',
     'total' 	         => 'Total',
     'show_details' 	     => 'Show Details',
+    'days'               => 'Days',
 
     'spares_available'   => 'Spares Available',
     'spares_used'        => 'Spares Used',

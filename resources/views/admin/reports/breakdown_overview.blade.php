@@ -104,7 +104,7 @@
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px">@lang('reports.average_break_down_duration')</td>
-                                        <td class="text-center average" style="width: 50px">{{ number_format($total, 2) }}</td>
+                                        <td class="text-center average" style="width: 50px">{{ number_format($total, 2) }} @lang('reports.days')</td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -118,7 +118,7 @@
                 </div>{{--end of collapse --}}
     
                 <h4 class="text-end count-min">@lang('reports.no_of_break_down') {{ $status->count() }}</h4>
-                <h4 class="text-end average-min">@lang('reports.average_break_down_duration') {{ number_format($total, 2) }}</h4>
+                <h4 class="text-end average-min">@lang('reports.average_break_down_duration') {{ number_format($total, 2) }} @lang('reports.days')</h4>
                 
             </div><!-- end of tile -->
             
