@@ -242,7 +242,7 @@
 
                     $('.count').html(data.count);
                     $('.average').html(sum);
-                    $('.average-min').html('Average Breakdown Duration' + sum + 'Days');
+                    $('.average-min').html('Average Delivery Time' + sum);
 
                 }//end of success
             });//end of ajax
