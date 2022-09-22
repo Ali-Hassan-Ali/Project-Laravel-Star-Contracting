@@ -6,7 +6,7 @@
 		@endphp
 		
 		@if(isset($equipment))
-			{{ $equipment->name . ' ' . $equipment->make . ' ' . $equipment->plate_no }} <br>
+			{{ $equipment->name . ' ' . $equipment->make . ' ' . $equipment->plate_no }}
 		@endif
 
 	@endforeach
