@@ -165,6 +165,7 @@
                     doc.styles.tableBodyEven.alignment = 'center';
                     doc.styles.tableBodyOdd.alignment = 'center';
                     doc.styles.tableFooter.alignment = 'center';
+                    doc.styles['table'] = {width:100%};
                 },
             }],
         });
