@@ -161,13 +161,7 @@
                 title: function () { 
                     let title = $('.title-download').html() + ' - ' + "{{ now()->format('d-m-Y') }}" 
                                 + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n'
-                                if ($('#start-date').val() && $('#end-date').val()) {
-
-                                    + $('#start-date').val() + '|' + $('#end-date').val();
-                                } else {
-                                    ;
-                                }
-
+                                + $('#start-date').val() + ' ' + $('#end-date').val();
 
                     return title;
                 },
