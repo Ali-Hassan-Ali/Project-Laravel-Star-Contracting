@@ -154,9 +154,9 @@
             return '';
         }
 
-        let equipmentID;
         var startData;
         var endData;
+        let cityID;
 
         let dataTable = $('#breakdown_overview-table').DataTable({
             dom: "Bfrtip",
@@ -169,7 +169,7 @@
             ajax: {
                 url: '{{ route('admin.breakdown_overview.data') }}',
                 data: function (d) {
-                    d.equipment_id = equipmentID;
+                    d.city_id = cityID;
                     d.start_data = startData;
                     d.end_data = endData;
                 }
