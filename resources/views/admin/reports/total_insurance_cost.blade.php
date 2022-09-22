@@ -93,7 +93,7 @@
 										<td class="text-center"></td>
 										<td class="text-center"></td>
 										<td class="text-center">@lang('reports.total_cost_of_insurance')</td>
-										<td class="text-center total">{{ $total_premium  }}</td>
+										<td class="text-center total">$ {{ $total_premium  }}</td>
 									</tr>
 									</tfoot>
 								</table>
@@ -106,7 +106,7 @@
 				
 				</div>{{--end of collapse --}}
 				
-				<h4 class="text-end total-min">@lang('reports.total_cost_of_insurance') {{ $total_premium }}</h4>
+				<h4 class="text-end total-min">@lang('reports.total_cost_of_insurance') $ {{ $total_premium }}</h4>
 			
 			</div><!-- end of tile -->
 		
@@ -196,7 +196,7 @@
                 },
                 success: function (data) {
                     $('.total').html(data);
-                    $('.total-min').html('Total Cost Of Insurance ' + data);
+                    $('.total-min').html('Total Cost Of Insurance $ ' + data);
                 }//end of success
             });//end of ajax
             dataTable.ajax.reload();
