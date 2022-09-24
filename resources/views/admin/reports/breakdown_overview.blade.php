@@ -213,9 +213,11 @@
         });
 
         $(document).on('keyup change', '#data-table-search',function () {
+            
+            dataTable.search(this.value).draw();
+
             var sum   = dataTable.column(7).data().sum();
             var count = dataTable.data().count();
-            dataTable.search(this.value).draw();
 
             $('.count').html('No Of Breakdowns ' + count);
             $('.average-min').html('Average Breakdown Duration ' + sum + ' Days');
