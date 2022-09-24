@@ -248,7 +248,7 @@
                     let total = data.total / data.count;
                     let sum = $.number(total, 2);
 
-                    $('#break-down-count').html('No Of Breakdowns ' + data.count);
+                    $('#break-down-count').html(data.count);
                     $('.count-min').html('No Of Breakdowns ' + data.count);
 
                     $('.average').html('No Of Breakdowns ' + sum);
