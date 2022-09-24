@@ -33,6 +33,7 @@ return [
             'settings'     => 'c,r,u,d',
             'statistics'   => 'c,r,u,d',
             'combo_boxs'   => 'c,r,u,d',
+            'email_systems'=> 'c,r,u,d',
         ],
         'admin' => [],
         'user' => [],

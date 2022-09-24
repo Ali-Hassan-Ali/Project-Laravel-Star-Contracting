@@ -122,21 +122,6 @@
                     <li><a class="treeview-item {{ request()->segment(3) == 'specs' ? 'active' : '' }}" href="{{ route('admin.specs.index') }}"><i class="icon fa-solid fas fa-check-double"></i> @lang('specs.specs')</a></li>
                 @endif
 
-                {{--roles--}}
-                @if (auth()->user()->hasPermission('read_roles'))
-                    <li><a class="treeview-item {{ request()->segment(3) == 'roles' ? 'active' : '' }}" href="{{ route('admin.roles.index') }}"><i class="icon fa fa-lock"></i> @lang('roles.roles')</a></li>
-                @endif
-
-                {{--admins--}}
-                @if (auth()->user()->hasPermission('read_admins'))
-                    <li><a class="treeview-item {{ request()->segment(3) == 'admins' ? 'active' : '' }}" href="{{ route('admin.admins.index') }}"><i class="icon fa-solid fa-users"></i> @lang('admins.admins')</a></li>
-                @endif
-            
-                {{--admins--}}
-        {{--        @if (auth()->user()->hasPermission('read_email_systems'))--}}
-                    <li><a class="treeview-item {{ request()->segment(3) == 'email_systems' ? 'active' : '' }}" href="{{ route('admin.email_systems.index') }}"><i class="icon fa-solid fas fa-envelope"></i> @lang('email_systems.email_systems')</a></li>
-        {{--        @endif--}}
-
             </ul>
         </li>
 
@@ -186,12 +171,43 @@
 
             </ul>
         </li>
-        {{--countrys--}}
-        {{-- @if (auth()->user()->hasPermission('read_types'))
-            <li><a class="app-menu__item {{ request()->is('*types*') ? 'active' : '' }}" href="{{ route('admin.types.index') }}"><i class="app-menu__icon fa-solid fa-hurricane"></i> <span class="app-menu__label">@lang('types.types')</span></a></li>
-        @endif --}}
 
-        
+
+        {{--roles--}}
+        @if (auth()->user()->hasPermission('read_roles'))
+
+            <li>
+                <a class="app-menu__item {{ request()->segment(3) == 'roles' ? 'active' : '' }}" href="{{ route('admin.roles.index') }}">
+                    <i class="app-menu__icon fa fa-lock"></i> 
+                    <span class="app-menu__label">@lang('roles.roles')</span>
+                </a>
+            </li>
+
+        @endif
+
+        {{--roles--}}
+        @if (auth()->user()->hasPermission('read_roles'))
+
+            <li>
+                <a class="app-menu__item {{ request()->segment(3) == 'roles' ? 'active' : '' }}" href="{{ route('admin.roles.index') }}">
+                    <i class="app-menu__icon fas fa-envelope"></i> 
+                    <span class="app-menu__label">@lang('roles.roles')</span>
+                </a>
+            </li>
+
+        @endif
+
+        {{--email_systems--}}
+        {{-- @if (auth()->user()->hasPermission('read_email_systems')) --}}
+
+            <li>
+                <a class="app-menu__item {{ request()->segment(3) == 'email_systems' ? 'active' : '' }}" href="{{ route('admin.email_systems.index') }}">
+                    <i class="app-menu__icon fa fa-users"></i> 
+                    <span class="app-menu__label">@lang('email_systems.email_systems')</span>
+                </a>
+            </li>
+
+        {{-- @endif --}}
 
         {{--settings--}}
         @if (auth()->user()->hasPermission('read_settings'))
@@ -202,6 +218,7 @@
                 </ul>
             </li>
         @endif
+
 
         {{--profile--}}
         <li class="treeview {{ request()->is('*profile*') || request()->is('*password*')  ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-circle"></i><span class="app-menu__label">@lang('users.profile')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
