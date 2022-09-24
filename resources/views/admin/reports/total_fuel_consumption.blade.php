@@ -65,7 +65,7 @@
                         </div>
                     </div>
 
-                </div><!-- end of row -->>
+                </div><!-- end of row -->
 				
 				<div class="collapse" id="collapse">
 					
