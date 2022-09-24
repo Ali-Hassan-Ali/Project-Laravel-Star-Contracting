@@ -1003,14 +1003,33 @@ class ReportController extends Controller
 
     public function dataTotalHoursWorked()
     {
-        if(request()->equipment_id) {
 
-            $fuels = Fuel::where('equipment_id', request()->equipment_id)->get();
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $fuels = Fuel::query()->whereDateBetween(request()->start_data, request()->end_data)
+                                ->whereRelation('equipment.city', 'id', request()->city_id);
+                
+            } else {
+
+                $fuels = Fuel::query()->whereRelation('equipment.city', 'id', request()->city_id);
+            }
+
 
         } else {
 
-            $fuels = Fuel::query();
-        }
+            if (request()->start_data && request()->end_data) {
+
+                $fuels = Fuel::query()->whereDateBetween(request()->start_data, request()->end_data);
+                
+            } else {
+
+                $fuels = Fuel::query();
+            }
+
+
+        }//end of if
 
         return DataTables::of($fuels)
             ->editColumn('project', function (Fuel $fuel) {
@@ -1028,14 +1047,32 @@ class ReportController extends Controller
 
     public function sumTotalHoursWorked()
     {
-        if(request()->equipment_id) {
+        if(request()->city_id) {
 
-            $fuels = Fuel::where('equipment_id', request()->equipment_id)->get();
+            if (request()->start_data && request()->end_data) {
+
+                $fuels = Fuel::query()->whereDateBetween(request()->start_data, request()->end_data)
+                                ->whereRelation('equipment.city', 'id', request()->city_id);
+                
+            } else {
+
+                $fuels = Fuel::query()->whereRelation('equipment.city', 'id', request()->city_id);
+            }
+
 
         } else {
 
-            $fuels = Fuel::query();
-        }
+            if (request()->start_data && request()->end_data) {
+
+                $fuels = Fuel::query()->whereDateBetween(request()->start_data, request()->end_data);
+                
+            } else {
+
+                $fuels = Fuel::query();
+            }
+
+
+        }//end of if
 
         return $total_hours = $fuels->sum('hours_worked_weekly');
 

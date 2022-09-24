@@ -173,7 +173,7 @@
             buttons: [{
                 footer: true,
                 extend: "pdf",
-                 title: function () { 
+                title: function () { 
                     let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
                                 + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + 'From ' + getDate($('#start-date').val()) + ' ' + 'To ' + getDate($('#start-date').val());
 
