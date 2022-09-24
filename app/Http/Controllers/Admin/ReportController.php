@@ -872,6 +872,8 @@ class ReportController extends Controller
 
     // average_expenditure_per_km
 
+    /////////////////////////////////////////////////////////////////////////////////
+
     public function EirOverview()
     {
         $citys = City::all();
@@ -884,11 +886,36 @@ class ReportController extends Controller
 
     public function dataEirOverview()
     {
-        if (request()->equipment_id) {
-            $eirs = Eir::with('equipment')->where('equipment_id', request()->equipment_id);
+
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $eirs = Eir::with('equipment')->whereDateBetween(request()->start_data, request()->end_data)
+                                              ->whereRelation('equipment.city', 'id', request()->city_id)
+                                              ->get();
+
+            } else {
+
+                $eirs = Eir::with('equipment')->whereRelation('equipment.city', 'id', request()->city_id)->get();
+
+            }
+
+
         } else {
-            $eirs = Eir::with('equipment');
-        }
+
+            if (request()->start_data && request()->end_data) {
+
+                $eirs = Eir::with('equipment')->whereDateBetween(request()->start_data, request()->end_data)->get();
+                
+            } else {
+
+                $eirs = Eir::with('equipment')->get();
+
+            }
+
+
+        }//end of if
 
         return DataTables::of($eirs)
             ->editColumn('date', function (Eir $eir) {
@@ -900,18 +927,41 @@ class ReportController extends Controller
 
     public function sumEirOverview()
     {
-        if (request()->equipment_id) {
+        if(request()->city_id) {
 
-            $eirs = Eir::where('equipment_id', request()->equipment_id)->get();
+            if (request()->start_data && request()->end_data) {
+
+                $eirs = Eir::with('equipment')->whereDateBetween(request()->start_data, request()->end_data)
+                                              ->whereRelation('equipment.city', 'id', request()->city_id)
+                                              ->get();
+
+            } else {
+
+                $eirs = Eir::with('equipment')->whereRelation('equipment.city', 'id', request()->city_id)->get();
+
+            }
+
 
         } else {
 
-            $eirs = Eir::query();
-        }
+            if (request()->start_data && request()->end_data) {
+
+                $eirs = Eir::with('equipment')->whereDateBetween(request()->start_data, request()->end_data)->get();
+                
+            } else {
+
+                $eirs = Eir::with('equipment')->get();
+
+            }
+
+
+        }//end of if
 
         return response(['count' => $eirs->count()]);
 
     }//end of fun
+
+    /////////////////////////////////////////////////////////////////////////////////
 
     public function EquipmentsOverview()
     {
@@ -937,7 +987,6 @@ class ReportController extends Controller
 
     public function sumIdleEquipments()
     {
-        $equipments = Equipment::withCount('status')->having('status_count', '>', '0')->orderBy('city_id')->get();
 
         if(request()->city_id) {
 
@@ -1045,7 +1094,7 @@ class ReportController extends Controller
 
 
     //////////////////////////////////////////////////////////////////////////
-    
+
 
     public function GetEquipment(Equipment $equipment)
     {

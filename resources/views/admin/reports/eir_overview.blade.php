@@ -67,7 +67,7 @@
 
                 </div><!-- end of row -->
 				
-				<div class="collapse" id="collapse-eir_overview">
+				<div class="collapse" id="collapse">
 					
 					<div class="row">
 						
@@ -100,6 +100,8 @@
 					</div><!-- end of row -->
 				
 				</div>{{--end of collapse --}}
+
+				<h4 class="text-end count-min">@lang('reports.total_EIRs') {{ $eirs->count() }}</h4>
 			
 			</div><!-- end of tile -->
 		
@@ -189,7 +191,8 @@
             dataTable.search(this.value).draw();
             var count   = dataTable.data().count();
 
-            $('.count').html(data.count);
+            $('.count').html(count);
+            $('.count-min').html('Total EIRs ' + count);
 
         });
 
@@ -200,7 +203,7 @@
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
 
-            let url     = '{{ route('admin.idle_equipments.sum') }}';
+            let url     = '{{ route('admin.eir_overview.sum') }}';
             var id      = $('#report-city').find(':selected').val();
             var method  = 'get';
 
@@ -215,6 +218,7 @@
                 success: function (data) {
 
             		$('.count').html(data.count);
+            		$('.count-min').html('Total EIRs ' + data.count);
 
                 }//end of success
             });//end of ajax
