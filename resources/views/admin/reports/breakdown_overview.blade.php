@@ -100,7 +100,7 @@
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px">@lang('reports.no_of_break_down')</td>
-                                        <td class="text-center count" style="width: 50px">{{ $status->count() }}</td>
+                                        <td class="text-center" id="break-down-count" style="width: 50px">{{ $status->count() }}</td>
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px">@lang('reports.average_break_down_duration')</td>
@@ -219,9 +219,7 @@
             var sum   = dataTable.column(7).data().sum();
             var count = dataTable.data().count();
 
-            alert(count);
-
-            $('.count').html('No Of Breakdowns ' + count);
+            $('#break-down-count').html('No Of Breakdowns ' + count);
             $('.average-min').html('Average Breakdown Duration ' + sum + ' Days');
         });
 
@@ -249,7 +247,8 @@
                     let total = data.total / data.count;
                     let sum = $.number(total, 2);
 
-                    $('.count').html('No Of Breakdowns ' + data.count);
+                    $('#break-down-count').html('No Of Breakdowns ' + data.count);
+                    
                     $('.average').html('No Of Breakdowns ' + sum);
                     $('.average-min').html('Average Breakdown Duration ' + sum + ' Days');
 
