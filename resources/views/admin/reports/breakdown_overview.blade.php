@@ -220,6 +220,7 @@
             var count = dataTable.data().count();
 
             $('#break-down-count').html('No Of Breakdowns ' + count);
+            $('.count-min').html('No Of Breakdowns ' + count);
             $('.average-min').html('Average Breakdown Duration ' + sum + ' Days');
         });
 
@@ -248,7 +249,8 @@
                     let sum = $.number(total, 2);
 
                     $('#break-down-count').html('No Of Breakdowns ' + data.count);
-                    
+                    $('.count-min').html('No Of Breakdowns ' + data.count);
+
                     $('.average').html('No Of Breakdowns ' + sum);
                     $('.average-min').html('Average Breakdown Duration ' + sum + ' Days');
 
