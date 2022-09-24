@@ -175,7 +175,7 @@
                 extend: "pdf",
                 title: function () { 
                     let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
-                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + 'From ' + getDate($('#start-date').val()) + ' ' + 'To ' + getDate($('#start-date').val());
+                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + 'From ' + getStartDate($('#start-date').val()) + ' ' + 'To ' + getEndDate($('#start-date').val());
 
                     return title;
                 },
