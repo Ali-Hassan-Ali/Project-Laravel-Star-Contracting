@@ -225,6 +225,7 @@
             dataTable.ajax.reload();
 
         });//end of data-table-search-city
+        
 	</script>
 
 @endpush

@@ -27,6 +27,12 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
 
     Route::get('/test', function () {
 
+        $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+
+        dd($equipments->fuels()->count());
+
+        return $equipments;
+
         $spares = Spare::with('equipmentsFirst')
                         ->whereRelation('equipmentsFirst.city', 'id', 1)
                         ->get();

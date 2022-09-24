@@ -11,7 +11,7 @@ class Equipment extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
-    protected $appends = ['total', 'idle', 'spec_name', 'chart_total'];
+    protected $appends = ['total', 'idle', 'spec_name'];
     
     public function admin()
     {
@@ -23,16 +23,6 @@ class Equipment extends Model
     {
         return $this->eir()->count() ?? '';
            
-    }//end of fun
-
-    public function getChartTotalAttribute()
-    {
-        return 0;
-        $total = $this->rental_cost_basis + $this->driver_salary + $this->spares->sum('cost') + $this->spares->sum('freight_charges') + !empty($this->fuel->total_cost_of_fuel) ?? '';
-
-        return $total;
-
-
     }//end of fun
 
     public function getSpecNameAttribute()

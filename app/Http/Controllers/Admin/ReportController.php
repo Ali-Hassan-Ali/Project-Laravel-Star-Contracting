@@ -699,30 +699,65 @@ class ReportController extends Controller
 
     // equipment_expenditure
 
+    ////////////////////////////////////////////////////////////////////////////
+
     public function sumTotalEquipmentExpenditure()
     {
-        $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
-        $cityID = request()->city_id;
+
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('fuel','spares')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+
+            } else {
+
+                $equipments = Equipment::with('fuel','spares')
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('fuel','spares')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->orderBy('city_id')
+                                        ->get();
+                
+            } else {
+
+                $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+
+            }
+
+
+        }//end of if
+
         $total = 0;
 
-        if ($cityID) {
-            foreach($equipments as $equipment) {
-                if ($equipment->city_id == $cityID) {
-                    $total += $equipment->rental_cost_basis + 
-                              $equipment->driver_salary + 
-                              $equipment->spares->sum('cost') + 
-                              $equipment->spares->sum('freight_charges') + 
-                              isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : '';
-                }
+        foreach($equipments as $equipment) {
+
+            $fuelFirst = Fuel::where('equipment_id', $equipment->id)->first();
+
+            if ($fuelFirst) {
+                
+                $cost = isset($fuelFirst) ? 0 : $fuelFirst->total_cost_of_fuel;
+            } else {
+                $cost = 0;
             }
-        } else {
-            foreach($equipments as $equipment) {
-                $total += $equipment->rental_cost_basis + 
-                          $equipment->driver_salary + 
-                          $equipment->spares->sum('cost') + 
-                          $equipment->spares->sum('freight_charges') + 
-                          isset($equipment->fuel->total_cost_of_fuel) ? $equipment->fuel->total_cost_of_fuel : '';
-            }
+
+            $total += $equipment->rental_cost_basis + 
+                      $equipment->driver_salary + 
+                      $equipment->spares->sum('cost') + 
+                      $equipment->spares->sum('freight_charges') + $cost;
         }
 
         return response()->json($total);
@@ -731,7 +766,42 @@ class ReportController extends Controller
 
     public function dataTotalEquipmentExpenditure()
     {
-        $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('fuel','spares')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+
+            } else {
+
+                $equipments = Equipment::with('fuel','spares')
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')
+                                        ->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('fuel','spares')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->orderBy('city_id')
+                                        ->get();
+                
+            } else {
+
+                $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+
+            }
+
+
+        }//end of if
 
         return DataTables::of($equipments)
             ->addColumn('city', function (Equipment $equipment) {
@@ -764,17 +834,25 @@ class ReportController extends Controller
 
     public function totalEquipmentExpenditure()
     {
-        $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+        $equipments = Equipment::with('spares')->orderBy('city_id')->get();
         $citys = City::all();
 
         $total = 0;
 
         foreach($equipments as $equipment) {
+
+            $fuelFirst = Fuel::where('equipment_id', $equipment->id)->first();
+
+            if ($fuelFirst) {
+                
+                $cost = isset($fuelFirst) ? 0 : $fuelFirst->total_cost_of_fuel;
+            } else {
+                $cost = 0;
+            }
             $total += $equipment->rental_cost_basis + 
                       $equipment->driver_salary + 
                       $equipment->spares->sum('cost') + 
-                      $equipment->spares->sum('freight_charges') + 
-                      !empty($equipment->fuel->total_cost_of_fuel) ?? 0;
+                      $equipment->spares->sum('freight_charges') + $cost;
         }
 
         return view('admin.reports.total_equipment_expenditure', compact('equipments', 'citys', 'total'));
@@ -828,14 +906,20 @@ class ReportController extends Controller
     
         foreach($equipments as $equipment) {
                 
-                $average_mileage_reading = $equipment->fuel->average_mileage_reading ?? 0;
+                 $fuelFirst = Fuel::where('equipment_id', $equipment->id)->first();
+
+                if ($fuelFirst) {
+                    
+                    $cost = isset($fuelFirst) ? 0 : $fuelFirst->total_cost_of_fuel;
+                } else {
+                    $cost = 0;
+                }
 
                 $total += $average_mileage_reading + 
                           $equipment->rental_cost_basis + 
                           $equipment->driver_salary + 
                           $equipment->spares->sum('cost') + 
-                          $equipment->spares->sum('freight_charges') + 
-                          !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+                          $equipment->spares->sum('freight_charges') + $cost;
             
         }
 
@@ -930,7 +1014,7 @@ class ReportController extends Controller
 
         foreach($equipments as $equipment) {
             $average_mileage_reading = $equipment->fuel->average_mileage_reading ?? 0;
-            $total += $average_mileage_reading + $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+            $total += $average_mileage_reading + $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? 0;
         }
 
         return view('admin.reports.average_expenditure_per_km', compact('equipments', 'citys', 'total'));
