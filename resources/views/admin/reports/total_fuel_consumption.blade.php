@@ -91,9 +91,9 @@
 										<td class="text-center" style="width: 50px"></td>
 										<td class="text-center" style="width: 50px"></td>
 										<td class="text-center" style="width: 50px"></td>
-										<td class="text-center" id="total-unit" style="width: 50px">{{ $totalUnit }}</td>
+										<td class="text-center total-unit-main" style="width: 50px">{{ $totalUnit }}</td>
 										<td class="text-center" style="width: 50px"></td>
-										<td class="text-center total-cost" style="width: 50px">$ {{ $totalCost }}</td>
+										<td class="text-center total-cost-main" style="width: 50px">$ {{ $totalCost }}</td>
 									</tr>
 									</tfoot>
 								</table>
@@ -192,13 +192,17 @@
             
             dataTable.search(this.value).draw();
 
-            var sum = dataTable.column(5).data().sum();
+            var totalCost = dataTable.column(5).data().sum();
             var totalUnit = dataTable.column(3).data().sum();
-            
-            $('#total-unit').html(totalUnit);
 
             $('.total').html('$ ' + sum);
             $('.total-min').html('Total Cost Of Fuel $ ' + sum);
+
+            $('.total-cost-main').html('Total Cost Of Fuel $ ' + totalCost);
+            $('.total-unit-main').html('No Of Gallons Filled ' + totalUnit);
+
+            $('.total-cost').html('Total Cost Of Fuel $ ' + totalCost);
+            $('.total-unit').html('No Of Gallons Filled ' + totalUnit);
         });
 
 
@@ -223,11 +227,11 @@
                 },
                 success: function (data) {
 
-                    let total = data.total / data.count;
-                    let sum = $.number(total, 2);
+                    $('.total-cost-main').html('Total Cost Of Fuel $ ' + data.totalCost);
+                    $('.total-unit-main').html('No Of Gallons Filled ' + data.totalUnit);
 
-                    $('.total').html('$ ' + sum);
-                    $('.total-min').html('Total Cost Of Fuel $ ' + sum);
+                    $('.total-cost').html('Total Cost Of Fuel $ ' + data.totalCost);
+                    $('.total-unit').html('No Of Gallons Filled ' + data.totalUnit);
 
                 }//end of success
             });//end of ajax
