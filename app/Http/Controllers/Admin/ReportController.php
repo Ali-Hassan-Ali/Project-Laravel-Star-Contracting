@@ -1041,6 +1041,9 @@ class ReportController extends Controller
 
     }//end of fun
 
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public function AverageMileage()
     {
         $citys = City::all();
@@ -1054,14 +1057,32 @@ class ReportController extends Controller
 
     public function dataAverageMileage()
     {
-        if(request()->equipment_id) {
+        if(request()->city_id) {
 
-            $fuels = Fuel::where('equipment_id', request()->equipment_id)->get();
+            if (request()->start_data && request()->end_data) {
+
+                $fuels = Fuel::query()->whereDateBetween(request()->start_data, request()->end_data)
+                                ->whereRelation('equipment.city', 'id', request()->city_id);
+                
+            } else {
+
+                $fuels = Fuel::query()->whereRelation('equipment.city', 'id', request()->city_id);
+            }
+
 
         } else {
 
-            $fuels = Fuel::query();
-        }
+            if (request()->start_data && request()->end_data) {
+
+                $fuels = Fuel::query()->whereDateBetween(request()->start_data, request()->end_data);
+                
+            } else {
+
+                $fuels = Fuel::query();
+            }
+
+
+        }//end of if
 
         return DataTables::of($fuels)
             ->editColumn('project', function (Fuel $fuel) {
@@ -1079,18 +1100,38 @@ class ReportController extends Controller
 
     public function sumAverageMileage()
     {
-        if(request()->equipment_id) {
+        if(request()->city_id) {
 
-            $fuels = Fuel::where('equipment_id', request()->equipment_id)->get();
+            if (request()->start_data && request()->end_data) {
+
+                $fuels = Fuel::query()->whereDateBetween(request()->start_data, request()->end_data)
+                                ->whereRelation('equipment.city', 'id', request()->city_id);
+                
+            } else {
+
+                $fuels = Fuel::query()->whereRelation('equipment.city', 'id', request()->city_id);
+            }
+
 
         } else {
 
-            $fuels = Fuel::query();
-        }
+            if (request()->start_data && request()->end_data) {
+
+                $fuels = Fuel::query()->whereDateBetween(request()->start_data, request()->end_data);
+                
+            } else {
+
+                $fuels = Fuel::query();
+            }
+
+
+        }//end of if
 
         return $fuels->sum('average_mileage_reading');
 
     }//end of fun
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public function TotalInsuranceCost()
     {

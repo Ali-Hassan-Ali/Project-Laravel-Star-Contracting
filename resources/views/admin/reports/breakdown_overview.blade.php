@@ -135,10 +135,10 @@
     
     <script>
 
-        function getStartDate(EData) {
+        function getStartDate(SData) {
             if (EData) {
 
-                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(SData));
                 return 'From ' + newDate;
             }
 
