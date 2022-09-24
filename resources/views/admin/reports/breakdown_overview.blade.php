@@ -210,74 +210,14 @@
                 },
             }],
         });
-        $('.date-search').change(function () {
-
-            if ($('#start-date').val() && $('#end-date').val()) {
-
-                startData = $('#start-date').val();
-                endData   = $('#end-date').val();
-
-                dataTable.ajax.reload();
-
-            }//end of if
-        });
-        $('#equipment-man').change(function () {
-    
-            equipmentID = this.value;
-            let url     = '{{ route('admin.breakdown_overview.sum') }}';
-            var id      = $(this).find(':selected').val();
-            var method  = 'get';
-            
-            $.ajax({
-                url: url,
-                method: method,
-                data: {equipment_id: id},
-                success: function (data) {
-                    
-                    let total = data.averages / data.count;
-                    
-                    $('.count').html(data.count);
-                    $('.count-min').html('No Of Breakdowns ' + data.count + ' Days');
-
-                    $('.average').html($.number(total, 2));            
-                    $('.average-min').html('Average Breakdown Duration ' + $.number(total, 2) + ' Days');
-
-                }//end of success
-            });//end of ajax
-            
-            dataTable.ajax.reload();
-            
-        });//end of data-table-search-city
-        $('#equipment-city').change(function () {
-    
-            equipmentID = this.value;
-            let url     = '{{ route('admin.breakdown_overview.sum') }}';
-            var id      = $(this).find(':selected').val();
-            var method  = 'get';
-            
-            if (!id) {
-                
-                $.ajax({
-                    url: url,
-                    method: method,
-                    data: {equipment_id: id},
-                    success: function (data) {
-                        let total = data.averages / data.count;
-                        $('.count').html(data.count);
-                        $('.average').html($.number(total, 2));
-                    }//end of success
-                });//end of ajax
-                DataTable.ajax.reload();
-            }
-    
-        });//end of data-table-search-city
 
         $(document).on('keyup change', '#data-table-search',function () {
-            var sum = dataTable.column(7).data().sum();
+            var sum   = dataTable.column(7).data().sum();
+            var count = dataTable.search(this.value).count();
             dataTable.search(this.value).draw();
 
-            // $('.average').html('$ ' + sum);
-            $('.average-min').html('Average Breakdown Duration' + sum + 'Days');
+            $('.average').html('No Of Breakdowns ' + count);
+            $('.average-min').html('Average Breakdown Duration ' + sum + ' Days');
         });
 
 
@@ -305,8 +245,8 @@
                     let sum = $.number(total, 2);
 
                     $('.count').html(data.count);
-                    $('.average').html(sum);
-                    $('.average-min').html('Average Breakdown Duration' + sum + 'Days');
+                    $('.average').html('No Of Breakdowns ' + sum);
+                    $('.average-min').html('Average Breakdown Duration ' + sum + ' Days');
 
                 }//end of success
             });//end of ajax
