@@ -781,39 +781,106 @@ class ReportController extends Controller
 
     }//end of fun
 
+    /////////////////////////////////////////////////////////////////////////////////
 
     // average_expenditure_per_km
 
+
     public function sumAverageExpenditurePerkM()
     {
-        $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
-        $cityID = request()->city_id;
-        $total = 0;
-        $count = 0;
+        if(request()->city_id) {
 
-        if ($cityID) {
-            foreach($equipments as $equipment) {
-                if ($equipment->city_id == $cityID) {
-                    $count +=1;
-                    $average_mileage_reading = $equipment->fuel->average_mileage_reading ?? 0;
-                    $total += $average_mileage_reading + $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? '';
-                }
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('fuel','spares')
+                                    ->whereDateBetween(request()->start_data, request()->end_data)
+                                    ->where('city_id', request()->city_id)
+                                    ->orderBy('city_id')
+                                    ->get();
+
+            } else {
+
+                $equipments = Equipment::with('fuel','spares')
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')->get();
+
             }
+
+
         } else {
-            foreach($equipments as $equipment) {
-                $count +=1;
-                $average_mileage_reading = $equipment->fuel->average_mileage_reading ?? 0;
-                $total += $average_mileage_reading + $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('fuel','spares')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->orderBy('city_id')->get();
+                
+            } else {
+
+                $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+
             }
+
+
+        }//end of if
+        
+        $total = 0;
+    
+        foreach($equipments as $equipment) {
+                
+                $average_mileage_reading = $equipment->fuel->average_mileage_reading ?? 0;
+
+                $total += $average_mileage_reading + 
+                          $equipment->rental_cost_basis + 
+                          $equipment->driver_salary + 
+                          $equipment->spares->sum('cost') + 
+                          $equipment->spares->sum('freight_charges') + 
+                          !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+            
         }
 
-        return response()->json(['count' => $count, 'total' => $total]);
+        return response()->json(['count' => $equipments->count(), 'total' => $total]);
 
     }//end of fun
 
     public function dataAverageExpenditurePerkM()
     {
-        $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+        if(request()->city_id) {
+
+            
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('fuel','spares')
+                                    ->whereDateBetween(request()->start_data, request()->end_data)
+                                    ->where('city_id', request()->city_id)
+                                    ->orderBy('city_id')
+                                    ->get();
+
+            } else {
+
+                $equipments = Equipment::with('fuel','spares')
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')->get();
+
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::with('fuel','spares')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->orderBy('city_id')->get();
+                
+            } else {
+
+                $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
+
+            }
+
+
+        }//end of if
 
         return DataTables::of($equipments)
             ->addColumn('city', function (Equipment $equipment) {
