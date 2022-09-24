@@ -188,27 +188,6 @@
             }],
         });
 
-        $('#data-table-search-city').change(function () {
-
-            DataTable.search(this.value).draw();
-
-            let url    = '{{ route('admin.total_fuel_consumption.sum') }}';
-            let count  = '{{ $equipments->count() }}';
-            var id     = $(this).find(':selected').data('id');
-            var method = 'get';
-
-            $.ajax({
-                url: url,
-                method: method,
-                data: {city_id: id},
-                success: function (data) {
-                    $('.total-cost').html('No Of Units Filled $ ' + data.totalCost);
-                    $('.total-unit').html('Total Cost Of Fuel ' + data.totalUnit);
-                }//end of success
-            });//end of ajax
-
-        });//end of data-table-search-city
-
         $(document).on('keyup change', '#data-table-search',function () {
             var sum = dataTable.column(7).data().sum();
             dataTable.search(this.value).draw();

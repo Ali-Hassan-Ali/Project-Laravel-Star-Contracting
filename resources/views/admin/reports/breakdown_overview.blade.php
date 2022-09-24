@@ -214,7 +214,7 @@
 
         $(document).on('keyup change', '#data-table-search',function () {
             var sum   = dataTable.column(7).data().sum();
-            var count = dataTable.search(this.value).count();
+            var count = dataTable.data().count();
             dataTable.search(this.value).draw();
 
             $('.count').html('No Of Breakdowns ' + count);
