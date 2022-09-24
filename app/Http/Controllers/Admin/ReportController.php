@@ -683,7 +683,7 @@ class ReportController extends Controller
                 return $equipment->fuel->unit ?? '';
             })
             ->addColumn('no_of_units_filled', function (Equipment $equipment) {
-                return $equipment->fuel->no_of_units_filled ?? '';
+                return $equipment->fuel->no_of_units_filled ?? 0;
             })
             ->addColumn('fuel_rate_per_litre', function (Equipment $equipment) {
                 $data = $equipment->fuel->fuel_rate_per_litre ?? '0';

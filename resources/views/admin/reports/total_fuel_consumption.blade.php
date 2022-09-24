@@ -189,9 +189,14 @@
         });
 
         $(document).on('keyup change', '#data-table-search',function () {
-            var sum = dataTable.column(7).data().sum();
-            dataTable.search(this.value).draw();
             
+            dataTable.search(this.value).draw();
+
+            var sum = dataTable.column(5).data().sum();
+            var totalUnit = dataTable.column(3).data().sum();
+            
+            $('#total-unit').html(totalUnit);
+
             $('.total').html('$ ' + sum);
             $('.total-min').html('Total Cost Of Fuel $ ' + sum);
         });
