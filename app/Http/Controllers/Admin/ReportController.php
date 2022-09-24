@@ -933,32 +933,91 @@ class ReportController extends Controller
 
     // idle_equipments
 
+    //////////////////////////////////////////////////////////////////////////
+
     public function sumIdleEquipments()
     {
         $equipments = Equipment::withCount('status')->having('status_count', '>', '0')->orderBy('city_id')->get();
 
-        $cityID = request()->city_id;
-        $count = 0;
+        if(request()->city_id) {
 
-        if ($cityID) {
-            foreach($equipments as $equipment) {
-                if ($equipment->city_id == $cityID) {
-                    $count +=1;
-                }
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::withCount('status')
+                                        ->having('status_count', '>', '0')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')->get();
+
+            } else {
+
+                $equipments = Equipment::withCount('status')
+                                        ->having('status_count', '>', '0')
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')->get();
             }
+
+
         } else {
-            foreach($equipments as $equipment) {
-                $count +=1;
-            }
-        }
 
-        return response()->json($count);
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::withCount('status')
+                                        ->having('status_count', '>', '0')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->orderBy('city_id')->get();
+                
+            } else {
+
+                $equipments = Equipment::withCount('status')->having('status_count', '>', '0')->orderBy('city_id')->get();
+
+            }
+
+
+        }//end of if
+
+        return response()->json($equipments->count());
 
     }//end of fun
 
     public function dataIdleEquipments()
     {
-        $equipments = Equipment::withCount('status')->having('status_count', '>', '0')->orderBy('city_id')->get();
+        if(request()->city_id) {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::withCount('status')
+                                        ->having('status_count', '>', '0')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')->get();
+
+            } else {
+
+                $equipments = Equipment::withCount('status')
+                                        ->having('status_count', '>', '0')
+                                        ->where('city_id', request()->city_id)
+                                        ->orderBy('city_id')->get();
+            }
+
+
+        } else {
+
+            if (request()->start_data && request()->end_data) {
+
+                $equipments = Equipment::withCount('status')
+                                        ->having('status_count', '>', '0')
+                                        ->whereDateBetween(request()->start_data, request()->end_data)
+                                        ->orderBy('city_id')->get();
+                
+            } else {
+
+                $equipments = Equipment::withCount('status')->having('status_count', '>', '0')->orderBy('city_id')->get();
+
+            }
+
+
+        }//end of if
 
         return DataTables::of($equipments)
             ->addColumn('city', function (Equipment $equipment) {
@@ -983,6 +1042,10 @@ class ReportController extends Controller
         return view('admin.reports.idle_equipments', compact('equipments', 'citys'));
 
     }//end of fun
+
+
+    //////////////////////////////////////////////////////////////////////////
+    
 
     public function GetEquipment(Equipment $equipment)
     {
