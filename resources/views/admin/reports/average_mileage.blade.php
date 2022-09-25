@@ -185,7 +185,7 @@
 
         $(document).on('keyup change', '#data-table-search',function () {
             dataTable.search(this.value).draw();
-            dataTable.columns(2).search(this.value).draw();
+            dataTable.columns(0).search(this.value).draw();
             var sum   = dataTable.column(3).data().sum();
 
             $('.total').html(sum);
