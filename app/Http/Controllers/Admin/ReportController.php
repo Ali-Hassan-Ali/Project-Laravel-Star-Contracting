@@ -1144,7 +1144,7 @@ class ReportController extends Controller
             if (request()->start_data && request()->end_data) {
 
                 $equipments = Equipment::withCount('status')
-                                        ->having('status_count', '>', '0')
+                                        ->having('status_count', '<', '0')
                                         ->whereDateBetween(request()->start_data, request()->end_data)
                                         ->where('city_id', request()->city_id)
                                         ->orderBy('city_id')->get();
@@ -1152,7 +1152,7 @@ class ReportController extends Controller
             } else {
 
                 $equipments = Equipment::withCount('status')
-                                        ->having('status_count', '>', '0')
+                                        ->having('status_count', '<', '0')
                                         ->where('city_id', request()->city_id)
                                         ->orderBy('city_id')->get();
             }
@@ -1163,13 +1163,13 @@ class ReportController extends Controller
             if (request()->start_data && request()->end_data) {
 
                 $equipments = Equipment::withCount('status')
-                                        ->having('status_count', '>', '0')
+                                        ->having('status_count', '<', '0')
                                         ->whereDateBetween(request()->start_data, request()->end_data)
                                         ->orderBy('city_id')->get();
                 
             } else {
 
-                $equipments = Equipment::withCount('status')->having('status_count', '>', '0')->orderBy('city_id')->get();
+                $equipments = Equipment::withCount('status')->having('status_count', '<', '0')->orderBy('city_id')->get();
 
             }
 
@@ -1187,7 +1187,7 @@ class ReportController extends Controller
             if (request()->start_data && request()->end_data) {
 
                 $equipments = Equipment::withCount('status')
-                                        ->having('status_count', '>', '0')
+                                        ->having('status_count', '<', '0')
                                         ->whereDateBetween(request()->start_data, request()->end_data)
                                         ->where('city_id', request()->city_id)
                                         ->orderBy('city_id')->get();
@@ -1195,7 +1195,7 @@ class ReportController extends Controller
             } else {
 
                 $equipments = Equipment::withCount('status')
-                                        ->having('status_count', '>', '0')
+                                        ->having('status_count', '<', '0')
                                         ->where('city_id', request()->city_id)
                                         ->orderBy('city_id')->get();
             }
@@ -1206,13 +1206,13 @@ class ReportController extends Controller
             if (request()->start_data && request()->end_data) {
 
                 $equipments = Equipment::withCount('status')
-                                        ->having('status_count', '>', '0')
+                                        ->having('status_count', '<', '0')
                                         ->whereDateBetween(request()->start_data, request()->end_data)
                                         ->orderBy('city_id')->get();
                 
             } else {
 
-                $equipments = Equipment::withCount('status')->having('status_count', '>', '0')->orderBy('city_id')->get();
+                $equipments = Equipment::withCount('status')->having('status_count', '<', '0')->orderBy('city_id')->get();
 
             }
 
