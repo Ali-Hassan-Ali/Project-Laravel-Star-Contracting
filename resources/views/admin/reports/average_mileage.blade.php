@@ -164,12 +164,6 @@
                 {data: 'project', name: 'project'},
                 {data: 'average_mileage_reading', name: 'average_mileage_reading'},
             ],
-            rowGroup: {
-                dataSrc: 'equipment_name',
-                startRender: function (rows, group) {
-                    return group;
-                },
-            },
             buttons: [{
                 footer: true,
                 extend: "pdf",
