@@ -164,12 +164,6 @@
                 {data: 'project', name: 'project'},
                 {data: 'hours_worked_weekly', name: 'hours_worked_weekly'},
             ],
-            rowGroup: {
-                dataSrc: 'equipment_name',
-                startRender: function (rows, group) {
-                    return group;
-                },
-            },
             buttons: [{
                 footer: true,
                 extend: "pdf",
