@@ -79,7 +79,7 @@
 									<thead>
 									<tr>
 										{{--                                        <th class="text-center" style="width: 50px">@lang('site.DT_RowIndex')</th>--}}
-										<th class="text-center" style="width: 50px">@lang('equipments.plate_no')</th>
+										<th class="text-center" style="width: 50px">@lang('equipments.equipments')</th>
 										<th class="text-center" style="width: 50px">@lang('citys.citys')</th>
 										<th class="text-center" style="width: 50px">@lang('fuels.project')</th>
 										<th class="text-center" style="width: 50px">@lang('fuels.average_mileage_reading')</th>
@@ -159,7 +159,7 @@
             },
             columns: [
                 // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'plate_no', name: 'plate_no'},
+                {data: 'equipments_name', name: 'equipments_name'},
                 {data: 'city', name: 'city'},
                 {data: 'project', name: 'project'},
                 {data: 'average_mileage_reading', name: 'average_mileage_reading'},
@@ -185,6 +185,7 @@
 
         $(document).on('keyup change', '#data-table-search',function () {
             dataTable.search(this.value).draw();
+            dataTable.columns(1).search(this.value).draw();
             var sum   = dataTable.column(3).data().sum();
 
             $('.total').html(sum);

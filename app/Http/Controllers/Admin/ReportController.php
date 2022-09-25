@@ -1388,7 +1388,7 @@ class ReportController extends Controller
             ->editColumn('project', function (Fuel $fuel) {
                 return !empty($fuel->project) ? date('d-m-Y', strtotime($fuel->project)) : '-';
             })
-            ->addColumn('plate_no', function (Fuel $fuel) {
+            ->addColumn('equipments_name', function (Fuel $fuel) {
                 return $fuel->equipment->plate_no;
             })
             ->addColumn('city', function (Fuel $fuel) {
