@@ -1235,7 +1235,7 @@ class ReportController extends Controller
 
     public function IdleEquipments()
     {
-        $equipments = Equipment::withCount('status')->having('status_count', '>', '0')->orderBy('city_id')->get();
+        $equipments = Equipment::withCount('status')->having('status_count', '<', '0')->orderBy('city_id')->get();
 
         $citys = City::all();
 
