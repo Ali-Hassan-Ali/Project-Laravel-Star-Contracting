@@ -15,7 +15,7 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
 
     Route::get('/testing/{id}', function ($id) {
         
-        $pdf = Attachment::find($id);
+        $pdf = Equipment::with('status')->get();
 
         // dd($pdf->path, Storage::disk('public')->getDriver()->getAdapter(), Storage::disk('public')->path($pdf->path));
 
@@ -26,6 +26,8 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
     })->name('view.pdf');
 
     Route::get('/test', function () {
+
+        return $pdf = Equipment::withCount('status')->having('status_count', '0')->get();
 
         $equipments = Equipment::with('fuel','spares')->orderBy('city_id')->get();
 
