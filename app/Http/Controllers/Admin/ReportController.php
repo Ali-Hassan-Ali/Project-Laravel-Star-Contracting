@@ -993,7 +993,7 @@ class ReportController extends Controller
             })
             ->addColumn('average_mileage_reading', function (Equipment $equipment) {
                 $average_mileage = $equipment->fuel->average_mileage_reading  ?? '0';
-                return '$ '. $average_mileage;
+                return $average_mileage;
             })
             ->addColumn('average_expenditure', function (Equipment $equipment) {
                 $average_mileage_reading = $equipment->fuel->average_mileage_reading ?? 0;
