@@ -29,7 +29,7 @@ class ReportController extends Controller
     public function dataAparesAvailable()
     {
 
-         if(request()->city_id) {
+        if(request()->city_id) {
 
             if (request()->start_data && request()->end_data) {
 
