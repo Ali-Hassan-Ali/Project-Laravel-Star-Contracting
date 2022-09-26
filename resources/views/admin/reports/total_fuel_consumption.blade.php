@@ -195,11 +195,11 @@
             var totalCost = dataTable.column(5).data().sum();
             var totalUnit = dataTable.column(3).data().sum();
 
-            $('.total-cost-main').html('Total Cost Of Fuel $ ' + totalCost);
-            $('.total-unit-main').html('No Of Gallons Filled ' + totalUnit);
+            $('.total-cost-main').html('$ ' + totalCost);
+            $('.total-unit-main').html(totalUnit);
 
-            $('.total-cost').html('$ ' + totalCost);
-            $('.total-unit').html(totalUnit);
+            $('.total-cost').html('Total Cost Of Fuel $ ' + totalCost);
+            $('.total-unit').html('No Of Gallons Filled ' + totalUnit);
         });
 
 
