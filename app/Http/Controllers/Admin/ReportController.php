@@ -1299,8 +1299,8 @@ class ReportController extends Controller
                 return !empty($fuel->project) ? date('d-m-Y', strtotime($fuel->project)) : '-';
             })
             ->addColumn('equipments', function (Fuel $fuel) {
-                return $eir->equipment ?
-                    $eir->equipment->name . ' ' . $eir->equipment->make . ' ' . $eir->equipment->plate_no 
+                return $fuel->equipment ?
+                    $fuel->equipment->name . ' ' . $fuel->equipment->make . ' ' . $fuel->equipment->plate_no 
                  : '';
             })
             ->addColumn('city', function (Fuel $fuel) {
