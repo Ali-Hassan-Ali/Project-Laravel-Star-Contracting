@@ -677,6 +677,7 @@ class ReportController extends Controller
                 return $equipment->name . ' ' . $equipment->make . ' ' . $equipment->plate_no;
             })
             ->addColumn('project', function (Equipment $equipment) {
+                return $equipment->allocated_to;
                 return !empty($equipment->fuel->project) ? date('d-m-Y', strtotime($equipment->fuel->project)) : '-';
             })
             ->addColumn('fuel', function (Equipment $equipment) {
@@ -1296,6 +1297,7 @@ class ReportController extends Controller
 
         return DataTables::of($fuels)
             ->editColumn('project', function (Fuel $fuel) {
+                return $fuel->equipment->allocated_to;
                 return 'Project';
             })
             ->addColumn('equipments', function (Fuel $fuel) {
@@ -1388,6 +1390,7 @@ class ReportController extends Controller
 
         return DataTables::of($fuels)
             ->editColumn('project', function (Fuel $fuel) {
+                return $fuel->equipment->allocated_to;
                 return !empty($fuel->project) ? date('d-m-Y', strtotime($fuel->project)) : '-';
             })
             ->addColumn('equipments_name', function (Fuel $fuel) {
