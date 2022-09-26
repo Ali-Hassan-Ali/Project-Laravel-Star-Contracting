@@ -12,7 +12,8 @@ return [
     'attachments_name'=> 'Attachments Name',
 
     'year_of_manufacture' => 'Year Of Manufacture',
-    'rental_cost_basis'   => 'Rental Cost Basis',
+    'rental_cost_basis'   => 'Rental Cost',
+    // 'rental_cost_basis'   => 'Rental Cost Basis',
     'driver_salary'       => 'Driver Salary',
     'rental_basis'        => 'Rental Basis',
     'make'                => 'Make',
