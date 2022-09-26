@@ -198,8 +198,8 @@
             $('.total-cost-main').html('Total Cost Of Fuel $ ' + totalCost);
             $('.total-unit-main').html('No Of Gallons Filled ' + totalUnit);
 
-            $('.total-cost').html('Total Cost Of Fuel $ ' + totalCost);
-            $('.total-unit').html('No Of Gallons Filled ' + totalUnit);
+            $('.total-cost').html('$ ' + totalCost);
+            $('.total-unit').html(totalUnit);
         });
 
 
@@ -224,8 +224,8 @@
                 },
                 success: function (data) {
 
-                    $('.total-cost-main').html('Total Cost Of Fuel $ ' + data.totalCost);
-                    $('.total-unit-main').html('No Of Gallons Filled ' + data.totalUnit);
+                    $('.total-cost-main').html('$ ' + data.totalCost);
+                    $('.total-unit-main').html(data.totalUnit);
 
                     $('.total-cost').html('Total Cost Of Fuel $ ' + data.totalCost);
                     $('.total-unit').html('No Of Gallons Filled ' + data.totalUnit);
