@@ -165,7 +165,7 @@
                 }
             },
             columns: [
-                {data: 'citys', name: 'site', searchable: true},
+                {data: 'site', name: 'site', searchable: true},
                 {data: 'equipments', name: 'equipments'},
                 {data: 'name', name: 'name'},
                 {data: 'part_no', name: 'part_no'},

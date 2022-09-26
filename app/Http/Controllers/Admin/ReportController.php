@@ -1296,7 +1296,7 @@ class ReportController extends Controller
 
         return DataTables::of($fuels)
             ->editColumn('project', function (Fuel $fuel) {
-                return !empty($fuel->project) ? date('d-m-Y', strtotime($fuel->project)) : '-';
+                return 'Project';
             })
             ->addColumn('equipments', function (Fuel $fuel) {
                 return $fuel->equipment ?
