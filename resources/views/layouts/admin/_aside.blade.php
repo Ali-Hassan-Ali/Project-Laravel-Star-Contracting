@@ -177,7 +177,7 @@
         @if (auth()->user()->hasPermission('read_roles'))
 
             <li>
-                <a class="app-menu__item {{ request()->segment(3) == 'roles' ? 'active' : '' }}" href="{{ route('admin.roles.index') }}">
+                <a class="app-menu__item {{ request()->segment(2) == 'roles' ? 'active' : '' }}" href="{{ route('admin.roles.index') }}">
                     <i class="app-menu__icon fa fa-lock"></i> 
                     <span class="app-menu__label">@lang('roles.roles')</span>
                 </a>
@@ -185,13 +185,13 @@
 
         @endif
 
-        {{--roles--}}
-        @if (auth()->user()->hasPermission('read_roles'))
+        {{--admins--}}
+        @if (auth()->user()->hasPermission('read_admins'))
 
             <li>
-                <a class="app-menu__item {{ request()->segment(3) == 'roles' ? 'active' : '' }}" href="{{ route('admin.roles.index') }}">
-                    <i class="app-menu__icon fas fa-envelope"></i> 
-                    <span class="app-menu__label">@lang('roles.roles')</span>
+                <a class="app-menu__item {{ request()->segment(2) == 'admins' ? 'active' : '' }}" href="{{ route('admin.admins.index') }}">
+                    <i class="app-menu__icon fa fa-users"></i> 
+                    <span class="app-menu__label">@lang('admins.admins')</span>
                 </a>
             </li>
 
@@ -201,7 +201,7 @@
         {{-- @if (auth()->user()->hasPermission('read_email_systems')) --}}
 
             <li>
-                <a class="app-menu__item {{ request()->segment(3) == 'email_systems' ? 'active' : '' }}" href="{{ route('admin.email_systems.index') }}">
+                <a class="app-menu__item {{ request()->segment(2) == 'email_systems' ? 'active' : '' }}" href="{{ route('admin.email_systems.index') }}">
                     <i class="app-menu__icon fa fa-users"></i> 
                     <span class="app-menu__label">@lang('email_systems.email_systems')</span>
                 </a>

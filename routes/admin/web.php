@@ -85,23 +85,14 @@ Route::middleware([
 
             Route::get('/statistics_ro', 'StatisticsController@chart')->name('statistics.chart');
             Route::get('/statistics_table', 'StatisticsController@table')->name('statistics.table');
+            
+            //combo boxs routes
+            Route::get('/combo_boxs/data', 'ComboBoxController@data')->name('combo_boxs.data');
+            Route::delete('/combo_boxs/bulk_delete', 'ComboBoxController@bulkDelete')->name('combo_boxs.bulk_delete');
+            Route::resource('combo_boxs', 'ComboBoxController');
 
             Route::prefix('models')->group(function () {
 
-                //combo boxs routes
-                Route::get('/combo_boxs/data', 'ComboBoxController@data')->name('combo_boxs.data');
-                Route::delete('/combo_boxs/bulk_delete', 'ComboBoxController@bulkDelete')->name('combo_boxs.bulk_delete');
-                Route::resource('combo_boxs', 'ComboBoxController');
-
-                //role routes
-                Route::get('/roles/data', 'RoleController@data')->name('roles.data');
-                Route::delete('/roles/bulk_delete', 'RoleController@bulkDelete')->name('roles.bulk_delete');
-                Route::resource('roles', 'RoleController');
-
-                //admin routes
-                Route::get('/admins/data', 'AdminController@data')->name('admins.data');
-                Route::delete('/admins/bulk_delete', 'AdminController@bulkDelete')->name('admins.bulk_delete');
-                Route::resource('admins', 'AdminController');
 
                 //user routes
                 Route::get('/users/data', 'UserController@data')->name('users.data');
@@ -180,13 +171,23 @@ Route::middleware([
                 Route::delete('/request_parts/bulk_delete', 'RequestPartController@bulkDelete')->name('request_parts.bulk_delete');
                 Route::resource('request_parts', 'RequestPartController');
 
-                //request_parts routes
-                Route::get('/email_systems/data', 'EmailSystemController@data')->name('email_systems.data');
-                Route::delete('/email_systems/bulk_delete', 'EmailSystemController@bulkDelete')->name('email_systems.bulk_delete');
-                Route::resource('email_systems', 'EmailSystemController');
 
             });//end of models
 
+            //role routes
+            Route::get('/roles/data', 'RoleController@data')->name('roles.data');
+            Route::delete('/roles/bulk_delete', 'RoleController@bulkDelete')->name('roles.bulk_delete');
+            Route::resource('roles', 'RoleController');
+
+            //admin routes
+            Route::get('/admins/data', 'AdminController@data')->name('admins.data');
+            Route::delete('/admins/bulk_delete', 'AdminController@bulkDelete')->name('admins.bulk_delete');
+            Route::resource('admins', 'AdminController');
+
+            //request_parts routes
+            Route::get('/email_systems/data', 'EmailSystemController@data')->name('email_systems.data');
+            Route::delete('/email_systems/bulk_delete', 'EmailSystemController@bulkDelete')->name('email_systems.bulk_delete');
+            Route::resource('email_systems', 'EmailSystemController');
           
 
             //setting routes

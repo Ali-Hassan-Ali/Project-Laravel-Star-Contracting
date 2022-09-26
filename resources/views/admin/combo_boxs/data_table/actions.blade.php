@@ -2,7 +2,7 @@
     <a href="{{ route('admin.combo_boxs.edit', $id) }}" class="btn btn-warning btn-sm" 
         data-html="true" data-placement="right" title="@lang('site.edit')">
         <i class="fa fa-edit"></i> 
-        @lang('site.edit')
+        {{-- @lang('site.edit') --}}
     </a>
 @endif
 
@@ -12,7 +12,8 @@
         @method('delete')
         <button type="submit" class="btn btn-danger btn-sm delete"
             data-html="true" data-placement="right" title="@lang('site.delete')">
-            <i class="fa fa-trash"></i> @lang('site.delete')
+            <i class="fa fa-trash"></i> 
+            {{-- @lang('site.delete') --}}
         </button>
     </form>
 @endif
