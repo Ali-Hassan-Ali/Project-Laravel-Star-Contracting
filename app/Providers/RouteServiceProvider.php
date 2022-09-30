@@ -30,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
     protected $adminNamespace = 'App\\Http\\Controllers\\Admin';
     protected $adminChartNamespace = 'App\\Http\\Controllers\\Admin\\Chart';
     protected $adminHomeNamespace = 'App\\Http\\Controllers\\Admin\\Home';
+    protected $adminReportNamespace = 'App\\Http\\Controllers\\Admin\\Report';
     protected $apiNamespace = 'App\\Http\\Controllers\\Api';
 
     /**
@@ -62,6 +63,10 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->adminHomeNamespace)
                 ->group(base_path('routes/admin/home.php'));
+
+            Route::middleware('web')
+                ->namespace($this->adminReportNamespace)
+                ->group(base_path('routes/admin/report.php'));
 
         });
     }
