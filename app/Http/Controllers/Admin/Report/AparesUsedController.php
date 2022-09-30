@@ -12,10 +12,9 @@ class AparesUsedController extends Controller
 {
     public function index()
     {
-        $spares = Spare::query()->where('used', '1');
         $citys  = City::all();
 
-        return view('admin.reports.spares_used', compact('spares', 'citys'));
+        return view('admin.reports.spares_used', compact('citys'));
 
     }//end of fun index
 

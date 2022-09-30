@@ -97,7 +97,7 @@
                                         <td class="text-center"></td>
                                         <td class="text-center"></td>
                                         <td class="text-center">@lang('reports.total_cost_used')</td>
-                                        <td class="text-center total">$ {{ $totalCostSpare }}</td>
+                                        <td class="text-center total"></td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -110,7 +110,7 @@
                 
                 </div>{{--end of collapse --}}
 
-                <h4 class="text-end total-min">@lang('reports.total_cost_used') $ {{ $totalCostSpare }}</h4>
+                <h4 class="text-end total-min"></h4>
             
             </div><!-- end of tile -->
         
@@ -212,7 +212,7 @@
                 // Update footer
                 $(api.column(7).footer()).html('$ ' + total);
 
-                $('.total-min').html('Total Cost Of Available Spares $ ' + total);
+                $('.total-min').html('Total Cost Of Used Spares $ ' + total);
             },
         });
 
@@ -226,7 +226,7 @@
             cityID      = $('#report-city').val()  ?? false;
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
-            
+
             dataTable.ajax.reload();
 
         });//end of data-table-search-city
