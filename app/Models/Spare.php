@@ -61,7 +61,7 @@ class Spare extends Model
 
         });
 
-    }// end of scopeWhenRoleId
+    }// end of scopeWhenCityId
 
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {
