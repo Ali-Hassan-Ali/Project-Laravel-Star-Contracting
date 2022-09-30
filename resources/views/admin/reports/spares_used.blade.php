@@ -214,7 +214,7 @@
 
                 $('.total-min').html('Total Cost Of Used Spares $ ' + total);
             },
-        });
+        });//end of dataTable
 
         $(document).on('keyup change', '#data-table-search',function () {
             dataTable.search(this.value).draw();
