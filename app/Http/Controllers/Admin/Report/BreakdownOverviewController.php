@@ -8,13 +8,13 @@ use App\Models\Spare;
 use App\Models\City;
 use Yajra\DataTables\DataTables;
 
-class AparesAvailableController extends Controller
+class BreakdownOverviewController extends Controller
 {
     public function index()
     {
         $citys  = City::all();
 
-        return view('admin.reports.spares_available', compact('citys'));
+        return view('admin.reports.breakdown_overview', compact('citys'));
 
     }//end of fun index
 
