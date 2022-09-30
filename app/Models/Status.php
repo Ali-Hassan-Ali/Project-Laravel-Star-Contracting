@@ -55,11 +55,16 @@ class Status extends Model
 
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {
-        $startDate = now()->createFromFormat('Y-m-d', $startDate);
-        $endDate   = now()->createFromFormat('Y-m-d', $endDate);
+        if ($startDate && $endDate) {
 
-        return $query->whereDate('created_at', '>=',$startDate)
-                     ->whereDate('created_at','<=',$endDate);
+            return $query->whereDate('created_at', '>=',$startDate)
+                         ->whereDate('created_at','<=',$endDate);
+            
+        } else {
+
+            return $query;
+
+        } //end of if
 
     }//end of fun
     
