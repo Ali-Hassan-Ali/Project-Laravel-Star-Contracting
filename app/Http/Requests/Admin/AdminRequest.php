@@ -26,7 +26,6 @@ class AdminRequest extends FormRequest
     {
         $rules = [
             'name'     => ['required','min:2','max:255'],
-            'password' => ['required','confirmed'],
             'type'     => ['required'],
         ];
 
@@ -38,7 +37,8 @@ class AdminRequest extends FormRequest
 
         } else {
 
-            $rules['email'] = ['required','email','unique:users','min:2','max:255'];
+            $rules['password'] = ['required','confirmed'];
+            $rules['email']    = ['required','email','unique:users','min:2','max:255'];
 
         } //end of if
 

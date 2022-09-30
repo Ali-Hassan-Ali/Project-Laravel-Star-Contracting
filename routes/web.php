@@ -13,17 +13,56 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
     
     Auth::routes();
 
-    Route::get('/testing/{id}', function ($id) {
+    Route::get('/dd', function ($id) {
+
+        // curl -X 'DELETE' 'https://test-api.kashier.io/orders/:orderId/transactions/:transactionId?operation=refund'
         
-        $pdf = Equipment::with('status')->get();
+        $response = Http::get('http://example.com');
 
-        // dd($pdf->path, Storage::disk('public')->getDriver()->getAdapter(), Storage::disk('public')->path($pdf->path));
 
-        return $book_file = Storage::disk('public')->getDriver()->getAdapter()->applyPathPrefix($pdf->path);
+        //Copy and paste this code in your Backend
+        function generateKashierOrderHash($order){
+            $mid = "MID-123-123"; //your merchant id
+            $amount = $order->amount; //eg: 100
+            $currency = $order->currency; //eg: "EGP"
+            $orderId = $order->merchantOrderId; //eg: 99, your system order ID
+            $secret = "yourApiKey";
 
-        return response()->file($book_file);
+            $path = "/?payment=".$mid.".".$orderId.".".$amount.".".$currency;
+            $hash = hash_hmac('sha256' , $path , $secret ,false);
+            return $hash;
+        }
+        //The Result Hash for /?payment=mid-0-1.99.20.EGP with secret 11111 should result 606a8a1307d64caf4e2e9bb724738f115a8972c27eccb2a8acd9194c357e4bec
 
-    })->name('view.pdf');
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     Route::get('/test', function () {
 
