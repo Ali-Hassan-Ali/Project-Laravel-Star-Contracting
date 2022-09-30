@@ -224,7 +224,7 @@
                     }, 0);
      
                 // Update footer
-                $(api.column(8).footer()).html('$ ' + total);
+                $(api.column(8).footer()).html(total);
                 $('.average-min').html('Average Breakdown Duration ' + total + ' Days');
 
                 $('#break-down-count').html(column.count());
