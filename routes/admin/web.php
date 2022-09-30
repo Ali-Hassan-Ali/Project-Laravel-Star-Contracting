@@ -16,10 +16,6 @@ Route::middleware([
             Route::get('reports/get/equipment/{eir_overview}', 'ReportController@GetEquipment')->name('reports.get.equipment');
             Route::get('tables/old/{name}', 'TableController@index')->name('tables');
 
-            Route::get('reports/breakdown_overview', 'ReportController@breakdownOverview')->name('reports.breakdown_overview');
-            Route::get('/breakdown_overview/sum', 'ReportController@sumBreakdownOverview')->name('breakdown_overview.sum');
-            Route::get('/breakdown_overview/data', 'ReportController@dataBreakdownOverview')->name('breakdown_overview.data');
-
             Route::get('/material_delivery_time/sum', 'ReportController@sumMaterialDeliveryTime')->name('material_delivery_time.sum');
             Route::get('/material_delivery_time/data', 'ReportController@dataMaterialDeliveryTime')->name('material_delivery_time.data');
             Route::get('reports/material_delivery_time', 'ReportController@MaterialDeliveryTime')->name('reports.material_delivery_time');

@@ -53,6 +53,21 @@ class Status extends Model
 
     }//end of get last name
 
+    //scope
+    public function scopeWhenCityId($query, $cityId)
+    {
+        return $query->when($cityId, function ($q) use ($cityId) {
+
+            return $q->whereHas('equipment', function ($qu) use ($cityId) {
+
+                return $qu->where('city_id', $cityId);
+
+            });
+
+        });
+
+    }// end of scopeWhenCityId
+
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {
         if ($startDate && $endDate) {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Report;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Spare;
+use App\Models\Status;
 use App\Models\City;
 use Yajra\DataTables\DataTables;
 
@@ -20,36 +20,44 @@ class BreakdownOverviewController extends Controller
 
     public function data()
     {
-        $spares = Spare::where('used', '0')->withCount('equipments')->having('equipments', '>', '0')
-                        ->whereDateBetween(request()->start_data, request()->end_data)
-                        ->WhenCityId(request()->city_id)
-                        ->orderBy('id')->get();
 
-        return DataTables::of($spares)
-            ->addColumn('site', function (Spare $spare) {
-                return $spare->equipments()->first()->city->name;
+    	$status = Status::with('equipment.eir')
+		                ->whereRelation('equipment.eir', 'idle', '1')
+		                ->whereDateBetween(request()->start_data, request()->end_data)
+		                ->WhenCityId(request()->city_id)
+		                ->get();
+
+        return DataTables::of($status)
+            ->addColumn('city', function (Status $status) {
+                return $status->equipment->city->name;
             })
-            ->addColumn('equipments', function (Spare $spare) {
-                return view('admin.spares.data_table._equipment', compact('spare'));
+            ->editColumn('as_of', function (Status $status) {
+                return $status->as_of ? date('d-m-Y', strtotime($status->as_of)) : '-';
             })
-            ->addColumn('used', function (Spare $spare) {
-                return $spare->used == 1 ? 'Yes' : 'No';
+            ->editColumn('break_down_date', function (Status $status) {
+                return $status->break_down_date ? date('d-m-Y', strtotime($status->break_down_date)) : '-';
             })
-            ->editColumn('location', function (Spare $spare) {
-                return $spare->location ?? '';
+            ->addColumn('eir_idle', function (Status $status) {
+                return $status->equipment->eir->idle == '1' ? 'Yes' : 'No';
             })
-            ->editColumn('cost', function (Spare $spare) {
-                $cost = $spare->cost;
-                return '$' . $cost;
+            ->addColumn('eir_date', function (Status $status) {
+                return isset($status->equipment->eir->date) ? date('d-m-Y', strtotime($status->equipment->eir->date)) : '-';
             })
-            ->editColumn('freight_charges', function (Spare $spare) {
-                $freight_charges = $spare->freight_charges;
-                return '$' . $freight_charges;
+            ->addColumn('actual_arrival_to_site_date', function (Status $status) {
+                return isset($status->equipment->eir->actual_arrival_to_site_date) ? date('d-m-Y', strtotime($status->equipment->eir->actual_arrival_to_site_date)) : '-';
             })
-            ->addColumn('total_cost', function (Spare $spare) {
-                $total = $spare->cost + $spare->freight_charges;
-                return '$' . $total;
-            })->toJson();
+            ->addColumn('spares ', function (Status $status) {
+                return isset($status->equipment->eir->actual_arrival_to_site_date) ? date('d-m-Y', strtotime($status->equipment->eir->actual_arrival_to_site_date)) : '-';
+            })
+            ->addColumn('eir_break_down_duration', function (Status $status) {
+                 return isset($status->eir->total_break_down_duration) ? $status->eir->total_break_down_duration : 0;
+            })
+            ->addColumn('total_break_down_duration', function (Status $status) {
+                $total_break_down = isset($status->eir->total_break_down_duration) ? $status->eir->total_break_down_duration : 0;
+                return $status->break_down_duration + $total_break_down;
+            })
+            ->addIndexColumn()
+            ->toJson();
 
     }// end of data
 

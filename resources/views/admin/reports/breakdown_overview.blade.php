@@ -67,10 +67,6 @@
 
                 </div><!-- end of row -->
                 
-                @php
-                    $total = $average / $status->count();
-                @endphp
-                
                 <div class="collapse" id="collapse">
                     
                     <div class="row">
@@ -100,12 +96,11 @@
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px">@lang('reports.no_of_break_down')</td>
-                                        <td class="text-center" id="break-down-count" style="width: 50px">{{ $status->count() }}</td>
+                                        <td class="text-center" id="break-down-count" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px"></td>
                                         <td class="text-center" style="width: 50px">@lang('reports.average_break_down_duration')</td>
-                                        <td class="text-center average" style="width: 50px">
-                                        {{ number_format($total, 2) }} @lang('reports.days')</td>
+                                        <td class="text-center average" style="width: 50px"></td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -118,8 +113,8 @@
                 
                 </div>{{--end of collapse --}}
     
-                <h4 class="text-end count-min">@lang('reports.no_of_break_down') {{ $status->count() }}</h4>
-                <h4 class="text-end average-min">@lang('reports.average_break_down_duration') {{ number_format($total, 2) }} @lang('reports.days')</h4>
+                <h4 class="text-end count-min"></h4>
+                <h4 class="text-end average-min"></h4>
                 
             </div><!-- end of tile -->
             
@@ -168,7 +163,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.breakdown_overview.data') }}',
+                url: '{{ route('admin.reports.breakdown_overview.data') }}',
                 data: function (d) {
                     d.city_id = cityID;
                     d.start_data = startData;
@@ -210,19 +205,37 @@
                     doc.styles.tableFooter.alignment = 'center';
                 },
             }],
-        });
+            footerCallback: function (row, data, start, end, display) {
+                var api = this.api();
+     
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+
+                var column = api.column(8).data();
+     
+                // Total over all pages
+                total = api
+                    .column(8)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+     
+                // Update footer
+                $(api.column(8).footer()).html('$ ' + total);
+                $('.average-min').html('Average Breakdown Duration ' + total + ' Days');
+
+                $('#break-down-count').html(column.count());
+                $('.count-min').html('No Of Breakdowns ' + column.count());
+
+            },
+        });//end of dataTable
 
         $(document).on('keyup change', '#data-table-search',function () {
-            
             dataTable.search(this.value).draw();
-
-            var sum   = dataTable.column(7).data().sum();
-            var count = dataTable.data().count();
-
-            $('#break-down-count').html('No Of Breakdowns ' + count);
-            $('.count-min').html('No Of Breakdowns ' + count);
-            $('.average-min').html('Average Breakdown Duration ' + sum + ' Days');
-        });
+        });//end of dataTable
 
 
         $(document).on('keyup change', '.report-search', function () {
@@ -231,31 +244,6 @@
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
 
-            let url     = '{{ route('admin.spares_used.sum') }}';
-            var id      = $('#report-city').find(':selected').val();
-            var method  = 'get';
-
-            $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    city_id: $('#report-city').val()  ?? false,
-                    start_data: $('#start-date').val()  ?? false,
-                    end_data: $('#end-date').val() ?? false,
-                },
-                success: function (data) {
-
-                    let total = data.total / data.count;
-                    let sum = $.number(total, 2);
-
-                    $('#break-down-count').html(data.count);
-                    $('.count-min').html('No Of Breakdowns ' + data.count);
-
-                    $('.average').html('No Of Breakdowns ' + sum);
-                    $('.average-min').html('Average Breakdown Duration ' + sum + ' Days');
-
-                }//end of success
-            });//end of ajax
             dataTable.ajax.reload();
 
         });//end of data-table-search-city
@@ -263,3 +251,6 @@
     </script>
 
 @endpush
+
+
+
