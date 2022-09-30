@@ -48,6 +48,21 @@ class Spare extends Model
 
     }//end of fun
 
+        //scope
+    public function scopeWhenCityId($query, $cityId)
+    {
+        return $query->when($cityId, function ($q) use ($cityId) {
+
+            return $q->whereHas('equipmentsFirst', function ($qu) use ($cityId) {
+
+                return $qu->where('city_id', $cityId);
+
+            });
+
+        });
+
+    }// end of scopeWhenRoleId
+
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {
 

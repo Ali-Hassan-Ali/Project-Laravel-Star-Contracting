@@ -84,6 +84,10 @@
         .has-error .select2-selection {
             border-color: rgb(185, 74, 72) !important;
         }
+        .dataTables_filter,
+        .dataTables_info {
+            display: none;
+        }
         .pb-2-1 {
             padding-bottom: 21px;
         }

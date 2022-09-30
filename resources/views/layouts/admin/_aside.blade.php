@@ -29,7 +29,7 @@
 
 
         {{--reports--}}
-        <li class="treeview {{ request()->is('*reports*') ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">@lang('reports.reports')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview {{ request()->is('*report*') ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">@lang('reports.reports')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item {{ request()->segment(3) == 'spares_available' ? 'active' : '' }}" href="{{ route('admin.reports.spares_available') }}"><i class="icon fa-solid fa-server"></i>@lang('reports.spares_available')</a></li>
                 <li><a class="treeview-item {{ request()->segment(3) == 'spares_used' ? 'active' : '' }}" href="{{ route('admin.reports.spares_used') }}"><i class="icon fa-solid fa-server"></i>@lang('reports.spares_used')</a></li>

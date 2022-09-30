@@ -16,10 +16,6 @@ Route::middleware([
             Route::get('reports/get/equipment/{eir_overview}', 'ReportController@GetEquipment')->name('reports.get.equipment');
             Route::get('tables/old/{name}', 'TableController@index')->name('tables');
 
-            Route::get('reports/spares_available', 'ReportController@AparesAvailable')->name('reports.spares_available');
-            Route::get('/spares_available/sum', 'ReportController@sumAparesAvailable')->name('spares_available.sum');
-            Route::get('/spares_available/data', 'ReportController@dataAparesAvailable')->name('spares_available.data');
-
             Route::get('reports/spares_used', 'ReportController@SparesUsed')->name('reports.spares_used');
             Route::get('/spares_used/sum', 'ReportController@sumSparesUsed')->name('spares_used.sum');
             Route::get('/spares_used/data', 'ReportController@dataSparesUsed')->name('spares_used.data');
