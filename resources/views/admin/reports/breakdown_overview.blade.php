@@ -225,7 +225,7 @@
      
                 // Update footer
                 $(api.column(8).footer()).html(total);
-                $('.average-min').html('Average Breakdown Duration ' + total + ' Days');
+                $('.average-min').html('Average Breakdown Duration ' + total / total + ' Days');
 
                 $('#break-down-count').html(column.count());
                 $('.count-min').html('No Of Breakdowns ' + column.count());
