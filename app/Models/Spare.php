@@ -48,7 +48,7 @@ class Spare extends Model
 
     }//end of fun
 
-        //scope
+    //scope
     public function scopeWhenCityId($query, $cityId)
     {
         return $query->when($cityId, function ($q) use ($cityId) {

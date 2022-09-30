@@ -157,7 +157,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.spares_used.data') }}',
+                url: '{{ route('admin.reports.spares_used.data') }}',
                 data: function (d) {
                     d.city_id = cityID;
                     d.start_data = startData;
@@ -193,44 +193,40 @@
                     doc.styles.tableFooter.alignment = 'center';
                 },
             }],
+            footerCallback: function (row, data, start, end, display) {
+                var api = this.api();
+     
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+     
+                // Total over all pages
+                total = api
+                    .column(7)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+     
+                // Update footer
+                $(api.column(7).footer()).html('$ ' + total);
+
+                $('.total-min').html('Total Cost Of Available Spares $ ' + total);
+            },
         });
 
         $(document).on('keyup change', '#data-table-search',function () {
-            var sum = dataTable.column(7).data().sum();
             dataTable.search(this.value).draw();
-            $('.total').html('$ ' + sum);
-            $('.total-min').html('Total Cost Of Used Spares $ ' + sum);
-        });
+        });//end of dataTable
 
 
         $(document).on('keyup change', '.report-search', function () {
 
-
             cityID      = $('#report-city').val()  ?? false;
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
-
-            let url     = '{{ route('admin.spares_used.sum') }}';
-            var id      = $('#report-city').find(':selected').val();
-            var method  = 'get';
-
-            $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    city_id: $('#report-city').val()  ?? false,
-                    start_data: $('#start-date').val()  ?? false,
-                    end_data: $('#end-date').val() ?? false,
-                },
-                success: function (data) {
-
-                    let total = data.total / data.count;
-                    let sum = $.number(total, 2);
-                    $('.total').html('$ ' + sum);
-                    $('.total-min').html('Total Cost Of Used Spares $ ' + sum);
-
-                }//end of success
-            });//end of ajax
+            
             dataTable.ajax.reload();
 
         });//end of data-table-search-city
