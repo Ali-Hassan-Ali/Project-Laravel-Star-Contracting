@@ -206,7 +206,7 @@
                     return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
                 };
 
-                var columnCount = api.column(6).data();
+                var columnCount = api.column(8).data();
      
                 // Total over all pages
                 total = api
@@ -219,7 +219,7 @@
                 if (total == 0) {
                     
                     // Update footer
-                    $(api.column(6).footer()).html('0');
+                    $(api.column(8).footer()).html('0');
                     $('.total-main').html('Total Expenditure 0');
 
                 } else {
@@ -227,7 +227,7 @@
                     var sum = total / columnCount.count();
 
                     // Update footer
-                    $(api.column(6).footer()).html('$ ' + $.number(sum, 2));
+                    $(api.column(8).footer()).html('$ ' + $.number(sum, 2));
                     $('.total-main').html('Total Expenditure $ ' + $.number(sum, 2));
 
                 }//end of if
