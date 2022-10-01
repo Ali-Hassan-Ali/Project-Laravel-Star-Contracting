@@ -206,7 +206,7 @@
                     return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
                 };
 
-                var column = api.column(6).data();
+                var columnCount = api.column(6).data();
      
                 // Total over all pages
                 total = api
@@ -224,7 +224,7 @@
 
                 } else {
 
-                    var sum = total / column.count();
+                    var sum = total / columnCount.count();
 
                     // Update footer
                     $(api.column(6).footer()).html('$ ' + $.number(sum, 2));
