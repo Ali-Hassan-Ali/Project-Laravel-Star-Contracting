@@ -155,7 +155,8 @@
                         {{--registration_date--}}
                         <div class="form-group col-6">
                             <label>@lang('equipments.registration_date')</label>
-                            <input type="date" name="registration_date" id="registration-date" class="form-control @error('registration_date') custom-select @enderror" value="{{  old('registration_date', $equipment->registration_date ? date('Y-m-d', strtotime($equipment->registration_date)) : '') }}" autofocus>
+                            <input type="date" name="registration_date" id="registration-date" class="form-control @error('registration_date') custom-select @enderror" value="{{  old('registration_date', $equipment->registration_date ? date('Y-m-d', strtotime($equipment->registration_date)) : '') }}" autofocus
+                                max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('registration_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
