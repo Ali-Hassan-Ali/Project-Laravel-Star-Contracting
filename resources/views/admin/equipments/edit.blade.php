@@ -322,7 +322,7 @@
                             </select>
                         </div>
                         {{--project_allocated_to--}}
-                        <div class="form-group col-6 @error('project_allocated_to') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.project_allocated_to') <span class="text-danger">*</span></label>
                             <select name="project_allocated_to[]" {{ old('allocated_to', $equipment->allocated_to) == 'Project' ? '' : 'disabled' }} multiple id="project-allocated-to" class="form-control select2">
                                 <option value="" disabled>@lang('site.choose') @lang('equipments.project_allocated_to')</option>
@@ -330,6 +330,11 @@
                                     <option value="{{ ucwords($project->name) }}" {{ in_array(ucwords($project->name), old('project_allocated_to', json_decode(ucwords($equipment->project_allocated_to)) ?? [])) ? 'selected' : '' }}>{{ $project->name }}</option>
                                 @endforeach
                             </select>
+                            @error('project_allocated_to')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         </div>
 
                     </div>{{-- row --}}
