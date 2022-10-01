@@ -120,15 +120,19 @@ class InsuranceController extends Controller
 
         $insurance = Insurance::create($validated);
 
-        foreach ($request->file('attachments') as $file) {
+        if ($request->attachments) {
             
-            Attachment::create([
-                'path'         => $file->store('insurances_attachments_file'),
-                'name'         => $file->getClientOriginalName(),
-                'insurance_id' => $insurance->id,
-            ]);
+            foreach ($request->file('attachments') as $file) {
+                
+                Attachment::create([
+                    'path'         => $file->store('insurances_attachments_file'),
+                    'name'         => $file->getClientOriginalName(),
+                    'insurance_id' => $insurance->id,
+                ]);
 
-        }//end of rach
+            }//end of rach
+
+        }//end of if
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('admin.insurances.index');
@@ -163,6 +167,20 @@ class InsuranceController extends Controller
         $validated['claim_amount']        = request()->claim_amount ?? NULL;
 
         $insurance->update($validated);
+
+        if ($request->attachments) {
+            
+            foreach ($request->file('attachments') as $file) {
+                
+                Attachment::create([
+                    'path'         => $file->store('insurances_attachments_file'),
+                    'name'         => $file->getClientOriginalName(),
+                    'insurance_id' => $insurance->id,
+                ]);
+
+            }//end of rach
+
+        }//end of if
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.insurances.index');
