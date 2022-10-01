@@ -36,12 +36,8 @@ class InsuranceRequest extends FormRequest
             'claim_date'          => ['required_if:claim,==,1','date'],
             'insurance_start_date'=> ['required','date'],
             'insurance_expiry'    => ['required','date'],
+            'attachments'         => ['nullable','array'],
         ];
-
-        if (in_array($this->method(), ['POST'])) {
-
-            $rules['attachments'] = ['required', 'array'];
-        }
 
         return $rules;
 
