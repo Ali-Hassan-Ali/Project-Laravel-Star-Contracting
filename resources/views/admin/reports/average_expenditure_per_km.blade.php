@@ -207,6 +207,8 @@
                 };
 
                 var columnCount = api.column(6).data();
+
+                alert(columnCount.count());
      
                 // Total over all pages
                 total = api
