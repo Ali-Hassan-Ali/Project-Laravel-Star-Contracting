@@ -99,7 +99,7 @@
 										<td class="text-center" style="width: 50px"></td>
 										<td class="text-center" style="width: 50px"></td>
 										<td class="text-center" style="width: 50px">@lang('reports.average_expenditure')</td>
-										<td class="text-center total" style="width: 50px">$ {{ number_format($total / $equipments->count(), 2) }}</td>
+										<td class="text-center total" style="width: 50px"></td>
 									</tr>
 									</tfoot>
 								</table>
@@ -112,7 +112,7 @@
 				
 				</div>{{--end of collapse --}}
 				
-				<h4 class="text-end total-min">@lang('reports.total_expenditure') $ {{ number_format($total / $equipments->count(), 2) }}</h4>
+				<h4 class="text-end total-min"></h4>
 			
 			</div><!-- end of tile -->
 		
