@@ -312,7 +312,7 @@
                         </div>
 
                         {{--allocated_to--}}
-                        <div class="form-group col-6 @error('allocated_to') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.allocated_to') <span class="text-danger">*</span></label>
                             <select name="allocated_to" id="allocated-to" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.allocated_to')</option>
@@ -320,11 +320,6 @@
                                     <option value="{{ $allocated->name }}" {{ $allocated->name == old('allocated_to', $equipment->allocated_to) ? 'selected' : '' }}>{{ $allocated->name }}</option>
                                 @endforeach
                             </select>
-                            @error('allocated_to')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         {{--project_allocated_to--}}
                         <div class="form-group col-6 @error('project_allocated_to') custom-select @enderror">
@@ -335,11 +330,6 @@
                                     <option value="{{ ucwords($project->name) }}" {{ in_array(ucwords($project->name), old('project_allocated_to', json_decode(ucwords($equipment->project_allocated_to)) ?? [])) ? 'selected' : '' }}>{{ $project->name }}</option>
                                 @endforeach
                             </select>
-                            @error('project_allocated_to')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                     </div>{{-- row --}}
@@ -441,7 +431,7 @@
                 $('#attachments').attr('required', false);
 
             }//end of if
-            
+
             // $('#registration-expiry').attr('disabled', value == 'Vehicle' ? false : true);
 
         });//end of chage

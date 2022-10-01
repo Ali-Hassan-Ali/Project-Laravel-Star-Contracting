@@ -282,11 +282,6 @@
                                     <option value="{{ $person->name }}" {{ $person->name == old('responsible_person') ? 'selected' : '' }}>{{ $person->name }}</option>
                                 @endforeach
                             </select>
-                            @error('responsible_person')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
 
@@ -299,15 +294,10 @@
                                     <option value="{{ $email->name }}" {{ $email->name == old('email') ? 'selected' : '' }}>{{ $email->name }}</option>
                                 @endforeach
                             </select>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         {{--allocated_to--}}
-                        <div class="form-group col-6 @error('allocated_to') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.allocated_to') <span class="text-danger">*</span></label>
                             <select name="allocated_to" id="allocated-to" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.allocated_to')</option>
@@ -323,7 +313,7 @@
                         </div>
 
                         {{--project_allocated_to--}}
-                        <div class="form-group col-6 @error('project_allocated_to') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.project_allocated_to') <span class="text-danger">*</span></label>
                             <select name="project_allocated_to[]" {{ old('allocated_to') == 'Project' ? '' : 'disabled' }} multiple id="project-allocated-to" class="form-control select2">
                                 <option value="" disabled>@lang('site.choose') @lang('equipments.project_allocated_to')</option>
