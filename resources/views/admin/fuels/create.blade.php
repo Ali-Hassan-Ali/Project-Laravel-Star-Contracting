@@ -154,7 +154,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" disabled id="total_cost_of_fuel" name="total_cost_of_fuel" class="form-control @error('total_cost_of_fuel') is-invalid @enderror" value="{{ old('total_cost_of_fuel') }}">
+                                <input type="text" disabled id="total_cost_of_fuel" name="total_cost_of_fuel" class="form-control @error('total_cost_of_fuel') is-invalid @enderror" value="{{ old('total_cost_of_fuel') }}">
                                 @error('total_cost_of_fuel')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
