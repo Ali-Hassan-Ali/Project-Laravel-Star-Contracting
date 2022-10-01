@@ -230,8 +230,6 @@
 
                 }//end of if
 
-
-
      
             },
         });//end of dataTable

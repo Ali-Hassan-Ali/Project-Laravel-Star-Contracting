@@ -178,7 +178,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.reports.spares_available.data') }}',
+                url: '{{ route('admin.reports.breakdown_overview.data') }}',
                 data: function (d) {
                     d.city_id      = cityID;
                     d.equipment_id = equipmentID;
@@ -248,7 +248,7 @@
                 } else {
                     // Update footer
                     $(api.column(8).footer()).html(total);
-                    $('.average-min').html('Average Breakdown Duration ' + total / total + ' Days');
+                    $('.average-min').html('Average Breakdown Duration ' + total / column.count() + ' Days');
                 }
 
                 $('#break-down-count').html(column.count());
