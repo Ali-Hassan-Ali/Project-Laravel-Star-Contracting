@@ -220,7 +220,7 @@
                     
                     // Update footer
                     $(api.column(8).footer()).html('0');
-                    $('.total-main').html('Total Expenditure 0');
+                    $('.total-min').html('Total Expenditure 0');
 
                 } else {
 
@@ -228,7 +228,7 @@
 
                     // Update footer
                     $(api.column(8).footer()).html('$ ' + $.number(sum, 2));
-                    $('.total-main').html('Total Expenditure $ ' + $.number(sum, 2));
+                    $('.total-min').html('Total Expenditure $ ' + $.number(sum, 2));
 
                 }//end of if
 
