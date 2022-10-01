@@ -235,7 +235,6 @@
         
         $(document).on('change keyup', '#current_mileage_reading, #no-of-unit-filled, #last_mileage_reading',function (e) {
             e.preventDefault();
-            console.log('ff');
 
             var current     = $('#current_mileage_reading').val();
             var lastCurrent = $('#last_mileage_reading').val();
@@ -243,15 +242,14 @@
 
             var subUnit = parseInt(current) - parseInt(lastCurrent);
             var total   =  parseInt(subUnit) / parseInt(unit);
-
-            $('#average_mileage_reading').val($.number(total, 2));
-            $('#average_mileage_reading-hidding').val($.number(total, 2));
+            
+            $('#average_mileage_reading').val($.number(total, 3));
+            $('#average_mileage_reading-hidding').val($.number(total, 3));
             
         });//end of change
 
         $(document).on('change keyup', '#no-of-unit-filled, #fuel_rate_per_litre',function (e) {
             e.preventDefault();
-            console.log('ff');
 
             var fuelRate    = $('#fuel_rate_per_litre').val();
             var unit        = $('#no-of-unit-filled').val();
