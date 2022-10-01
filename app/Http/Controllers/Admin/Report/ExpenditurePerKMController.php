@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Report;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Status;
 use App\Models\City;
 use App\Models\Equipment;
 use Yajra\DataTables\DataTables;
@@ -50,6 +49,16 @@ class ExpenditurePerKMController extends Controller
             })
             ->addColumn('total_expenditure', function (Equipment $equipment) {
                 $sum = $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+                return '$ ' . $sum;
+            })
+            ->addColumn('average_mileage_reading', function (Equipment $equipment) {
+                $average_mileage = $equipment->fuel->average_mileage_reading  ?? '0';
+                return $average_mileage;
+            })
+            ->addColumn('average_expenditure', function (Equipment $equipment) {
+                $average_mileage_reading = $equipment->fuel->average_mileage_reading ?? 0;
+                $total = $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+                $sum = $average_mileage_reading + $total;
                 return '$ ' . $sum;
             })
             ->toJson();
