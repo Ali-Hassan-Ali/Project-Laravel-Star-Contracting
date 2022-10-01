@@ -233,7 +233,9 @@
 
     <script>
         
-        $(document).on('change keyup', '#current_mileage_reading, #no-of-unit-filled, #last_mileage_reading',function () {
+        $(document).on('change keyup', '#current_mileage_reading, #no-of-unit-filled, #last_mileage_reading',function (e) {
+            e.preventDefault();
+            console.log('ff');
 
             var current     = $('#current_mileage_reading').val();
             var lastCurrent = $('#last_mileage_reading').val();
@@ -247,7 +249,9 @@
             
         });//end of change
 
-        $(document).on('change keyup', '#no-of-unit-filled, #fuel_rate_per_litre',function () {
+        $(document).on('change keyup', '#no-of-unit-filled, #fuel_rate_per_litre',function (e) {
+            e.preventDefault();
+            console.log('ff');
 
             var fuelRate    = $('#fuel_rate_per_litre').val();
             var unit        = $('#no-of-unit-filled').val();
