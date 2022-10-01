@@ -178,7 +178,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.reports.breakdown_overview.data') }}',
+                url: '{{ route('admin.reports.spares_available.data') }}',
                 data: function (d) {
                     d.city_id      = cityID;
                     d.equipment_id = equipmentID;

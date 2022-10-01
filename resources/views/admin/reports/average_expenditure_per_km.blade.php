@@ -159,7 +159,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.average_expenditure_per_km.data') }}',
+                url: '{{ route('admin.reports.expenditure_per_KM.data') }}',
                 data: function (d) {
                     d.city_id = cityID;
                     d.start_data = startData;
@@ -198,20 +198,47 @@
                     // doc.content[1].table.headerRows = 0;
                 },
             }],
-        });
+            footerCallback: function (row, data, start, end, display) {
+                var api = this.api();
+     
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+
+                var column = api.column(8).data();
+     
+                // Total over all pages
+                total = api
+                    .column(8)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                if (total == 0) {
+                    
+                    // Update footer
+                    $(api.column(8).footer()).html('0');
+                    $('.total-main').html('Total Expenditure 0');
+
+                } else {
+
+                    // Update footer
+                    $(api.column(8).footer()).html('$ ' + total / column.count());
+                    $('.total-main').html('Total Expenditure $ ' + total / column.count());
+
+                }//end of if
+
+
+
+     
+            },
+        });//end of dataTable
 
         $(document).on('keyup change', '#data-table-search',function () {
             dataTable.search(this.value).draw();
-            var count   = dataTable.data().count();
-            var sum = dataTable.column(8).data().sum();
-
-            var total =  sum / count;
-            var newSum = $.number(total, 2);
-
-            $('.total').html('$' + newSum);
-            $('.total-min').html('Average Expenditure $ ' + newSum);
-
-        });
+        });//end of dataTable
 
 
         $(document).on('keyup change', '.report-search', function () {
@@ -219,29 +246,6 @@
             cityID      = $('#report-city').val()  ?? false;
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
-
-            let url     = '{{ route('admin.average_expenditure_per_km.sum') }}';
-            var id      = $('#report-city').find(':selected').val();
-            var method  = 'get';
-
-            $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    city_id: $('#report-city').val()  ?? false,
-                    start_data: $('#start-date').val()  ?? false,
-                    end_data: $('#end-date').val() ?? false,
-                },
-                success: function (data) {
-
-            		total =  data.total / data.count;
-                    sum = $.number(total, 2);
-
-                    $('.total').html('$' + sum);
-                    $('.total-min').html('Average Expenditure $ ' + sum);
-
-                }//end of success
-            });//end of ajax
 
             dataTable.ajax.reload();
 
