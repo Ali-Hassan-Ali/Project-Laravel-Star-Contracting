@@ -124,10 +124,10 @@
     
     <script>
         
-        function getStartDate(EData) {
-            if (EData) {
+        function getStartDate(SData) {
+            if (SData) {
 
-                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(SData));
                 return 'From ' + newDate;
             }
 

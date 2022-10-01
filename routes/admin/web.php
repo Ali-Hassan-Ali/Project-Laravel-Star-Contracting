@@ -16,10 +16,6 @@ Route::middleware([
             Route::get('reports/get/equipment/{eir_overview}', 'ReportController@GetEquipment')->name('reports.get.equipment');
             Route::get('tables/old/{name}', 'TableController@index')->name('tables');
 
-            Route::get('/material_delivery_time/sum', 'ReportController@sumMaterialDeliveryTime')->name('material_delivery_time.sum');
-            Route::get('/material_delivery_time/data', 'ReportController@dataMaterialDeliveryTime')->name('material_delivery_time.data');
-            Route::get('reports/material_delivery_time', 'ReportController@MaterialDeliveryTime')->name('reports.material_delivery_time');
-
             Route::get('/total_fuel_consumption/sum', 'ReportController@sumTotalFuelConsumption')->name('total_fuel_consumption.sum');
             Route::get('/total_fuel_consumption/data', 'ReportController@dataTotalFuelConsumption')->name('total_fuel_consumption.data');
             Route::get('reports/total_fuel_consumption', 'ReportController@totalFuelConsumption')->name('reports.total_fuel_consumption');

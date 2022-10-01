@@ -133,6 +133,21 @@ class Equipment extends Model
 
     }//end of get last name
 
+
+    public function scopeWhenCityId($query, $cityId)
+    {
+        if ($cityId) {
+            
+            return $query->where('city_id', $cityId);
+
+        } else {
+            
+            return $query;    
+
+        }//end of if
+
+    }// end of scopeWhenCityId
+
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {
         if ($startDate && $endDate) {

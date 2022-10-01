@@ -93,7 +93,7 @@
                                     <td class="text-center" style="width: 50px"></td>
                                     <td class="text-center" style="width: 50px"></td>
                                     <td class="text-end" style="width: 50px">@lang('reports.average_delivery_time')</td>
-                                    <td class="text-center average" style="width: 50px">{{ number_format($total / $equipments->count(), 2) }}</td>
+                                    <td class="text-center average" style="width: 50px"></td>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -108,7 +108,6 @@
     
                 <h4 class="text-end average-min">
                     @lang('reports.average_delivery_time') 
-                    {{ number_format($total / $equipments->count(), 2) }}
                 </h4>
                 
             </div><!-- end of tile -->
@@ -123,10 +122,10 @@
     
     <script>
 
-        function getStartDate(EData) {
-            if (EData) {
+        function getStartDate(SData) {
+            if (SData) {
 
-                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(SData));
                 return 'From ' + newDate;
             }
 
@@ -156,7 +155,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.material_delivery_time.data') }}',
+                url: '{{ route('admin.reports.material_delivery_time.data') }}',
                 data: function (d) {
                     d.city_id = cityID;
                     d.start_data = startData;
@@ -175,7 +174,12 @@
                 footer: true,
                 extend: "pdf",
                 pageSize: 'A4',
-                title: $('.title-download').html() + ' - ' + "{{ now()->format('d-m-Y') }}",
+                title: function () { 
+                    let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
+                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + getStartDate($('#start-date').val()) + ' ' + getEndDate($('#start-date').val());
+
+                    return title;
+                },
                 className: 'btn btn-primary',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
                 customize: function(doc) {
@@ -184,38 +188,32 @@
                     doc.styles.tableFooter.alignment = 'center';
                 },
             }],
+            footerCallback: function (row, data, start, end, display) {
+                var api = this.api();
+     
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+     
+                // Total over all pages
+                total = api
+                    .column(5)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+     
+                // Update footer
+                $(api.column(5).footer()).html(total);
+
+                $('.average-min').html('Average Delivery Time ' + total);
+            },
         });
-        $('#data-table-search-city').change(function () {
-            
-            DataTable.search(this.value).draw();
-    
-            let url    = '{{ route('admin.material_delivery_time.sum') }}';
-            let count  = '{{ $equipments->count() }}';
-            var id     = $(this).find(':selected').data('id');
-            var method = 'get';
-            
-            $.ajax({
-                url: url,
-                method: method,
-                data: {city_id: id},
-                success: function (data) {
-                    let total = data.total / data.count;
-                    let sum = $.number(total, 2);
-                    $('.average').html(sum);
-                    $('.average-min').html('Average Delivery Time ' + sum);
-                }//end of success
-            });//end of ajax
-            
-        });//end of data-table-search-city
 
         $(document).on('keyup change', '#data-table-search',function () {
-            var sum = dataTable.column(5).data().sum();
             dataTable.search(this.value).draw();
-
-            // $('.average').html('$ ' + sum);
-            $('.average').html(sum);
-            $('.average-min').html('Average Delivery Time ' + sum);
-        });
+        });//end of dataTable
 
 
         $(document).on('keyup change', '.report-search', function () {
@@ -224,29 +222,6 @@
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
 
-            let url     = '{{ route('admin.material_delivery_time.sum') }}';
-            var id      = $('#report-city').find(':selected').val();
-            var method  = 'get';
-
-            $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    city_id: $('#report-city').val()  ?? false,
-                    start_data: $('#start-date').val()  ?? false,
-                    end_data: $('#end-date').val() ?? false,
-                },
-                success: function (data) {
-
-                    let total = data.total / data.count;
-                    let sum = $.number(total, 2);
-
-                    $('.count').html(data.count);
-                    $('.average').html(sum);
-                    $('.average-min').html('Average Delivery Time ' + sum);
-
-                }//end of success
-            });//end of ajax
             dataTable.ajax.reload();
 
         });//end of data-table-search-city

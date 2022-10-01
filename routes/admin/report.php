@@ -24,6 +24,10 @@ Route::middleware([
             Route::get('breakdown_overview', 'BreakdownOverviewController@index')->name('breakdown_overview');
             Route::get('breakdown_overview/data', 'BreakdownOverviewController@data')->name('breakdown_overview.data');
 
+            // breakdown_overview
+            Route::get('material_delivery_time', 'MaterialDeliveryTimeController@index')->name('material_delivery_time');
+            Route::get('breakdown_overview/data', 'MaterialDeliveryTimeController@data')->name('material_delivery_time.data');
+
         });//end of group
 
     });//end of Route middleware
