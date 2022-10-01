@@ -258,8 +258,8 @@
 
             var total = parseInt(fuelRate) * parseInt(unit);
 
-            $('#total_cost_of_fuel').val($.number(total, 2));
-            $('#total_cost_of_fuel-hidding').val($.number(total, 2));
+            $('#total_cost_of_fuel').val($.number(total, 3));
+            $('#total_cost_of_fuel-hidding').val($.number(total, 3));
             
         });//end of change
 
