@@ -246,7 +246,6 @@
                     $('.average-min').html('Average Breakdown Duration 0 Days');
 
                 } else {
-
                     // Update footer
                     $(api.column(8).footer()).html(total);
                     $('.average-min').html('Average Breakdown Duration ' + total / total + ' Days');
