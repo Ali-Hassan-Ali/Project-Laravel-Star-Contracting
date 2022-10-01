@@ -348,7 +348,7 @@
                             <small style="font-weight: bold;">@lang('equipments.attachments_docum') )</small> 
                             <span class="text-dark small" style="text-transform: none;" id="rented-attachments"></span>
                         </label>
-                        <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
+                        <input type="file" id="attachments" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
                         @error('attachments')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -435,7 +435,15 @@
                 }//end of each
             });
 
-            // $('#registration-expiry').attr('disabled', value == 'Vehicle' ? false : true);
+            if (value == 'Vehicle' || value == vehicle) {
+
+                $('#attachments').attr('required', true);
+
+            } else {
+
+                $('#attachments').attr('required', false);
+
+            }//end of if
             
         });//end of change
 

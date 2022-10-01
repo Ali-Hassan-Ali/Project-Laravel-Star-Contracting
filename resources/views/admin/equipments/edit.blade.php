@@ -432,6 +432,16 @@
                 }//end of each
             });
             
+            if (value == 'Vehicle' || value == vehicle) {
+
+                $('#attachments').attr('required', true);
+
+            } else {
+
+                $('#attachments').attr('required', false);
+
+            }//end of if
+            
             // $('#registration-expiry').attr('disabled', value == 'Vehicle' ? false : true);
 
         });//end of chage
