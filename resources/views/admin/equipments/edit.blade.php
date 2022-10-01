@@ -465,10 +465,12 @@
             if (value == 'project' || value == 'Project') {
 
                 $('#project-allocated-to').attr('disabled', false);
+                $('#project-allocated-to').attr('required', true);
 
             } else {
 
                 $('#project-allocated-to').attr('disabled', true);
+                $('#project-allocated-to').attr('required', false);
 
             }//end of if
             
