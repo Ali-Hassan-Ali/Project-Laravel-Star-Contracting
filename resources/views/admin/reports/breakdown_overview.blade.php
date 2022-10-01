@@ -238,10 +238,14 @@
                     .reduce(function (a, b) {
                         return intVal(a) + intVal(b);
                     }, 0);
-     
-                // Update footer
-                $(api.column(8).footer()).html(total);
-                $('.average-min').html('Average Breakdown Duration ' + total / total + ' Days');
+
+                if (total == 0) {
+                    
+                    // Update footer
+                    $(api.column(8).footer()).html('0');
+                    $('.average-min').html('Average Breakdown Duration 0 Days');
+
+                }
 
                 $('#break-down-count').html(column.count());
                 $('.count-min').html('No Of Breakdowns ' + column.count());
