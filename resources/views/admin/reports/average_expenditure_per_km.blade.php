@@ -219,14 +219,16 @@
                 if (total == 0) {
                     
                     // Update footer
-                    $(api.column(8).footer()).html('0');
+                    $(api.column(6).footer()).html('0');
                     $('.total-main').html('Total Expenditure 0');
 
                 } else {
 
+                    var sum = total / column.count();
+
                     // Update footer
-                    $(api.column(8).footer()).html('$ ' + total / column.count());
-                    $('.total-main').html('Total Expenditure $ ' + total / column.count());
+                    $(api.column(6).footer()).html('$ ' + $.number(sum, 2));
+                    $('.total-main').html('Total Expenditure $ ' + $.number(sum, 2));
 
                 }//end of if
 
