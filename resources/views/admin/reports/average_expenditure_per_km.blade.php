@@ -190,12 +190,10 @@
                 className: 'btn btn-primary',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
                 customize: function(doc) {
-                	// doc.styles['table'] = { width:100 }
-                    // doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+                    doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
                     doc.styles.tableBodyEven.alignment = 'center';
                     doc.styles.tableBodyOdd.alignment = 'center';
                     doc.styles.tableFooter.alignment = 'center';
-                    // doc.content[1].table.headerRows = 0;
                 },
             }],
             footerCallback: function (row, data, start, end, display) {
