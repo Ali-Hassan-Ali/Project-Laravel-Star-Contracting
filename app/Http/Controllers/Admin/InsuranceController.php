@@ -111,6 +111,7 @@ class InsuranceController extends Controller
     public function store(InsuranceRequest $request)
     {
         $validated = $request->validated();
+        dd($validated);
         $validated = $request->safe()->except(['attachments','insurer','type_of_insurance','claim']);
         
         $validated['insurer']           = $this->tagInsurer($request);
