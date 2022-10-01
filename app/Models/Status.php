@@ -68,6 +68,20 @@ class Status extends Model
 
     }// end of scopeWhenCityId
 
+    public function scopeWhenEquipmentId($query, $equipmentId)
+    {
+        return $query->when($equipmentId, function ($q) use ($equipmentId) {
+
+            return $q->whereHas('equipment', function ($qu) use ($equipmentId) {
+
+                return $qu->where('id', $equipmentId);
+
+            });
+
+        });
+
+    }// end of scopeWhenCityId
+
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {
         if ($startDate && $endDate) {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Status;
 use App\Models\City;
+use App\Models\Equipment;
 use Yajra\DataTables\DataTables;
 
 class BreakdownOverviewController extends Controller
@@ -13,8 +14,9 @@ class BreakdownOverviewController extends Controller
     public function index()
     {
         $citys  = City::all();
+        $equipments  = Equipment::all();
 
-        return view('admin.reports.breakdown_overview', compact('citys'));
+        return view('admin.reports.breakdown_overview', compact('citys', 'equipments'));
 
     }//end of fun index
 
@@ -25,6 +27,7 @@ class BreakdownOverviewController extends Controller
 		                ->whereRelation('equipment.eir', 'idle', '1')
 		                ->whereDateBetween(request()->start_data, request()->end_data)
 		                ->WhenCityId(request()->city_id)
+                        ->WhenEquipmentId(request()->equipment_id)
 		                ->get();
 
         return DataTables::of($status)
