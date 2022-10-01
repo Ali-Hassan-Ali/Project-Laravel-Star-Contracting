@@ -28,9 +28,13 @@ Route::middleware([
             Route::get('material_delivery_time', 'MaterialDeliveryTimeController@index')->name('material_delivery_time');
             Route::get('breakdown_overview/data', 'MaterialDeliveryTimeController@data')->name('material_delivery_time.data');
 
-            // material_delivery_time
+            // fuel_consumption
             Route::get('total_fuel_consumption', 'FuelConsumptionController@index')->name('total_fuel_consumption');
             Route::get('total_fuel_consumption/data', 'FuelConsumptionController@data')->name('total_fuel_consumption.data');
+
+            // equipment_expenditure
+            Route::get('total_equipment_expenditure', 'EquipmentExpenditureController@index')->name('total_equipment_expenditure');
+            Route::get('total_equipment_expenditure/data', 'EquipmentExpenditureController@data')->name('total_equipment_expenditure.data');
 
         });//end of group
 
