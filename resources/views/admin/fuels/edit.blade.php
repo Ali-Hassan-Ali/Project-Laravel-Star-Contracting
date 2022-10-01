@@ -153,7 +153,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="test" disabled id="total_cost_of_fuel" name="total_cost_of_fuel" class="form-control @error('total_cost_of_fuel') is-invalid @enderror" value="{{ old('total_cost_of_fuel', $fuel->total_cost_of_fuel) }}">
+                                <input type="text" disabled id="total_cost_of_fuel" name="total_cost_of_fuel" class="form-control @error('total_cost_of_fuel') is-invalid @enderror" value="{{ old('total_cost_of_fuel', $fuel->total_cost_of_fuel) }}">
                                 @error('total_cost_of_fuel')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -162,7 +162,7 @@
                             </div>
                         </div>
 
-                        <input type="test" name="total_cost_of_fuel" value="{{ old('total_cost_of_fuel', $fuel->total_cost_of_fuel) }}" id="total_cost_of_fuel-hidding" hidden>
+                        <input type="text" name="total_cost_of_fuel" value="{{ old('total_cost_of_fuel', $fuel->total_cost_of_fuel) }}" id="total_cost_of_fuel-hidding" hidden>
 
 
                         {{--last_mileage_reading--}}

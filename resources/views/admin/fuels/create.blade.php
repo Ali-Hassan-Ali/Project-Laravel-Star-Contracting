@@ -163,7 +163,7 @@
                             </div>
                         </div>
 
-                        <input type="test" name="total_cost_of_fuel" value="{{ old('total_cost_of_fuel', 0) }}" id="total_cost_of_fuel-hidding" hidden>
+                        <input type="text" name="total_cost_of_fuel" value="{{ old('total_cost_of_fuel', 0) }}" id="total_cost_of_fuel-hidding" hidden>
 
 
                         {{--last_mileage_reading--}}
