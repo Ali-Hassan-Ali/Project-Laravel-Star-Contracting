@@ -206,7 +206,7 @@
                     return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
                 };
 
-                var column = api.column(8).data();
+                var column = api.column(6).data();
      
                 // Total over all pages
                 total = api
