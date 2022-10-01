@@ -33,9 +33,10 @@
 								<div class="d-flex">
 									<div class="p-2"><h3>{{ $city->name }}</h3></div>
 									<div class="ml-auto p-3">
-										<div class="form-check form-switch" data-toggle="collapse" href="#collapse{{ $city->id }}" role="button" aria-expanded="false" aria-controls="collapse{{ $city->id }}">
+										<div class="form-check form-switch">
 											<label class="form-check-label mr-5">@lang('reports.show_details')</label>
-											<input class="form-check-input" type="checkbox">
+											<input class="form-check-input" type="checkbox"
+											data-toggle="collapse" href="#collapse{{ $city->id }}" role="button" aria-expanded="false" aria-controls="collapse{{ $city->id }}">
 										</div>
 									</div>
 								</div>
