@@ -30,7 +30,7 @@ class EquipmentRequest extends FormRequest
             'owner_ship'            => ['required','string','min:1','max:255'],
             'operator'              => ['nullable','string','min:1','max:255'],
             'responsible_person'    => ['required','string','min:1','max:255'],
-            'project_allocated_to'  => ['required_if:allocated_to,==,Project','array'],
+            'project_allocated_to'  => ['nullable','required_if:allocated_to,==,Project','array'],
             'allocated_to'          => ['required','string','min:1','max:255'],
             'email'                 => ['required','email','min:1','max:255'],
             'driver_salary'         => ['nullable','numeric'],
