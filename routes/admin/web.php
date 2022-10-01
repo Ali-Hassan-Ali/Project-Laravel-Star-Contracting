@@ -20,10 +20,6 @@ Route::middleware([
             Route::get('/average_expenditure_per_km/data', 'ReportController@dataAverageExpenditurePerkM')->name('average_expenditure_per_km.data');
             Route::get('reports/average_expenditure_per_km', 'ReportController@averageExpenditurePerkM')->name('reports.average_expenditure_per_km');
 
-            Route::get('reports/eir_overview', 'ReportController@EirOverview')->name('reports.eir_overview');
-            Route::get('/eir_overview/data', 'ReportController@dataEirOverview')->name('eir_overview.data');
-            Route::get('reports/sum_eir_overview', 'ReportController@sumEirOverview')->name('eir_overview.sum');
-
             Route::get('reports/equipments_overview', 'ReportController@EquipmentsOverview')->name('reports.equipments_overview');
             Route::get('/equipments_overview/data', 'ReportController@dataEquipmentsOverview')->name('equipments_overview.data');
             Route::get('reports/sum_equipments_overview', 'ReportController@sumEquipmentsOverview')->name('equipments_overview.sum');

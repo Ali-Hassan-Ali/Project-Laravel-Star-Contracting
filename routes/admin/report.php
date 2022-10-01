@@ -40,6 +40,10 @@ Route::middleware([
             Route::get('expenditure_per_KM', 'ExpenditurePerKMController@index')->name('expenditure_per_KM');
             Route::get('expenditure_per_KM/data', 'ExpenditurePerKMController@data')->name('expenditure_per_KM.data');
 
+            // equipment_expenditure
+            Route::get('eir_overview', 'EirOverviewController@index')->name('eir_overview');
+            Route::get('eir_overview/data', 'EirOverviewController@data')->name('eir_overview.data');
+
         });//end of group
 
     });//end of Route middleware

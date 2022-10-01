@@ -88,7 +88,7 @@
 									<tr>
 										<td class="text-center"></td>
 										<td class="text-end" >@lang('reports.total_EIRs')</td>
-										<td class="text-center count">{{ $eirs->count() }}</td>
+										<td class="text-center count"></td>
 									</tr>
 									</tfoot>
 								</table>
@@ -101,7 +101,7 @@
 				
 				</div>{{--end of collapse --}}
 
-				<h4 class="text-end count-min">@lang('reports.total_EIRs') {{ $eirs->count() }}</h4>
+				<h4 class="text-end count-min"></h4>
 			
 			</div><!-- end of tile -->
 		
@@ -147,7 +147,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.eir_overview.data') }}',
+                url: '{{ route('admin.reports.eir_overview.data') }}',
                 data: function (d) {
                     d.city_id = cityID;
                     d.start_data = startData;
@@ -184,17 +184,24 @@
                     doc.styles.tableFooter.alignment = 'center';
                 },
             }],
-        });
+            footerCallback: function (row, data, start, end, display) {
+                
+                var api = this.api();
+
+                var columnCount = api.column(2).data();
+     
+                // Update footer
+                $(api.column(2).footer()).html('$ ' + columnCount.count());
+
+                $('.count').html(columnCount.count());
+                $('.count-min').html('Total EIRs ' + columnCount.count());
+            },
+        });//end of dataTable
 
 
         $(document).on('keyup change', '#data-table-search',function () {
             dataTable.search(this.value).draw();
-            var count   = dataTable.data().count();
-
-            $('.count').html(count);
-            $('.count-min').html('Total EIRs ' + count);
-
-        });
+        });//end of dataTable
 
 
         $(document).on('keyup change', '.report-search', function () {
@@ -203,25 +210,6 @@
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
 
-            let url     = '{{ route('admin.eir_overview.sum') }}';
-            var id      = $('#report-city').find(':selected').val();
-            var method  = 'get';
-
-            $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    city_id: $('#report-city').val()  ?? false,
-                    start_data: $('#start-date').val()  ?? false,
-                    end_data: $('#end-date').val() ?? false,
-                },
-                success: function (data) {
-
-            		$('.count').html(data.count);
-            		$('.count-min').html('Total EIRs ' + data.count);
-
-                }//end of success
-            });//end of ajax
             dataTable.ajax.reload();
 
         });//end of data-table-search-city
