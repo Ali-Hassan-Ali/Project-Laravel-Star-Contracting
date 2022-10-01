@@ -278,7 +278,7 @@
                 success: function (data) {
                     
                     $('.equipment-man').empty('');
-                    $('.equipment-man').append(`<option disabled>Choose Equipment</option>`);
+                    $('.equipment-man').append(`<option value="">Choose Equipment</option>`);
 
                     $.each(data, function(index,item) {
                         
