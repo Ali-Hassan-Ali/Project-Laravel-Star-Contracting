@@ -37,8 +37,8 @@ Route::middleware([
             Route::get('total_equipment_expenditure/data', 'EquipmentExpenditureController@data')->name('total_equipment_expenditure.data');
 
             // equipment_expenditure
-            Route::get('expenditure_per_KM', 'EquipmentExpenditureController@index')->name('expenditure_per_KM');
-            Route::get('expenditure_per_KM/data', 'EquipmentExpenditureController@data')->name('expenditure_per_KM.data');
+            Route::get('expenditure_per_KM', 'ExpenditurePerKMController@index')->name('expenditure_per_KM');
+            Route::get('expenditure_per_KM/data', 'ExpenditurePerKMController@data')->name('expenditure_per_KM.data');
 
         });//end of group
 
