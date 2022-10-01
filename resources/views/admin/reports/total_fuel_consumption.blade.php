@@ -56,11 +56,12 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6" for="form-switch">
-                        <div class="d-flex flex-row-reverse" for="form-switch">
-                            <div class="form-check form-switch" for="form-switch" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
-                                <label class="form-check-label mr-5" for="form-switch">@lang('reports.show_details')</label>
-                                <input class="form-check-input" id="form-switch" type="checkbox">
+                    <div class="col-md-6">
+                        <div class="d-flex flex-row-reverse">
+                            <div class="form-check form-switch">
+                                <label class="form-check-label mr-5">@lang('reports.show_details')</label>
+                                <input class="form-check-input" type="checkbox"
+                                data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
                             </div>
                         </div>
                     </div>
