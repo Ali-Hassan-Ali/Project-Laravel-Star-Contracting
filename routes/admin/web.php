@@ -25,11 +25,6 @@ Route::middleware([
             Route::get('reports/sum_equipments_overview', 'ReportController@sumEquipmentsOverview')->name('equipments_overview.sum');
 
 
-            Route::get('reports/total_hours_worked', 'ReportController@totalHoursWorked')->name('reports.total_hours_worked');
-            Route::get('/total_hours_worked/data', 'ReportController@dataTotalHoursWorked')->name('total_hours_worked.data');
-            Route::get('/total_hours_worked/sum', 'ReportController@sumTotalHoursWorked')->name('total_hours_worked.sum');
-
-
             Route::get('reports/average_mileage', 'ReportController@AverageMileage')->name('reports.average_mileage');
             Route::get('/average_mileage/data', 'ReportController@dataAverageMileage')->name('average_mileage.data');
             Route::get('/average_mileage/sum', 'ReportController@sumAverageMileage')->name('average_mileage.sum');

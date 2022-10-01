@@ -90,7 +90,7 @@
 										<td class="text-center"></td>
 										<td class="text-center"></td>
 										<td class="text-center">@lang('reports.total_hours_worked')</td>
-										<td class="text-center total">{{ $total_hours }}</td>
+										<td class="text-center count"></td>
 									</tr>
 									</tfoot>
 								</table>
@@ -103,7 +103,7 @@
 				
 				</div>{{--end of collapse --}}
 				
-				<h4 class="text-end total-min">@lang('reports.total_hours_worked') {{ $total_hours }}</h4>
+				<h4 class="text-end count-min"></h4>
 			
 			</div><!-- end of tile -->
 			
@@ -150,7 +150,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.total_hours_worked.data') }}',
+                url: '{{ route('admin.reports.total_hours_worked.data') }}',
                 data: function (d) {
                     d.city_id = cityID;
                     d.start_data = startData;
@@ -181,17 +181,22 @@
                     doc.styles.tableFooter.alignment = 'center';
                 },
             }],
-        });
+            footerCallback: function (row, data, start, end, display) {
+                
+                var api = this.api();
+
+                var columnCount = api.column(3).data();
+     
+                // Update footer
+                $(api.column(2).footer()).html(columnCount.count());
+                $('.count-min').html('Total Hours Worked ' + columnCount.count());
+            },
+        });//end of dataTable
 
 
         $(document).on('keyup change', '#data-table-search',function () {
             dataTable.search(this.value).draw();
-            var sum   = dataTable.column(3).data().sum();
-
-            $('.total').html(sum);
-            $('.total-min').html('Aggregate Average Mileage ' + sum);
-
-        });
+        });//end of dataTable
 
 
         $(document).on('keyup change', '.report-search', function () {
@@ -200,25 +205,6 @@
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
 
-            let url     = '{{ route('admin.total_hours_worked.sum') }}';
-            var id      = $('#report-city').find(':selected').val();
-            var method  = 'get';
-
-            $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    city_id: $('#report-city').val()  ?? false,
-                    start_data: $('#start-date').val()  ?? false,
-                    end_data: $('#end-date').val() ?? false,
-                },
-                success: function (data) {
-
-            		$('.total').html(data);
-                    $('.total-min').html('Total Hours Worked ' + data);
-
-                }//end of success
-            });//end of ajax
             dataTable.ajax.reload();
 
         });//end of data-table-search-city

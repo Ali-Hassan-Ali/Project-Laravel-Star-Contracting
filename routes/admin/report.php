@@ -48,6 +48,10 @@ Route::middleware([
             Route::get('idle_equipments', 'IdleEquipmentsController@index')->name('idle_equipments');
             Route::get('idle_equipments/data', 'IdleEquipmentsController@data')->name('idle_equipments.data');
 
+            // total_hours_worked
+            Route::get('total_hours_worked', 'TotalHoursWorkedController@index')->name('total_hours_worked');
+            Route::get('total_hours_worked/data', 'TotalHoursWorkedController@data')->name('total_hours_worked.data');
+
         });//end of group
 
     });//end of Route middleware
