@@ -204,7 +204,7 @@
                     {{--hours_worked_weekly--}}
                     <div class="form-group">
                         <label>@lang('fuels.hours_worked_weekly')<span class="text-danger">*</span></label>
-                        <input {{ $fuel->equipment->spec->name == 'lightweight' ? 'disabled' : '' }} type="number" id="hours_worked_weekly" name="hours_worked_weekly" class="form-control @error('average_mileage_reading') is-invalid @enderror" value="{{ old('hours_worked_weekly', $fuel->hours_worked_weekly) }}" required autofocus>
+                        <input {{ $fuel->equipment->spec->name == 'lightweight' ? 'disabled' : '' }} type="text" id="hours_worked_weekly" name="hours_worked_weekly" class="form-control @error('average_mileage_reading') is-invalid @enderror" value="{{ old('hours_worked_weekly', $fuel->hours_worked_weekly) }}" required autofocus>
                         @error('hours_worked_weekly')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

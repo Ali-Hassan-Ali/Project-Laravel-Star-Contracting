@@ -194,7 +194,7 @@
                     {{--average_mileage_reading--}}
                     <div class="form-group">
                         <label>@lang('fuels.average_mileage_reading')<span class="text-danger">*</span></label>
-                        <input type="number" disabled id="average_mileage_reading" name="average_mileage_reading" class="form-control @error('average_mileage_reading') is-invalid @enderror" value="{{ old('average_mileage_reading', 0) }}" required autofocus>
+                        <input type="text" disabled id="average_mileage_reading" name="average_mileage_reading" class="form-control @error('average_mileage_reading') is-invalid @enderror" value="{{ old('average_mileage_reading', 0) }}" required autofocus>
                         @error('average_mileage_reading')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
