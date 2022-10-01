@@ -24,9 +24,13 @@ Route::middleware([
             Route::get('breakdown_overview', 'BreakdownOverviewController@index')->name('breakdown_overview');
             Route::get('breakdown_overview/data', 'BreakdownOverviewController@data')->name('breakdown_overview.data');
 
-            // breakdown_overview
+            // material_delivery_time
             Route::get('material_delivery_time', 'MaterialDeliveryTimeController@index')->name('material_delivery_time');
             Route::get('breakdown_overview/data', 'MaterialDeliveryTimeController@data')->name('material_delivery_time.data');
+
+            // material_delivery_time
+            Route::get('total_fuel_consumption', 'FuelConsumptionController@index')->name('total_fuel_consumption');
+            Route::get('total_fuel_consumption/data', 'FuelConsumptionController@data')->name('total_fuel_consumption.data');
 
         });//end of group
 
