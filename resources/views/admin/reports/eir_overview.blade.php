@@ -23,7 +23,7 @@
                     {{--city--}}
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select class="form-control report-search col-3 select2-tags-false" id="report-city">
+                            <select class="form-control equipment-city report-search col-3 select2-tags-false" id="report-city">
                                 <option value="">@lang('site.all') @lang('citys.citys')</option>
                                 @foreach ($citys as $city)
                                     <option data-id="{{ $city->id }}" value="{{ $city->id }}">{{ $city->name }}</option>
@@ -245,7 +245,7 @@
                 success: function (data) {
                     
                     $('.equipment-man').empty('');
-                    $('.equipment-man').append(`<option value="">Choose Equipment</option>`);
+                    $('.equipment-man').append(`<option value="">All Equipment</option>`);
 
                     $.each(data, function(index,item) {
                         
