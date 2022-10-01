@@ -122,7 +122,7 @@
                         {{-- insurance_start_date --}}
                         <div class="form-group col-6">
                             <label>@lang('insurances.insurance_start_date') <span class="text-danger">*</span></label>
-                                <input type="date" name="insurance_start_date" id="insurance_start_date"  autofocus class="form-control @error('insurance_start_date') is-invalid @enderror" value="{{ old('insurance_start_date', $insurance->insurance_start_date ? date('Y-m-d', strtotime($insurance->insurance_start_date)) : '') }}" required>
+                                <input type="date" name="insurance_start_date" id="insurance_start_date"  autofocus class="form-control @error('insurance_start_date') is-invalid @enderror" value="{{ old('insurance_start_date', $insurance->insurance_start_date ? date('Y-m-d', strtotime($insurance->insurance_start_date)) : '') }}" required max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('insurance_start_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
