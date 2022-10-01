@@ -36,7 +36,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <select class="form-control report-search col-3 select2 equipment-man" id="report-city">
-                                <option value="">@lang('equipments.all') @lang('equipments.equipments')</option>
+                                <option value="">@lang('site.all') @lang('equipments.equipments')</option>
                                 @foreach ($equipments as $equipment)
                                     <option data-id="{{ $equipment->id }}" value="{{ $equipment->id }}">
                                         {{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no  }}
