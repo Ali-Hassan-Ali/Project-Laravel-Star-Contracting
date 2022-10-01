@@ -90,7 +90,7 @@
 										<td class="text-center"></td>
 										<td class="text-center"></td>
 										<td class="text-center">@lang('reports.total_average_mileage')</td>
-										<td class="text-center total">{{ $total_average_mileage }}</td>
+										<td class="text-center total"></td>
 									</tr>
 									</tfoot>
 								</table>
@@ -103,7 +103,7 @@
 				
 				</div>{{--end of collapse --}}
 				
-				<h4 class="text-end total-min">@lang('reports.total_average_mileage') {{ $total_average_mileage }}</h4>
+				<h4 class="text-end total-min"></h4>
 			
 			</div><!-- end of tile -->
 		
@@ -150,7 +150,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.average_mileage.data') }}',
+                url: '{{ route('admin.reports.average_mileage.data') }}',
                 data: function (d) {
                     d.city_id = cityID;
                     d.start_data = startData;
@@ -182,17 +182,34 @@
                     doc.styles.tableFooter.alignment = 'center';
                 },
             }],
-        });
+            footerCallback: function (row, data, start, end, display) {
+
+                 var api = this.api();
+     
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+     
+                // Total over all pages
+                total = api
+                    .column(3)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+     
+                // Update footer
+
+                $('.total').html(total);
+                $('.total-min').html('Aggregate Average ' + total);
+
+            },
+        });//end of dataTable
 
         $(document).on('keyup change', '#data-table-search',function () {
             dataTable.search(this.value).draw();
-            dataTable.columns(0).search(this.value).draw();
-            var sum   = dataTable.column(3).data().sum();
-
-            $('.total').html(sum);
-            $('.total-min').html('Aggregate Average Mileage ' + sum);
-
-        });
+        });//end of dataTable
 
 
         $(document).on('keyup change', '.report-search', function () {
@@ -201,25 +218,6 @@
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
 
-            let url     = '{{ route('admin.average_mileage.sum') }}';
-            var id      = $('#report-city').find(':selected').val();
-            var method  = 'get';
-
-            $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    city_id: $('#report-city').val()  ?? false,
-                    start_data: $('#start-date').val()  ?? false,
-                    end_data: $('#end-date').val() ?? false,
-                },
-                success: function (data) {
-
-                    $('.total').html(data);
-            		$('.total-min').html('Aggregate Average Mileage ' + data);
-
-                }//end of success
-            });//end of ajax
             dataTable.ajax.reload();
 
         });//end of data-table-search-city

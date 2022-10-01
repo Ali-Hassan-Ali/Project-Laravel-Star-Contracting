@@ -24,15 +24,9 @@ Route::middleware([
             Route::get('/equipments_overview/data', 'ReportController@dataEquipmentsOverview')->name('equipments_overview.data');
             Route::get('reports/sum_equipments_overview', 'ReportController@sumEquipmentsOverview')->name('equipments_overview.sum');
 
-
-            Route::get('reports/average_mileage', 'ReportController@AverageMileage')->name('reports.average_mileage');
-            Route::get('/average_mileage/data', 'ReportController@dataAverageMileage')->name('average_mileage.data');
-            Route::get('/average_mileage/sum', 'ReportController@sumAverageMileage')->name('average_mileage.sum');
-
             Route::get('reports/total_insurance_cost', 'ReportController@TotalInsuranceCost')->name('reports.total_insurance_cost');
             Route::get('/total_insurance_cost/data', 'ReportController@dataTotalInsuranceCost')->name('total_insurance_cost.data');
             Route::get('/total_insurance_cost/sum', 'ReportController@sumTotalInsuranceCost')->name('total_insurance_cost.sum');
-
 
             //home
             Route::get('/top_statistics', 'HomeController@topStatistics')->name('home.top_statistics');

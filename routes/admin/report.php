@@ -52,6 +52,10 @@ Route::middleware([
             Route::get('total_hours_worked', 'TotalHoursWorkedController@index')->name('total_hours_worked');
             Route::get('total_hours_worked/data', 'TotalHoursWorkedController@data')->name('total_hours_worked.data');
 
+            // average_mileage
+            Route::get('average_mileage', 'AverageMileageController@index')->name('average_mileage');
+            Route::get('average_mileage/data', 'AverageMileageController@data')->name('average_mileage.data');
+
         });//end of group
 
     });//end of Route middleware
