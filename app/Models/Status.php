@@ -80,7 +80,7 @@ class Status extends Model
 
         });
 
-    }// end of scopeWhenCityId
+    }// end of scopeWhenEquipmentId
 
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {

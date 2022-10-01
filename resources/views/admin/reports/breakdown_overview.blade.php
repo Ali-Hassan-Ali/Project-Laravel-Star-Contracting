@@ -33,6 +33,7 @@
                         </div>
                     </div>
 
+                    {{-- equipments --}}
                     <div class="col-md-3">
                         <div class="form-group">
                             <select class="form-control report-search col-3 select2-tags-false equipment-man" id="report-city">

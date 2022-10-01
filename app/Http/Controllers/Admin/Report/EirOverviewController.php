@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Report;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Equipment;
 use App\Models\City;
 use App\Models\Eir;
 use Yajra\DataTables\DataTables;
@@ -13,8 +14,9 @@ class EirOverviewController extends Controller
     public function index()
     {
         $citys  = City::all();
+        $equipments  = Equipment::all();
 
-        return view('admin.reports.eir_overview', compact('citys'));
+        return view('admin.reports.eir_overview', compact('citys', 'equipments'));
 
     }//end of fun index
 
@@ -23,6 +25,7 @@ class EirOverviewController extends Controller
     	$eirs = Eir::with('equipment')
                         ->whereDateBetween(request()->start_data, request()->end_data)
                         ->WhenCityId(request()->city_id)
+                        ->WhenEquipmentId(request()->equipment_id)
                         ->get();
 
 

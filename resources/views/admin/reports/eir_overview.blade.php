@@ -21,12 +21,26 @@
 				<div class="row">
 
                     {{--city--}}
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <select class="form-control report-search col-6 select2-tags-false" id="report-city">
+                            <select class="form-control report-search col-3 select2-tags-false" id="report-city">
                                 <option value="">@lang('site.all') @lang('citys.citys')</option>
                                 @foreach ($citys as $city)
                                     <option data-id="{{ $city->id }}" value="{{ $city->id }}">{{ $city->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    {{-- equipments --}}
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select class="form-control report-search col-3 select2-tags-false equipment-man" id="report-city">
+                                <option value="">@lang('site.all') @lang('equipments.equipments')</option>
+                                @foreach ($equipments as $equipment)
+                                    <option data-id="{{ $equipment->id }}" value="{{ $equipment->id }}">
+                                        {{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no  }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -137,6 +151,7 @@
         var startData;
         var endData;
         let cityID;
+        let equipmentID;
 
         let dataTable = $('#eir_overview-table').DataTable({
             dom: "Bfrtip",
@@ -149,9 +164,10 @@
             ajax: {
                 url: '{{ route('admin.reports.eir_overview.data') }}',
                 data: function (d) {
-                    d.city_id = cityID;
-                    d.start_data = startData;
-                    d.end_data = endData;
+                    d.city_id      = cityID;
+                    d.equipment_id = equipmentID;
+                    d.start_data   = startData;
+                    d.end_data     = endData;
                 }
             },
             columns: [
@@ -209,10 +225,39 @@
             cityID      = $('#report-city').val()  ?? false;
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
+            equipmentID = $('.equipment-man').val() ?? false;
 
             dataTable.ajax.reload();
 
         });//end of data-table-search-city
+
+        $(document).on('change', '.equipment-city', function(e) {
+            e.preventDefault();
+            
+            var id     = $(this).find(':selected').val();
+            var url    = "/admin/ajax/city/"+id;
+            var method = 'post';
+            
+            $.ajax({
+                url: url,
+                method: method,
+                success: function (data) {
+                    
+                    $('.equipment-man').empty('');
+                    $('.equipment-man').append(`<option value="">Choose Equipment</option>`);
+
+                    $.each(data, function(index,item) {
+                        
+                        var html = `<option value="${item.id}" data-type="${item.spec_name}">${item.make} ${item.name} ${item.plate_no}</option>`;
+
+                        $('.equipment-man').append(html);
+
+                    });//end of each
+
+                }//end of success
+            })
+
+        });//end of countrey
 
 	</script>
 
