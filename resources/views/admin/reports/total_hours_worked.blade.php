@@ -188,7 +188,7 @@
                 var columnCount = api.column(3).data();
      
                 // Update footer
-                $(api.column(2).footer()).html(columnCount.count());
+                $(api.column(3).footer()).html(columnCount.count());
                 $('.count-min').html('Total Hours Worked ' + columnCount.count());
             },
         });//end of dataTable
