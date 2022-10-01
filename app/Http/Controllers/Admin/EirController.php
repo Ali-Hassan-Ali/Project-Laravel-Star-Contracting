@@ -36,30 +36,15 @@ class EirController extends Controller
     {
         if (request()->old) {
 
-            if (request()->start_data && request()->end_data) {
-
-                $eirs = Eir::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', '!=', now()->year);
-                
-            } else {
-
-                $eirs = Eir::query()->whereYear('created_at', '!=', now()->year);
-            }
+            $eirs = Eir::query()
+                ->whereDateBetween(request()->start_data, request()->end_data)
+                ->whereYear('created_at', '!=', now()->year);
             
-        } else {
+        } else {            
 
-            if (request()->start_data && request()->end_data) {
-
-                $eirs = Eir::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', now()->year);
-                
-            } else {
-
-                $eirs = Eir::query()->whereYear('created_at', now()->year);
-            }
-
+            $eirs = Eir::query()
+                ->whereDateBetween(request()->start_data, request()->end_data)
+                ->whereYear('created_at', now()->year);
 
         }//end of if
 
