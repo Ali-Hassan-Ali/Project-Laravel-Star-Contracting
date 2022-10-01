@@ -34,6 +34,9 @@ class BreakdownOverviewController extends Controller
             ->addColumn('city', function (Status $status) {
                 return $status->equipment->city->name;
             })
+            ->addColumn('full_name_equipment', function (Status $status) {
+                return $status->equipment->name .' '. $status->equipment->make .' '. $status->equipment->plate_no;
+            })
             ->editColumn('as_of', function (Status $status) {
                 return $status->as_of ? date('d-m-Y', strtotime($status->as_of)) : '-';
             })
