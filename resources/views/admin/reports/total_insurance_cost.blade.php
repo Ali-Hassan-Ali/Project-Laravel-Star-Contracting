@@ -94,7 +94,7 @@
 										<td class="text-center"></td>
 										<td class="text-center"></td>
 										<td class="text-center">@lang('reports.total_cost_of_insurance')</td>
-										<td class="text-center total">$ {{ $total_premium  }}</td>
+										<td class="text-center total"></td>
 									</tr>
 									</tfoot>
 								</table>
@@ -107,7 +107,7 @@
 				
 				</div>{{--end of collapse --}}
 				
-				<h4 class="text-end total-min">@lang('reports.total_cost_of_insurance') $ {{ $total_premium }}</h4>
+				<h4 class="text-end total-min"></h4>
 			
 			</div><!-- end of tile -->
 		
@@ -120,6 +120,26 @@
 @push('scripts')
 	
 	<script>
+
+		function getStartDate(SData) {
+            if (SData) {
+
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(SData));
+                return 'From ' + newDate;
+            }
+
+            return '';
+        }
+
+        function getEndDate(EData) {
+            if (EData) {
+
+                var newDate = $.datepicker.formatDate("dd-mm-yy", new Date(EData));
+                return 'To ' + newDate;
+            }
+
+            return '';
+        }
 		
 		var startData;
         var endData;
@@ -134,7 +154,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.total_insurance_cost.data') }}',
+                url: '{{ route('admin.reports.total_insurance_cost.data') }}',
                 data: function (d) {
                     d.city_id = cityID;
                     d.start_data = startData;
@@ -159,7 +179,12 @@
             buttons: [{
                 footer: true,
                 extend: "pdf",
-                title: $('.title-download').html() + ' - ' + "{{ now()->format('d-m-Y') }}",
+                title: function () { 
+                    let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
+                                + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + getStartDate($('#start-date').val()) + ' ' + getEndDate($('#start-date').val());
+
+                    return title;
+                },
                 className: 'btn btn-primary',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
                 customize: function(doc) {
@@ -170,14 +195,34 @@
                     doc.styles.tableFooter.alignment = 'center';
                 },
             }],
-        });
+            footerCallback: function (row, data, start, end, display) {
+
+                 var api = this.api();
+     
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+     
+                // Total over all pages
+                total = api
+                    .column(5)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+     
+                // Update footer
+
+                $('.total').html(' $' + total);
+                $('.total-min').html('Total Cost Of Insurance $' + total);
+
+            },
+        });//end of dataTable
 
         $(document).on('keyup change', '#data-table-search',function () {
-            var sum = dataTable.column(5).data().sum();
-            $('.total').html('$ ' + sum);
-            $('.total-min').html('Total Cost Of Insurance $ ' + sum);
             dataTable.search(this.value).draw();
-        });
+        });//end of dataTable
 
         $(document).on('keyup change', '.report-search', function () {
 
@@ -185,23 +230,6 @@
             startData   = $('#start-date').val()  ?? false;
         	endData     = $('#end-date').val() ?? false;
 
-            let url     = '{{ route('admin.total_insurance_cost.sum') }}';
-            var id      = $('#report-city').find(':selected').val();
-            var method  = 'get';
-
-            $.ajax({
-                url: url,
-                method: method,
-                data: {
-                	city_id: $('#report-city').val()  ?? false,
-                	start_data: $('#start-date').val()  ?? false,
-                    end_data: $('#end-date').val() ?? false,
-                },
-                success: function (data) {
-                    $('.total').html('$ ' + data);
-                    $('.total-min').html('Total Cost Of Insurance $ ' + data);
-                }//end of success
-            });//end of ajax
             dataTable.ajax.reload();
 
         });//end of data-table-search-city

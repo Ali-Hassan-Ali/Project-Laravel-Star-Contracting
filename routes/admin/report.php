@@ -56,6 +56,10 @@ Route::middleware([
             Route::get('average_mileage', 'AverageMileageController@index')->name('average_mileage');
             Route::get('average_mileage/data', 'AverageMileageController@data')->name('average_mileage.data');
 
+            // total_insurance_cost
+            Route::get('total_insurance_cost', 'TotalInsuranceCostController@index')->name('total_insurance_cost');
+            Route::get('total_insurance_cost/data', 'TotalInsuranceCostController@data')->name('total_insurance_cost.data');
+
         });//end of group
 
     });//end of Route middleware

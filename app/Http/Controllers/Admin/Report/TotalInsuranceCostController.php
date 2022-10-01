@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Report;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Insurance;
+use App\Models\City;
+use Yajra\DataTables\DataTables;
+
+class TotalInsuranceCostController extends Controller
+{
+    public function index()
+    {
+        $citys  = City::all();
+
+        return view('admin.reports.total_insurance_cost', compact('citys'));
+
+    }//end of fun index
+
+    public function data()
+    {
+        $insurances = Insurance::whereDateBetween(request()->start_data, request()->end_data)
+                    ->WhenCityId(request()->city_id)
+                    ->orderBy('id')
+                    ->get();
+
+		return DataTables::of($insurances)
+            ->addColumn('plate_no', function (Insurance $insurance) {
+                return $insurance->equipment->plate_no ?? '';
+            })
+            ->addColumn('city', function (Insurance $insurance) {
+                return $insurance->equipment->city->name  ?? '';
+            })
+            ->editColumn('premium', function (Insurance $insurance) {
+                $premium = $insurance->premium  ?? 0;
+
+                return "$ $premium";
+            })
+            ->toJson();
+
+    }// end of data
+
+}//end of controller
