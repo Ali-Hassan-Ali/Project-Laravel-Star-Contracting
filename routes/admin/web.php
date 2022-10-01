@@ -24,10 +24,6 @@ Route::middleware([
             Route::get('/equipments_overview/data', 'ReportController@dataEquipmentsOverview')->name('equipments_overview.data');
             Route::get('reports/sum_equipments_overview', 'ReportController@sumEquipmentsOverview')->name('equipments_overview.sum');
 
-            Route::get('/idle_equipments/sum', 'ReportController@sumIdleEquipments')->name('idle_equipments.sum');
-            Route::get('/idle_equipments/data', 'ReportController@dataIdleEquipments')->name('idle_equipments.data');
-            Route::get('reports/idle_equipments', 'ReportController@IdleEquipments')->name('reports.idle_equipments');
-
 
             Route::get('reports/total_hours_worked', 'ReportController@totalHoursWorked')->name('reports.total_hours_worked');
             Route::get('/total_hours_worked/data', 'ReportController@dataTotalHoursWorked')->name('total_hours_worked.data');

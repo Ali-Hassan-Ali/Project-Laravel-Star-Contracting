@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Report;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Status;
 use App\Models\City;
 use App\Models\Equipment;
 use Yajra\DataTables\DataTables;

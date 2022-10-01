@@ -32,17 +32,21 @@ Route::middleware([
             Route::get('total_fuel_consumption', 'FuelConsumptionController@index')->name('total_fuel_consumption');
             Route::get('total_fuel_consumption/data', 'FuelConsumptionController@data')->name('total_fuel_consumption.data');
 
-            // equipment_expenditure
+            // total_equipment_expenditure
             Route::get('total_equipment_expenditure', 'EquipmentExpenditureController@index')->name('total_equipment_expenditure');
             Route::get('total_equipment_expenditure/data', 'EquipmentExpenditureController@data')->name('total_equipment_expenditure.data');
 
-            // equipment_expenditure
+            // eir_overview
             Route::get('expenditure_per_KM', 'ExpenditurePerKMController@index')->name('expenditure_per_KM');
             Route::get('expenditure_per_KM/data', 'ExpenditurePerKMController@data')->name('expenditure_per_KM.data');
 
-            // equipment_expenditure
+            // eir_overview
             Route::get('eir_overview', 'EirOverviewController@index')->name('eir_overview');
             Route::get('eir_overview/data', 'EirOverviewController@data')->name('eir_overview.data');
+
+            // idle_equipments
+            Route::get('idle_equipments', 'IdleEquipmentsController@index')->name('idle_equipments');
+            Route::get('idle_equipments/data', 'IdleEquipmentsController@data')->name('idle_equipments.data');
 
         });//end of group
 

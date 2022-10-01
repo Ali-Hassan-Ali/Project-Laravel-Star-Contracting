@@ -88,7 +88,7 @@
 									<tr>
 										<td class="text-center" style="width: 50px"></td>
 										<td class="text-center" style="width: 50px">@lang('reports.total_idle_equipments')</td>
-										<td class="text-center total" style="width: 50px">{{ $equipments->count()  }}</td>
+										<td class="text-center count" style="width: 50px"></td>
 									</tr>
 									</tfoot>
 								</table>
@@ -101,7 +101,7 @@
 				
 				</div>{{--end of collapse --}}
 				
-				<h4 class="text-end total-min">@lang('reports.total_idle_equipments') {{ $equipments->count() }}</h4>
+				<h4 class="text-end count-min"></h4>
 			
 			</div><!-- end of tile -->
 		
@@ -148,7 +148,7 @@
                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('admin.idle_equipments.data') }}',
+                url: '{{ route('admin.reports.idle_equipments.data') }}',
                 data: function (d) {
                     d.city_id = cityID;
                     d.start_data = startData;
@@ -179,17 +179,24 @@
                     doc.content[1].table.headerRows = 0;
                 },
             }],//buttons
-        });
+            footerCallback: function (row, data, start, end, display) {
+                
+                var api = this.api();
+
+                var columnCount = api.column(2).data();
+     
+                // Update footer
+                $(api.column(2).footer()).html('$ ' + columnCount.count());
+
+                $('.count').html(columnCount.count());
+                $('.count-min').html('Total Idle Equipment ' + columnCount.count());
+            },
+        });//end of dataTable
 
 
         $(document).on('keyup change', '#data-table-search',function () {
             dataTable.search(this.value).draw();
-            var count   = dataTable.data().count();
-
-            $('.total').html(count);
-        	$('.total-min').html('Total Idle Equipment ' + count);
-
-        });
+        });//end of dataTable
 
 
         $(document).on('keyup change', '.report-search', function () {
@@ -198,25 +205,6 @@
             startData   = $('#start-date').val()  ?? false;
             endData     = $('#end-date').val() ?? false;
 
-            let url     = '{{ route('admin.idle_equipments.sum') }}';
-            var id      = $('#report-city').find(':selected').val();
-            var method  = 'get';
-
-            $.ajax({
-                url: url,
-                method: method,
-                data: {
-                    city_id: $('#report-city').val()  ?? false,
-                    start_data: $('#start-date').val()  ?? false,
-                    end_data: $('#end-date').val() ?? false,
-                },
-                success: function (data) {
-
-            		$('.total').html(data);
-        			$('.total-min').html('Total Idle Equipment ' + data);
-
-                }//end of success
-            });//end of ajax
             dataTable.ajax.reload();
 
         });//end of data-table-search-city
