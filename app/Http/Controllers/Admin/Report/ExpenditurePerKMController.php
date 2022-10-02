@@ -75,7 +75,7 @@ class ExpenditurePerKMController extends Controller
 
                 if ($average == 0) {
                     
-                    $total = $sum;
+                    $total = 0;
 
                 } else {
 
