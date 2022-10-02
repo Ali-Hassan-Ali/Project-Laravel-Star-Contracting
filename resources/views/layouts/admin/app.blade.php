@@ -86,9 +86,9 @@
         }
 
         @if(request()->is('*report*'))
-            .dataTables_info {
+            /*.dataTables_info {
                 display: none;
-            }
+            }*/
         @endif
 
         .dataTables_filter {

@@ -48,7 +48,14 @@ class ExpenditurePerKMController extends Controller
                 return "$ $total_cost";
             })
             ->addColumn('total_expenditure', function (Equipment $equipment) {
-                $sum = $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? '';
+
+                $sum1 = $equipment->rental_cost_basis ?? 0;
+                $sum2 = $equipment->driver_salary ?? 0;
+                $sum3 = $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges');
+                $sum4 = $equipment->fuel->total_cost_of_fuel ?? 0;
+
+                $sum = $sum1 + $sum2 + $sum3 + $sum4;
+
                 return '$ ' . $sum;
             })
             ->addColumn('average_mileage_reading', function (Equipment $equipment) {
@@ -56,10 +63,19 @@ class ExpenditurePerKMController extends Controller
                 return $average_mileage;
             })
             ->addColumn('average_expenditure', function (Equipment $equipment) {
-                $average_mileage_reading = $equipment->fuel->average_mileage_reading ?? 0;
-                $total = $equipment->rental_cost_basis + $equipment->driver_salary + $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges') + !empty($equipment->fuel->total_cost_of_fuel) ?? '';
-                $sum = $average_mileage_reading + $total;
-                return '$ ' . $sum;
+
+                $sum1 = $equipment->rental_cost_basis ?? 0;
+                $sum2 = $equipment->driver_salary ?? 0;
+                $sum3 = $equipment->spares->sum('cost') + $equipment->spares->sum('freight_charges');
+                $sum4 = $equipment->fuel->total_cost_of_fuel ?? 0;
+
+                $sum = $sum1 + $sum2 + $sum3 + $sum4;
+
+                $average = $equipment->fuel->average_mileage_reading ?? 0;
+
+                $total = $sum + $average;
+
+                return '$ ' . $total;
             })
             ->toJson();
 
