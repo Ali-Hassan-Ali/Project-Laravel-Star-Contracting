@@ -35,29 +35,15 @@ class SpareController extends Controller
 
         if (request()->old) {
 
-            if (request()->start_data && request()->end_data) {
-
-                $spares = Spare::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', '!=', now()->year);
-                
-            } else {
-
-                $spares = Spare::query()->whereYear('created_at', '!=', now()->year);
-            }
+            $spares = Spare::query()
+                ->whereDateBetween(request()->start_data, request()->end_data)
+                ->whereYear('created_at', '!=', now()->year);
             
         } else {
 
-            if (request()->start_data && request()->end_data) {
-
-                $spares = Spare::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', now()->year);
-                
-            } else {
-
-                $spares = Spare::query()->whereYear('created_at', now()->year);
-            }
+            $spares = Spare::query()
+                ->whereDateBetween(request()->start_data, request()->end_data)
+                ->whereYear('created_at', now()->year);
 
 
         }//end of if

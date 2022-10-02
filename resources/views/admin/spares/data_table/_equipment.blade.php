@@ -7,7 +7,7 @@
 		
 		@if(isset($equipment))
 			<pre class="badge badge-primary">
-				{{ $equipment->name . ' ' . $equipment->make . ' ' . $equipment->plate_no . ' ' }}
+				{{ $equipment->make . ' ' . $equipment->name . ' ' . $equipment->plate_no . ' ' }}
 			</pre>
 		@endif
 
