@@ -15,7 +15,7 @@ class FuelController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:read_fuels')->only(['index']);
+        $this->middleware('permission:read_fuels')->only(['index', 'data']);
         $this->middleware('permission:create_fuels')->only(['create', 'store']);
         $this->middleware('permission:update_fuels')->only(['edit', 'update']);
         $this->middleware('permission:delete_fuels')->only(['delete', 'bulk_delete']);
