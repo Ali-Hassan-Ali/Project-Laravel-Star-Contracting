@@ -172,7 +172,6 @@
                 }
             },
             columns: [
-                // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'eir_no', name: 'eir_no'},
                 {data: 'date', name: 'date'},
                 {data: 'status', name: 'status'},
@@ -187,6 +186,7 @@
                 footer: true,
                 extend: "pdf",
                 pageSize: 'A4',
+                orientation: 'landscape',
                 title: function () { 
                     let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
                                 + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + getStartDate($('#start-date').val()) + ' ' + getEndDate($('#start-date').val());
