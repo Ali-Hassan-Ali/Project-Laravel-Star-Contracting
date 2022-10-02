@@ -22,6 +22,7 @@ class AverageMileageController extends Controller
     {
         $fuels = Fuel::whereDateBetween(request()->start_data, request()->end_data)
                     ->WhenCityId(request()->city_id)
+                    ->WhenSpecstIds([3])
                     ->orderBy('id')
                     ->get();
 
