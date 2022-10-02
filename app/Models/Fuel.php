@@ -49,6 +49,20 @@ class Fuel extends Model
 
     }// end of scopeWhenCityId
 
+    public function scopeWhenSpecstIds($query, $SpecstIds)
+    {
+        return $query->when($SpecstIds, function ($q) use ($SpecstIds) {
+
+            return $q->whereHas('equipment', function ($qu) use ($SpecstIds) {
+
+                return $qu->whereIn('spec_id', $SpecstIds);
+
+            });
+
+        });
+
+    }// end of scopeWhenSpecstIds
+
     public function scopeWhereDateBetween($query, $startDate, $endDate)
     {
         if ($startDate && $endDate) {

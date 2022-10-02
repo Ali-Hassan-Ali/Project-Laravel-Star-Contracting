@@ -139,20 +139,6 @@ class Equipment extends Model
 
     }//end of get last name
 
-    public function scopeWhenSpecstIds($query, $SpecstIds)
-    {
-        return $query->when($SpecstIds, function ($q) use ($SpecstIds) {
-
-            return $q->whereHas('spec', function ($qu) use ($SpecstIds) {
-
-                return $qu->whereIn('id', $SpecstIds);
-
-            });
-
-        });
-
-    }// end of scopeWhenEquipmentId
-
 
     public function scopeWhenCityId($query, $cityId)
     {
