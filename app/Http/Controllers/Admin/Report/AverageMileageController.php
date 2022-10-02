@@ -28,7 +28,7 @@ class AverageMileageController extends Controller
         return DataTables::of($fuels)
             ->addColumn('equipments_name', function (Fuel $fuel) {
                 return $fuel->equipment ?
-                    $fuel->equipment->name . ' ' . $fuel->equipment->make . ' ' . $fuel->equipment->plate_no 
+                    $fuel->equipment->make . ' ' . $fuel->equipment->name . ' ' . $fuel->equipment->plate_no 
                  : '';
             })
             ->addColumn('city', function (Fuel $fuel) {

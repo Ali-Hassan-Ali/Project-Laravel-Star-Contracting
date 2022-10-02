@@ -28,7 +28,7 @@ class TotalHoursWorkedController extends Controller
 		return DataTables::of($fuels)
             ->addColumn('equipments', function (Fuel $fuel) {
                 return $fuel->equipment ?
-                    $fuel->equipment->name . ' ' . $fuel->equipment->make . ' ' . $fuel->equipment->plate_no 
+                    $fuel->equipment->make . ' ' . $fuel->equipment->name . ' ' . $fuel->equipment->plate_no 
                  : '';
             })
             ->addColumn('city', function (Fuel $fuel) {
