@@ -31,7 +31,7 @@ class TotalInsuranceCostController extends Controller
 		return DataTables::of($insurances)
             ->addColumn('equipments', function (Insurance $insurance) {
                 return $insurance->equipment ?
-                    $fuel->equipment->make . ' ' . $fuel->equipment->name . ' ' . $fuel->equipment->plate_no 
+                    $insurance->equipment->make . ' ' . $insurance->equipment->name . ' ' . $insurance->equipment->plate_no 
                  : '';
             })
             ->addColumn('city', function (Insurance $insurance) {
