@@ -37,17 +37,17 @@ class FuelConsumptionController extends Controller
             ->addColumn('project', function (Fuel $fuel) {
                 return $fuel->project ?? '';
             })
-            ->ediColumn('fuel', function (Fuel $fuel) {
+            ->editColumn('fuel', function (Fuel $fuel) {
                 return $fuel->unit ?? '';
             })
-            ->ediColumn('no_of_units_filled', function (Fuel $fuel) {
+            ->editColumn('no_of_units_filled', function (Fuel $fuel) {
                 return $fuel->no_of_units_filled ?? 0;
             })
-            ->ediColumn('fuel_rate_per_litre', function (Equipment $equipment) {
+            ->editColumn('fuel_rate_per_litre', function (Equipment $equipment) {
                 $data = $fuel->fuel_rate_per_litre ?? '0';
                 return "$ $data";
             })
-            ->ediColumn('total_cost_of_fuel', function (Equipment $equipment) {
+            ->editColumn('total_cost_of_fuel', function (Equipment $equipment) {
                 $data = $fuel->total_cost_of_fuel ?? '0';
                 return "$ $data";
             })
