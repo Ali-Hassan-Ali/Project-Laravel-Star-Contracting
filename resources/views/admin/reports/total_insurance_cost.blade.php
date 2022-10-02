@@ -187,12 +187,6 @@
                 {data: 'policy_number', name: 'policy_number'},
                 {data: 'premium', name: 'premium'},
             ],
-            rowGroup: {
-                dataSrc: 'equipment_name',
-                startRender: function (rows, group) {
-                    return group;
-                },
-            },
             buttons: [{
                 footer: true,
                 extend: "pdf",
