@@ -178,7 +178,6 @@
             buttons: [{
                 footer: true,
                 extend: "pdf",
-                text: 'All',
                 pageSize: 'A4',
                 orientation: 'landscape',
                 title: function () { 
