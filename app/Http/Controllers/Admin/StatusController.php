@@ -33,31 +33,17 @@ class StatusController extends Controller
     {
         if (request()->old) {
 
-            if (request()->start_data && request()->end_data) {
-
-                $statuss = Status::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at',  '!=', now()->year);
+            $statuss = Status::query()
+                ->whereDateBetween(request()->start_data, request()->end_data)
+                ->whereYear('created_at',  '!=', now()->year);
                 
-            } else {
-
-                $statuss = Status::query()->whereYear('created_at',  '!=', now()->year);
-            }            
         } else {
 
-            if (request()->start_data && request()->end_data) {
+            $statuss = Status::query()
+                ->whereDateBetween(request()->start_data, request()->end_data)
+                ->whereYear('created_at', now()->year);
 
-                $statuss = Status::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', now()->year);
-                
-            } else {
-
-                $statuss = Status::query()->whereYear('created_at', now()->year);
-            }
-
-
-        }//end of if
+        }//end of ifs
 
         return DataTables::of($statuss)
             ->addColumn('record_select', 'admin.status.data_table.record_select')
@@ -75,7 +61,7 @@ class StatusController extends Controller
             })
             ->addColumn('equipment', function (Status $status) {
                 return $status->equipment ?
-                    $status->equipment->name . ' ' . $status->equipment->make . ' ' . $status->equipment->plate_no 
+                    $status->equipment->make . ' ' . $status->equipment->name . ' ' . $status->equipment->plate_no 
                  : '';
             })
             ->addColumn('actions','admin.status.data_table.actions')
