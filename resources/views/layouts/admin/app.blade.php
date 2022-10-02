@@ -84,8 +84,14 @@
         .has-error .select2-selection {
             border-color: rgb(185, 74, 72) !important;
         }
-        .dataTables_filter,
-        .dataTables_info {
+
+        @if(request()->is('*report*'))
+            .dataTables_info {
+                display: none;
+            }
+        @endif
+
+        .dataTables_filter {
             display: none;
         }
         .pb-2-1 {
