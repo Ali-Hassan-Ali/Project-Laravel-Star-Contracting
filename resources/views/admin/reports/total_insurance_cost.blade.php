@@ -223,8 +223,8 @@
      
                 // Update footer
 
-                $('.total').html(' $' + total);
-                $('.total-min').html('Total Cost Of Insurance $' + total);
+                $('.total').html(' $' + $.number(total, 2));
+                $('.total-min').html('Total Cost Of Insurance $' + $.number(total, 2));
 
             },
         });//end of dataTable
