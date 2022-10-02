@@ -31,32 +31,17 @@ class SpecController extends Controller
     public function data()
     {
 
-        if (request()->old) {
+        if (request()->old) {            
 
-            if (request()->start_data && request()->end_data) {
-
-                $specs = Spec::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', '!=', now()->year);
-                
-            } else {
-
-                $specs = Spec::query()->whereYear('created_at', '!=', now()->year);
-            }
+            $specs = Spec::query()
+                ->whereDateBetween(request()->start_data, request()->end_data)
+                ->whereYear('created_at', '!=', now()->year);
             
-        } else {
+        } else {            
 
-            if (request()->start_data && request()->end_data) {
-
-                $specs = Spec::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', now()->year);
-                
-            } else {
-
-                $specs = Spec::query()->whereYear('created_at', now()->year);
-            }
-
+            $specs = Spec::query()
+                ->whereDateBetween(request()->start_data, request()->end_data)
+                ->whereYear('created_at', now()->year);
 
         }//end of if
 
