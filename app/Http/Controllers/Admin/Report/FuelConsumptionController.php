@@ -26,7 +26,6 @@ class FuelConsumptionController extends Controller
                                 ->orderBy('id')
                                 ->get();
 
-
         return DataTables::of($fuels)
             ->addColumn('city', function (Fuel $fuel) {
                 return $fuel->equipment->city->name;
