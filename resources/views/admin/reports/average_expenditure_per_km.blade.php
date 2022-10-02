@@ -181,7 +181,6 @@
             buttons: [{
                 footer: true,
                 extend: "pdf",
-                pageSize: 'A4',
                 orientation: 'landscape',
                 title: function () { 
                     let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 

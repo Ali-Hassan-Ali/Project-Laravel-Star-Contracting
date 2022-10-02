@@ -208,7 +208,6 @@
             buttons: [{
                 footer: true,
                 extend: "pdf",
-                pageSize: 'A4',
                 orientation: 'landscape',
                 title: function () { 
                     let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
@@ -225,7 +224,7 @@
                     doc.styles.tableFooter.alignment = 'center';
                     doc.content.push(
                         {text: $('.dataTables_info').text() , margin:[0, 10, 0, 100]},
-                    );
+                    ),
                 },
             }],
             footerCallback: function (row, data, start, end, display) {
