@@ -75,7 +75,7 @@ class ExpenditurePerKMController extends Controller
 
                 $total = $sum / $average;
 
-                return '$ ' . $total;
+                return '$ ' . $total ?? 0;
             })
             ->toJson();
 
