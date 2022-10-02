@@ -79,9 +79,8 @@
 								<table class="table datatable table-sm table-bordered table-hover" id="breakdown_overview-table" style="width: 100%;">
 									<thead>
 									<tr>
-										{{--                                        <th class="text-center" style="width: 50px">@lang('site.DT_RowIndex')</th>--}}
-										<th class="text-center" style="width: 50px">@lang('equipments.equipments')</th>
 										<th class="text-center" style="width: 50px">@lang('citys.citys')</th>
+										<th class="text-center" style="width: 50px">@lang('equipments.equipments')</th>
 										<th class="text-center" style="width: 50px">@lang('fuels.project')</th>
 										<th class="text-center" style="width: 50px">@lang('fuels.hours_worked_weekly')</th>
 									</tr>
@@ -159,9 +158,8 @@
                 }
             },
             columns: [
-                // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'equipments', name: 'equipments'},
                 {data: 'city', name: 'city'},
+                {data: 'equipments', name: 'equipments'},
                 {data: 'project', name: 'project'},
                 {data: 'hours_worked_weekly', name: 'hours_worked_weekly'},
             ],
