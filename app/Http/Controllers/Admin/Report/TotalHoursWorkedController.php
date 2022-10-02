@@ -26,9 +26,6 @@ class TotalHoursWorkedController extends Controller
                     ->get();
 
 		return DataTables::of($fuels)
-            ->editColumn('project', function (Fuel $fuel) {
-                return $fuel->equipment->allocated_to;
-            })
             ->addColumn('equipments', function (Fuel $fuel) {
                 return $fuel->equipment ?
                     $fuel->equipment->name . ' ' . $fuel->equipment->make . ' ' . $fuel->equipment->plate_no 
