@@ -22,7 +22,7 @@ class TotalHoursWorkedController extends Controller
     {
         $fuels = Fuel::whereDateBetween(request()->start_data, request()->end_data)
                     ->WhenCityId(request()->city_id)
-                    ->whereRelation('equipment', 'type', 'Vehicle')
+                    ->whereRelation('equipment', 'type', 'Equipment')
                     ->orderBy('id')
                     ->get();
 
