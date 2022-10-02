@@ -79,14 +79,12 @@
 								<table class="table datatable table-sm table-bordered table-hover" id="material_delivery_time-table" style="width: 100%;">
 									<thead>
 									<tr>
-										<th class="text-center" style="width: 50px">@lang('site.DT_RowIndex')</th>
 										<th class="text-center" style="width: 50px">@lang('citys.citys')</th>
 										<th class="text-center" style="width: 50px">@lang('equipments.equipments')</th>
 									</tr>
 									</thead>
 									<tfoot>
 									<tr>
-										<td class="text-center" style="width: 50px"></td>
 										<td class="text-center" style="width: 50px">@lang('reports.total_idle_equipments')</td>
                                         <td class="text-center" style="width: 50px"></td>
 									</tr>
@@ -156,7 +154,6 @@
                 }
             },
             columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'city', name: 'city'},
                 {data: 'name', name: 'name'},
             ],//columns
@@ -183,10 +180,10 @@
                 
                 var api = this.api();
 
-                var columnCount = api.column(2).data();
+                var columnCount = api.column(1).data();
      
                 // Update footer
-                $(api.column(2).footer()).html(columnCount.count());
+                $(api.column(1).footer()).html(columnCount.count());
                 $('.count-min').html('Total Idle Equipment ' + columnCount.count());
             },
         });//end of dataTable
