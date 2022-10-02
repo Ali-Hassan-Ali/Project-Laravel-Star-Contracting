@@ -25,6 +25,7 @@ class MaterialDeliveryTimeController extends Controller
     	$equipments = Equipment::with('eir')
                                 ->whereDateBetween(request()->start_data, request()->end_data)
                                 ->WhenCityId(request()->city_id)
+                                ->whereRelation('eir', 'status', 'Delivered To Site')
                                 ->orderBy('city_id')
                                 ->get();
 
