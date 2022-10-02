@@ -33,7 +33,7 @@ class TotalHoursWorkedController extends Controller
                  : '';
             })
             ->addColumn('city', function (Fuel $fuel) {
-                return $fuel->equipment->type;
+                return $fuel->equipment->city->name;
             })
             ->toJson();
 
