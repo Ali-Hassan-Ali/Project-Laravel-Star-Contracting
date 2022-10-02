@@ -179,6 +179,8 @@
                 footer: true,
                 extend: "pdf",
                 text: 'All',
+                pageSize: 'A4',
+                orientation: 'landscape',
                 title: function () { 
                     let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
                                 + '\n' + 'For ' + $('#report-city').find(':selected').text() + '\n' + getStartDate($('#start-date').val()) + ' ' + getEndDate($('#start-date').val());
@@ -186,7 +188,6 @@
                     return title;
                 },
                 className: 'btn btn-primary',
-                orientation: 'landscape',
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
                 customize: function(doc) {
                     doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
