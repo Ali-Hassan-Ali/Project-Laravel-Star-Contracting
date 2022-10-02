@@ -22,10 +22,10 @@ class MaterialDeliveryTimeController extends Controller
     public function data()
     {
 
-    	$equipments = Equipment::with('eir')
+    	$equipments = Equipment::with('eirs')
                                 ->whereDateBetween(request()->start_data, request()->end_data)
                                 ->WhenCityId(request()->city_id)
-                                ->whereRelation('eir', 'status', 'Delivered To Site')
+                                ->whereRelation('eirs', 'status', 'Delivered To Site')
                                 ->orderBy('city_id')
                                 ->get();
 
