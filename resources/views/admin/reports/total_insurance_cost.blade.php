@@ -200,10 +200,13 @@
                 text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> PDF',
                 customize: function(doc) {
                 	doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-                    doc.defaultStyle.alignment = 'center';
+                    // doc.defaultStyle.alignment = 'center';
                     doc.styles.tableBodyEven.alignment = 'center';
                     doc.styles.tableBodyOdd.alignment = 'center';
                     doc.styles.tableFooter.alignment = 'center';
+                    doc.content.push(
+                        {text: $('.dataTables_info').text() , margin:[0, 10, 0, 100]},
+                    );
                 },
             }],
             footerCallback: function (row, data, start, end, display) {
