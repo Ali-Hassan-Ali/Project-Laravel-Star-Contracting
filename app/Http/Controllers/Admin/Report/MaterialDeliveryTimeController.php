@@ -22,7 +22,7 @@ class MaterialDeliveryTimeController extends Controller
     public function data()
     {
 
-    	$equipments = Equipment::with('eirs')
+    	$equipments = Equipment::with('eirDeliveredSite')
                                 ->whereDateBetween(request()->start_data, request()->end_data)
                                 ->WhenCityId(request()->city_id)
                                 ->whereRelation('eirs', 'status', 'Delivered To Site')
@@ -38,16 +38,16 @@ class MaterialDeliveryTimeController extends Controller
                 return $equipment->name . ' ' . $equipment->make . ' ' . $equipment->plate_no;
             })
             ->addColumn('eir_no', function (Equipment $equipment) {
-                return $equipment->eir->eir_no ?? '';
+                return $equipment->eirDeliveredSite->eir_no ?? '';
             })
             ->addColumn('eir_date', function (Equipment $equipment) {
-                return !empty($equipment->eir->date) ? date('d-m-Y', strtotime($equipment->eir->date)) : '-';
+                return !empty($equipment->eirDeliveredSite->date) ? date('d-m-Y', strtotime($equipment->eirDeliveredSite->date)) : '-';
             })
             ->addColumn('actual_arrival_to_site_date', function (Equipment $equipment) {
-                return !empty($equipment->eir->actual_arrival_to_site_date) ? date('d-m-Y', strtotime($equipment->eir->actual_arrival_to_site_date)) : '-';
+                return !empty($equipment->eirDeliveredSite->actual_arrival_to_site_date) ? date('d-m-Y', strtotime($equipment->eirDeliveredSite->actual_arrival_to_site_date)) : '-';
             })
             ->addColumn('total_break_down_duration', function (Equipment $equipment) {
-                return $equipment->eir->total_break_down_duration ?? '';
+                return $equipment->eirDeliveredSite->total_break_down_duration ?? '';
             })
             ->make(true);
 

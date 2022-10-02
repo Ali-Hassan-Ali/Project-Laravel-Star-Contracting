@@ -115,6 +115,12 @@ class Equipment extends Model
 
     }//end of fun
 
+    public function eirDeliveredSite()
+    {
+        return $this->hasMany(Eir::class)->where('status', 'Delivered To Site');
+
+    }//end of fun
+
     public function fuel()
     {
         return $this->hasOne(Fuel::class);
