@@ -117,7 +117,7 @@ class Equipment extends Model
 
     public function eirDeliveredSite()
     {
-        return $this->hasMany(Eir::class)->where('status', 'Delivered To Site');
+        return $this->hasOne(Eir::class)->where('status', 'Delivered To Site');
 
     }//end of fun
 
