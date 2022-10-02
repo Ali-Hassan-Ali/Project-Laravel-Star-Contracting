@@ -227,7 +227,7 @@
 
                     // Update footer
                     $(api.column(8).footer()).html('$ ' + $.number(sum, 2));
-                    $('.total-min').html('Total Expenditure $ ' + $.number(sum, 2));
+                    $('.total-min').html('Average Expenditure $ ' + $.number(sum, 2));
 
                 }//end of if
 
