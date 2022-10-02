@@ -26,10 +26,6 @@ class AverageMileageController extends Controller
                     ->get();
 
         return DataTables::of($fuels)
-            ->editColumn('project', function (Fuel $fuel) {
-                return $fuel->equipment->allocated_to;
-                return !empty($fuel->project) ? date('d-m-Y', strtotime($fuel->project)) : '-';
-            })
             ->addColumn('equipments_name', function (Fuel $fuel) {
                 return $fuel->equipment ?
                     $fuel->equipment->name . ' ' . $fuel->equipment->make . ' ' . $fuel->equipment->plate_no 
