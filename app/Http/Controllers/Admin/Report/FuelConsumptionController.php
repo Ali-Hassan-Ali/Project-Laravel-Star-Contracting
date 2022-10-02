@@ -34,21 +34,15 @@ class FuelConsumptionController extends Controller
             ->addColumn('name', function (Fuel $fuel) {
                 return $fuel->equipment->make . ' ' . $fuel->equipment->name . ' ' . $fuel->equipment->plate_no;
             })
-            ->addColumn('project', function (Fuel $fuel) {
-                return $fuel->project ?? '';
-            })
-            ->ediColumn('fuel', function (Fuel $fuel) {
-                return $fuel->unit ?? '';
-            })
             ->editColumn('no_of_units_filled', function (Fuel $fuel) {
                 return $fuel->no_of_units_filled ?? 0;
             })
             ->editColumn('fuel_rate_per_litre', function (Fuel $fuel) {
-                $data = $fuel->fuel_rate_per_litre ?? '0';
+                $data = $fuel->fuel_rate_per_litre ?? 0;
                 return "$ $data";
             })
             ->editColumn('total_cost_of_fuel', function (Fuel $fuel) {
-                $data = $fuel->total_cost_of_fuel ?? '0';
+                $data = $fuel->total_cost_of_fuel ?? 0;
                 return "$ $data";
             })
             ->toJson();
