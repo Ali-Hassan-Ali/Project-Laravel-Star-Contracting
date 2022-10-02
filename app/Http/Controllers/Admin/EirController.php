@@ -94,7 +94,7 @@ class EirController extends Controller
             })
             ->addColumn('equipment', function (Eir $eir) {
                 return $eir->equipment ?
-                    $eir->equipment->name . ' ' . $eir->equipment->make . ' ' . $eir->equipment->plate_no 
+                    $eir->equipment->make . ' ' . $eir->equipment->name . ' ' . $eir->equipment->plate_no 
                  : '';
             })
             ->addColumn('actions', 'admin.eirs.data_table.actions')
