@@ -175,7 +175,9 @@
                     doc.styles.tableBodyEven.alignment = 'center';
                     doc.styles.tableBodyOdd.alignment = 'center';
                     doc.styles.tableFooter.alignment = 'center';
-                    doc.content[1].table.headerRows = 0;
+                    doc.content.push(
+                        {text: $('.dataTables_info').text() , margin:[0, 10, 0, 100]},
+                    );
                 },
             }],//buttons
             footerCallback: function (row, data, start, end, display) {
