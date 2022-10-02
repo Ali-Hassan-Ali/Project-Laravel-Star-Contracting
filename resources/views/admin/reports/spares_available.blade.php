@@ -179,6 +179,7 @@
                 footer: true,
                 extend: "pdf",
                 pageSize: 'A4',
+                exportOptions: {modifier: {page: 'current'}},
                 orientation: 'landscape',
                 title: function () { 
                     let title = $('.title-download').html() + '\n' + 'Date ' + "{{ now()->format('d-m-Y') }}" 
@@ -193,6 +194,14 @@
                     doc.styles.tableBodyEven.alignment = 'center';
                     doc.styles.tableBodyOdd.alignment = 'center';
                     doc.styles.tableFooter.alignment = 'center';
+                    doc.content.push(
+                        {text: $('.dataTables_info').text() , margin:[0, 10, 0, 100]},
+                    );
+                    // doc.content.splice( 1, 0, {
+                    // margin: [0, 0, 0, 12],
+                    // alignment: 'center',
+                    //     image: '@include('admin.reports.includes._logo')',
+                    // });
                 },
             }],
             footerCallback: function (row, data, start, end, display) {
