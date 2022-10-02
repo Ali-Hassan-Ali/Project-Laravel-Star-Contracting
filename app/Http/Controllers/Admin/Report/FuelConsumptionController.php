@@ -38,7 +38,7 @@ class FuelConsumptionController extends Controller
                 return $fuel->no_of_units_filled ?? 0;
             })
             ->addColumn('edit_fuel_rate_per_litre', function (Equipment $equipment) {
-                $data = $fuel-*>fuel_rate_per_litre ?? '0';
+                $data = $fuel->fuel_rate_per_litre ?? '0';
                 return "$ $data";
             })
             ->addColumn('edit_total_cost_of_fuel', function (Equipment $equipment) {
