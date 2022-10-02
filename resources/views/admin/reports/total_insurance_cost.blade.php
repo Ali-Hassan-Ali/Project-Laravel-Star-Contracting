@@ -93,9 +93,8 @@
 								<table class="table datatable table-sm table-bordered table-hover" id="breakdown_overview-table" style="width: 100%;">
 									<thead>
 									<tr>
-										{{--                                        <th class="text-center" style="width: 50px">@lang('site.DT_RowIndex')</th>--}}
-										<th class="text-center" style="width: 50px">@lang('equipments.plate_no')</th>
 										<th class="text-center" style="width: 50px">@lang('citys.citys')</th>
+										<th class="text-center" style="width: 50px">@lang('equipments.equipments')</th>
 										<th class="text-center" style="width: 50px">@lang('insurances.insurer')</th>
 										<th class="text-center" style="width: 50px">@lang('insurances.type_of_insurance')</th>
 										<th class="text-center" style="width: 50px">@lang('insurances.policy_number')</th>
@@ -179,9 +178,8 @@
                 }
             },
             columns: [
-                // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'plate_no', name: 'plate_no'},
                 {data: 'city', name: 'city'},
+                {data: 'equipments', name: 'equipments'},
                 {data: 'insurer', name: 'insurer'},
                 {data: 'type_of_insurance', name: 'type_of_insurance'},
                 {data: 'policy_number', name: 'policy_number'},
