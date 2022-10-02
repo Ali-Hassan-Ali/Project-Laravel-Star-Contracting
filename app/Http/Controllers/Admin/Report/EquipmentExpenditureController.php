@@ -49,10 +49,11 @@ class EquipmentExpenditureController extends Controller
                 return "$ $total_cost";
             })
             ->addColumn('total_expenditure', function (Equipment $equipment) {
-                $sum = $equipment->rental_cost_basis + 
-                       $equipment->driver_salary + 
+                $sum = $equipment->rental_cost_basis ?? 0 + 
+                       $equipment->driver_salary ?? 0 + 
                        $equipment->spares->sum('cost') + 
-                       $equipment->spares->sum('freight_charges');
+                       $equipment->spares->sum('freight_charges') +
+                       $equipment->fuel->total_cost_of_fuel ?? 0;
 
                 return '$ ' . $sum;
             })
