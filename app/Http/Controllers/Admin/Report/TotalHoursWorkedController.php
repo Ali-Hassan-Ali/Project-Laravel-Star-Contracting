@@ -20,7 +20,6 @@ class TotalHoursWorkedController extends Controller
 
     public function data()
     {
-        return 'fd';
         $fuels = Fuel::whereDateBetween(request()->start_data, request()->end_data)
                     ->WhenCityId(request()->city_id)
                     ->WhenSpecstIds([1,3,4])
