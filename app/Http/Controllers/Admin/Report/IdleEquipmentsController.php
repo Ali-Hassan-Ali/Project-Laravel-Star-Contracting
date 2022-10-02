@@ -33,11 +33,12 @@ class IdleEquipmentsController extends Controller
                 return $equipment->city->name;
             })
             ->addColumn('name', function (Equipment $equipment) {
-                return $equipment->name . ' ' . $equipment->make;
+                return $equipment->make . ' ' . $equipment->name . ' ' . $equipment->plate_no;
             })
             ->addColumn('plate_no', function (Equipment $equipment) {
                 return $equipment->plate_no  ?? '0';
             })
+            ->addIndexColumn()
             ->toJson();
 
     }// end of data
