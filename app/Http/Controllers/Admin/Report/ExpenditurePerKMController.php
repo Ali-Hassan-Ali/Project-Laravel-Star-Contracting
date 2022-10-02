@@ -73,7 +73,7 @@ class ExpenditurePerKMController extends Controller
 
                 $average = $equipment->fuel->average_mileage_reading ?? 0;
 
-                $total = $sum + $average;
+                $total = $sum / $average;
 
                 return '$ ' . $total;
             })
