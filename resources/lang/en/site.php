@@ -45,7 +45,7 @@ return [
     'show_all'    => 'Show all ...',
     'total'       => 'Total',
     'top'         => 'Top',
-    'DT_RowIndex' => '#',
+    'DT_RowIndex' => 'number',
     
     'start_date' => 'Start Date',
     'end_date'   => 'end Date',

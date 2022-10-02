@@ -88,6 +88,7 @@
 									<tr>
 										<td class="text-center" style="width: 50px"></td>
 										<td class="text-center" style="width: 50px">@lang('reports.total_idle_equipments')</td>
+                                        <td class="text-center" style="width: 50px"></td>
 									</tr>
 									</tfoot>
 								</table>
@@ -185,8 +186,7 @@
                 var columnCount = api.column(2).data();
      
                 // Update footer
-
-                $('.count').html(columnCount.count());
+                $(api.column(2).footer()).html(columnCount.count());
                 $('.count-min').html('Total Idle Equipment ' + columnCount.count());
             },
         });//end of dataTable
