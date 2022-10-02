@@ -56,7 +56,7 @@ class ExpenditurePerKMController extends Controller
 
                 $sum = $sum1 + $sum2 + $sum3 + $sum4;
 
-                return '$ ' . $sum;
+                return '$ ' . number_format($sum, 2);
             })
             ->addColumn('average_mileage_reading', function (Equipment $equipment) {
                 $average_mileage = $equipment->fuel->average_mileage_reading  ?? '0';
