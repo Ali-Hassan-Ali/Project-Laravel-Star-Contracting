@@ -209,7 +209,7 @@
                         </div>
                         
                         {{--rental_basis--}}
-                        <div class="form-group col-6 @error('rental_basis') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.rental_basis') <span class="text-danger">*</span></label>
                             <select name="rental_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} id="rental-basis" class="form-control select2-tags-false">
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.rental_basis')</option>
@@ -217,11 +217,6 @@
                                     <option value="{{ $rental->name }}" {{ $rental->name == old('rental_basis') ? 'selected' : '' }}>{{ $rental->name }}</option>
                                 @endforeach
                             </select>
-                            @error('rental_basis')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         {{--rental_cost_basis--}}
