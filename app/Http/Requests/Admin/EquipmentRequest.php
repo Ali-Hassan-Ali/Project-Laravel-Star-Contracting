@@ -33,7 +33,7 @@ class EquipmentRequest extends FormRequest
             'project_allocated_to'  => ['nullable','required_if:allocated_to,==,Project','array'],
             'allocated_to'          => ['required','string','min:1','max:255'],
             'email'                 => ['required','email','min:1','max:255'],
-            'driver_salary'         => ['nullable','numeric'],
+            'driver_salary'         => ['nullable','required_if:operator,==,driver,Driver'],
             'registration_expiry'   => ['required_if:type,==,Vehicle','date'],
             'registration_date'     => ['required','date'],
             'year_of_manufacture'   => ['nullable','string','min:1','max:255'],
