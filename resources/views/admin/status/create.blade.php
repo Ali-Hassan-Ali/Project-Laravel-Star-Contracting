@@ -135,8 +135,8 @@
                     {{-- break_down_description --}}
                     <div class="form-group">
                         <label>@lang('status.descrption') <span class="text-danger">*</span></label>
-                        <textarea disabled {{ old('working_status') == 'Breakdown' ? '' : 'disabled' }}
-                                           {{ old('working_status') ? '' : 'disabled' }} id="break_down_description" 
+                        <textarea {{ old('working_status') == 'Breakdown' ? '' : 'disabled' }}
+                                  {{ old('working_status') ? '' : 'disabled' }} id="break_down_description"
                                            class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description') }}</textarea>
                         @error('break_down_description')
                             <span class="invalid-feedback" role="alert">
