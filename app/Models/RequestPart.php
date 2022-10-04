@@ -20,7 +20,7 @@ class RequestPart extends Model
 
     public function eir()
     {
-        return $this->belongsTo(Eir::class);
+        return $this->belongsTo(Eir::class, 'eir_id');
         
     }//end of  belongsTo
 
