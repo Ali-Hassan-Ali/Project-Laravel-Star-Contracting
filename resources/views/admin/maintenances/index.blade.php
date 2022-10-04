@@ -151,7 +151,7 @@
 
                 console.log(new Date(data.next_service_date));
 
-                if (data.actual_service_date > data.next_service_date) {
+                if (new Date(data.actual_service_date) > new Date(data.next_service_date)) {
 
                     $(row).addClass('bg-danger-datatable text-black');
             
