@@ -289,7 +289,7 @@
                                 <option value="" disabled>@lang('site.choose') @lang('equipments.project_allocated_to')</option>
                                 @foreach ($project_allocated_to as $project)
                                     <option value="{{ $project->name }}" {{ $project->name == old('project_allocated_to') ? 'selected' : '' }}
-                                        {{ in_array(ucwords($project->name), old('project_allocated_to', json_decode(old('project_allocated_to'))) ?? []) ? 'selected' : '' }}>
+                                        {{ in_array(ucwords($project->name), old('project_allocated_to', old('project_allocated_to')) ?? []) ? 'selected' : '' }}>
                                         {{ $project->name }}
                                     </option>
                                 @endforeach
