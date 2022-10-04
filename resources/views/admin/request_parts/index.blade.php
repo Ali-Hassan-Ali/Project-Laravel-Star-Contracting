@@ -78,6 +78,7 @@
                                         </div>
                                     </th>
                                     <th>@lang('eirs.eir_no')</th>
+                                    <th>@lang('eirs.date')</th>
                                     <th>@lang('request_parts.requested_part')</th>
                                     <th>@lang('request_parts.requested_part_no')</th>
                                     <th>@lang('request_parts.quantity')</th>
@@ -126,6 +127,7 @@
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'eir_no', name: 'eir_no'},
+                {data: 'eir_date', name: 'eir_date'},
                 {data: 'requested_part', name: 'requested_part'},
                 {data: 'requested_part_no', name: 'requested_part_no'},
                 {data: 'quantity', name: 'quantity'},
