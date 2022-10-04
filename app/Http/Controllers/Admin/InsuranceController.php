@@ -171,8 +171,8 @@ class InsuranceController extends Controller
 
         if ($request->attachments) {
 
-            foreach ($request->file('claim_attachments') as $file) {
-                dd($file, $file->getClientOriginalName());
+            foreach ($request->file('attachments') as $file) {
+
                 Attachment::create([
                     'path'         => $file->store('insurances_attachments_file'),
                     'name'         => $file->getClientOriginalName(),
