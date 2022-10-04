@@ -250,6 +250,8 @@ class EirController extends Controller
     private function delete(Eir $eir)
     {
         Storage::disk('local')->delete('public/'. $eir->attachments);
+
+        $eir->RequestParts()->delete();
         $eir->delete();
 
     }// end of delete
