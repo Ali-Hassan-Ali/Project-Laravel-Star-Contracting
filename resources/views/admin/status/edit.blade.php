@@ -98,7 +98,7 @@
                         {{--hours_worked--}}
                         <div class="form-group col-6">
                             <label>@lang('status.hours_worked') <span class="text-danger">*</span></label>
-                            <input type="number" id="hours_worked" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', $status->hours_worked) }}" autofocus>
+                            <input required type="number" id="hours_worked" name="hours_worked" class="form-control @error('hours_worked') is-invalid @enderror" value="{{ old('hours_worked', $status->hours_worked) }}" autofocus>
                             @error('hours_worked')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -109,7 +109,7 @@
                         {{--break_down_date--}}
                         <div class="form-group col-6">
                             <label>@lang('status.break_down_date') <span class="text-danger">*</span></label>
-                            <input type="date" {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} 
+                            <input required type="date" {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} 
                                 id="break_down_date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" 
                                 value="{{ old('break_down_date', isset($status->break_down_date) ? date('Y-m-d', strtotime( $status->break_down_date )) : '') }}" 
                                 autofocus max="{{ date('Y-m-d', strtotime( now() )) }}"
@@ -141,7 +141,7 @@
                     <div class="form-group">
                         <label>@lang('status.descrption') <span class="text-danger">*</span></label>
                         <textarea {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} 
-                                  {{ old('working_status') ? '' : 'disabled' }} id="break_down_description" class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description', $status->break_down_description) }}</textarea>
+                                  {{ old('working_status') ? '' : 'disabled' }} id="break_down_description" required class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description', $status->break_down_description) }}</textarea>
                         @error('break_down_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
