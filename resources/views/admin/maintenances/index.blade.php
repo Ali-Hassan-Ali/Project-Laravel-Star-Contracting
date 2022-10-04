@@ -149,7 +149,7 @@
             
                 // }
 
-                console.log(new Date(data.next_service_date));
+                console.log(new Date(data.getMonth());
 
                 if (new Date(data.actual_service_date).getMonth() > new Date(data.next_service_date).getMonth()) {
 
