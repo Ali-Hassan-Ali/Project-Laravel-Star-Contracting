@@ -60,7 +60,7 @@ class RequestPartController extends Controller
         return DataTables::of($request_parts)
             ->addColumn('record_select', 'admin.request_parts.data_table.record_select')
             ->editColumn('created_at', function (RequestPart $requestPart) {
-                return $request_part->created_at->format('m-d-');
+                return $requestPart->created_at->format('m-d-');
             })
             ->addColumn('eir_date', function (RequestPart $requestPart) {
                 return $requestPart->date ? date('d-m-Y', strtotime($requestPart->date)) : '';
