@@ -89,7 +89,7 @@ class InsuranceAttachmentController extends Controller
      */
     public function destroy(Insurance $insurance, Attachment $attachment)
     {
-        $insurance->delete();
+        $attachment->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('admin.insurances.attachment.index', ['insurance' => $insurance->id]);

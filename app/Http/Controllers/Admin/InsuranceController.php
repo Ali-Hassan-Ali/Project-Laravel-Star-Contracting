@@ -125,7 +125,7 @@ class InsuranceController extends Controller
             foreach ($request->file('attachments') as $file) {
                 
                 Attachment::create([
-                    'path'         => $file->store('insurances_attachments_file'),
+                    'path'         => $file->store('insurances_attachments_file', 'public'),
                     'name'         => $file->getClientOriginalName(),
                     'type'         => $file->extension(),
                     'insurance_id' => $insurance->id,
@@ -172,9 +172,10 @@ class InsuranceController extends Controller
         if ($request->attachments) {
 
             foreach ($request->file('attachments') as $file) {
-
+                
+                
                 Attachment::create([
-                    'path'         => $file->store('insurances_attachments_file'),
+                    'path'         => $file->store('insurances_attachments_file', 'public'),
                     'name'         => $file->getClientOriginalName(),
                     'type'         => $file->extension(),
                     'insurance_id' => $insurance->id,
