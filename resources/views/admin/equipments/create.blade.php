@@ -217,7 +217,7 @@
                         {{--rental_basis--}}
                         <div class="form-group col-6">
                             <label>@lang('equipments.rental_basis') <span class="text-danger">*</span></label>
-                            <select name="rental_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} id="rental-basis" class="form-control select2-tags-false">
+                            <select name="rental_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} required id="rental-basis" class="form-control select2-tags-false">
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.rental_basis')</option>
                                 @foreach ($rental_basis as $rental)
                                     <option value="{{ $rental->name }}" {{ $rental->name == old('rental_basis') ? 'selected' : '' }}>{{ $rental->name }}</option>
@@ -232,7 +232,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" name="rental_cost_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
+                                <input type="number" name="rental_cost_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" required autofocus>
                             </div>
                         </div>
                         
@@ -240,7 +240,7 @@
                         <div class="form-group col-6">
                             <label>@lang('equipments.operator') <span class="text-danger">*</span></label>
                             <select name="operator" id="operator" {{ old('owner_ship') == 'Rented' ? 'disabled' : '' }} class="form-control select2" required>
-                                <option value="" selected disabled>@lang('site.choose') @lang('equipments.operator')</option>
+                                <option value="" selected disabled>@lang('site.choose') @lang('equipments.operator')</option>*
                                 @foreach ($operators as $operator)
                                     <option value="{{ $operator->name }}" {{ $operator->name == old('operator') ? 'selected' : '' }}>{{ $operator->name }}</option>
                                 @endforeach
