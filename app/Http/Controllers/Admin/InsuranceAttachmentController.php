@@ -89,6 +89,8 @@ class InsuranceAttachmentController extends Controller
      */
     public function destroy(Attachment $attachment, Insurance $insurance)
     {
+        dd($insurance);
+        
         $insurance->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
