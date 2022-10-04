@@ -31,7 +31,8 @@
                                 <option value="">@lang('site.choose') @lang('countrys.countrys')</option>
                                 @foreach ($countrys as $country)
                                     <option value="{{ $country->id }}" 
-                                        data-url="{{ route('admin.ajax.country', $country->id) }}">{{ $country->name }}</option>
+                                        data-url="{{ route('admin.ajax.country', $country->id) }}"
+                                        {{ old('') }}>{{ $country->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -106,7 +107,8 @@
                         {{--break_down_date--}}
                         <div class="form-group col-6">
                             <label>@lang('status.break_down_date') <span class="text-danger">*</span></label>
-                            <input type="date" disabled id="break_down_date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date') }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                            <input type="date" id="break_down_date" name="break_down_date" disabled
+                                   {{ old('working_status') == 'Breakdown' ? '' : 'disabled' }} class="form-control @error('break_down_date') is-invalid @enderror" value="{{ old('break_down_date') }}" autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('break_down_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -132,7 +134,8 @@
                     {{-- break_down_description --}}
                     <div class="form-group">
                         <label>@lang('status.descrption') <span class="text-danger">*</span></label>
-                        <textarea disabled id="break_down_description" class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description') }}</textarea>
+                        <textarea disabled {{ old('working_status') == 'Breakdown' ? '' : 'disabled' }} id="break_down_description" 
+                                           class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description') }}</textarea>
                         @error('break_down_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
