@@ -1,4 +1,4 @@
-<?php
+*<?php
 
 namespace App\Http\Requests\Admin;
 
@@ -23,8 +23,6 @@ class EquipmentRequest extends FormRequest
      */
     public function rules()
     {
-        dd(request()->all());
-        
         $rules = [
             'name'                  => ['required','string','min:1','max:255'],
             'make'                  => ['required','string','min:1','max:255'],
@@ -40,7 +38,7 @@ class EquipmentRequest extends FormRequest
             'registration_date'     => ['required','date'],
             'year_of_manufacture'   => ['nullable','string','min:1','max:255'],
             'rental_basis'          => ['required_if:owner_ship,==,Rented,rented','string','max:255'],
-            'rental_cost_basis'     => ['required_if:owner_ship,==,Rented,rented','numeric'],
+            'rental_cost_basis'     => ['nullable'],
             'spec_id'               => ['required','numeric'],
             'country_id'            => ['required','numeric'],
             'city_id'               => ['required','numeric'],
