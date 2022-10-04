@@ -209,7 +209,7 @@
                             <small>( @lang('insurances.attachments_mssage')</small>
                             <small style="font-weight: bold;">@lang('insurances.attachments_docum') )</small>
                         </label>
-                        <input type="file" name="claim_attachments[]" autofocus multiple class="form-control">
+                        <input type="file" name="attachments[]" autofocus multiple class="form-control" accept=".pdf,image/*,.doc,.docx">
                     </div>
 
                     <div class="form-group">

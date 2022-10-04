@@ -166,7 +166,7 @@
                             <small>@lang('spares.attachments_or')</small> 
                             <small style="font-weight: bold;"> @lang('spares.attachments_note') )</small>
                         </label>
-                        <input type="file" name="attachments[]" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
+                        <input type="file" name="attachments[]" autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" accept=".pdf,image/*,.doc,.docx">
                         @error('attachments')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

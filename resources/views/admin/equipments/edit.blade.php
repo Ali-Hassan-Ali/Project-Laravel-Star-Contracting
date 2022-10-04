@@ -376,7 +376,7 @@
                     {{-- attachments --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_attachments') <span class="text-dark small" style="text-transform: none;" id="rented-attachments"></span> <span class="text-danger">*</span> <small>( @lang('equipments.attachments_mssag') </small> <small style="font-weight: bold;">@lang('equipments.attachments_docum') )</small> </label>
-                        <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
+                        <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" accept=".pdf,image/*,.doc,.docx">
                         @error('attachments')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

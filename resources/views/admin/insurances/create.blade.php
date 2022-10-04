@@ -211,7 +211,7 @@
                             <small>( @lang('insurances.attachments_mssage')</small>
                             <small style="font-weight: bold;">@lang('insurances.attachments_docum') )</small>
                         </label>
-                        <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" required>
+                        <input type="file" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" accept=".pdf,image/*,.doc,.docx" required>
                         @error('attachments')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

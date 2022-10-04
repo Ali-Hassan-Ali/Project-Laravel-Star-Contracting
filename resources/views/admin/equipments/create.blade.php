@@ -323,7 +323,9 @@
                             <small style="font-weight: bold;">@lang('equipments.attachments_docum') )</small> 
                             <span class="text-dark small" style="text-transform: none;" id="rented-attachments"></span>
                         </label>
-                        <input type="file" id="attachments" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
+                        <input type="file" id="attachments" name="attachments[]" multiple 
+                               class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}"
+                               accept=".pdf,image/*,.doc,.docx">
                     </div>
 
 

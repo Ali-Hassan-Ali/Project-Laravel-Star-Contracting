@@ -235,7 +235,7 @@
                                 <small>( @lang('eirs.attachments_mssage') </small> 
                                 <small style="font-weight: bold;"> @lang('eirs.attachments_docum') )</small>
                             </label>
-                            <input type="file" name="attachments[]" multiple autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
+                            <input type="file" name="attachments[]" multiple autofocus class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}" accept=".pdf,image/*,.doc,.docx">
                             @error('attachments')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
