@@ -170,9 +170,9 @@ class InsuranceController extends Controller
         $insurance->update($validated);
 
         if ($request->attachments) {
-                
+
             foreach ($request->file('claim_attachments') as $file) {
-                
+                dd($file, $file->getClientOriginalName());
                 Attachment::create([
                     'path'         => $file->store('insurances_attachments_file'),
                     'name'         => $file->getClientOriginalName(),
