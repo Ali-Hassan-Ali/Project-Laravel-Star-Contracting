@@ -76,8 +76,16 @@
                                 <option value="" selected disabled>@lang('site.choose') @lang('specs.specs')</option>
                                 @if(old('spec_id'))
 
-                                    @foreach ($specs as $spec)
-                                        <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id') ? 'selected' : '' }}>{{ $spec->name }}</option>
+                                    @php
+                                        $newspecs = \App\Models\Spec::where('type', old('type'))->get();
+                                    @endphp
+
+                                    @foreach ($newspecs as $nspecs)
+                                        <option value="{{ $nspecs->id }}" 
+                                            {{ $nspecs->id == old('spec_id') ? 'selected' : '' }}>
+                                            {{ $nspecs->name }}
+                                        </option>
+
                                     @endforeach
 
                                 @else
