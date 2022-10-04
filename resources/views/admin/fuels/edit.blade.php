@@ -69,7 +69,7 @@
                             <div class="form-group col-6">
                                 <label>@lang('fuels.' . $data_time)<span class="text-danger">*</span></label>
                                 <input type="date" name="{{ $data_time }}" class="form-control @error($data_time) is-invalid @enderror" required autofocus
-                                    value="{{  old('$data_time', $fuel[$data_time] ? date('Y-m-d', strtotime($fuel[$data_time])) : '') }}">
+                                    value="{{  old('$data_time', $fuel[$data_time] ? date('Y-m-d', strtotime($fuel[$data_time])) : '') }}" max="{{ date('Y-m-d', strtotime( now() )) }}">
                                 @error($data_time)
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

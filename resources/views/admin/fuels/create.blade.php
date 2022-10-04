@@ -67,11 +67,10 @@
                         @endphp
 
                         @foreach ($data_times as $data_time)
-                            
                             {{--$data_time--}}
                             <div class="form-group col-6">
                                 <label>@lang('fuels.' . $data_time)<span class="text-danger">*</span></label>
-                                <input type="date" name="{{ $data_time }}" class="form-control @error($data_time) is-invalid @enderror" value="{{ old($data_time) }}" required autofocus>
+                                <input type="date" name="{{ $data_time }}" class="form-control @error($data_time) is-invalid @enderror" value="{{ old($data_time) }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                                 @error($data_time)
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
