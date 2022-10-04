@@ -13,7 +13,7 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
     
     Auth::routes();
 
-    Route::get('/dd', function ($id) {
+    Route::get('/dd', function () {
 
         $eir = \App\Models\Eir::first();
 
