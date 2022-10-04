@@ -25,6 +25,7 @@ class EquipmentRequest extends FormRequest
     {
 
         $rules = [
+            'test'                  => ['required'],
             'name'                  => ['required','string','min:1','max:255'],
             'make'                  => ['required','string','min:1','max:255'],
             'type'                  => ['required','string','min:1','max:255'],
