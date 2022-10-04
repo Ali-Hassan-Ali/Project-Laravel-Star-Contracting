@@ -92,7 +92,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" name="cost" class="form-control @error('cost') is-invalid @enderror" value="{{ old('cost') }}" required>
+                                <input type="number" name="cost" class="form-control @error('cost') is-invalid @enderror" value="{{ old('cost',0) }}" required>
                                 @error('cost')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -133,7 +133,7 @@
                     {{-- usage_date --}}
                     <div class="form-group">
                         <label>@lang('spares.usage_date') <span class="text-danger">*</span></label>
-                        <input {{ old('used') == '1' ? '' : 'disabled' }} id="usage-date" type="date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date') }}" required>
+                        <input required {{ old('used') == '1' ? '' : 'disabled' }} id="usage-date" type="date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date') }}" required>
                         @error('usage_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -144,7 +144,7 @@
                     {{-- description --}}
                     <div class="form-group">
                         <label>@lang('spares.description') <span class="text-danger">*</span></label>
-                        <textarea {{ old('used') == '1' ? '' : 'disabled' }} id="usage-description" class="form-control @error('description') is-invalid @enderror" name="description" rows="6">{{ old('description') }}</textarea>
+                        <textarea required {{ old('used') == '1' ? '' : 'disabled' }} id="usage-description" class="form-control @error('description') is-invalid @enderror" name="description" rows="6">{{ old('description') }}</textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
