@@ -302,7 +302,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" {{ old('owner_ship', $equipment->owner_ship) == 'Rented' ? 'disabled' : '' }} id="driver-salary" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', $equipment->driver_salary) }}" required autofocus>
+                                <input type="number" {{ old('owner_ship', $equipment->owner_ship) == 'Rented' ? 'disabled' : '' }} 
+                                                     {{ old('operator') != 'Driver' ? 'disabled' : '' }} id="driver-salary" name="driver_salary" class="form-control @error('driver_salary') custom-select @enderror" value="{{ old('driver_salary', $equipment->driver_salary) }}" required autofocus>
                                 @error('driver_salary')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
