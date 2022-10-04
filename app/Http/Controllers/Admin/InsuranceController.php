@@ -157,7 +157,7 @@ class InsuranceController extends Controller
     {
 
         $validated = $request->validated();
-        $validated = $request->safe()->except(['claim_attachments','insurer','type_of_insurance','claim','claim_date','claim_description','claim_amount']);
+        $validated = $request->safe()->except(['attachments','insurer','type_of_insurance','claim','claim_date','claim_description','claim_amount']);
 
         $validated['insurer']           = $this->tagInsurer($request);
         $validated['type_of_insurance'] = $this->tagInsurerType($request);
@@ -169,8 +169,8 @@ class InsuranceController extends Controller
 
         $insurance->update($validated);
 
-        if ($request->claim_attachments) {
-            dd($request->claim_attachments, $request->file('claim_attachments'));
+        if ($request->attachments) {
+            dd($request->attachments, $request->file('attachments'));
             foreach ($request->file('claim_attachments') as $file) {
                 
                 Attachment::create([
