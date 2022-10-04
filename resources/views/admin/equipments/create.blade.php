@@ -64,9 +64,15 @@
                             <label>@lang('specs.specs') <span class="text-danger">*</span></label>
                             <select name="spec_id" id="spec-id" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('specs.specs')</option>
-                                {{-- @foreach ($specs as $spec)
-                                    <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id') ? 'selected' : '' }}>{{ $spec->name }}</option>
-                                @endforeach --}}
+                                
+                                @if(old('spec_id'))
+
+                                    @foreach ($specs as $spec)
+                                        <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id') ? 'selected' : '' }}>{{ $spec->name }}</option>
+                                    @endforeach
+                                    
+                                @endif
+
                             </select>
                         </div>
 
@@ -163,7 +169,7 @@
                                 <option value="" selected disabled>@lang('site.choose') @lang('citys.citys')</option>
                                 
                                 @if(old('city_id'))
-                                
+
                                     @foreach ($citys as $city)
                                         <option value="{{ $city->id }}" {{ $city->id == old('city_id') ? 'selected' : '' }}>{{ $city->name }}</option>
                                     @endforeach
