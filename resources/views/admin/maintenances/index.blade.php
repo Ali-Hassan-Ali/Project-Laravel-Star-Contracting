@@ -79,8 +79,8 @@
                                     </th>
                                     <th>@lang('equipments.equipments')</th>
                                     <th>@lang('maintenances.last_service_date')</th>
-                                    <th>@lang('maintenances.next_service_date')</th>
                                     <th>@lang('maintenances.last_service_km')</th>
+                                    <th>@lang('maintenances.next_service_date')</th>
                                     <th>@lang('maintenances.next_service_dueon_km')</th>
                                     <th>@lang('maintenances.actual_service_date')</th>
                                     <th>@lang('maintenances.actual_service_reading')</th>
@@ -131,8 +131,8 @@
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'equipment', name: 'equipment'},
                 {data: 'last_service_date', name: 'last_service_date'},
-                {data: 'next_service_date', name: 'next_service_date'},
                 {data: 'last_service_km', name: 'last_service_km'},
+                {data: 'next_service_date', name: 'next_service_date'},
                 {data: 'next_service_dueon_km', name: 'next_service_dueon_km'},
                 {data: 'actual_service_date', name: 'actual_service_date'},
                 {data: 'actual_service_reading', name: 'actual_service_reading'},
