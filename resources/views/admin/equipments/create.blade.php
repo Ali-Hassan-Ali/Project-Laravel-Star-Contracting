@@ -27,7 +27,7 @@
                     <div class="row">
                         
                         {{--make--}}
-                        <div class="form-group col-6 @error('make') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.make') <span class="text-danger">*</span></label>
                             <select name="make" class="form-control select2" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.make')</option>
@@ -35,15 +35,10 @@
                                     <option value="{{ $make->name }}" {{ $make->name == old('make') ? 'selected' : '' }}>{{ $make->name }}</option>
                                 @endforeach
                             </select>
-                            @error('make')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         {{--equipments--}}
-                        <div class="form-group col-6 @error('equipments') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.name') <span class="text-danger">*</span></label>
                             <select name="name" class="form-control select2" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.name')</option>
@@ -51,11 +46,6 @@
                                     <option value="{{ $equipment->name }}" {{ $equipment->name == old('name') ? 'selected' : '' }}>{{ $equipment->name }}</option>
                                 @endforeach
                             </select>
-                            @error('equipment')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         {{--types--}}
@@ -90,22 +80,12 @@
                         <div class="form-group col-6">
                             <label>@lang('equipments.chasis_no')</label>
                             <input type="text" name="chasis_no" class="form-control @error('engine_no') custom-select @enderror" value="{{ old('chasis_no') }}" autofocus>
-                            @error('engine_no')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         {{--engine_no--}}
                         <div class="form-group col-6">
                             <label>@lang('equipments.engine_no')</label>
                             <input type="text" name="engine_no" class="form-control @error('engine_no') custom-select @enderror" value="{{ old('engine_no') }}" autofocus>
-                            @error('engine_no')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         {{--serial_no--}}
@@ -120,7 +100,7 @@
                         </div>
 
                         {{--model--}}
-                        <div class="form-group col-6 @error('model') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.model')</label>
                             <select name="model" class="form-control select2">
                                 <option value="" selected class="py-5"></option>
@@ -128,11 +108,6 @@
                                     <option value="{{ $model->name }}" {{ $model->name == old('model') ? 'selected' : '' }}>{{ $model->name }}</option>
                                 @endforeach
                             </select>
-                            @error('model')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
 
@@ -193,7 +168,7 @@
                         </div>
 
                         {{--owner_ship--}}
-                        <div class="form-group col-12 @error('owner_ship') custom-select @enderror">
+                        <div class="form-group col-12">
                             <label>@lang('equipments.owner_ship') <span class="text-danger">*</span></label>
                             <select name="owner_ship" id="owner-ship" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.owner_ship')</option>
@@ -201,15 +176,10 @@
                                     <option value="{{ $owner->name }}" {{ $owner->name == old('owner_ship') ? 'selected' : '' }}>{{ $owner->name }}</option>
                                 @endforeach
                             </select>
-                            @error('owner_ship')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         
                         {{--rental_basis--}}
-                        <div class="form-group col-6 @error('rental_basis') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.rental_basis') <span class="text-danger">*</span></label>
                             <select name="rental_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} id="rental-basis" class="form-control select2-tags-false">
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.rental_basis')</option>
@@ -217,11 +187,6 @@
                                     <option value="{{ $rental->name }}" {{ $rental->name == old('rental_basis') ? 'selected' : '' }}>{{ $rental->name }}</option>
                                 @endforeach
                             </select>
-                            @error('rental_basis')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         {{--rental_cost_basis--}}
@@ -232,16 +197,11 @@
                                     <span class="input-group-text">$</span>
                                 </div>
                                 <input type="number" name="rental_cost_basis" {{ old('owner_ship') != 'Rented' ? 'disabled' : '' }} id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
-                                @error('rental_cost_basis')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
                         
                         {{--operator--}}
-                        <div class="form-group col-6 @error('operator') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.operator') <span class="text-danger">*</span></label>
                             <select name="operator" id="operator" class="form-control select2" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.operator')</option>
@@ -249,11 +209,6 @@
                                     <option value="{{ $operator->name }}" {{ $operator->name == old('operator') ? 'selected' : '' }}>{{ $operator->name }}</option>
                                 @endforeach
                             </select>
-                            @error('operator')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         {{--driver_salary--}}
@@ -274,7 +229,7 @@
 
 
                         {{--responsible_person--}}
-                        <div class="form-group col-6 @error('responsible_person') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.responsible_person') <span class="text-danger">*</span></label>
                             <select name="responsible_person" class="form-control select2" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.responsible_person')</option>
@@ -286,7 +241,7 @@
 
 
                         {{--email--}}
-                        <div class="form-group col-6 @error('email') custom-select @enderror">
+                        <div class="form-group col-6">
                             <label>@lang('equipments.email') <span class="text-danger">*</span></label>
                             <select name="email" class="form-control select2" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.email')</option>
@@ -305,11 +260,6 @@
                                     <option value="{{ $allocated->name }}" {{ $allocated->name == old('allocated_to') ? 'selected' : '' }}>{{ $allocated->name }}</option>
                                 @endforeach
                             </select>
-                            @error('allocated_to')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
                         {{--project_allocated_to--}}
@@ -321,11 +271,6 @@
                                     <option value="{{ $project->name }}" {{ $project->name == old('project_allocated_to') ? 'selected' : '' }}>{{ $project->name }}</option>
                                 @endforeach
                             </select>
-                            @error('project_allocated_to')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
 
@@ -339,11 +284,6 @@
                             <span class="text-dark small" style="text-transform: none;" id="rented-attachments"></span>
                         </label>
                         <input type="file" id="attachments" name="attachments[]" multiple class="form-control @error('attachments') is-invalid @enderror" value="{{ old('attachments') }}">
-                        @error('attachments')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
 
 
