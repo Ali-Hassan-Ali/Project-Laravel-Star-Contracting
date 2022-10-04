@@ -62,6 +62,24 @@ class MaintenanceController extends Controller
 
         return DataTables::of($maintenances)
             ->addColumn('record_select', 'admin.maintenances.data_table.record_select')
+            ->addColumn('service_date', function (Maintenance $maintenance) {
+                if (isset($maintenance->actual_service_date) && isset($maintenance->next_service_date)) {
+                    if (date($maintenance->actual_service_date) > date($maintenance->next_service_date)) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            })
+            ->addColumn('service_reading', function (Maintenance $maintenance) {
+                if (isset($maintenance->actual_service_reading) && isset($maintenance->next_service_dueon_km)) {
+                    if ((int) $maintenance->actual_service_reading > (int) $maintenance->next_service_dueon_km) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            })
             ->editColumn('created_at', function (Maintenance $maintenance) {
                 return $maintenance->created_at->format('Y-m-d');
             })

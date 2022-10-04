@@ -143,16 +143,8 @@
             order: [[2, 'desc']],
             rowCallback: function(row, data, index) {
         
-                // if (data.actual_service_reading > data.next_service_dueon_km) {
-
-                //     $(row).addClass('bg-danger-datatable text-black');
+                if (data.service_date == 1 || data.service_reading == 1) {
             
-                // }
-
-                console.log(new Date(data.getMonth()) );
-
-                if (new Date(data.actual_service_date).getMonth() > new Date(data.next_service_date).getMonth()) {
-
                     $(row).addClass('bg-danger-datatable text-black');
             
                 }

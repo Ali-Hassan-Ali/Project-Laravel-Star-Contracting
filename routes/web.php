@@ -15,7 +15,15 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
 
     Route::get('/dd', function () {
 
-        $eir = \App\Models\Eir::first();
+        $maintenance = \App\Models\Maintenance::first();
+
+        if (date($maintenance->next_service_date) > date($maintenance->actual_service_date)) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+        dd(date($maintenance->actual_service_date));
 
         dd($eir->RequestParts());
 
