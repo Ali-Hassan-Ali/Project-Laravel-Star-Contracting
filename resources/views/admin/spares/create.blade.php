@@ -141,7 +141,7 @@
                     {{-- usage_date --}}
                     <div class="form-group">
                         <label>@lang('spares.usage_date') <span class="text-danger">*</span></label>
-                        <input required {{ old('used') == '1' ? '' : 'disabled' }} id="usage-date" type="date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date') }}" required>
+                        <input required {{ old('used') == '1' ? '' : 'disabled' }} id="usage-date" type="date" name="usage_date" autofocus class="form-control @error('usage_date') is-invalid @enderror" value="{{ old('usage_date') }}" required max="{{ date('Y-m-d', strtotime( now() )) }}">
                         @error('usage_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
