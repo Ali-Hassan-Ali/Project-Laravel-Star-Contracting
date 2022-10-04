@@ -112,7 +112,8 @@
                             <input type="date" {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} 
                                 id="break_down_date" name="break_down_date" class="form-control @error('break_down_date') is-invalid @enderror" 
                                 value="{{ old('break_down_date', isset($status->break_down_date) ? date('Y-m-d', strtotime( $status->break_down_date )) : '') }}" 
-                                autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
+                                autofocus max="{{ date('Y-m-d', strtotime( now() )) }}"
+                                {{ old('working_status') ? '' : 'disabled' }}>
                             @error('break_down_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -139,7 +140,8 @@
                     {{-- break_down_description --}}
                     <div class="form-group">
                         <label>@lang('status.descrption') <span class="text-danger">*</span></label>
-                        <textarea {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} id="break_down_description" class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description', $status->break_down_description) }}</textarea>
+                        <textarea {{ old('working_status', $status->working_status) == 'Breakdown' ? '' : 'disabled' }} 
+                                  {{ old('working_status') ? '' : 'disabled' }} id="break_down_description" class="form-control @error('break_down_description') is-invalid @enderror" name="break_down_description" rows="3">{{ old('break_down_description', $status->break_down_description) }}</textarea>
                         @error('break_down_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
