@@ -144,7 +144,7 @@
             rowCallback: function(row, data, index) {
         
                 if (data.actual_service_date > data.next_service_date || data.actual_service_reading > data.next_service_dueon_km) {
-            
+                    alert(data.actual_service_date, data.next_service_date);
                     $(row).addClass('bg-danger-datatable text-black');
             
                 }
