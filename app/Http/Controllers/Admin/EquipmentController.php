@@ -235,8 +235,6 @@ class EquipmentController extends Controller
             $validated['project_allocated_to'] = json_encode($this->tagProjectAllocatedTo($request));
         }
         $validated['user_id']  = auth()->id();
-
-        dd($request->model, $validated['model']);
         $equipment->update($validated);
 
         if ($request->attachments) {
