@@ -130,7 +130,11 @@
                             <select name="model" class="form-control select2">
                                 <option value="" selected></option>
                                 @foreach ($models as $model)
-                                    <option value="{{ $model->name }}" {{ $model->name == old('model', $equipment->model) ? 'selected' : '' }}>{{ $model->name }}</option>
+                                    <option value="{{ $model->name }}" 
+                                        {{ $model->name == old('model', $equipment->model) ? 'selected' : '' }}>
+                                        
+                                        {{ $model->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('model')

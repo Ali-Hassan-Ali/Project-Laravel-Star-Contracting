@@ -326,7 +326,7 @@ class EquipmentController extends Controller
             $type = ComboBox::create(['name' => $request->model, 'type' => 'model','user_id' => auth()->id()]);
             return $requestData['model'] = $type['name'];
         } else {
-            return $requestData['modelmodel'] = $request->make;
+            return $requestData['model'] = $request->make;
         } 
 
     }// end of fun
