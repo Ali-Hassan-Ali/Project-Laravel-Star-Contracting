@@ -44,17 +44,17 @@ class Eir extends Model
         
     }//end of  belongsTo
 
-    public function RequestPart()
+    public function RequestParts()
     {
         return $this->hasMany(RequestPart::class);
         
-    }//end of  belongsTo
+    }//end of  hasMany
 
     public function attachments()
     {
         return $this->hasMany(Attachment::class);
         
-    }//end of  belongsTo
+    }//end of hasMany
 
     public function scopeWhenCityId($query, $cityId)
     {

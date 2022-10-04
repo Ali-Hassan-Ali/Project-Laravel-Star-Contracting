@@ -15,6 +15,10 @@ Route::prefix(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocal
 
     Route::get('/dd', function ($id) {
 
+        $eir = \App\Models\Eir::first();
+
+        dd($eir->RequestParts());
+
         // curl -X 'DELETE' 'https://test-api.kashier.io/orders/:orderId/transactions/:transactionId?operation=refund'
         
         $response = Http::get('http://example.com');
