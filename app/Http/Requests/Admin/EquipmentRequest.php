@@ -23,7 +23,6 @@ class EquipmentRequest extends FormRequest
      */
     public function rules()
     {
-        dd(request()->all());
 
         $rules = [
             'name'                  => ['required','string','min:1','max:255'],
