@@ -333,7 +333,7 @@
                         <div class="form-group col-6 @error('email') custom-select @enderror">
                             <label>@lang('equipments.email') <span class="text-danger">*</span></label>
                             <select name="email" class="form-control select2" required>
-                                <option value="" selected disabled>@lang('site.choose') @lang('equipments.email')</option>
+                                <option value="" selected>@lang('site.choose') @lang('equipments.email')</option>
                                 @foreach ($responsible_person_email as $email)
                                     <option value="{{ $email->name }}" {{ $email->name == old('email', $equipment->email) ? 'selected' : '' }}>{{ $email->name }}</option>
                                 @endforeach
