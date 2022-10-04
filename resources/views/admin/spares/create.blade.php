@@ -51,9 +51,17 @@
                             <label>@lang('equipments.equipments') <span class="text-danger">*</span></label>
                             <select name="equipments[]" multiple id="equipment-man" class="form-control select2-tags-false" required>
                                 <option value="" disabled>@lang('site.choose') @lang('equipments.equipments')</option>
-                                {{-- @foreach ($equipments as $equipment)
-                                    <option value="{{ $equipment->id }}" {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}>{{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}</option>
-                                @endforeach --}}
+                                @if(old('equipments'))
+
+                                    @foreach($equipments as $equipment)
+                                        <option value="{{ $equipment->id }}" 
+                                            {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}
+                                            {{ in_array($equipment->id, old('equipments', old('equipments')) ?? []) ? 'selected' : '' }}>
+                                            {{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}
+                                        </option>
+                                    @endforeach
+
+                                @endif
                             </select>
                             @error('equipment_id')
                                 <span class="invalid-feedback" role="alert">

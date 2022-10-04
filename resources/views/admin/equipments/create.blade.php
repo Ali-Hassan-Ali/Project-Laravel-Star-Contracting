@@ -42,9 +42,25 @@
                             <label>@lang('equipments.name') <span class="text-danger">*</span></label>
                             <select name="name" class="form-control select2" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.name')</option>
-                                @foreach ($equipments as $equipment)
-                                    <option value="{{ $equipment->name }}" {{ $equipment->name == old('name') ? 'selected' : '' }}>{{ $equipment->name }}</option>
-                                @endforeach
+
+                                @if(old('equipments'))
+
+                                    @foreach($equipments as $equipment)
+                                        <option value="{{ $equipment->id }}" 
+                                            {{ $equipment->id == old('equipment_id') ? 'selected' : '' }}
+                                            {{ in_array($equipment->id, old('equipments', old('equipments')) ?? []) ? 'selected' : '' }}>
+                                            {{ $equipment->name .' '. $equipment->make .' '. $equipment->plate_no }}
+                                        </option>
+                                    @endforeach
+
+                                @else
+
+                                    @foreach ($equipments as $equipment)
+                                        <option value="{{ $equipment->name }}" {{ $equipment->name == old('name') ? 'selected' : '' }}>{{ $equipment->name }}</option>
+                                    @endforeach
+                                    
+                                @endif
+
                             </select>
                         </div>
 
