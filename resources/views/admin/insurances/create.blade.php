@@ -29,7 +29,7 @@
                         {{--equipment_id--}}
                         <div class="form-group col-6">
                             <label>@lang('countrys.countrys') <span class="text-danger">*</span></label>
-                            <select class="form-control col-6 select2-tags-false" id="equipment-countrey" required>
+                            <select class="form-control col-6 select2-tags-false" id="equipment-countrey">
                                 <option value="">@lang('site.choose') @lang('countrys.countrys')</option>
                                 @foreach ($countrys as $country)
                                     <option value="{{ $country->id }}" 
@@ -172,7 +172,7 @@
                         {{-- claim_date --}}
                         <div class="form-group col-6">
                             <label>@lang('insurances.claim_date') <span class="text-danger">*</span></label>
-                            <input type="date" name="claim_date" {{ old('claim','0') == '1' ? '' : 'disabled' }} id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date') }}" max="{{ date('Y-m-d', strtotime(now())) }}">
+                            <input type="date" name="claim_date" {{ old('claim','0') == '1' ? '' : 'disabled' }} id="claim_date" autofocus class="form-control @error('claim_date') is-invalid @enderror" value="{{ old('claim_date') }}" max="{{ date('Y-m-d', strtotime(now())) }}" required>
                             @error('claim_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -183,7 +183,7 @@
                         {{-- claim_amount --}}
                         <div class="form-group col-6">
                             <label>@lang('insurances.claim_amount') <span class="text-danger">*</span></label>
-                            <input type="number" {{ old('claim','0') == '1' ? '' : 'disabled' }} name="claim_amount" id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" value="{{ old('claim_amount') }}">
+                            <input type="number" {{ old('claim','0') == '1' ? '' : 'disabled' }} name="claim_amount" id="claim_amount" autofocus class="form-control @error('claim_amount') is-invalid @enderror" required value="{{ old('claim_amount') }}">
                             @error('claim_amount')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -197,7 +197,7 @@
                     {{-- claim_description --}}
                     <div class="form-group">
                         <label>@lang('insurances.claim_description') <span class="text-danger">*</span></label>
-                        <textarea {{ old('claim','0') == '1' ? '' : 'disabled' }} id="claim_description" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="5">{{ old('claim_description') }}</textarea>
+                        <textarea {{ old('claim','0') == '1' ? '' : 'disabled' }} id="claim_description" class="form-control @error('claim_description') is-invalid @enderror" name="claim_description" rows="5" required>{{ old('claim_description') }}</textarea>
                         @error('claim_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
