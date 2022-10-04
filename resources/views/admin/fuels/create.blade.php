@@ -107,17 +107,6 @@
                             @enderror
                         </div>
 
-                        {{--unit--}}
-{{--                        <div class="form-group col-6">--}}
-{{--                            <label>@lang('fuels.unit') <span class="text-danger">*</span></label>--}}
-{{--                            <select name="unit" class="form-control select2" required>--}}
-{{--                                <option value="" selected disabled>@lang('site.choose') @lang('fuels.unit')</option>--}}
-{{--                                @foreach ($units as $unit)--}}
-{{--                                    <option value="{{ $unit->name }}" {{ $unit->name == old('unit') ? 'selected' : '' }}>{{ $unit->name }}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
-
                         {{--$data_time--}}
                         <div class="form-group col-6">
                             <label>@lang('fuels.no_of_units_filled')<span class="text-danger">*</span></label>
@@ -136,7 +125,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" id="fuel_rate_per_litre" name="fuel_rate_per_litre" class="form-control @error('fuel_rate_per_litre') is-invalid @enderror" value="{{ old('fuel_rate_per_litre') }}">
+                                <input type="number" id="fuel_rate_per_litre" name="fuel_rate_per_litre" class="form-control @error('fuel_rate_per_litre') is-invalid @enderror" value="{{ old('fuel_rate_per_litre', 0) }}" required>
                                 @error('fuel_rate_per_litre')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -135,7 +135,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" id="fuel_rate_per_litre" name="fuel_rate_per_litre" class="form-control @error('fuel_rate_per_litre') is-invalid @enderror" value="{{ old('fuel_rate_per_litre', $fuel->fuel_rate_per_litre) }}">
+                                <input type="number" id="fuel_rate_per_litre" name="fuel_rate_per_litre" class="form-control @error('fuel_rate_per_litre') is-invalid @enderror" value="{{ old('fuel_rate_per_litre', $fuel->fuel_rate_per_litre) }}" required>
                                 @error('fuel_rate_per_litre')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
