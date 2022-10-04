@@ -230,7 +230,7 @@
             var unit        = $('#no-of-unit-filled').val();
 
             var subUnit = parseInt(current) - parseInt(lastCurrent);
-            var total   =  parseInt(subUnit) / parseInt(unit);
+            var total   = parseInt(subUnit) / parseInt(unit);
             
             $('#average_mileage_reading').val($.number(total, 2));
             $('#average_mileage_reading-hidding').val($.number(total, 2));
