@@ -33,29 +33,15 @@ class MaintenanceController extends Controller
 
         if (request()->old) {
 
-             if (request()->start_data && request()->end_data) {
-
-                $maintenances = Maintenance::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', '!=', now()->year);
-                
-            } else {
-
-                $maintenances = Maintenance::query()->whereYear('created_at', '!=', now()->year);
-            }
+                $maintenances = Maintenance::whereDateBetween(request()->start_data, request()->end_data)
+                    ->whereYear('created_at', '!=', now()->year)->get();
             
         } else {
 
             if (request()->start_data && request()->end_data) {
 
-                $maintenances = Maintenance::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', now()->year);
-                
-            } else {
-
-                $maintenances = Maintenance::query()->whereYear('created_at', now()->year);
-            }
+                $maintenances = Maintenance::whereDateBetween(request()->start_data, request()->end_data)
+                    ->whereYear('created_at', now()->year)->get();
 
 
         }//end of if
@@ -82,7 +68,7 @@ class MaintenanceController extends Controller
             })
             ->addColumn('equipment', function (Maintenance $maintenance) {
                 return $maintenance->equipment ?
-                    $maintenance->equipment->name . ' ' . $maintenance->equipment->make . ' ' . $maintenance->equipment->plate_no 
+                    $maintenance->equipment->make . ' ' . $maintenance->equipment->name . ' ' . $maintenance->equipment->plate_no 
                  : '';
             })
             ->addColumn('actions', 'admin.maintenances.data_table.actions')
