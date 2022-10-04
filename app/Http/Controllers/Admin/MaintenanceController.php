@@ -33,15 +33,29 @@ class MaintenanceController extends Controller
 
         if (request()->old) {
 
-                $maintenances = Maintenance::whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', '!=', now()->year)->get();
+             if (request()->start_data && request()->end_data) {
+
+                $maintenances = Maintenance::query()
+                    ->whereDateBetween(request()->start_data, request()->end_data)
+                    ->whereYear('created_at', '!=', now()->year);
+                
+            } else {
+
+                $maintenances = Maintenance::query()->whereYear('created_at', '!=', now()->year);
+            }
             
         } else {
 
             if (request()->start_data && request()->end_data) {
 
-                $maintenances = Maintenance::whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', now()->year)->get();
+                $maintenances = Maintenance::query()
+                    ->whereDateBetween(request()->start_data, request()->end_data)
+                    ->whereYear('created_at', now()->year);
+                
+            } else {
+
+                $maintenances = Maintenance::query()->whereYear('created_at', now()->year);
+            }
 
 
         }//end of if
