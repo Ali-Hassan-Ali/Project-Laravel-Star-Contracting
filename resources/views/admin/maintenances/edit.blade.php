@@ -63,7 +63,7 @@
                         {{--last_service_date--}}
                         <div class="form-group col-6">
                             <label>@lang('maintenances.last_service_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="last_service_date" id="last_service_date" class="form-control @error('last_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->last_service_date ? date('Y-m-d', strtotime($maintenance->last_service_date)) : '') }}" required autofocus>
+                            <input type="date" name="last_service_date" id="last_service_date" class="form-control @error('last_service_date') is-invalid @enderror" value="{{ old('insurance_start_date', $maintenance->last_service_date ? date('Y-m-d', strtotime($maintenance->last_service_date)) : '') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('last_service_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
