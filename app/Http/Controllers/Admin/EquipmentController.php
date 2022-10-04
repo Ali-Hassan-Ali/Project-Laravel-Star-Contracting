@@ -37,30 +37,13 @@ class EquipmentController extends Controller
     {
         if (request()->old) {
 
-            if (request()->start_data && request()->end_data) {
-
-                $equipments = Equipment::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', '!=',now()->year);
-                
-            } else {
-
-                $equipments = Equipment::query()->whereYear('created_at', '!=',now()->year);
-            }
+            $equipments = Equipment::whereDateBetween(request()->start_data, request()->end_data)
+                                    ->whereYear('created_at', '!=',now()->year)->get();
             
         } else {
 
-            if (request()->start_data && request()->end_data) {
-
-                $equipments = Equipment::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', now()->year);
-                
-            } else {
-
-                $equipments = Equipment::query()->whereYear('created_at', now()->year);
-            }
-
+            $equipments = Equipment::whereDateBetween(request()->start_data, request()->end_data)
+                                    ->whereYear('created_at', now()->year)->get();
 
         }//end of if
 
@@ -146,7 +129,6 @@ class EquipmentController extends Controller
     {
         $validated = $request->safe()->except(['make','model','type','name','operator','email','responsible_person','project_allocated_to','attachments']);
 
-        $validated['make'] = $this->tagMake($request);
         if ($request->model) {
 
             $validated['model'] = $this->tagModel($request);
@@ -156,6 +138,7 @@ class EquipmentController extends Controller
             $validated['model'] = null;
 
         }
+        $validated['make']     = $this->tagMake($request);
         $validated['type']     = $this->tagType($request);
         $validated['name']     = $this->tagEquipment($request);
         $validated['operator'] = $this->tagOperator($request);
@@ -252,7 +235,7 @@ class EquipmentController extends Controller
             $validated['project_allocated_to'] = json_encode($this->tagProjectAllocatedTo($request));
         }
         $validated['user_id']  = auth()->id();
-
+        dd($validated['make'], $request->make);
         $equipment->update($validated);
 
         if ($request->attachments) {
