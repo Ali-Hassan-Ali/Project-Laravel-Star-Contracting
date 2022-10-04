@@ -114,7 +114,7 @@
                         {{--actual_service_date--}}
                         <div class="form-group col-6">
                             <label>@lang('maintenances.actual_service_date')<span class="text-danger">*</span></label>
-                            <input type="date" name="actual_service_date" class="form-control @error('actual_service_date') is-invalid @enderror" value="{{ old('actual_service_date') }}" required autofocus>
+                            <input type="date" name="actual_service_date" class="form-control @error('actual_service_date') is-invalid @enderror" value="{{ old('actual_service_date') }}" required autofocus max="{{ date('Y-m-d', strtotime( now() )) }}">
                             @error('actual_service_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
