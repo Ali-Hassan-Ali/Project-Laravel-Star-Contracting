@@ -125,7 +125,7 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'eir', name: 'eir'},
+                {data: 'eir_no', name: 'eir_no'},
                 {data: 'requested_part', name: 'requested_part'},
                 {data: 'requested_part_no', name: 'requested_part_no'},
                 {data: 'quantity', name: 'quantity'},
