@@ -132,7 +132,7 @@
                                 @foreach ($models as $model)
                                     <option value="{{ $model->name }}" 
                                         {{ $model->name == old('model', $equipment->model) ? 'selected' : '' }}>
-                                        
+
                                         {{ $model->name }}
                                     </option>
                                 @endforeach
@@ -197,9 +197,19 @@
                             <label>@lang('citys.citys') <span class="text-danger">*</span></label>
                             <select name="city_id" id="city" class="form-control select2-tags-false" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('citys.citys')</option>
-                                @foreach ($citys as $city)
-                                    <option value="{{ $city->id }}" {{ $city->id == old('city_id', $equipment->city_id) ? 'selected' : '' }}>{{ $city->name }}</option>
-                                @endforeach
+                                @if(old('city_id'))
+                                
+                                    @foreach ($citys as $city)
+                                        <option value="{{ $city->id }}" {{ $city->id == old('city_id') ? 'selected' : '' }}>{{ $city->name }}</option>
+                                    @endforeach
+
+                                @else
+                                
+                                    @foreach ($citys as $city)
+                                        <option value="{{ $city->id }}" {{ $city->id == old('city_id', $equipment->city_id) ? 'selected' : '' }}>{{ $city->name }}</option>
+                                    @endforeach
+
+                                @endif
                             </select>
                         </div>
 
