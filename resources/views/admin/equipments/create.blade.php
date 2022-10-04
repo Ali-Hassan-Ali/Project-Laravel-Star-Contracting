@@ -70,7 +70,7 @@
                                     @foreach ($specs as $spec)
                                         <option value="{{ $spec->id }}" {{ $spec->id == old('spec_id') ? 'selected' : '' }}>{{ $spec->name }}</option>
                                     @endforeach
-                                    
+
                                 @endif
 
                             </select>
@@ -208,14 +208,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="number" name="rental_cost_basis" {{ old('owner_ship') != 'Rented' ? 'disabled' : '' }} id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
+                                <input type="number" name="rental_cost_basis" {{ old('owner_ship') == 'Rented' ? '' : 'disabled' }} id="rental-cost-basis" class="form-control @error('rental_cost_basis') custom-select @enderror" value="{{ old('rental_cost_basis', 0) }}" autofocus>
                             </div>
                         </div>
                         
                         {{--operator--}}
                         <div class="form-group col-6">
                             <label>@lang('equipments.operator') <span class="text-danger">*</span></label>
-                            <select name="operator" id="operator" class="form-control select2" required>
+                            <select name="operator" id="operator" {{ old('owner_ship') == 'Rented' ? 'disabled' : '' }} class="form-control select2" required>
                                 <option value="" selected disabled>@lang('site.choose') @lang('equipments.operator')</option>
                                 @foreach ($operators as $operator)
                                     <option value="{{ $operator->name }}" {{ $operator->name == old('operator') ? 'selected' : '' }}>{{ $operator->name }}</option>
