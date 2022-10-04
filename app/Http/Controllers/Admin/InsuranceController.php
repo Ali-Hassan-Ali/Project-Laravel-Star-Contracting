@@ -35,30 +35,14 @@ class InsuranceController extends Controller
     {
         if (request()->old) {
 
-            if (request()->start_data && request()->end_data) {
-
-                $insurances = Insurance::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', '!=', now()->year);
-                
-            } else {
-
-                $insurances = Insurance::query()->whereYear('created_at', '!=', now()->year);
-            }
+            $insurances = Insurance::whereDateBetween(request()->start_data, request()->end_data)
+                ->whereYear('created_at', '!=', now()->year)->get();
 
             
         } else {
 
-            if (request()->start_data && request()->end_data) {
-
-                $insurances = Insurance::query()
-                    ->whereDateBetween(request()->start_data, request()->end_data)
-                    ->whereYear('created_at', now()->year);
-                
-            } else {
-
-                $insurances = Insurance::query()->whereYear('created_at', now()->year);
-            }
+            $insurances = Insurance::whereDateBetween(request()->start_data, request()->end_data)
+                ->whereYear('created_at', now()->year)->get();
 
 
         }//end of if
@@ -85,7 +69,7 @@ class InsuranceController extends Controller
             })
             ->addColumn('equipment', function (Insurance $insurance) {
                 return $insurance->equipment ?
-                    $insurance->equipment->name . ' ' . $insurance->equipment->make . ' ' . $insurance->equipment->plate_no 
+                    $insurance->equipment->make . ' ' . $insurance->equipment->name . ' ' . $insurance->equipment->plate_no 
                  : '';
             })
             ->addColumn('admin', function (Insurance $insurance) {
